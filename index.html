@@ -197,10 +197,8 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
 
 <main class="gut"><div class="wrap" id="main">
 <div class="tfbar" id="tfbar">
-  <label for="tfFrom">From <input type="date" id="tfFrom" min="2026-09-01" max="2026-11-30"></label>
-  <label for="tfTo">To <input type="date" id="tfTo" min="2026-09-01" max="2026-11-30"></label>
-  <div class="seg" id="tfPreset"><button type="button" data-p="all">All</button><button type="button" data-p="sep">September</button><button type="button" data-p="oct">October</button><button type="button" data-p="nov">November</button><button type="button" data-p="plan">19 Oct – 20 Nov</button></div>
-  <div class="seg" id="tfGran" aria-label="Group by"><button type="button" data-g="day">Daily</button><button type="button" data-g="week" aria-pressed="true">Weekly</button><button type="button" data-g="month">Monthly</button></div>
+  <span class="note">Period</span><div class="seg" id="tfPreset"><button type="button" data-p="all">All</button><button type="button" data-p="sep">September</button><button type="button" data-p="oct">October</button><button type="button" data-p="nov">November</button></div>
+  <span class="note">View by</span><div class="seg" id="tfGran"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div>
 </div>
 
 <!-- OVERVIEW -->
@@ -266,7 +264,7 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
     <div class="grid" id="mKpis"></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>Meta performance over time</h2><div class="seg" style="gap:8px"><select id="tCamp" class="btn" style="border-radius:6px" aria-label="Campaign"></select><select id="tMetric" class="btn" style="border-radius:6px" aria-label="Measure"></select></div></div>
+    <div class="panel-h"><h2>Meta performance over time</h2><div class="seg" style="gap:8px"><select id="tMetric" class="btn" style="border-radius:6px" aria-label="Measure"></select></div></div>
     <div class="out" id="tKpis" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
     <div class="scroll-x" id="tChart"></div>
     <div class="tbl"><table id="tTable"></table></div>
@@ -511,6 +509,11 @@ const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De
 function bkey(d){if(TF.g==='day')return d;if(TF.g==='month')return d.slice(0,7);const x=new Date(d+'T00:00:00');x.setDate(x.getDate()-((x.getDay()+6)%7));return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}
 function blab(k){if(TF.g==='month'){const m=+k.slice(5,7)-1;return {label:MONL[m]+' '+k.slice(0,4),short:MON[m]}}const x=new Date(k+'T00:00:00');const ds=x.getDate()+' '+MON[x.getMonth()];return TF.g==='week'?{label:'Week of '+ds,short:'w/c '+ds}:{label:x.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}),short:ds}}
 function groupRows(rows,dateOf,merge){const m=new Map();rows.forEach(r=>{const k=bkey(dateOf(r));m.set(k,merge(m.get(k)||{},r))});return [...m.entries()].sort((a,b)=>a[0]<b[0]?-1:1).map(([k,v])=>Object.assign(v,{key:k},blab(k)))}
+const tfAll=()=>TF.from<='2026-09-01'&&TF.to>='2026-10-16';
+const nrm=s=>String(s||'').replace(/[\[\]\s]+/g,' ').trim().toLowerCase();
+function mAgg(pred){const a={spend:0,impr:0,leads:0,clicks:0,link:0};D.mdaily.forEach(r=>{if(inTF(r[0])&&pred(r)){a.leads+=r[4];a.spend+=r[5];a.impr+=r[6];a.clicks+=r[7];a.link+=r[8]}});return a}
+function aiAgg(){const a={calls:0,con:0,int:0,min:0};D.ai.days.forEach(r=>{if(inTF(r.Date)){a.calls+=r['Calls made'];a.con+=r['Connected'];a.int+=r['Interested'];a.min+=r['Talk time (min)']}});return a}
+function periodLabel(){const f=d=>{const x=new Date(d+'T00:00:00');return x.getDate()+' '+MON[x.getMonth()]};return f(TF.from)+' – '+f(TF.to)}
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
 /* Theme */
@@ -530,6 +533,7 @@ function openTab(k,push){
   TABS.forEach(([t])=>{$('#t-'+t).hidden=t!==k;$('#tab-'+t).setAttribute('aria-selected',t===k)});
   if(push){try{history.replaceState(null,'','#'+k)}catch(e){}}
   store.set('iesp-tab',k);
+  const bar=document.getElementById('tfbar');if(bar)bar.hidden=!['overview','campaigns','walkins','ai','calendar'].includes(k);
   window.scrollTo({top:0});
 }
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)openTab(b.dataset.tab,true)});
@@ -594,20 +598,35 @@ function sankey(svg,f,onPick,sel){
 }
 
 /* ---------- Overview ---------- */
-const KPIS=[
- ['Total spend','₹1,10,284','Meta ₹99,188 · Google ₹8,458 · AI calling ₹2,638',''],
- ['Leads','5,458','5,287 Meta leads in Zoho and 171 Google leads',''],
- ['Spoke to the lead','1,887','38% of Meta leads called',''],
- ['Scheduled visits','165','192 including college and seminar leads',''],
- ['Attended visits','8','Bengaluru 7, Andheri East 1','bad'],
- ['Admissions','0','Target is 125 a month','bad'],
- ['Open leads','838','621 follow-ups due, 217 interested but not scheduled',''],
- ['Cost per scheduled visit','₹617','₹219 at Khalapur to ₹2,641 at Goa',''],
- ['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),'Meta, '+fmt(D.mtotal.clicksAll)+' clicks on '+fmt(D.mtotal.impr)+' impressions',''],
- ['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),'Meta, '+fmt(D.mtotal.linkClicks)+' link clicks','']
-];
-const KK=['spend','leads','spoke','booked','walked','adm','open','cps','ctr','cpc'];
-$('#kpis').innerHTML=KPIS.map((k,i)=>`<div class="panel s3 kpi drill ${k[3]}" role="button" tabindex="0" data-drill="${KK[i]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
+function renderOvKpis(){
+  const all=tfAll(),m=mAgg(()=>true),ai=aiAgg(),wb=D.days.filter(d=>inTF(d.date)).reduce((s,d)=>s+d.total,0);
+  const W='Whole period, 1 Sep – 15 Oct';
+  const K=all?[
+   ['Total spend','₹1,10,284','Meta ₹99,188 · Google ₹8,458 · AI calling ₹2,638','','spend'],
+   ['Leads','5,458','5,287 Meta leads in Zoho and 171 Google leads','','leads'],
+   ['Spoke to the lead','1,887','38% of Meta leads called','','spoke'],
+   ['Scheduled visits','165','192 including college and seminar leads','','booked'],
+   ['Attended visits','8','Bengaluru 7, Andheri East 1','bad','walked'],
+   ['Admissions','0','Target is 125 a month','bad','adm'],
+   ['Open leads','838','621 follow-ups due, 217 interested but not scheduled','','open'],
+   ['Cost per scheduled visit','₹617','₹219 at Khalapur to ₹2,641 at Goa','','cps'],
+   ['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),'Meta, '+fmt(D.mtotal.clicksAll)+' clicks on '+fmt(D.mtotal.impr)+' impressions','','ctr'],
+   ['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),'Meta, '+fmt(D.mtotal.linkClicks)+' link clicks','','cpc']
+  ]:[
+   ['Meta spend',rs(m.spend),periodLabel(),'','spend'],
+   ['Meta leads',fmt(m.leads),periodLabel()+' · '+rs(m.leads?m.spend/m.leads:null)+' per lead','','leads'],
+   ['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks on '+fmt(m.impr)+' impressions','','ctr'],
+   ['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks','','cpc'],
+   ['AI calls',fmt(ai.calls),fmt(ai.con)+' connected · '+fmt(ai.int)+' interested','','acalls'],
+   ['AI calling cost',rs(ai.min),fmt(ai.min)+' call minutes','','acalls'],
+   ['Walk-ins booked',fmt(wb),'By walk-in date, all sources','','wbooked'],
+   ['Attended visits','8',W,'bad','walked'],
+   ['Admissions','0',W,'bad','adm'],
+   ['Open leads','838',W,'','open']
+  ];
+  $('#kpis').innerHTML=K.map(k=>`<div class="panel s3 kpi drill ${k[3]}" role="button" tabindex="0" data-drill="${k[4]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
+}
+TFL.push(renderOvKpis);
 sankey($('#ovSankey'),FUN.all.f,i=>{openTab('funnel',true);pickStage(i)});
 hbars($('#spendBars'),[['Meta ads',99188,'var(--accent)'],['Google Ads',8458.49,'var(--c2)'],['AI calling',2638,'var(--c4)']],{money:true});
 
@@ -695,15 +714,24 @@ const MET=[
 ];
 const fv=(t,v)=>v==null||!isFinite(v)?'–':t==='money'?rs(v):t==='pct'?pf(v*100,1):t==='dec'?(Math.round(v*100)/100).toLocaleString('en-IN'):fmt(v);
 function sumRow(rows){const o={};['Spend (₹)','Impressions','Reach','Leads (Meta)','Leads (Zoho)','Called','Spoke','Interested','Walk-ins booked','rSpend','rImpr','clicksAll','linkClicks'].forEach(k=>o[k]=rows.reduce((a,r)=>a+(r[k]||0),0));return o}
-(function(){
-  const t=D.campaigns.find(r=>r.Campaign==='Total');const ads=D.ads.filter(a=>a.Campaign!=='Total'&&a.Campaign!=='Not in export');
-  const live=ads.filter(a=>sp(a)>0);const cpls=live.filter(a=>ml(a)>0).map(a=>sp(a)/ml(a)).sort((a,b)=>a-b);const med=cpls.length?cpls[Math.floor(cpls.length/2)]:null;
-  const KD=['spend','impr','impr','cpm','ctr','cpc','leads','cpml','lr','cps','aspend','aleads','contact','bookr'];
-  const K=[['Spend',rs(sp(t)),'46 ads in 4 campaigns'],['Impressions',fmt(im(t)),'Reach '+fmt(rc(t))],['Frequency',fv('dec',im(t)/rc(t)),'Average times each person saw an ad'],['CPM',rs(sp(t)*1000/im(t)),'Cost per 1,000 impressions'],['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),fmt(D.mtotal.clicksAll)+' clicks'],['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),fmt(D.mtotal.linkClicks)+' link clicks'],
-   ['Leads (Meta)',fmt(ml(t)),fmt(zl(t))+' in Zoho'],['Cost per Meta lead',rs(sp(t)/ml(t)),'Median across ads '+rs(med)],['Leads per 1,000 impressions',fv('dec',ml(t)*1000/im(t)),''],['Cost per walk-in booked',rs(sp(t)/bk(t)),fmt(bk(t))+' walk-ins booked'],
-   ['Average spend per ad',rs(sp(t)/live.length),live.length+' ads with spend'],['Average leads per ad',fv('dec',ml(t)/live.length),'Meta-reported'],['Average contact rate',pf((t.Spoke/t.Called)*100,1),'Spoke ÷ called'],['Average booking rate',pf(bk(t)/t.Spoke*100,1),'Walk-ins booked ÷ spoke']];
+function renderMK(){
+  let K,KD;
+  if(tfAll()){
+    const t=D.campaigns.find(r=>r.Campaign==='Total');const ads=D.ads.filter(a=>a.Campaign!=='Total'&&a.Campaign!=='Not in export');
+    const live=ads.filter(a=>sp(a)>0);const cpls=live.filter(a=>ml(a)>0).map(a=>sp(a)/ml(a)).sort((a,b)=>a-b);const med=cpls.length?cpls[Math.floor(cpls.length/2)]:null;
+    KD=['spend','impr','impr','cpm','ctr','cpc','leads','cpml','lr','cps','aspend','aleads','contact','bookr'];
+    K=[['Spend',rs(sp(t)),'46 ads in 4 campaigns'],['Impressions',fmt(im(t)),'Reach '+fmt(rc(t))],['Frequency',fv('dec',im(t)/rc(t)),'Average times each person saw an ad'],['CPM',rs(sp(t)*1000/im(t)),'Cost per 1,000 impressions'],['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),fmt(D.mtotal.clicksAll)+' clicks'],['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),fmt(D.mtotal.linkClicks)+' link clicks'],
+     ['Leads (Meta)',fmt(ml(t)),fmt(zl(t))+' in Zoho'],['Cost per Meta lead',rs(sp(t)/ml(t)),'Median across ads '+rs(med)],['Leads per 1,000 impressions',fv('dec',ml(t)*1000/im(t)),''],['Cost per walk-in booked',rs(sp(t)/bk(t)),fmt(bk(t))+' walk-ins booked'],
+     ['Average spend per ad',rs(sp(t)/live.length),live.length+' ads with spend'],['Average leads per ad',fv('dec',ml(t)/live.length),'Meta-reported'],['Average contact rate',pf((t.Spoke/t.Called)*100,1),'Spoke ÷ called'],['Average booking rate',pf(bk(t)/t.Spoke*100,1),'Walk-ins booked ÷ spoke']];
+  }else{
+    const m=mAgg(()=>true);const n=new Set(D.mdaily.filter(r=>inTF(r[0])&&r[5]>0).map(r=>nrm(r[2])+'|'+nrm(r[3]))).size;
+    KD=['spend','impr','cpm','ctr','cpc','leads','cpml','lr','aspend','aleads','cpc','spend'];
+    K=[['Spend',rs(m.spend),periodLabel()],['Impressions',fmt(m.impr),''],['CPM',rs(m.impr?m.spend*1000/m.impr:null),'Cost per 1,000 impressions'],['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks'],['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks'],['Leads (Meta)',fmt(m.leads),''],
+     ['Cost per Meta lead',rs(m.leads?m.spend/m.leads:null),''],['Leads per 1,000 impressions',fv('dec',m.impr?m.leads*1000/m.impr:null),''],['Average spend per ad',rs(n?m.spend/n:null),n+' ads with spend'],['Average leads per ad',fv('dec',n?m.leads/n:null),''],['Link clicks',fmt(m.link),''],['Ads delivering',fmt(n),'in this period']];
+  }
   $('#mKpis').innerHTML=K.map((k,i)=>`<div class="s3 kpi drill" role="button" tabindex="0" data-drill="${KD[i]}" style="background:var(--sunk);border:1px solid transparent;border-radius:8px;padding:12px"><span class="lab">${k[0]}</span><span class="val" style="font-size:22px">${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}<span class="more">See the breakdown ›</span></div>`).join('');
-})();
+}
+TFL.push(renderMK);
 let lvl={campaign:null,adset:null},metric='spend',sortKey='spend',sortDir=-1,campMode='tree',adName=null;
 const adN=s=>String(s||'').replace(/[\[\]]/g,'').trim();
 const ADGROUPS=(()=>{const g={};D.ads.filter(a=>a.Campaign!=='Total'&&a.Campaign!=='Not in export').forEach(a=>{const k=adN(a.Ad);(g[k]=g[k]||[]).push(a)});return Object.entries(g).map(([k,items])=>Object.assign(sumRow(items),{_name:k,_n:items.length}))})();
@@ -717,8 +745,19 @@ function campRows(){
   return {rows:D.ads.filter(r=>r.Campaign===lvl.campaign&&r['Ad set']===lvl.adset),name:r=>r.Ad,level:'Ad'};
 }
 const RES={'actions:leadgen.other':'Leads','video_continuous_2_sec_watched_actions':'2-second video plays','actions:post_engagement':'Post engagement'};
+function periodRow(r,level){
+  if(tfAll())return r;
+  let pred;
+  if(level==='Campaign'){const sets=new Set(D.ads.filter(a=>a.Campaign===r.Campaign).map(a=>nrm(a['Ad set'])));pred=x=>sets.has(nrm(x[2]))}
+  else if(level==='Ad set')pred=x=>nrm(x[2])===nrm(r['Ad set']);
+  else if(level==='Ad name')pred=x=>nrm(x[3])===nrm(r._name);
+  else pred=x=>nrm(x[2])===nrm(r['Ad set'])&&nrm(x[3])===nrm(r.Ad);
+  const m=mAgg(pred);
+  return Object.assign({},r,{'Spend (₹)':m.spend,Impressions:m.impr,Reach:null,'Leads (Meta)':m.leads,'Leads (Zoho)':null,Called:null,Spoke:null,Interested:null,'Walk-ins booked':null,rSpend:m.spend,rImpr:m.impr,clicksAll:m.clicks,linkClicks:m.link});
+}
 function renderCamp(){
-  const {rows,name,level}=campRows();
+  let {rows,name,level}=campRows();
+  rows=rows.map(r=>periodRow(r,level));
   const cr=$('#crumbs');
   let c=campMode==='name'?(adName?`<button type="button" data-l="n">All ad names</button><span class="sep">›</span><b style="font-weight:500">${esc(adName)}</b>`:'<b style="font-weight:500">All ad names</b>'):`<button type="button" data-l="0">All campaigns</button>`;
   if(campMode==='tree'&&lvl.campaign)c+=`<span class="sep">›</span>${lvl.adset?`<button type="button" data-l="1">${esc(lvl.campaign)}</button>`:`<b style="font-weight:500">${esc(lvl.campaign)}</b>`}`;
@@ -750,7 +789,7 @@ function renderCamp(){
   $('#campTable').innerHTML=head+'<tbody>'+body+foot+'</tbody>';
   $('#campTable').querySelectorAll('th[data-s]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.s;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=k==='name'?1:-1}renderCamp()}));
   $('#campTable').querySelectorAll('tr[data-i]').forEach(tr=>tr.addEventListener('click',()=>go(+tr.dataset.i)));
-  $('#campNote').textContent=level==='Ad name'?'Each ad name is totalled across every ad set it ran in. Select one to see it ad set by ad set.':level==='Ad'?(campMode==='name'?'This ad in each ad set it ran in. Use the link above to go back.':'These are the individual ads in this ad set. Use the links above to go back.'):'Select a '+(level==='Campaign'?'campaign to see its ad sets':'an ad set to see its ads')+'. Select a column heading to sort. The average row is the plain average of the rows shown; the total row recalculates each rate from the totals.';
+  $('#campNote').textContent=(tfAll()?'':'Meta figures for '+periodLabel()+'. Call and walk-in columns are not available by period. ')+(level==='Ad name'?'Each ad name is totalled across every ad set it ran in. Select one to see it ad set by ad set.':level==='Ad'?(campMode==='name'?'This ad in each ad set it ran in. Use the link above to go back.':'These are the individual ads in this ad set. Use the links above to go back.'):'Select a '+(level==='Campaign'?'campaign to see its ad sets':'an ad set to see its ads')+'. Select a column heading to sort. The average row is the plain average of the rows shown; the total row recalculates each rate from the totals.');
 }
 renderCamp();
 let rankKey='quality';
@@ -1027,12 +1066,11 @@ const DRILL={
 DRILL.open.parts[0][1]=el=>hbars(el,Object.entries(FUN).filter(([k])=>k!=='all').map(([k,v])=>[v.name,v.status[2]]).sort((a,b)=>b[1]-a[1]));
 
 /* ---------- Period filter ---------- */
-const PRE={all:['2026-09-01','2026-11-20'],sep:['2026-09-01','2026-09-30'],oct:['2026-10-01','2026-10-31'],nov:['2026-11-01','2026-11-30'],plan:['2026-10-19','2026-11-20']};
-function syncTF(){$('#tfFrom').value=TF.from;$('#tfTo').value=TF.to;$('#tfGran').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===TF.g));$('#tfPreset').querySelectorAll('button').forEach(b=>{const p=PRE[b.dataset.p];b.setAttribute('aria-pressed',p[0]===TF.from&&p[1]===TF.to)});}
+const PRE={all:['2026-09-01','2026-11-20'],sep:['2026-09-01','2026-09-30'],oct:['2026-10-01','2026-10-31'],nov:['2026-11-01','2026-11-30'],};
+function syncTF(){$('#tfGran').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===TF.g));$('#tfPreset').querySelectorAll('button').forEach(b=>{const p=PRE[b.dataset.p];b.setAttribute('aria-pressed',p[0]===TF.from&&p[1]===TF.to)});}
 function tfChanged(){syncTF();TFL.forEach(f=>f())}
 $('#tfPreset').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(!b)return;[TF.from,TF.to]=PRE[b.dataset.p];tfChanged()});
 $('#tfGran').addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;TF.g=b.dataset.g;tfChanged()});
-['tfFrom','tfTo'].forEach(id=>$('#'+id).addEventListener('change',()=>{let f=$('#tfFrom').value||'2026-09-01',to=$('#tfTo').value||'2026-11-20';if(f>to)[f,to]=[to,f];TF.from=f;TF.to=to;tfChanged()}));
 TFL.push(renderW);
 
 /* ---------- Meta performance over time ---------- */
@@ -1040,13 +1078,11 @@ const TMET=[['spend','Spend','money'],['impr','Impressions','int'],['leads','Lea
 const tv=(m,a)=>m==='spend'?a.spend:m==='impr'?a.impr:m==='leads'?a.leads:m==='cpl'?(a.leads?a.spend/a.leads:null):m==='cpm'?(a.impr?a.spend*1000/a.impr:null):m==='ctr'?(a.impr?a.clicks/a.impr:null):m==='cpc'?(a.link?a.spend/a.link:null):a.link;
 const CAMPS=[...new Set(D.mdaily.map(r=>r[1]))];
 const cname=c=>String(c).replace(/[\[\]]/g,'').trim();
-$('#tCamp').innerHTML='<option value="">All campaigns</option>'+CAMPS.map(c=>`<option value="${esc(c)}">${esc(cname(c))}</option>`).join('');
 $('#tMetric').innerHTML=TMET.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join('');
 let tMetric='spend';
-$('#tCamp').addEventListener('change',renderTime);$('#tMetric').addEventListener('change',e=>{tMetric=e.target.value;renderTime()});
+$('#tMetric').addEventListener('change',e=>{tMetric=e.target.value;renderTime()});
 function renderTime(){
-  const camp=$('#tCamp').value;
-  const rows=D.mdaily.filter(r=>inTF(r[0])&&(!camp||r[1]===camp));
+  const rows=D.mdaily.filter(r=>inTF(r[0]));
   const add=(a,r)=>{a.leads=(a.leads||0)+r[4];a.spend=(a.spend||0)+r[5];a.impr=(a.impr||0)+r[6];a.clicks=(a.clicks||0)+r[7];a.link=(a.link||0)+r[8];return a};
   const tot=rows.reduce((a,r)=>add(a,r),{});
   const fvT=(t,v)=>v==null||!isFinite(v)?'–':t==='money'?rs(v):t==='pct'?pf(v*100,2):fmt(v);
@@ -1067,6 +1103,7 @@ function renderTime(){
   $('#tTable').innerHTML=`<thead><tr><th>${TF.g==='day'?'Date':TF.g==='week'?'Week':'Month'}</th>${TMET.map(m=>`<th class="num">${m[1]}</th>`).join('')}</tr></thead><tbody>${B.map(b=>`<tr><td>${esc(b.label)}</td>${TMET.map(m=>`<td class="num">${fvT(m[2],tv(m[0],b))}</td>`).join('')}</tr>`).join('')}<tr class="total"><td>Total</td>${TMET.map(m=>`<td class="num">${fvT(m[2],tv(m[0],tot))}</td>`).join('')}</tr></tbody>`;
 }
 TFL.push(renderTime);
+TFL.push(()=>renderCamp());
 
 /* ---------- Calendar ---------- */
 let calType='all';
