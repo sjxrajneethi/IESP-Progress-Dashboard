@@ -26,6 +26,13 @@ tr.tt-r[aria-expanded="true"] td{background:var(--sunk)}
 .dl-card[open] summary{margin-bottom:12px}
 .dl-sum .kpi .val{font-size:28px}
 #t-zoho .dl-card{margin-top:16px}
+button.dl-pop{display:flex;flex-direction:column;gap:8px;text-align:left;width:100%;font:inherit;color:inherit;cursor:pointer;transition:box-shadow .15s,transform .15s}
+button.dl-pop:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-1px)}
+.dl-modal{border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:20px;width:min(560px,calc(100vw - 32px));max-height:80vh;overflow:auto}
+.dl-modal::backdrop{background:rgba(0,0,0,.4)}
+.dl-mhw{margin-bottom:14px}
+.dl-mh{flex:1}
+.dl-x{padding:4px 10px}
 .zt td,.zt th{font-size:14px;vertical-align:top;text-align:left;white-space:normal}
 .zt td:last-child{min-width:280px}
 .dl-card .tt-car{font-size:13px;color:var(--muted)}
@@ -306,10 +313,11 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 <!-- OVERVIEW -->
 <section class="tab" id="t-overview" role="tabpanel" aria-label="Overview">
   <div class="panel">
-    <div class="panel-h"><h2>What We Have Delivered</h2><span class="note tt-by">1 September to 16 October 2026 <button type="button" class="btn dl-toggle">Close All</button></span></div>
+    <div class="panel-h"><h2>What We Have Delivered</h2><span class="note tt-by">1 September to 16 October 2026</span></div>
     <div class="dl-sum" id="dlSum"></div>
   </div>
   <div class="dl-grid" id="dlCards"></div>
+  <dialog id="dlModal" class="dl-modal" aria-label="Details"><div class="dl-top dl-mhw"><div class="dl-top dl-mh"></div><button type="button" class="btn dl-x" aria-label="Close">✕</button></div><ul class="dl-list"></ul></dialog>
 </section>
 
 <!-- FUNNEL AND CENTRES -->
@@ -639,7 +647,7 @@ const DL=[
  {h:'Creative Elements',c:'--c8',n:4,u:'elements',items:[['Interactive Map','2 versions: print and website'],['3D Mascot','With Airawat branding'],['3D Airplane','With IESP branding']]},
  {h:'Videos',c:'--c4',n:22,u:'videos',items:[['21 Social Media Videos','7 posted so far'],['1 Long-Form Video','Bengaluru launch event']]},
  {h:'Website',c:'--c3',n:26,u:'pages',items:[['3 Iterations','2 for structure and design, 1 for content'],['26 Pages','Beta to a deployable version']]},
- {h:'AI Calling',c:'--c6',n:AIX.calls,u:'calls',items:[[fmt(AIX.calls)+' Calls to '+fmt(AIX.leads)+' Leads',AIX.days.length+' calling days, 29 September to 15 October'],[fmt(AIX.talkAllMin)+' Total Minutes','Average connected call '+Math.floor(AIX.avgSec/60)+' min '+(AIX.avgSec%60)+' s'],[fmt(AIX.connected)+' Calls Connected',''],['5 Languages','Marathi, Kannada, Hindi, Gujarati and English'],['2 Voice Agents','Vaishnavi and Priya'],['Writes Back to Zoho','Disposition, connection status, attempts, summary, next action and call-back time'],['Calibrated Daily','Scripts, timing and voice tuned through the pilot']]},
+ {h:'AI Calling',c:'--c6',n:AIX.calls,u:'calls',items:[[fmt(AIX.calls)+' Calls to '+fmt(AIX.leads)+' Leads',AIX.days.length+' calling days, 29 September to 16 October'],[fmt(AIX.talkAllMin)+' Total Minutes','Average connected call '+Math.floor(AIX.avgSec/60)+' min '+(AIX.avgSec%60)+' s'],[fmt(AIX.connected)+' Calls Connected',''],['5 Languages','Marathi, Kannada, Hindi, Gujarati and English'],['2 Voice Agents','Vaishnavi and Priya'],['Writes Back to Zoho','Disposition, connection status, attempts, summary, next action and call-back time'],['Calibrated Daily','Scripts, timing and voice tuned through the pilot']]},
  {h:'WhatsApp Bot',c:'--c3',n:null,v:'Ready',items:[['Technical Set-Up Complete',''],['Business Verification Pending','Meta rejected the business verification'],['Bot Features','5 languages, six guided questions, cabin crew pre-check, FAQ answers, visit booking with reminders and hand-off to the centre counsellor']]},
  {h:'Zoho',c:'--c7',n:null,v:'Configured',items:[['2 Blueprints','Enquiry to Application, 11 steps'],['9 Workflow Rules','Centre routing, territory sync and lead status'],['6 Reports',''],['Full Detail','See the Zoho tab']]}
 ];
@@ -647,7 +655,9 @@ function renderDelivered(){
   const design=25+22+32+3;
   $('#dlSum').innerHTML=[[fmt(FUN.all.f[0]),'Total Leads','1 September to 15 October','--c1'],[fmt(design),'Design Pieces','7 avg. iterations','--c2'],['4','Creative Elements','Map, mascot and airplane','--c8'],['22','Videos','21 social, 1 long-form','--c4'],['26','Website Pages','3 iterations','--c3'],[fmt(AIX.talkAllMin),'AI Call Minutes',fmt(AIX.calls)+' calls','--c6']]
     .map(k=>`<div class="kpi" style="border-top-color:var(${k[3]})"><span class="val">${k[0]}</span><span class="lab">${k[1]}</span><span class="det">${k[2]}</span></div>`).join('');
-  $('#dlCards').innerHTML=DL.map(c=>`<details class="panel dl-card" open style="border-left:4px solid var(${c.c})"><summary class="dl-top"><h3><span class="tt-car">▾</span> ${esc(c.h)}</h3><span class="dl-n">${c.n!=null?fmt(c.n):esc(c.v)}${c.n!=null?`<span class="note"> ${esc(c.u)}</span>`:''}</span></summary><ul class="dl-list">${c.items.map(([a,b])=>`<li><span>${esc(a)}</span>${b?`<span class="note">${esc(b)}</span>`:''}</li>`).join('')}</ul></details>`).join('');
+  $('#dlCards').innerHTML=DL.map((c,i)=>`<button type="button" class="panel dl-card dl-pop" data-i="${i}" style="border-left:4px solid var(${c.c})"><span class="dl-top"><h3>${esc(c.h)}</h3><span class="dl-n">${c.n!=null?fmt(c.n):esc(c.v)}${c.n!=null?`<span class="note"> ${esc(c.u)}</span>`:''}</span></span><span class="note">${c.items.length} ${c.items.length===1?'item':'items'} · View details ›</span></button>`).join('');
+  $('#dlCards').onclick=e=>{const b=e.target.closest('.dl-pop');if(!b)return;const c=DL[+b.dataset.i];const m=$('#dlModal');m.querySelector('.dl-mh').innerHTML=`<h3>${esc(c.h)}</h3><span class="dl-n">${c.n!=null?fmt(c.n):esc(c.v)}${c.n!=null?`<span class="note"> ${esc(c.u)}</span>`:''}</span>`;m.querySelector('.dl-list').innerHTML=c.items.map(([a,b])=>`<li><span>${esc(a)}</span>${b?`<span class="note">${esc(b)}</span>`:''}</li>`).join('');m.style.borderTop='4px solid var('+c.c+')';m.showModal()};
+  const M=$('#dlModal');M.addEventListener('click',e=>{if(e.target===M||e.target.closest('.dl-x'))M.close()});
 }
 renderDelivered();
 document.addEventListener('click',e=>{const b=e.target.closest('.dl-toggle');if(!b)return;const ds=[...b.closest('.tab').querySelectorAll('.dl-card')];const open=ds.some(d=>d.open);ds.forEach(d=>d.open=!open);b.textContent=open?'Open All':'Close All'});
