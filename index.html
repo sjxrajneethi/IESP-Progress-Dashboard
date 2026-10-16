@@ -219,12 +219,13 @@ ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
 </section>
 
 <!-- FUNNEL -->
-<section class="tab" id="t-funnel" role="tabpanel" aria-label="Funnel" hidden>
+<section class="tab" id="t-funnel" role="tabpanel" aria-label="Funnel and centres" hidden>
   <div class="panel">
     <div class="panel-h"><h2 id="fTitle">Lead funnel</h2><div class="seg" id="fCentres" aria-label="Choose a centre"></div></div>
     <div class="scroll-x"><svg class="chart" id="fSankey" viewBox="0 0 1000 380" role="img" aria-label="Lead flow chart for the selected centre"></svg></div>
     <p class="note">Select a stage in the chart or the table to see what it cost and how many leads dropped out.</p>
     <div class="detail" id="fDetail"></div>
+    <div class="out" id="fCentre" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))"></div>
   </div>
   <div class="grid">
     <div class="panel s7">
@@ -239,24 +240,10 @@ ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
       <div id="fReasons"></div>
     </div>
   </div>
-</section>
-
-<!-- CENTRES -->
-<section class="tab" id="t-centres" role="tabpanel" aria-label="Centres" hidden>
-  <div class="grid">
-        <div class="panel s12">
-      <div class="panel-h"><h2 id="cTitle">Select a centre</h2></div>
-      <div id="cDetail"></div>
-    </div>
-  </div>
   <div class="panel">
-    <div class="panel-h"><h2>All centres</h2><span class="note">Select a row for its funnel and spend</span></div>
+    <div class="panel-h"><h2>All centres</h2><span class="note">Select a row to show that centre above</span></div>
     <div class="tbl"><table id="cTable"></table></div>
     <p class="note">Meta spend is assigned to a centre through the ad set each lead came from. AI calling cost is shared by leads called. Walked in is what the centres reported: Bengaluru 7 and Andheri East 1.</p>
-  </div>
-  <div class="panel">
-    <div class="panel-h"><h2>Top 30 cities by leads</h2></div>
-    <div class="tbl"><table id="cityTable"></table></div>
   </div>
 </section>
 
@@ -502,7 +489,7 @@ themeBtn.addEventListener('click',()=>{document.documentElement.setAttribute('da
 const savedTheme=store.get('iesp-theme');if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);syncTheme();
 
 /* Tabs */
-const TABS=[['overview','Overview'],['funnel','Funnel'],['centres','Centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['workflows','Workflows'],['plan','Plan']];
+const TABS=[['overview','Overview'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['workflows','Workflows'],['plan','Plan']];
 const tabsEl=$('#tabs');
 tabsEl.innerHTML=TABS.map(([k,l])=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}">${l}</button>`).join('');
 function openTab(k,push){
@@ -624,34 +611,28 @@ function renderFunnel(){
   $('#fTable').querySelectorAll('tr[data-j]').forEach(r=>r.addEventListener('click',()=>pickStage(+r.dataset.j)));
   hbars($('#fStatus'),c.status.map((v,j)=>[STATUS_L[j][0],v,STATUS_L[j][1]]));
   hbars($('#fReasons'),c.reasons,{color:'var(--c3)'});
+  if(typeof centreStrip==='function'&&document.querySelector('#cTable tbody'))centreStrip(fKey);
 }
 renderFunnel();
 
-/* ---------- Centres and map ---------- */
-const CK=c=>({'T1 Andheri East':'t1','T2 Khalapur':'t2','T3 Roha':'t3','T4 Alibag':'t4','T5 Goa':'t5','T6 Bengaluru':'t6','Other & unassigned':'ot'})[c];
-
-
+/* ---------- Centres ---------- */
+const CK=c=>({'T1 Andheri East':'t1','T2 Khalapur':'t2','T3 Roha':'t3','T4 Alibag':'t4','T5 Goa':'t5','T6 Bengaluru':'t6','Other & unassigned':'ot','Total':'all'})[c];
 function cRow(k){return D.centres.find(c=>CK(c.Centre)===k)}
-function centreDetail(k){
-  const c=cRow(k),f=FUN[k];$('#cTitle').textContent=f.name;
-  $('#cDetail').innerHTML=`<div class="detail">
-   <div class="kpi"><span class="lab">Total spend</span><span class="val">${rs(c['Total spend (₹)'])}</span><span class="det">Meta ${rs(c['Meta spend (₹)'])} · AI ${rs(c['AI calling (₹)'])}</span></div>
-   <div class="kpi"><span class="lab">Leads</span><span class="val">${fmt(c.Leads)}</span><span class="det">${rs(c['Cost per lead (₹)'])} per lead</span></div>
-   <div class="kpi"><span class="lab">Contact rate</span><span class="val">${pf(c['Contact rate']*100,0)}</span><span class="det">Spoke ÷ called</span></div>
-   <div class="kpi"><span class="lab">Walk-ins booked</span><span class="val">${fmt(c['Walk-ins booked'])}</span><span class="det">${rs(c['Cost per walk-in booked (₹)'])} each</span></div>
-   <div class="kpi"><span class="lab">Walked in</span><span class="val" ${c['Walked in (actual)']?'':'style="color:var(--loss)"'}>${fmt(c['Walked in (actual)'])}</span><span class="det">${c['Walked in (actual)']?rs(c['Cost per walk-in (₹)'])+' each':'None reported yet'}</span></div></div>
-   <svg class="chart" viewBox="0 0 1000 380" id="cSankey" role="img" aria-label="Lead flow for ${esc(f.name)}"></svg>
-   <h3>Main reasons leads were closed</h3><div id="cReasons"></div>
-   <p><button class="btn" type="button" id="cOpen">Open this centre in the funnel</button></p>`;
-  sankey($('#cSankey'),f.f);
-  hbars($('#cReasons'),f.reasons,{color:'var(--c3)'});
-  $('#cOpen').addEventListener('click',()=>{fKey=k;fC.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===k));fStage=0;renderFunnel();openTab('funnel',true)});
+function centreStrip(k){
+  const c=cRow(k);if(!c){$('#fCentre').innerHTML='';return}
+  $('#fCentre').innerHTML=[
+   ['Total spend',rs(c['Total spend (₹)']),'Meta '+rs(c['Meta spend (₹)'])+' · AI '+rs(c['AI calling (₹)'])],
+   ['Cost per lead',rs(c['Cost per lead (₹)']),fmt(c.Leads)+' leads'],
+   ['Contact rate',pf(c['Contact rate']*100,0),'Spoke ÷ called'],
+   ['Booking rate',pf(c['Booking rate (booked ÷ spoke)']*100,1),'Walk-ins booked ÷ spoke'],
+   ['Cost per walk-in booked',rs(c['Cost per walk-in booked (₹)']),fmt(c['Walk-ins booked'])+' booked'],
+   ['Walked in',fmt(c['Walked in (actual)']),c['Walked in (actual)']?rs(c['Cost per walk-in (₹)'])+' each · '+pf(c['Show-up rate (walked ÷ booked)']*100,1)+' show-up':'None reported yet']
+  ].map(x=>`<div class="kpi"><span class="lab">${x[0]}</span><span class="val">${x[1]}</span><span class="det">${x[2]}</span></div>`).join('');
   $('#cTable').querySelectorAll('tr[data-k]').forEach(r=>r.classList.toggle('sel',r.dataset.k===k));
 }
-$('#cTable').innerHTML=`<thead><tr><th>Centre</th><th class="num">Total spend</th><th class="num">Leads</th><th class="num">Cost per lead</th><th class="num">Contact rate</th><th class="num">Walk-ins booked</th><th class="num">Cost per walk-in booked</th><th class="num">Walked in</th><th class="num">Show-up rate</th></tr></thead><tbody>${D.centres.map(c=>{const k=CK(c.Centre);const tot=c.Centre==='Total';return `<tr class="${tot?'total':'click'}" ${k?`data-k="${k}"`:''}><td>${esc(c.Centre)}</td><td class="num">${rs(c['Total spend (₹)'])}</td><td class="num">${fmt(c.Leads)}</td><td class="num">${rs(c['Cost per lead (₹)'])}</td><td class="num">${pf(c['Contact rate']*100,0)}</td><td class="num">${fmt(c['Walk-ins booked'])}</td><td class="num">${rs(c['Cost per walk-in booked (₹)'])}</td><td class="num">${fmt(c['Walked in (actual)'])}</td><td class="num">${pf(c['Show-up rate (walked ÷ booked)']*100,1)}</td></tr>`}).join('')}</tbody>`;
-$('#cTable').querySelectorAll('tr[data-k]').forEach(r=>r.addEventListener('click',()=>centreDetail(r.dataset.k)));
-$('#cityTable').innerHTML=`<thead><tr><th>City</th><th class="num">Leads</th><th class="num">Called</th><th class="num">Spoke</th><th class="num">Interested</th><th class="num">Walk-ins booked</th><th class="num">Booking rate</th></tr></thead><tbody>${D.cities.map(c=>`<tr><td>${esc(c.City)}</td><td class="num">${fmt(c.Leads)}</td><td class="num">${fmt(c.Called)}</td><td class="num">${fmt(c.Spoke)}</td><td class="num">${fmt(c.Interested)}</td><td class="num">${fmt(c['Walk-ins booked'])}</td><td class="num">${pf((c['Booking rate (booked ÷ spoke)']||0)*100,0)}</td></tr>`).join('')}</tbody>`;
-centreDetail('t6');
+$('#cTable').innerHTML=`<thead><tr><th>Centre</th><th class="num">Total spend</th><th class="num">Leads</th><th class="num">Cost per lead</th><th class="num">Contact rate</th><th class="num">Walk-ins booked</th><th class="num">Cost per walk-in booked</th><th class="num">Walked in</th><th class="num">Show-up rate</th></tr></thead><tbody>${D.centres.map(c=>{const k=CK(c.Centre);const tot=c.Centre==='Total';return `<tr class="click ${tot?'total':''}" data-k="${k}"><td>${tot?'All centres':esc(c.Centre)}</td><td class="num">${rs(c['Total spend (₹)'])}</td><td class="num">${fmt(c.Leads)}</td><td class="num">${rs(c['Cost per lead (₹)'])}</td><td class="num">${pf(c['Contact rate']*100,0)}</td><td class="num">${fmt(c['Walk-ins booked'])}</td><td class="num">${rs(c['Cost per walk-in booked (₹)'])}</td><td class="num">${fmt(c['Walked in (actual)'])}</td><td class="num">${pf(c['Show-up rate (walked ÷ booked)']*100,1)}</td></tr>`}).join('')}</tbody>`;
+$('#cTable').querySelectorAll('tr[data-k]').forEach(r=>r.addEventListener('click',()=>{fKey=r.dataset.k;fStage=0;fC.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===fKey));renderFunnel();$('#t-funnel').scrollIntoView({behavior:'smooth',block:'start'})}));
+centreStrip(fKey);
 
 /* ---------- Campaigns drill-down ---------- */
 const sp=r=>r['Spend (₹)']||0,im=r=>r.Impressions||0,rc=r=>r.Reach||0,ml=r=>r['Leads (Meta)']||0,zl=r=>r['Leads (Zoho)']||0,bk=r=>r['Walk-ins booked']||0;
@@ -985,7 +966,7 @@ const DRILL={
  walked:{title:'Attended visits',lead:'8 attended visits so far, as reported by the centres.',parts:[['By centre',byFun(5)],['Show-up rate by centre (walked in ÷ booked)',ratioCentre('Walked in (actual)','Walk-ins booked')]],go:['funnel','Open the funnel']},
  adm:{title:'Admissions',lead:'0 admissions against a target of 125 a month.',parts:[['What 125 admissions need',`<ul class="plain"><li>About 312 attended visits a month, if 40% of visitors take admission.</li><li>At today’s rates: about 2.07 lakh leads, or about ₹40 lakh a month.</li><li>At the after-fix rates of 60% answered, 15% scheduled, 25% attended and 40% admitted: about 14,850 leads, or about ₹2.9 lakh a month.</li></ul>`]],go:['plan','Open the plan']},
  open:{title:'Open leads',lead:'838 leads are still open.',parts:[['Follow-up pending, by centre',byFun(-1)],['Interested but not yet scheduled, by centre',el=>hbars(el,Object.entries(FUN).filter(([k])=>k!=='all').map(([k,v])=>[v.name,v.status[4]-v.f[4]]).sort((a,b)=>b[1]-a[1]))]],go:['funnel','Open the funnel']},
- cps:{title:'Cost per scheduled visit',lead:'₹617 across all centres: total spend ÷ walk-ins booked.',parts:[['By centre',byCentre(c=>c['Cost per walk-in booked (₹)']||null,{money:true,share:false,color:'var(--c4)'})],['By campaign',byCamp(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'})],['Lowest 10 ads',byAd(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'},10,true)]],go:['centres','Open centres']},
+ cps:{title:'Cost per scheduled visit',lead:'₹617 across all centres: total spend ÷ walk-ins booked.',parts:[['By centre',byCentre(c=>c['Cost per walk-in booked (₹)']||null,{money:true,share:false,color:'var(--c4)'})],['By campaign',byCamp(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'})],['Lowest 10 ads',byAd(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'},10,true)]],go:['funnel','Open funnel and centres']},
  impr:{title:'Impressions and reach',parts:[['Impressions by campaign',byCamp(im)],['Reach by campaign',byCamp(rc)],['Frequency by campaign',byCamp(r=>dv(im(r),rc(r)),{share:false,dec:true})],['Top 10 ad sets by impressions',byAdset(im)]],go:['campaigns','Open campaigns']},
  cpm:{title:'CPM',lead:'Cost per 1,000 impressions.',parts:[['By campaign',byCamp(r=>dv(sp(r)*1000,im(r)),{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>dv(sp(r)*1000,im(r)),{money:true,share:false,color:'var(--c4)'},25)]],go:['campaigns','Open campaigns']},
  cpml:{title:'Cost per Meta lead',parts:[['By campaign',byCamp(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'},25)],['Lowest 10 ads',byAd(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'},10,true)]],go:['campaigns','Open campaigns']},
