@@ -9,26 +9,30 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
 <style>
 /* Layout: sticky brand bar and tab row; each tab is a 12-column grid of panels that stacks to one column on phones */
 :root{
-  --bg:#F3F4F8; --surface:#FFFFFF; --sunk:#ECEEF4; --ink:#1A1E3A; --muted:#565D78; --faint:#8A90A8; --line:#DCDFE8;
-  --accent:#2E3A8C; --accent-soft:#E3E6F6; --loss:#C42332; --loss-soft:#F7DDE0; --land:#E4E7F0; --sea:#F7F8FB;
-  --good:#1D7A4C; --good-soft:#DDF1E6; --warn:#9A6400; --warn-soft:#FBEBCB; --crit:#C42332; --crit-soft:#F7DDE0;
-  --c1:#2E3A8C; --c2:#3F8F9C; --c3:#8C6BB1; --c4:#C27C2C; --c5:#C42332; --c6:#2F7D4F; --c7:#8A90A8;
+  --bg:#F9F9F7; --surface:#FCFCFB; --sunk:#F0EFEC; --ink:#0B0B0B; --muted:#52514E; --faint:#898781; --line:#E1E0D9;
+  --accent:#2A78D6; --accent-soft:#E7F0FB; --loss:#D03B3B; --loss-soft:#FBE8E7; --land:#ECEBE6; --sea:#F7F7F4;
+  --good:#006300; --good-soft:#E3F2E3; --warn:#8A5A00; --warn-soft:#FCF0D6; --crit:#D03B3B; --crit-soft:#FBE8E7;
+  --c1:#2A78D6; --c2:#EB6834; --c3:#1BAF7A; --c4:#EDA100; --c5:#E87BA4; --c6:#008300; --c7:#898781; --c8:#6250D6;
+  --grid:#E1E0D9; --axis:#C3C2B7; --st-good:#0CA30C; --st-warn:#FAB219; --st-bad:#D03B3B; --pop-shadow:0 6px 24px rgba(11,11,11,.10);
   --font:'Google Sans','Google Sans Flex','Product Sans',Roboto,system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
   --r:10px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F1220; --surface:#171B2C; --sunk:#1E2336; --ink:#E8EAF3; --muted:#A3A9C0; --faint:#757C96; --line:#2A3048;
-  --accent:#93A0F0; --accent-soft:#252B4A; --loss:#F26D75; --loss-soft:#3A1F27; --land:#262C42; --sea:#141828;
-  --good:#5BC98F; --good-soft:#173328; --warn:#E6B450; --warn-soft:#3A2E14; --crit:#F26D75; --crit-soft:#3A1F27;
-  --c1:#93A0F0; --c2:#6CC3CF; --c3:#B79BDB; --c4:#E2A35A; --c5:#F26D75; --c6:#6FCB95; --c7:#8A90A8; color-scheme:dark}}
+  --bg:#0D0D0D; --surface:#1A1A19; --sunk:#262624; --ink:#F0EFEC; --muted:#C3C2B7; --faint:#898781; --line:#2C2C2A;
+  --accent:#3987E5; --accent-soft:#1A2A3E; --loss:#E66767; --loss-soft:#3A2020; --land:#2C2C2A; --sea:#141413;
+  --good:#0CA30C; --good-soft:#15301A; --warn:#FAB219; --warn-soft:#3A2E14; --crit:#E66767; --crit-soft:#3A2020;
+  --c1:#3987E5; --c2:#D95926; --c3:#199E70; --c4:#C98500; --c5:#D55181; --c6:#2E9B2E; --c7:#898781; --c8:#9085E9;
+  --grid:#2C2C2A; --axis:#383835; --st-good:#0CA30C; --st-warn:#FAB219; --st-bad:#E66767; --pop-shadow:0 6px 24px rgba(0,0,0,.45); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1220; --surface:#171B2C; --sunk:#1E2336; --ink:#E8EAF3; --muted:#A3A9C0; --faint:#757C96; --line:#2A3048;
-  --accent:#93A0F0; --accent-soft:#252B4A; --loss:#F26D75; --loss-soft:#3A1F27; --land:#262C42; --sea:#141828;
-  --good:#5BC98F; --good-soft:#173328; --warn:#E6B450; --warn-soft:#3A2E14; --crit:#F26D75; --crit-soft:#3A1F27;
-  --c1:#93A0F0; --c2:#6CC3CF; --c3:#B79BDB; --c4:#E2A35A; --c5:#F26D75; --c6:#6FCB95; --c7:#8A90A8; color-scheme:dark}
+  --bg:#0D0D0D; --surface:#1A1A19; --sunk:#262624; --ink:#F0EFEC; --muted:#C3C2B7; --faint:#898781; --line:#2C2C2A;
+  --accent:#3987E5; --accent-soft:#1A2A3E; --loss:#E66767; --loss-soft:#3A2020; --land:#2C2C2A; --sea:#141413;
+  --good:#0CA30C; --good-soft:#15301A; --warn:#FAB219; --warn-soft:#3A2E14; --crit:#E66767; --crit-soft:#3A2020;
+  --c1:#3987E5; --c2:#D95926; --c3:#199E70; --c4:#C98500; --c5:#D55181; --c6:#2E9B2E; --c7:#898781; --c8:#9085E9;
+  --grid:#2C2C2A; --axis:#383835; --st-good:#0CA30C; --st-warn:#FAB219; --st-bad:#E66767; --pop-shadow:0 6px 24px rgba(0,0,0,.45); color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body.drawer-open{overflow:hidden}
@@ -165,6 +169,85 @@ ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
 .tag.content{background:var(--accent-soft);color:var(--accent)}.tag.ad{background:var(--warn-soft);color:var(--warn)}.tag.fest{background:var(--good-soft);color:var(--good)}
 tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Restyle to match the Campaigns & Ads dashboard: warm neutral surfaces, serif figures, quiet tables, popover tooltips, rounded thin bars */
+:root{--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--r:12px}
+h1{font-family:var(--serif);font-weight:400;font-size:30px;letter-spacing:-.01em}
+h2{font-size:17px;font-weight:500;letter-spacing:0}
+h3{font-size:15px;font-weight:500}
+.panel{padding:20px 22px;gap:12px}
+.note{font-size:12.5px;line-height:1.5}
+nav.tabs button[aria-selected="true"]{border-bottom-color:currentColor}
+.kpi .lab{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:500}
+.kpi .val{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.15}
+.kpi .det{font-size:12.5px;line-height:1.45}
+.kpi.bad .val{color:var(--loss)}
+.detail{background:transparent;border-top:1px solid var(--line);border-radius:0;padding:12px 0 0}
+.detail .kpi .val,.out .kpi .val{font-size:24px}
+.out .kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.seg button,.btn{font-size:12.5px;padding:5px 12px;background:var(--surface)}
+.seg button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.seg button:hover,.btn:hover{border-color:var(--faint)}
+.tfbar{padding:14px 18px}
+/* status chips become a coloured dot beside plain text */
+.chip{background:transparent!important;color:var(--ink)!important;font-weight:400;padding:0;font-size:13px}
+.chip::before{width:7px;height:7px;background:var(--faint)}
+.chip.good::before{background:var(--st-good)}.chip.warn::before{background:var(--st-warn)}.chip.crit::before{background:var(--st-bad)}.chip.info::before{background:var(--faint);opacity:.7}
+/* tables */
+.tbl{border:0;border-top:1px solid var(--line);border-radius:0;max-height:36rem;overflow:auto}
+table{font-size:13.5px}
+th,td{padding:8px 12px}
+th{background:var(--surface);font-size:12.5px;color:var(--muted);vertical-align:bottom;z-index:1}
+tbody tr:hover td,tr.click:hover td{background:var(--sunk)}
+tr.sel td{background:var(--accent-soft)}
+tr.total td{background:transparent;border-top:2px solid var(--line)}
+tr:last-child td{border-bottom:1px solid var(--line)}
+tr.group td{background:var(--sunk)}
+/* charts */
+svg text{font-size:12px}
+svg text.muted,svg .muted{fill:var(--faint)}
+.legend{font-size:12.5px}
+.legend>span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:10px;height:10px;border-radius:2px}
+.split{height:8px;border-radius:4px;gap:2px;background:transparent}
+.split span{border-radius:2px}
+.step,.st,.ph{border-radius:10px}
+.mapwrap{border-radius:10px}
+/* tooltip: small popover, as on the Campaigns & Ads dashboard */
+#tip{background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--pop-shadow);border-radius:10px;font-size:12.5px;padding:8px 10px;min-width:11rem}
+#tip b{font-weight:500;color:var(--muted)}
+
+/* Campaigns & Ads visuals */
+.cv-chart{position:relative;min-width:0;min-height:8rem}
+.cv-chart svg{display:block;width:100%;height:auto}
+.cv-h2{font-size:17px;font-weight:500;padding-top:10px}
+.cv-empty{display:flex;align-items:center;justify-content:center;min-height:8rem;color:var(--muted);font-size:12.5px;text-align:center}
+svg text.cv-t{fill:var(--faint);font-size:11.5px}
+svg text.cv-v{fill:var(--ink);font-size:12px}
+.cv-tip-h{color:var(--muted);padding-bottom:3px}
+.cv-tip-row{display:flex;justify-content:space-between;gap:18px}
+.cv-tip-k{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.cv-tip-v{color:var(--ink);font-variant-numeric:tabular-nums}
+.cv-share{display:grid;gap:16px}
+.cv-share-row{display:grid;gap:5px}
+.cv-share-n{font-size:14px;display:flex;justify-content:space-between;gap:12px}
+.cv-share-n span:last-child{color:var(--muted);font-size:12.5px;white-space:nowrap}
+.cv-bar{display:grid;grid-template-columns:minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cv-bar i{display:block;height:8px;border-radius:4px;background:var(--grid);overflow:hidden}
+.cv-bar i b{display:block;height:100%;border-radius:4px}
+.cv-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:700px){.cv-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cv-step{display:grid;gap:3px;align-content:start;padding-top:10px;border-top:3px solid var(--axis);min-width:0}
+.cv-step:last-child{border-top-color:var(--c1)}
+.cv-step-l{font-size:12.5px;color:var(--muted)}
+.cv-step-v{font-family:var(--serif);font-size:26px;line-height:1.2}
+.cv-step-k{font-size:12.5px;line-height:1.45}
+.cv-per{font-size:14px;line-height:1.6;padding-top:10px;border-top:1px solid var(--line)}
+.cv-band{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.cv-band[data-b="low"]{background:var(--st-good)}.cv-band[data-b="mid"]{background:var(--st-warn)}.cv-band[data-b="high"]{background:var(--st-bad)}.cv-band[data-b="none"]{background:var(--faint);opacity:.5}
+.cv-cellbar{display:inline-grid;grid-template-columns:4.5rem auto;gap:8px;align-items:center}
+.cv-track{display:block;height:6px;border-radius:3px;background:var(--grid);overflow:hidden}
+.cv-track b{display:block;height:100%;border-radius:3px;background:var(--c1)}
 </style>
 
 </head>
@@ -207,7 +290,7 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
     <div class="panel s7">
       <div class="panel-h"><h2>Where the 5,287 Meta leads went</h2><button class="btn" data-go="funnel" type="button">Open the funnel</button></div>
       <div class="scroll-x"><svg class="chart" id="ovSankey" viewBox="0 0 1000 380" role="img" aria-label="Lead flow chart"></svg></div>
-      <p class="note">The navy band is the leads still moving forward. Each red band is where leads dropped out. Widths are to scale.</p>
+      <p class="note">The blue band is the leads still moving forward. Each red band is where leads dropped out. Widths are to scale.</p>
     </div>
     <div class="panel s5">
       <div class="panel-h"><h2>Spend</h2><span class="note">₹1,10,284 in total</span></div>
@@ -262,6 +345,35 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
     <div class="panel-h"><h2>Meta ads, 1 September to 15 October 2026</h2></div>
     <div class="grid" id="mKpis"></div>
   </div>
+  <div class="panel" id="cTrend">
+    <div class="panel-h"><h2 id="cTrendH">Leads per week, by campaign</h2></div>
+    <p class="note">Each bar is split by campaign. Hover a bar for the numbers. Follows the period and the Day / Week / Month choice.</p>
+    <div class="legend" id="cLeg"></div>
+    <div class="cv-chart" id="cStack"></div>
+    <h3 class="cv-h2" id="cCplH">Cost per lead per week</h3>
+    <p class="note">Spend ÷ Meta leads. The dashed line is the average for the period.</p>
+    <div class="cv-chart" id="cCpl"></div>
+  </div>
+  <div class="grid">
+    <div class="panel s6" id="cShareCard">
+      <h2>Where the money went, and where the leads came from</h2>
+      <p class="note">For each campaign, its share of leads against its share of spend. A lead bar longer than the spend bar means cheaper leads than average.</p>
+      <div class="legend"><span><span class="sw" style="background:var(--c1)"></span>Share of leads (each campaign's colour)</span><span><span class="sw" style="background:var(--faint)"></span>Share of money spent</span></div>
+      <div class="cv-share" id="cShare"></div>
+    </div>
+    <div class="panel s6" id="cFlowCard">
+      <h2>From an ad on screen to a filled form</h2>
+      <p class="note">Each step as a share of the step before, for the period.</p>
+      <div class="cv-flow" id="cFlow"></div>
+      <p class="cv-per" id="cPer"></p>
+    </div>
+  </div>
+  <div class="panel" id="cScatterCard">
+    <h2>Every ad: money spent against leads</h2>
+    <p class="note">Each dot is one ad in one ad set, coloured by campaign. Dots above the dashed average cost-per-lead line brought leads more cheaply than average; dots below it cost more. Hover a dot for the ad.</p>
+    <div class="legend" id="cScLeg"></div>
+    <div class="cv-chart" id="cScatter"></div>
+  </div>
   <div class="panel">
     <div class="panel-h"><h2>Meta performance over time</h2><div class="seg" style="gap:8px;align-items:center"><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div><select id="tMetric" class="btn" style="border-radius:6px" aria-label="Measure"></select></div></div>
     <div class="out" id="tKpis" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
@@ -274,6 +386,7 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
     <div class="scroll-x" id="campChart"></div>
     <div class="tbl"><table id="campTable"></table></div>
     <p class="note" id="campNote"></p>
+    <p class="note">The dot before cost per Meta lead compares it with the average of the rows shown: <span class="cv-band" data-b="low"></span>at or below average, <span class="cv-band" data-b="mid"></span>up to twice the average, <span class="cv-band" data-b="high"></span>more than twice. The bar under Leads (Meta) is on one scale for the rows shown.</p>
   </div>
   <div class="grid">
     <div class="panel s6">
@@ -538,7 +651,7 @@ function hbars(el,items,opts={}){
     const w=it[1]/max*100;const col=it[2]||opts.color||'var(--accent)';
     return `<div ${opts.click?`role="button" tabindex="0" data-i="${i}" style="cursor:pointer"`:''}>
       <div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(it[0])}">${esc(it[0])}</span><span><b style="font-weight:500">${opts.money?rs(it[1]):opts.pctv?pf(it[1],1):opts.dec?(Math.round(it[1]*100)/100).toLocaleString('en-IN'):fmt(it[1])}</b>${opts.share===false?'':` <span class="note">${pf(pct(it[1],total),0)}</span>`}</span></div>
-      <div style="height:8px;background:var(--sunk);border-radius:4px;margin-top:4px"><div style="width:${w}%;height:100%;background:${col};border-radius:4px"></div></div></div>`}).join('')}</div>`;
+      <div style="height:6px;background:var(--grid);border-radius:3px;margin-top:5px;overflow:hidden"><div style="width:${w}%;height:100%;background:${col};border-radius:3px"></div></div></div>`}).join('')}</div>`;
   if(opts.click){el.querySelectorAll('[data-i]').forEach(n=>{const f=()=>opts.click(+n.dataset.i);n.addEventListener('click',f);n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})})}
 }
 
@@ -720,7 +833,7 @@ function renderMK(){
     K=[['Spend',rs(m.spend),periodLabel()],['Impressions',fmt(m.impr),''],['CPM',rs(m.impr?m.spend*1000/m.impr:null),'Cost per 1,000 impressions'],['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks'],['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks'],['Leads (Meta)',fmt(m.leads),''],
      ['Cost per Meta lead',rs(m.leads?m.spend/m.leads:null),''],['Leads per 1,000 impressions',fv('dec',m.impr?m.leads*1000/m.impr:null),''],['Average spend per ad',rs(n?m.spend/n:null),n+' ads with spend'],['Average leads per ad',fv('dec',n?m.leads/n:null),''],['Link clicks',fmt(m.link),''],['Ads delivering',fmt(n),'in this period']];
   }
-  $('#mKpis').innerHTML=K.map((k,i)=>`<div class="s3 kpi drill" role="button" tabindex="0" data-drill="${KD[i]}" style="background:var(--sunk);border:1px solid transparent;border-radius:8px;padding:12px"><span class="lab">${k[0]}</span><span class="val" style="font-size:22px">${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}<span class="more">See the breakdown ›</span></div>`).join('');
+  $('#mKpis').innerHTML=K.map((k,i)=>`<div class="s3 kpi drill" role="button" tabindex="0" data-drill="${KD[i]}" style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px"><span class="lab">${k[0]}</span><span class="val" style="font-size:26px">${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}<span class="more">See the breakdown ›</span></div>`).join('');
 }
 TFL.push(renderMK);
 let lvl={campaign:null,adset:null},metric='spend',sortKey='spend',sortDir=-1,campMode='tree',adName=null;
@@ -763,7 +876,7 @@ function renderCamp(){
   const rowH=30,lw=320,W=1000,H=sorted.length*rowH+10;
   const bad=['cpm','cpml','cpl','cpb','freq'].includes(metric);
   let s='';sorted.forEach((r,i)=>{const v=vals[i];const w=v==null||!isFinite(v)?0:(v/max)*(W-lw-120);const y=i*rowH+4;const nm=String(name(r));
-    s+=`<g data-i="${i}" style="cursor:${level==='Ad'?'default':'pointer'}"><rect x="0" y="${y}" width="${W}" height="${rowH-4}" fill="transparent"/><text x="${lw-10}" y="${y+18}" text-anchor="end" font-size="13">${esc(nm.length>44?nm.slice(0,43)+'…':nm)}</text><rect x="${lw}" y="${y+4}" width="${Math.max(w,v?1:0)}" height="${rowH-12}" rx="3" fill="${bad?'var(--c4)':'var(--accent)'}"/><text x="${lw+w+6}" y="${y+18}" font-size="13" class="muted">${v==null||!isFinite(v)?'not applicable':fv(M[2],v)}</text></g>`});
+    s+=`<g data-i="${i}" style="cursor:${level==='Ad'?'default':'pointer'}"><rect x="0" y="${y}" width="${W}" height="${rowH-4}" fill="transparent"/><text x="${lw-10}" y="${y+18}" text-anchor="end" font-size="13">${esc(nm.length>44?nm.slice(0,43)+'…':nm)}</text><rect x="${lw}" y="${y+4}" width="${Math.max(w,v?1:0)}" height="${rowH-12}" rx="4" fill="${bad?'var(--c4)':'var(--accent)'}"/><text x="${lw+w+6}" y="${y+18}" font-size="13" class="muted">${v==null||!isFinite(v)?'not applicable':fv(M[2],v)}</text></g>`});
   $('#campChart').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" style="min-width:680px" role="img" aria-label="${esc(M[1])} by ${level.toLowerCase()}">${s}</svg>`;
   const go=i=>{const r=sorted[i];if(level==='Ad name')adName=r._name;else if(level==='Campaign')lvl.campaign=r.Campaign;else if(level==='Ad set')lvl.adset=r['Ad set'];else return;renderCamp()};
   $('#campChart').querySelectorAll('g[data-i]').forEach(g=>g.addEventListener('click',()=>go(+g.dataset.i)));
@@ -775,7 +888,8 @@ function renderCamp(){
   const head=`<thead><tr><th class="sortable" data-s="name">${level}${sortKey==='name'?(sortDir<0?' ↓':' ↑'):''}</th>${showAds?'<th>Ads</th>':''}${MET.map(m=>`<th class="sortable num" data-s="${m[0]}">${m[1]}${sortKey===m[0]?(sortDir<0?' ↓':' ↑'):''}</th>`).join('')}${extra.map(e=>`<th>${e[0]}</th>`).join('')}</tr></thead>`;
   const dl=d=>d==='active'?'<span class="chip good">Active</span>':d==='not_delivering'?'<span class="chip warn">Not delivering</span>':d?'<span class="chip info">Inactive</span>':'';
   const rk=v=>!v||v==='-'?'<span class="note">No ranking</span>':/Below/.test(v)?`<span class="chip crit">${esc(v)}</span>`:/Above/.test(v)?`<span class="chip good">${esc(v)}</span>`:`<span class="chip info">${esc(v)}</span>`;
-  const body=sorted.map((r,i)=>`<tr class="${level==='Ad'?'':'click'}" data-i="${i}"><td class="wrap-cell">${esc(name(r))}</td>${showAds?`<td class="wrap-cell" style="min-width:260px">${esc(adsOf(r))}</td>`:''}${MET.map(m=>`<td class="num">${fv(m[2],m[3](r))}</td>`).join('')}${level==='Ad'?(r.rank?`<td>${dl(r.Delivery)}</td><td>${esc(RES[r.rank.resultType]||r.rank.resultType||'–')}</td><td>${rk(r.rank.quality)}</td><td>${rk(r.rank.engagement)}</td><td>${rk(r.rank.conversion)}</td><td>${r.rank.budgetType==='Daily'?rs(+r.rank.budget)+' a day':'Campaign budget'}</td>`:`<td>${dl(r.Delivery)}</td><td></td><td></td><td></td><td></td><td></td>`):''}</tr>`).join('');
+  const cvAvg=ml(tot)?sp(tot)/ml(tot):null,cvMaxL=Math.max(1,...rows.map(ml));
+  const body=sorted.map((r,i)=>`<tr class="${level==='Ad'?'':'click'}" data-i="${i}"><td class="wrap-cell">${esc(name(r))}</td>${showAds?`<td class="wrap-cell" style="min-width:260px">${esc(adsOf(r))}</td>`:''}${MET.map(m=>cvCell(m,r,cvAvg,cvMaxL)).join('')}${level==='Ad'?(r.rank?`<td>${dl(r.Delivery)}</td><td>${esc(RES[r.rank.resultType]||r.rank.resultType||'–')}</td><td>${rk(r.rank.quality)}</td><td>${rk(r.rank.engagement)}</td><td>${rk(r.rank.conversion)}</td><td>${r.rank.budgetType==='Daily'?rs(+r.rank.budget)+' a day':'Campaign budget'}</td>`:`<td>${dl(r.Delivery)}</td><td></td><td></td><td></td><td></td><td></td>`):''}</tr>`).join('');
   const foot=`<tr class="total"><td>Average of ${rows.length} rows</td>${showAds?'<td></td>':''}${avg.map((v,j)=>`<td class="num">${fv(MET[j][2],v)}</td>`).join('')}${extra.map(()=>'<td></td>').join('')}</tr><tr class="total"><td>Total</td>${showAds?'<td></td>':''}${MET.map(m=>`<td class="num">${fv(m[2],m[3](tot))}</td>`).join('')}${extra.map(()=>'<td></td>').join('')}</tr>`;
   $('#campTable').innerHTML=head+'<tbody>'+body+foot+'</tbody>';
   $('#campTable').querySelectorAll('th[data-s]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.s;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=k==='name'?1:-1}renderCamp()}));
@@ -1084,8 +1198,8 @@ function renderTime(){
   const W=1000,H=260,pl=60,pb=34,bw=(W-pl)/B.length,y=v=>H-pb-(v/max)*(H-pb-20);
   let s=`<line x1="${pl}" x2="${W}" y1="${H-pb}" y2="${H-pb}" stroke="var(--line)"/>`;
   const line=['cpl','cpm','ctr','cpc'].includes(tMetric);
-  if(line){const pts=B.map((b,i)=>vals[i]==null?null:[pl+i*bw+bw/2,y(vals[i])]).filter(Boolean);s+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="var(--accent)" stroke-width="2"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="var(--accent)"/>`).join('')}
-  B.forEach((b,i)=>{const v=vals[i],x=pl+i*bw;if(!line&&v)s+=`<rect x="${x+bw*0.15}" y="${y(v)}" width="${bw*0.7}" height="${H-pb-y(v)}" fill="var(--accent)" rx="2"/>`;
+  if(line){const pts=B.map((b,i)=>vals[i]==null?null:[pl+i*bw+bw/2,y(vals[i])]).filter(Boolean);s+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="var(--accent)"/>`).join('')}
+  B.forEach((b,i)=>{const v=vals[i],x=pl+i*bw;if(!line&&v)s+=`<rect x="${x+bw/2-Math.min(bw*0.7,40)/2}" y="${y(v)}" width="${Math.min(bw*0.7,40)}" height="${H-pb-y(v)}" fill="var(--accent)" rx="4"/>`;
     if(B.length<=20&&v!=null)s+=`<text x="${x+bw/2}" y="${y(v)-7}" text-anchor="middle" font-size="11">${fvT(M[2],v)}</text>`;
     if(B.length<=20||i%Math.ceil(B.length/12)===0)s+=`<text x="${x+bw/2}" y="${H-pb+16}" text-anchor="middle" font-size="11" class="muted">${esc(b.short)}</text>`;
     s+=`<rect x="${x}" y="0" width="${bw}" height="${H-pb}" fill="transparent" data-b="${i}"/>`});
@@ -1095,6 +1209,95 @@ function renderTime(){
 }
 TFL.push(renderTime);
 TFL.push(()=>renderCamp());
+
+/* ---------- Campaigns & Ads visuals (same charts, tables and colours as the online Campaigns & Ads dashboard) ---------- */
+const CV_COL=['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)','var(--c6)','var(--c8)'];
+const CV_CAMPS=CAMPS.slice().sort((a,b)=>{const t=c=>D.mdaily.reduce((s,r)=>s+(r[1]===c?r[4]:0),0);return t(b)-t(a)});
+const cvCol=c=>CV_COL[Math.max(0,CV_CAMPS.indexOf(c))%CV_COL.length];
+const cvSw=c=>`<span class="sw" style="background:${c}"></span>`;
+const cvTip=(hd,rows)=>`<div class="cv-tip-h">${esc(hd)}</div>`+rows.map(r=>`<div class="cv-tip-row"><span class="cv-tip-k">${r[2]?cvSw(r[2]):''}${esc(r[0])}</span><span class="cv-tip-v">${r[1]}</span></div>`).join('');
+const cvW=el=>Math.max(300,Math.round(el.clientWidth||600));
+const cvT=(x,y,t,a='')=>`<text x="${x}" y="${y}" ${a}>${esc(t)}</text>`;
+const cvShort=n=>n>=1e5?(Math.round(n/1e4)/10)+'L':n>=1e3?(Math.round(n/100)/10)+'k':String(Math.round(n));
+function cvNice(v){if(!(v>0))return 1;const p=Math.pow(10,Math.floor(Math.log10(v)));const n=v/p;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p}
+function cvStep(v,n=4){const s=cvNice(v/n);return s*Math.ceil(v/s-1e-9)}
+function cvGrid(W,pl,pr,y,max,f){const st=cvNice(max/4),n=Math.round(max/st);let s='';for(let i=0;i<=n;i++){const v=st*i,yy=y(v);s+=`<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="${i===0?'var(--axis)':'var(--grid)'}"/>`+cvT(pl-8,yy+4,f(v),'text-anchor="end" class="cv-t"')}return s}
+function cvTop(x,y,w,h,r){r=Math.min(r,w/2,h);if(h<=0)return '';return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`}
+function cvXLabels(B,pl,step,H,pb,W){const every=Math.max(1,Math.ceil(B.length*64/(W-pl)));return B.map((b,i)=>i%every?'':cvT(pl+step*i+step/2,H-pb+16,b.short,'text-anchor="middle" class="cv-t"')).join('')}
+function cvHover(el,sel,html){el.querySelectorAll(sel).forEach(n=>{n.addEventListener('mousemove',e=>showTip(e,html(n)));n.addEventListener('mouseleave',hideTip)})}
+function cvCell(m,r,avg,maxL){const v=m[3](r),t=fv(m[2],v);
+  if(m[0]==='cpml'){const b=v==null||!isFinite(v)||avg==null?'none':v<=avg?'low':v<=2*avg?'mid':'high';return `<td class="num"><span class="cv-band" data-b="${b}"></span>${t}</td>`}
+  if(m[0]==='mleads'){const w=v?Math.max(2,v/maxL*100):0;return `<td class="num"><span class="cv-cellbar"><span class="cv-track"><b style="width:${w}%"></b></span>${t}</span></td>`}
+  return `<td class="num">${t}</td>`}
+function renderCV(){
+  const rows=D.mdaily.filter(r=>inTF(r[0]));
+  const g=TF.g==='day'?'day':TF.g==='week'?'week':'month';
+  $('#cTrendH').textContent='Leads per '+g+', by campaign';
+  $('#cCplH').textContent='Cost per lead per '+g;
+  const present=CV_CAMPS.filter(c=>rows.some(r=>r[1]===c&&(r[4]||r[5])));
+  const leg=present.map(c=>`<span>${cvSw(cvCol(c))}${esc(cname(c))}</span>`).join('');
+  $('#cLeg').innerHTML=leg;$('#cScLeg').innerHTML=leg;
+  const B=groupRows(rows,r=>r[0],(a,r)=>{a.leads=(a.leads||0)+r[4];a.spend=(a.spend||0)+r[5];a.by=a.by||{};const o=a.by[r[1]]=a.by[r[1]]||{leads:0,spend:0};o.leads+=r[4];o.spend+=r[5];return a});
+  if(!B.length){const e='<p class="cv-empty">No Meta ad delivery in this period. Meta data runs from 9 September to 16 October 2026.</p>';['#cStack','#cCpl','#cShare','#cScatter'].forEach(s=>$(s).innerHTML=e);$('#cFlow').innerHTML='';$('#cPer').textContent='';return}
+  const T=rows.reduce((a,r)=>{a.leads+=r[4];a.spend+=r[5];a.impr+=r[6];a.clicks+=r[7];a.link+=r[8];return a},{leads:0,spend:0,impr:0,clicks:0,link:0});
+  const avgCpl=T.leads?T.spend/T.leads:null;
+
+  /* Leads per period, stacked by campaign */
+  {const el=$('#cStack'),W=cvW(el),H=250,pl=46,pr=8,pt=12,pb=26;
+   const max=cvStep(Math.max(1,...B.map(b=>b.leads||0)));const y=v=>H-pb-(v/max)*(H-pb-pt);
+   const step=(W-pl-pr)/B.length,bw=Math.max(2,Math.min(32,step*0.72));
+   let s=cvGrid(W,pl,pr,y,max,v=>fmt(v));
+   B.forEach((b,i)=>{const x=pl+step*i+step/2-bw/2;let acc=0;const segs=present.filter(c=>b.by[c]&&b.by[c].leads>0);
+     segs.forEach((c,j)=>{const v=b.by[c].leads,y0=y(acc),y1=y(acc+v);acc+=v;const top=j===segs.length-1,gap=j>0?2:0,hh=Math.max(0,y0-y1-gap);
+       s+=top?`<path d="${cvTop(x,y1,bw,hh,4)}" fill="${cvCol(c)}"/>`:`<rect x="${x}" y="${y1}" width="${bw}" height="${hh}" fill="${cvCol(c)}"/>`});
+     s+=`<rect x="${pl+step*i}" y="${pt}" width="${step}" height="${H-pb-pt}" fill="transparent" data-b="${i}"/>`});
+   s+=cvXLabels(B,pl,step,H,pb,W);
+   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Leads per ${g} by campaign">${s}</svg>`;
+   cvHover(el,'[data-b]',n=>{const b=B[+n.dataset.b];return cvTip(b.label,present.filter(c=>b.by[c]).map(c=>[cname(c),fmt(b.by[c].leads),cvCol(c)]).concat([['All campaigns',fmt(b.leads)],['Spend',rs(b.spend)],['Cost per lead',rs(b.leads?b.spend/b.leads:null)]]))})}
+
+  /* Cost per lead per period */
+  {const el=$('#cCpl'),W=cvW(el),H=200,pl=56,pr=8,pt=12,pb=26;
+   const vals=B.map(b=>b.leads?b.spend/b.leads:null);const max=cvStep(Math.max(1,...vals.filter(v=>v!=null),avgCpl||0));const y=v=>H-pb-(v/max)*(H-pb-pt);
+   const step=(W-pl-pr)/B.length,cx=i=>pl+step*i+step/2;
+   let s=cvGrid(W,pl,pr,y,max,v=>'₹'+fmt(v));
+   if(avgCpl!=null)s+=`<line x1="${pl}" x2="${W-pr}" y1="${y(avgCpl)}" y2="${y(avgCpl)}" stroke="var(--faint)" stroke-dasharray="4 4"/>`+cvT(W-pr,y(avgCpl)-6,'Average '+rs(avgCpl),'text-anchor="end" class="cv-t"');
+   let d='',pen=false;vals.forEach((v,i)=>{if(v==null){pen=false;return}d+=(pen?'L':'M')+cx(i)+','+y(v);pen=true});
+   s+=`<path d="${d}" fill="none" stroke="var(--c1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+   vals.forEach((v,i)=>{if(v!=null&&B.length<=45)s+=`<circle cx="${cx(i)}" cy="${y(v)}" r="3.5" fill="var(--c1)" stroke="var(--surface)" stroke-width="1.5"/>`;s+=`<rect x="${pl+step*i}" y="${pt}" width="${step}" height="${H-pb-pt}" fill="transparent" data-b="${i}"/>`});
+   s+=cvXLabels(B,pl,step,H,pb,W);
+   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Cost per lead per ${g}">${s}</svg>`;
+   cvHover(el,'[data-b]',n=>{const b=B[+n.dataset.b];return cvTip(b.label,[['Cost per lead',rs(b.leads?b.spend/b.leads:null)],['Spend',rs(b.spend)],['Leads',fmt(b.leads)]])})}
+
+  /* Share of spend vs share of leads */
+  {const per=present.map(c=>{const a=rows.filter(r=>r[1]===c).reduce((o,r)=>{o.l+=r[4];o.s+=r[5];return o},{l:0,s:0});return [c,a]});
+   $('#cShare').innerHTML=per.map(([c,a])=>{const ls=T.leads?a.l/T.leads:0,ss=T.spend?a.s/T.spend:0;
+     return `<div class="cv-share-row"><div class="cv-share-n"><span>${esc(cname(c))}</span><span>${fmt(a.l)} leads · ${rs(a.s)} · ${rs(a.l?a.s/a.l:null)} a lead</span></div>
+     <div class="cv-bar"><i><b style="width:${ls*100}%;background:${cvCol(c)}"></b></i><span>${pf(ls*100,0)}</span></div>
+     <div class="cv-bar"><i><b style="width:${ss*100}%;background:var(--faint)"></b></i><span>${pf(ss*100,0)}</span></div></div>`}).join('')}
+
+  /* Funnel: impression to lead */
+  {const st=[['Impressions',T.impr,null],['Clicks (all)',T.clicks,'of impressions clicked'],['Link clicks',T.link,'of clicks opened the form or link'],['Leads',T.leads,'of link clicks filled the form']];
+   $('#cFlow').innerHTML=st.map((s,i)=>`<div class="cv-step"><span class="cv-step-l">${s[0]}</span><span class="cv-step-v">${fmt(s[1])}</span><span class="cv-step-k">${i?`<b style="font-weight:500">${pf(pct(s[1],st[i-1][1]),i===1?2:1)}</b> ${s[2]}`:'Times an ad was shown'}</span></div>`).join('');
+   $('#cPer').textContent=T.impr?`Every 1,000 impressions brought ${fv('dec',T.clicks*1000/T.impr)} clicks and ${fv('dec',T.leads*1000/T.impr)} leads, at ${rs(T.impr?T.spend*1000/T.impr:null)} per 1,000 impressions and ${rs(avgCpl)} per lead.`:''}
+
+  /* Scatter: every ad, spend against leads */
+  {const m=new Map();rows.forEach(r=>{const k=nrm(r[2])+'|'+nrm(r[3]);const o=m.get(k)||{c:r[1],set:cname(r[2]),ad:cname(r[3]),s:0,l:0};o.s+=r[5];o.l+=r[4];m.set(k,o)});
+   const pts=[...m.values()].filter(p=>p.s>0);
+   const el=$('#cScatter'),W=cvW(el),H=340,pl=46,pr=14,pt=30,pb=40;
+   const mx=cvStep(Math.max(1,...pts.map(p=>p.s))),my=cvStep(Math.max(1,...pts.map(p=>p.l)));
+   const x=v=>pl+(v/mx)*(W-pl-pr),y=v=>H-pb-(v/my)*(H-pb-pt);
+   let s=cvGrid(W,pl,pr,y,my,v=>fmt(v));
+   for(let i=1,st=cvNice(mx/4);st*i<=mx+1e-9;i++){const v=st*i;s+=cvT(x(v),H-pb+16,'₹'+cvShort(v),'text-anchor="middle" class="cv-t"')}
+   s+=cvT(pl+(W-pl-pr)/2,H-6,'Money spent','text-anchor="middle" class="cv-t"')+cvT(pl-8,pt-16,'Leads','text-anchor="start" class="cv-t"');
+   if(avgCpl){const xe=Math.min(mx,my*avgCpl);s+=`<line x1="${x(0)}" y1="${y(0)}" x2="${x(xe)}" y2="${y(xe/avgCpl)}" stroke="var(--faint)" stroke-dasharray="4 4"/>`+cvT(x(xe)-4,y(xe/avgCpl)+(xe<mx?-6:14),'Average '+rs(avgCpl)+' a lead','text-anchor="end" class="cv-t"')}
+   pts.sort((a,b)=>b.s-a.s).forEach((p,i)=>{s+=`<circle cx="${x(p.s)}" cy="${y(p.l)}" r="5.5" fill="${cvCol(p.c)}" fill-opacity=".9" stroke="var(--surface)" stroke-width="2"/><circle cx="${x(p.s)}" cy="${y(p.l)}" r="10" fill="transparent" data-p="${i}"/>`});
+   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Every ad, spend against leads">${s}</svg>`;
+   cvHover(el,'[data-p]',n=>{const p=pts[+n.dataset.p];return cvTip(p.ad,[['Ad set',esc(p.set)],['Campaign',esc(cname(p.c)),cvCol(p.c)],['Spend',rs(p.s)],['Leads',fmt(p.l)],['Cost per lead',p.l?rs(p.s/p.l):'No leads']])})}
+}
+TFL.push(renderCV);
+let cvRT;window.addEventListener('resize',()=>{clearTimeout(cvRT);cvRT=setTimeout(renderCV,150)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tab="campaigns"]');if(b)setTimeout(renderCV,0)});
+requestAnimationFrame(()=>renderCV());
 
 DRILL.ctr={title:'CTR (all)',lead:'All clicks ÷ impressions on Meta, 9 September to 16 October 2026.',parts:[['By campaign',byCamp(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true})],['By ad set',byAdset(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true},25)],['Top 10 ads',byAd(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true})]],go:['campaigns','Open campaigns']};
 DRILL.cpc={title:'CPC (link click)',lead:'Spend ÷ link clicks on Meta, 9 September to 16 October 2026.',parts:[['By campaign',byCamp(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},25)],['Lowest 10 ads',byAd(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},10,true)]],go:['campaigns','Open campaigns']};
