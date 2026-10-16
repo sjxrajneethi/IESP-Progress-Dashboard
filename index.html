@@ -7,6 +7,16 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}.tt-car{display:inline-block;width:12px;color:var(--faint);font-size:11px}
 .tt-by{display:flex;align-items:center;gap:8px}
 tr.tt-r[aria-expanded="true"] td{background:var(--sunk)}
+.dl-sum{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+@media (max-width:980px){.dl-sum{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.dl-sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dl-sum .kpi{border-top:3px solid var(--c1);padding-top:10px}
+.dl-sum .kpi .lab{font-size:13px}
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.dl-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.dl-n{font-size:22px;font-weight:500;white-space:nowrap}
+.dl-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.dl-list li{display:flex;flex-direction:column;gap:1px;padding-top:8px;border-top:1px solid var(--line);font-size:14px}
 </style>
 <title>IESP Progress Dashboard</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -286,7 +296,11 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 
 <!-- OVERVIEW -->
 <section class="tab" id="t-overview" role="tabpanel" aria-label="Overview">
-  <div class="grid" id="kpis"></div>
+  <div class="panel">
+    <div class="panel-h"><h2>What we have delivered</h2><span class="note">1 September to 16 October 2026</span></div>
+    <div class="dl-sum" id="dlSum"></div>
+  </div>
+  <div class="dl-grid" id="dlCards"></div>
 </section>
 
 <!-- FUNNEL AND CENTRES -->
@@ -500,7 +514,7 @@ function openTab(k,push){
   TABS.forEach(([t])=>{$('#t-'+t).hidden=t!==k;$('#tab-'+t).setAttribute('aria-selected',t===k)});
   if(push){try{history.replaceState(null,'','#'+k)}catch(e){}}
   store.set('iesp-tab',k);
-  const bar=document.getElementById('tfbar');if(bar)bar.hidden=!['overview','campaigns','walkins','ai'].includes(k);
+  const bar=document.getElementById('tfbar');if(bar)bar.hidden=!['campaigns','walkins','ai'].includes(k);
   window.scrollTo({top:0});
 }
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)openTab(b.dataset.tab,true)});
@@ -598,36 +612,27 @@ function sankey(svg,f,onPick,sel){
   });
 }
 
-/* ---------- Overview ---------- */
-function renderOvKpis(){
-  const all=tfAll(),m=mAgg(()=>true),ai=aiAgg(),wb=D.days.filter(d=>inTF(d.date)).reduce((s,d)=>s+d.total,0);
-  const W='Whole period, 1 Sep – 15 Oct';
-  const K=all?[
-   ['Leads','5,458','5,287 Meta leads in Zoho and 171 Google leads','leads'],
-   ['Spoke to the lead','1,887','38% of Meta leads called','spoke'],
-   ['Scheduled visits','165','192 including college and seminar leads','booked'],
-   ['Attended visits','8','Bengaluru 7, Andheri East 1','walked'],
-   ['Admissions','0','Target is 125 a month','adm'],
-   ['Open leads','838','621 follow-ups due, 217 interested with a visit to book','open'],
-   ['Cost per lead','₹19.3','Meta leads in Zoho','cpml'],
-   ['Cost per scheduled visit','₹617','₹219 at Khalapur to ₹2,641 at Goa','cps'],
-   ['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),'Meta, '+fmt(D.mtotal.clicksAll)+' clicks on '+fmt(D.mtotal.impr)+' impressions','ctr'],
-   ['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),'Meta, '+fmt(D.mtotal.linkClicks)+' link clicks','cpc']
-  ]:[
-   ['Meta leads',fmt(m.leads),periodLabel(),'leads'],
-   ['Cost per lead',rs(m.leads?m.spend/m.leads:null),periodLabel(),'cpml'],
-   ['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks on '+fmt(m.impr)+' impressions','ctr'],
-   ['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks','cpc'],
-   ['AI calls',fmt(ai.calls),fmt(ai.con)+' connected · '+fmt(ai.int)+' interested','acalls'],
-   ['Walk-ins booked',fmt(wb),'By walk-in date, all sources','wbooked'],
-   ['Spoke to the lead','1,887',W,'spoke'],
-   ['Attended visits','8',W,'walked'],
-   ['Admissions','0',W,'adm'],
-   ['Open leads','838',W,'open']
-  ];
-  $('#kpis').innerHTML=K.map(k=>`<div class="panel s3 kpi drill" role="button" tabindex="0" data-drill="${k[3]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
+/* ---------- Overview: what we have delivered ---------- */
+const AIX=D.ai;
+const DL=[
+ {h:'Ad creatives',n:27,u:'creatives',items:[['25 creatives across 5 ad copies','3, 8, 4, 7 and 3 creatives per copy'],['2 more ad creatives','']]},
+ {h:'Print: banners',n:22,u:'large-format files',items:[['12 banners','Alibag'],['5 banners','Bengaluru launch event'],['5 wall posters','Bengaluru launch']]},
+ {h:'Print: marketing',n:32,u:'pieces',items:[['8 brochure pieces',''],['12 flyers','6 flyer copies'],['8 invites','Mathrubhoomi'],['2 invite covers',''],['1 invitation card',''],['1 letterhead','']]},
+ {h:'Brand pieces',n:3,u:'designs',items:[['2 visiting card designs',''],['1 logo','Mathrubhoomi']]},
+ {h:'Creative elements',n:4,u:'elements',items:[['Interactive map','2 versions: print and website'],['3D mascot','With Airawat branding'],['3D airplane','With IESP branding']]},
+ {h:'Videos',n:22,u:'videos',items:[['21 social media videos','7 posted so far'],['1 long-form video','Bengaluru launch event']]},
+ {h:'Website',n:26,u:'pages',items:[['3 iterations from beta to a deployable version','2 for structure and design, 1 for content'],['26 pages in total','']]},
+ {h:'AI calling',n:AIX.calls,u:'calls in the pilot',items:[[fmt(AIX.calls)+' calls to '+fmt(AIX.leads)+' people',AIX.days.length+' calling days, 29 September to 15 October'],[fmt(AIX.connected)+' calls connected','Average connected call '+Math.floor(AIX.avgSec/60)+' min '+(AIX.avgSec%60)+' s'],['5 languages','Marathi, Kannada, Hindi, Gujarati and English'],['2 voice agents','Vaishnavi and Priya'],['Writes back to Zoho after every call','Disposition, connection status, call attempts, AI summary, next action and call-back time'],['Calibrated every day','Scripts, timing and voice tuned through the pilot']]},
+ {h:'WhatsApp bot',n:null,v:'Beta from Monday',items:[['Technical set-up complete',''],['Business verification complete',''],['Ready for the beta run','From Monday, 19 October 2026'],['5 languages, six guided questions, cabin crew pre-check, FAQ answers, visit booking with reminders and hand-off to the centre counsellor','']]},
+ {h:'Zoho',n:null,v:'Configured',items:[['Set up to IESP’s needs','Configured step by step for each process'],['Blueprints and workflows','Custom-made for every small process'],['Lead routing','Centre and territory set automatically from the ad set'],['Current system migrated','Basic team training complete, more sessions planned']]}
+];
+function renderDelivered(){
+  const design=27+22+32+3;
+  $('#dlSum').innerHTML=[[fmt(design),'design pieces','Ad creatives, print and brand'],['4','creative elements','Map, mascot and airplane'],['22','videos','21 social, 1 long-form'],['26','website pages','3 iterations'],[fmt(AIX.calls),'AI calls','Pilot, 15 calling days'],['2','systems ready','WhatsApp bot and Zoho']]
+    .map(k=>`<div class="kpi"><span class="val">${k[0]}</span><span class="lab">${k[1]}</span><span class="det">${k[2]}</span></div>`).join('');
+  $('#dlCards').innerHTML=DL.map(c=>`<div class="panel dl-card"><div class="dl-top"><h3>${esc(c.h)}</h3><span class="dl-n">${c.n!=null?fmt(c.n):esc(c.v)}${c.n!=null?`<span class="note"> ${esc(c.u)}</span>`:''}</span></div><ul class="dl-list">${c.items.map(([a,b])=>`<li><span>${esc(a)}</span>${b?`<span class="note">${esc(b)}</span>`:''}</li>`).join('')}</ul></div>`).join('');
 }
-TFL.push(renderOvKpis);
+renderDelivered();
 
 /* ---------- Funnel and centres ---------- */
 let fKey='all',fStage=0;
