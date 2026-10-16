@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}.tt-car{display:inline-block;width:12px;color:var(--faint);font-size:11px}
+.tt-by{display:flex;align-items:center;gap:8px}
+tr.tt-r[aria-expanded="true"] td{background:var(--sunk)}
+</style>
 <title>IESP Progress Dashboard</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
 <style>
 /* Layout: sticky brand bar and tab row; each tab is a 12-column grid of panels that stacks to one column on phones */
 :root{
@@ -52,7 +54,7 @@ header.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;pa
 .sub{color:var(--muted);font-size:13px}
 .target{display:flex;flex-direction:column;gap:6px;min-width:220px}
 .target .bar{height:8px;border-radius:4px;background:var(--sunk);overflow:hidden}
-.target .bar span{display:block;height:100%;background:var(--loss)}
+.target .bar span{display:block;height:100%;background:var(--accent)}
 .tools{display:flex;gap:8px;align-items:center}
 nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
 nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin}
@@ -74,7 +76,6 @@ section.tab{display:flex;flex-direction:column;gap:16px}
 .kpi .lab{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .kpi .val{font-size:30px;font-weight:500;line-height:1.1}
 .kpi .det{font-size:13px;color:var(--muted)}
-.kpi.bad .val{color:var(--loss)}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
 .seg button,.btn{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
@@ -171,17 +172,17 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* Restyle to match the Campaigns & Ads dashboard: warm neutral surfaces, serif figures, quiet tables, popover tooltips, rounded thin bars */
-:root{--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--r:12px}
-h1{font-family:var(--serif);font-weight:400;font-size:30px;letter-spacing:-.01em}
+:root{--serif:var(--font);--r:12px}
+h1{font-weight:500;font-size:26px;letter-spacing:-.01em}
 h2{font-size:17px;font-weight:500;letter-spacing:0}
 h3{font-size:15px;font-weight:500}
 .panel{padding:20px 22px;gap:12px}
 .note{font-size:12.5px;line-height:1.5}
 nav.tabs button[aria-selected="true"]{border-bottom-color:currentColor}
 .kpi .lab{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:500}
-.kpi .val{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.15}
+.kpi .val{font-weight:500;font-size:30px;line-height:1.15}
 .kpi .det{font-size:12.5px;line-height:1.45}
-.kpi.bad .val{color:var(--loss)}
+
 .detail{background:transparent;border-top:1px solid var(--line);border-radius:0;padding:12px 0 0}
 .detail .kpi .val,.out .kpi .val{font-size:24px}
 .out .kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px}
@@ -240,7 +241,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 .cv-step{display:grid;gap:3px;align-content:start;padding-top:10px;border-top:3px solid var(--axis);min-width:0}
 .cv-step:last-child{border-top-color:var(--c1)}
 .cv-step-l{font-size:12.5px;color:var(--muted)}
-.cv-step-v{font-family:var(--serif);font-size:26px;line-height:1.2}
+.cv-step-v{font-weight:500;font-size:24px;line-height:1.2}
 .cv-step-k{font-size:12.5px;line-height:1.45}
 .cv-per{font-size:14px;line-height:1.6;padding-top:10px;border-top:1px solid var(--line)}
 .cv-band{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
@@ -286,79 +287,42 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 <!-- OVERVIEW -->
 <section class="tab" id="t-overview" role="tabpanel" aria-label="Overview">
   <div class="grid" id="kpis"></div>
-  <div class="grid">
-    <div class="panel s7">
-      <div class="panel-h"><h2>Where the 5,287 Meta leads went</h2><button class="btn" data-go="funnel" type="button">Open the funnel</button></div>
-      <div class="scroll-x"><svg class="chart" id="ovSankey" viewBox="0 0 1000 380" role="img" aria-label="Lead flow chart"></svg></div>
-      <p class="note">The blue band is the leads still moving forward. Each red band is where leads dropped out. Widths are to scale.</p>
-    </div>
-    <div class="panel s5">
-      <div class="panel-h"><h2>Spend</h2><span class="note">₹1,10,284 in total</span></div>
-      <div id="spendBars"></div>
-      <div class="detail">
-        <div class="kpi drill" role="button" tabindex="0" data-drill="cpml"><span class="lab">Cost per lead</span><span class="val">₹19.3</span><span class="det">Meta and AI calling</span></div>
-        <div class="kpi drill" role="button" tabindex="0" data-drill="cps"><span class="lab">Cost per scheduled visit</span><span class="val">₹617</span></div>
-        <div class="kpi drill" role="button" tabindex="0" data-drill="walked"><span class="lab">Cost per attended visit</span><span class="val">₹12,728</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="panel">
-    <div class="panel-h"><h2>Where each part of the work stands</h2><span class="note">Select an item for detail</span></div>
-    <div class="statusgrid" id="status"></div>
-    <div class="detail" id="statusDetail" hidden></div>
-    <p class="note">The website, Zoho, AI calling, WhatsApp, the process for creatives and launches, and the ad campaigns all had to be built first. While we did this, we fell well short of the admissions target. With no backlog left, we are now fully focused on lead generation.</p>
-  </div>
 </section>
 
-<!-- FUNNEL -->
+<!-- FUNNEL AND CENTRES -->
 <section class="tab" id="t-funnel" role="tabpanel" aria-label="Funnel and centres" hidden>
   <div class="panel">
-    <div class="panel-h"><h2 id="fTitle">Lead funnel</h2><div class="seg" id="fCentres" aria-label="Choose a centre"></div></div>
+    <div class="panel-h"><h2 id="fTitle">Lead funnel</h2></div>
     <div class="scroll-x"><svg class="chart" id="fSankey" viewBox="0 0 1000 380" role="img" aria-label="Lead flow chart for the selected centre"></svg></div>
-    <p class="note">Select a stage in the chart or the table to see what it cost and how many leads dropped out.</p>
+    <p class="note">The blue band is the leads moving forward. Each red band shows the leads that move out of the funnel at that step. Select a stage or a centre below to see its detail.</p>
     <div class="detail" id="fDetail"></div>
-    <div class="out" id="fCentre" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))"></div>
-  </div>
-  <div class="grid">
-    <div class="panel s7">
-      <div class="panel-h"><h2>Stage by stage</h2><span class="note" id="fSpend"></span></div>
-      <div class="tbl"><table id="fTable"></table></div>
-      <p class="note">Cost per lead at a stage is the centre's total spend divided by the leads that reached that stage.</p>
-    </div>
-    <div class="panel s5">
-      <div class="panel-h"><h2>Lead status now</h2></div>
-      <div id="fStatus"></div>
-      <h3>Main reasons leads were closed</h3>
-      <div id="fReasons"></div>
-    </div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>All centres</h2><span class="note">Select a row to show that centre above</span></div>
-    <div class="tbl"><table id="cTable"></table></div>
-    <p class="note">Meta spend is assigned to a centre through the ad set each lead came from. AI calling cost is shared by leads called. Walked in is what the centres reported: Bengaluru 7 and Andheri East 1.</p>
+    <div class="panel-h"><h2>Centres</h2><label class="note tt-by" for="fBy">Break down by <select id="fBy" class="btn" style="border-radius:6px"><option value="status">Lead status now</option><option value="reasons">Reasons leads were closed</option><option value="stages">Funnel stages</option></select></label></div>
+    <div class="tbl"><table id="fTable"></table></div>
+    <p class="note">Select a centre to show it in the funnel above and open its breakdown.</p>
   </div>
 </section>
 
 <!-- CAMPAIGNS -->
 <section class="tab" id="t-campaigns" role="tabpanel" aria-label="Campaigns" hidden>
   <div class="panel">
-    <div class="panel-h"><h2>Meta ads, 1 September to 15 October 2026</h2></div>
+    <div class="panel-h"><h2 id="mTitle">Meta ads</h2></div>
     <div class="grid" id="mKpis"></div>
   </div>
   <div class="panel" id="cTrend">
-    <div class="panel-h"><h2 id="cTrendH">Leads per week, by campaign</h2></div>
-    <p class="note">Each bar is split by campaign. Hover a bar for the numbers. Follows the period and the Day / Week / Month choice.</p>
+    <div class="panel-h"><h2 id="cTrendH">Leads per week, by campaign</h2><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div></div>
     <div class="legend" id="cLeg"></div>
     <div class="cv-chart" id="cStack"></div>
     <h3 class="cv-h2" id="cCplH">Cost per lead per week</h3>
-    <p class="note">Spend ÷ Meta leads. The dashed line is the average for the period.</p>
+    <p class="note">The dashed line is the average for the period.</p>
     <div class="cv-chart" id="cCpl"></div>
   </div>
   <div class="grid">
     <div class="panel s6" id="cShareCard">
-      <h2>Where the money went, and where the leads came from</h2>
-      <p class="note">For each campaign, its share of leads against its share of spend. A lead bar longer than the spend bar means cheaper leads than average.</p>
-      <div class="legend"><span><span class="sw" style="background:var(--c1)"></span>Share of leads (each campaign's colour)</span><span><span class="sw" style="background:var(--faint)"></span>Share of money spent</span></div>
+      <h2>Share of leads and share of budget, by campaign</h2>
+      <p class="note">A lead bar longer than the budget bar means leads came in below the average cost.</p>
+      <div class="legend"><span><span class="sw" style="background:var(--c1)"></span>Share of leads</span><span><span class="sw" style="background:var(--faint)"></span>Share of budget</span></div>
       <div class="cv-share" id="cShare"></div>
     </div>
     <div class="panel s6" id="cFlowCard">
@@ -369,30 +333,21 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     </div>
   </div>
   <div class="panel" id="cScatterCard">
-    <h2>Every ad: money spent against leads</h2>
-    <p class="note">Each dot is one ad in one ad set, coloured by campaign. Dots above the dashed average cost-per-lead line brought leads more cheaply than average; dots below it cost more. Hover a dot for the ad.</p>
+    <h2>Every ad: budget against leads</h2>
+    <p class="note">Each dot is one ad. Dots above the dashed line brought leads below the average cost.</p>
     <div class="legend" id="cScLeg"></div>
     <div class="cv-chart" id="cScatter"></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>Meta performance over time</h2><div class="seg" style="gap:8px;align-items:center"><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div><select id="tMetric" class="btn" style="border-radius:6px" aria-label="Measure"></select></div></div>
-    <div class="out" id="tKpis" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
-    <div class="scroll-x" id="tChart"></div>
-    <div class="tbl"><table id="tTable"></table></div>
-  </div>
-  <div class="panel">
-    <div class="panel-h"><div class="seg" id="campMode"><button type="button" data-m="tree" aria-pressed="true">By campaign</button><button type="button" data-m="name" aria-pressed="false">By ad name</button></div></div>
-    <div class="panel-h"><div class="crumbs" id="crumbs"></div><label class="note" for="metricSel" style="display:flex;gap:8px;align-items:center">Chart shows <select id="metricSel" class="btn" style="border-radius:6px"></select></label></div>
-    <div class="scroll-x" id="campChart"></div>
+    <div class="panel-h"><h2>Campaigns, ad sets and ads</h2><label class="note tt-by" for="cBy">Break down by <select id="cBy" class="btn" style="border-radius:6px"><option value="tree">Campaign › Ad set › Ad</option><option value="name">Ad name › Ad set</option><option value="adset">Ad set › Ad</option><option value="period">Period › Campaign › Ad set</option></select></label></div>
     <div class="tbl"><table id="campTable"></table></div>
     <p class="note" id="campNote"></p>
-    <p class="note">The dot before cost per Meta lead compares it with the average of the rows shown: <span class="cv-band" data-b="low"></span>at or below average, <span class="cv-band" data-b="mid"></span>up to twice the average, <span class="cv-band" data-b="high"></span>more than twice. The bar under Leads (Meta) is on one scale for the rows shown.</p>
   </div>
   <div class="grid">
     <div class="panel s6">
       <div class="panel-h"><h2>Meta ad rankings</h2><div class="seg" id="rankPick"><button type="button" data-r="quality" aria-pressed="true">Quality</button><button type="button" data-r="engagement" aria-pressed="false">Engagement rate</button><button type="button" data-r="conversion" aria-pressed="false">Conversion rate</button></div></div>
       <div id="rankBars"></div>
-      <p class="note">Rankings compare each ad with other ads competing for the same audience. Meta gives no ranking to ads with too few impressions.</p>
+      <p class="note">Rankings compare each ad with other ads competing for the same audience. Meta ranks ads once they have enough impressions.</p>
     </div>
     <div class="panel s6">
       <div class="panel-h"><h2>Google Ads</h2><span class="note" id="gNote"></span></div>
@@ -403,21 +358,10 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 
 <!-- COURSES -->
 <section class="tab" id="t-courses" role="tabpanel" aria-label="Courses" hidden>
-  <div class="grid">
-    <div class="panel s6">
-      <div class="panel-h"><h2>Leads by course of interest</h2></div>
-      <div id="courseBars"></div>
-      <p class="note">79% of leads did not state a course. Leads who named a course were far easier to reach.</p>
-    </div>
-    <div class="panel s6">
-      <div class="panel-h"><h2>Course detail</h2></div>
-      <div class="tbl"><table id="courseTable"></table></div>
-    </div>
-  </div>
   <div class="panel">
-    <div class="panel-h"><h2>Which ads brought which course</h2><span class="note">Leads by ad theme. Select a cell to read it.</span></div>
-    <div class="tbl heat"><table id="themeTable"></table></div>
-    <p class="note" id="themeNote"></p>
+    <div class="panel-h"><h2>Leads by course of interest</h2></div>
+    <div class="tbl"><table id="courseTable"></table></div>
+    <p class="note">Select a course to see which ad themes brought its leads. Leads who named a course were far easier to reach.</p>
   </div>
 </section>
 
@@ -425,26 +369,13 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 <section class="tab" id="t-walkins" role="tabpanel" aria-label="Walk-ins" hidden>
   <div class="grid" id="wKpis"></div>
   <div class="panel">
-    <div class="panel-h"><h2>Walk-ins booked, by walk-in date</h2><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div><div class="legend" id="wLegend"></div></div>
+    <div class="panel-h"><h2>Walk-ins booked, by walk-in date</h2><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div></div>
+    <div class="legend" id="wLegend"></div>
     <div class="scroll-x" id="wChart"></div>
-    <p class="note">All 192 leads with the disposition "Interested – walk-in booked" from 1 October 2026, from every lead source. 80 of them have no walk-in date in Zoho yet.</p>
   </div>
-  <div class="grid">
-    <div class="panel s4"><h2>Lead source</h2><div id="wSource"></div></div>
-    <div class="panel s4"><h2>Connection status in Zoho</h2><div id="wConn"></div></div>
-    <div class="panel s4"><h2>AI calls on file per lead</h2><div id="wAi"></div></div>
-  </div>
-  <div class="grid">
-    <div class="panel s6">
-      <h2>Daily walk-in lists sent to the centres</h2>
-      <div id="wLists"></div>
-      <div class="detail" id="wListStatus"></div>
-    </div>
-    <div class="panel s6">
-      <h2>No date set, by centre</h2>
-      <div id="wNoDate"></div>
-      <p class="note">These leads agreed to visit but have no date and time yet. They are the first group to call back.</p>
-    </div>
+  <div class="panel">
+    <div class="panel-h"><h2>Walk-ins booked</h2><label class="note tt-by" for="wBy">Break down by <select id="wBy" class="btn" style="border-radius:6px"><option value="centre">Centre › Lead source</option><option value="source">Lead source › Centre</option><option value="conn">Connection status in Zoho</option><option value="ai">AI calls per lead</option><option value="platform">Platform</option><option value="lists">Daily walk-in lists</option></select></label></div>
+    <div class="tbl"><table id="wTable"></table></div>
   </div>
 </section>
 
@@ -453,36 +384,16 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
   <div class="panel">
     <div class="panel-h"><h2>AI calls, 29 September to 15 October 2026</h2></div>
     <div class="flow" id="aiFunnel"></div>
-    <div class="two">
-      <div class="detail" style="flex-direction:column;gap:6px"><b style="font-weight:500">On the AI call</b><span id="aiOnCall"></span></div>
-      <div class="detail" style="flex-direction:column;gap:6px"><b style="font-weight:500">Recorded in Zoho</b><span id="aiZoho"></span></div>
-    </div>
+    <p class="note" id="aiNote"></p>
   </div>
-  <div class="grid" id="aKpis"></div>
   <div class="panel">
-    <div class="panel-h"><h2>AI calls over time</h2><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div><div class="legend"><span><span class="sw" style="background:var(--loss)"></span> Not connected</span><span><span class="sw" style="background:var(--accent)"></span> Connected</span><span><span class="sw" style="background:var(--good)"></span> Interested</span></div></div>
+    <div class="panel-h"><h2>AI calls over time</h2><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div></div>
+    <div class="legend"><span><span class="sw" style="background:var(--loss)"></span> Not reached yet</span><span><span class="sw" style="background:var(--accent)"></span> Connected</span><span><span class="sw" style="background:var(--good)"></span> Interested</span></div>
     <div class="scroll-x" id="aDaily"></div>
-    <div class="tbl"><table id="aDayTbl"></table></div>
-  </div>
-  <div class="grid">
-    <div class="panel s6"><h2>Call outcome</h2><div id="aOutcome"></div></div>
-    <div class="panel s6"><h2>Next action set by the AI</h2><div id="aNext"></div></div>
-  </div>
-  <div class="grid">
-    <div class="panel s4"><h2>Language</h2><div id="aLang"></div></div>
-    <div class="panel s4"><h2>Length of connected calls</h2><div id="aDur"></div></div>
-    <div class="panel s4"><h2>Calls per person</h2><div id="aPer"></div></div>
-  </div>
-  <div class="grid">
-    <div class="panel s6"><h2>Region of the call script</h2><div id="aState"></div></div>
-    <div class="panel s6"><h2>Course named by interested leads</h2><div id="aCourse"></div></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>Calls to leads booked for a walk-in</h2><span class="note">158 AI calls to the 192 booked leads</span></div>
-    <div class="grid">
-      <div class="s6" style="display:flex;flex-direction:column;gap:10px"><h3>Outcome</h3><div id="aBOutcome"></div></div>
-      <div class="s6" style="display:flex;flex-direction:column;gap:10px"><h3>Language</h3><div id="aBLang"></div></div>
-    </div>
+    <div class="panel-h"><h2>AI calls in detail</h2><label class="note tt-by" for="aBy">Break down by <select id="aBy" class="btn" style="border-radius:6px"><option value="period">Period › Day</option><option value="outcome">Call outcome</option><option value="next">Next action set by the AI</option><option value="lang">Language</option><option value="dur">Length of connected calls</option><option value="per">Calls per person</option><option value="state">Region of the call script</option><option value="course">Course named by interested leads</option><option value="booked">Calls to leads booked for a walk-in › Outcome</option></select></label></div>
+    <div class="tbl"><table id="aTable"></table></div>
   </div>
 </section>
 
@@ -511,39 +422,11 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
   </div>
 </section>
 
-<!-- PLAN -->
-<section class="tab" id="t-plan" role="tabpanel" aria-label="Plan" hidden>
-  <div class="grid">
-    <div class="panel s6">
-      <h2>Why 125 admissions is out of reach today</h2>
-      <ul class="plain">
-        <li>The budget of ₹50,000 to ₹1,00,000 a month, spread over 6 centres and 4 courses each, gives about ₹4,000 per course.</li>
-        <li>That buys 110 to 215 leads per course, or 2,600 to 5,200 leads a month.</li>
-        <li>Today, 1 in 660 leads attends a visit, so the network gets 4 to 8 attended visits a month.</li>
-        <li>125 admissions need about 312 attended visits a month, if 40% of visitors take admission.</li>
-        <li>Getting there with ad spend alone would cost about ₹40 lakh a month. After the fixes below, it would cost about ₹2.9 lakh.</li>
-      </ul>
-    </div>
-    <div class="panel s6">
-      <h2>Where we are losing students</h2>
-      <div class="detail" style="flex-direction:column;gap:10px">
-        <div><b>58% of leads did not answer.</b> 3,059 leads were called but never reached. That is ₹58,915 of spend.</div>
-        <div><b>4.8% of scheduled visits were attended.</b> 8 of 165. Visits were confirmed, but continuous engagement until the visit was missing. With WhatsApp and more calling capacity, this rate will go up.</div>
-        <div><b>0 of 8 attended visits took admission.</b> None has taken admission yet.</div>
-      </div>
-      <p class="note">838 leads are still open: 621 are due for a follow-up call and 217 are interested but not yet scheduled.</p>
-    </div>
-  </div>
+<!-- SIMULATOR -->
+<section class="tab" id="t-sim" role="tabpanel" aria-label="Simulator" hidden>
   <div class="panel">
-    <div class="panel-h"><h2>What we will do in the next 30 days</h2></div>
-    <div class="tbl"><table id="actions"></table></div>
-  </div>
-  <div class="panel">
-    <div class="panel-h"><h2>Budget plan by phase</h2><span class="note">₹3 lakh a month for ads, plus a one-time shoot of ₹2–4 lakh. Select a phase to load it into the calculator.</span></div>
-    <div class="phase" id="phases"></div>
-  </div>
-  <div class="panel">
-    <div class="panel-h"><h2>What a budget can deliver</h2><div class="seg" id="presets"></div></div>
+    <div class="panel-h"><h2>Simulator</h2><div class="seg" id="presets"></div></div>
+    <p class="note">Move the budget, the channel split and each rate to see the leads, visits and admissions they produce in a month.</p>
     <div class="calc">
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="field"><label for="iBudget">Lead generation budget a month <b id="vBudget"></b></label><input type="range" id="iBudget" min="20000" max="600000" step="10000"></div>
@@ -562,31 +445,11 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       <div style="display:flex;flex-direction:column;gap:12px">
         <div class="out" id="calcOut"></div>
         <div id="calcChannels"></div>
-        <p class="note">93.5% of leads get at least one call, as in the first 45 days. Persona spend is not counted here, because we have no data yet on how much it lifts answer and attendance rates.</p>
+        <p class="note">93.5% of leads get at least one call, as in the first 45 days.</p>
       </div>
     </div>
   </div>
-  <div class="grid">
-    <div class="panel s6">
-      <h2>Focus: fewer centres and courses</h2>
-      <ul class="plain">
-        <li><b>Keep:</b> Khalapur, Alibag, Roha, Andheri East and Bengaluru. Each costs under ₹560 per scheduled visit.</li>
-        <li><b>Pause:</b> Goa and the state-wide ads. They cost ₹2,641 and ₹3,643 per scheduled visit.</li>
-        <li><b>Choose:</b> one or two courses per centre, agreed with each centre head.</li>
-        <li>This takes us from 24 courses with ads to 6, at about ₹16,000 each instead of ₹4,000.</li>
-      </ul>
-    </div>
-    <div class="panel s6">
-      <h2>Persona: one professional video shoot</h2>
-      <ul class="plain">
-        <li><b>Budget:</b> ₹2–4 lakh, one time. Shoot in weeks 1–2, videos ready by week 4.</li>
-        <li><b>What we will make:</b> one brand film of 60–90 seconds, short videos for each course, student and placement stories, and centre walkthroughs.</li>
-        <li><b>Where it will run:</b> YouTube ads and Shorts, Instagram and Facebook Reels, WhatsApp Status and broadcasts, the IESP website and centre screens.</li>
-      </ul>
-    </div>
-  </div>
 </section>
-
 
 </div></main>
 
@@ -628,7 +491,7 @@ themeBtn.addEventListener('click',()=>{document.documentElement.setAttribute('da
 const savedTheme=store.get('iesp-theme');if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);syncTheme();
 
 /* Tabs */
-const TABS=[['overview','Overview'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['workflows','Workflows'],['plan','Plan']];
+const TABS=[['overview','Overview'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['workflows','Workflows'],['sim','Simulator']];
 const tabsEl=$('#tabs');
 tabsEl.innerHTML=TABS.map(([k,l])=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}">${l}</button>`).join('');
 function openTab(k,push){
@@ -655,9 +518,43 @@ function hbars(el,items,opts={}){
   if(opts.click){el.querySelectorAll('[data-i]').forEach(n=>{const f=()=>opts.click(+n.dataset.i);n.addEventListener('click',f);n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})})}
 }
 
+/* ---------- Shared formatting ---------- */
+const fv=(t,v)=>v==null||!isFinite(v)?'–':t==='money'?rs(v):t==='pct'?pf(v*100,1):t==='dec'?(Math.round(v*100)/100).toLocaleString('en-IN'):fmt(v);
+const dv=(a,b)=>b?a/b:null;
+/* Plain wording for labels that come from the source data */
+const SOFT={'Not interested':'Chose not to proceed','Not eligible (age or qualification)':'Outside age or qualification criteria','Junk or did not enquire':'Enquiry not genuine','Invalid enquiry':'Enquiry not genuine','Too far from the centre':'Prefers a nearer centre','Looking for a job only':'Looking for a job, not a course','Fee concern':'Fee query','Do not disturb or opted out':'Asked not to be contacted','DND / opt-out':'Asked not to be contacted','RNR (no answer)':'No answer yet (RNR)','RNR (Ring No Response)':'No answer yet (RNR)','Disconnected':'Call dropped','Disconnected Unexpectedly':'Call dropped','Not Connected':'Not reached yet','Not connected':'Not reached yet','None':'None set','No longer walk-in booked':'Booking changed','Interested - walk-in booked':'Interested'};
+const soft=s=>SOFT[s]||s;
+const mergeSoft=list=>{const o=new Map();list.forEach(([k,v])=>{const s=soft(k);o.set(s,(o.get(s)||0)+v)});return [...o.entries()].sort((a,b)=>b[1]-a[1])};
+
+/* ---------- Drill-down table: rows open into child rows ---------- */
+function TT(el,cfg){
+  cfg.open=cfg.open||new Set();
+  const draw=()=>{
+    const cols=cfg.cols;
+    let html=`<thead><tr><th>${esc(cfg.first)}</th>${cols.map(c=>`<th class="num">${esc(c[1])}</th>`).join('')}</tr></thead><tbody>`;
+    const walk=(nodes,depth)=>{
+      const bc=cfg.bar&&cols.find(c=>c[0]===cfg.bar);
+      const max=bc?Math.max(1e-9,...nodes.filter(n=>!n.group).map(n=>bc[3](n.d)||0)):0;
+      nodes.forEach(n=>{
+        if(n.group){html+=`<tr class="group"><td colspan="${cols.length+1}" style="padding-left:${12+depth*20}px">${esc(n.label)}</td></tr>`;if(n.kids)walk(n.kids(),depth);return}
+        const kids=n.kids?n.kids():null,has=!!(kids&&kids.length),open=cfg.open.has(n.id);
+        html+=`<tr class="tt-r ${has||cfg.pick?'click':''} ${cfg.sel===n.id?'sel':''} ${n.cls||''}" data-id="${esc(n.id)}" ${has?`aria-expanded="${open}"`:''}><td class="wrap-cell"><span style="display:inline-flex;gap:8px;align-items:baseline;padding-left:${depth*20}px"><span class="tt-car" aria-hidden="true">${has?(open?'▾':'▸'):''}</span><span>${esc(n.label)}${n.sub?`<br><span class="note">${esc(n.sub)}</span>`:''}</span></span></td>`+
+          cols.map(c=>{const v=c[3](n.d);if(bc&&c===bc&&v!=null){const w=v?Math.max(2,v/max*100):0;return `<td class="num"><span class="cv-cellbar"><span class="cv-track"><b style="width:${w}%"></b></span>${fv(c[2],v)}</span></td>`}return `<td class="num">${fv(c[2],v)}</td>`}).join('')+`</tr>`;
+        if(has&&open)walk(kids,depth+1);
+      });
+    };
+    walk(cfg.root(),0);
+    if(cfg.total){const t=cfg.total();if(t)html+=`<tr class="total"><td>${esc(t.label)}</td>${cols.map(c=>`<td class="num">${fv(c[2],c[3](t.d))}</td>`).join('')}</tr>`}
+    el.innerHTML=html+'</tbody>';
+    el.querySelectorAll('tr.tt-r.click').forEach(tr=>tr.addEventListener('click',()=>{const id=tr.dataset.id;if(tr.hasAttribute('aria-expanded')){cfg.open.has(id)?cfg.open.delete(id):cfg.open.add(id)}if(cfg.pick)cfg.pick(id);draw()}));
+  };
+  cfg.draw=draw;draw();return cfg;
+}
+const BAR=n=>[n,'Share','pct',null];
+
 /* ---------- Funnel data (Leads Funnel report, 15 Oct 2026) ---------- */
 const STAGES=['Leads received','Called at least once','Spoke to the lead','Interested','Walk-in booked','Walked in','Enrolled'];
-const LOSS=['Not called yet','Did not answer','Not interested or pending','Interested, not booked','Did not walk in','Not enrolled yet'];
+const LOSS=['To be called','Not reached yet','Closed or follow-up due','Interested, visit to book','Visit to reschedule','Admission to follow'];
 const FUN={
  all:{name:'All centres',spend:101826,f:[5287,4946,1887,382,165,8,0],status:[341,3059,621,884,382],reasons:[['Not interested',371],['Not eligible (age or qualification)',221],['Junk or did not enquire',138],['Too far from the centre',74],['Looking for a job only',39],['Fee concern',18],['Duplicate',18],['Do not disturb or opted out',5]]},
  t1:{name:'T1 Andheri East',spend:23847,f:[1164,1078,303,86,45,1,0],status:[86,775,155,62,86],reasons:[['Not interested',25],['Not eligible (age or qualification)',22],['Too far from the centre',6],['Duplicate',4]]},
@@ -668,7 +565,7 @@ const FUN={
  t6:{name:'T6 Bengaluru',spend:33080,f:[1648,1635,839,176,60,7,0],status:[13,796,153,510,176],reasons:[['Not interested',198],['Not eligible (age or qualification)',156],['Invalid enquiry',82],['Too far from the centre',38]]},
  ot:{name:'Other and unassigned',spend:7287,f:[509,372,161,18,2,0,0],status:[137,211,52,91,18],reasons:[['Not interested',42],['Invalid enquiry',22],['Not eligible (age or qualification)',13],['Too far from the centre',8]]}
 };
-const STATUS_L=[['Not called yet','var(--c7)'],['Did not answer','var(--loss)'],['Follow-up pending','var(--warn)'],['Not interested or not eligible','var(--c3)'],['Interested or booked','var(--good)']];
+const STATUS_L=[['To be called','var(--c7)'],['Not reached yet','var(--loss)'],['Follow-up due','var(--warn)'],['Closed (not a fit)','var(--c3)'],['Interested or booked','var(--good)']];
 
 function sankey(svg,f,onPick,sel){
   const W=1000,top=58,maxH=230,sinkY=330,n=f.length,colW=(W-16)/(n-1);
@@ -680,9 +577,9 @@ function sankey(svg,f,onPick,sel){
     const xs=x(i)+12,xe=x(i+1);
     s+=`<rect x="${xs}" y="${top}" width="${xe-xs}" height="${h[i+1]}" fill="var(--accent)" fill-opacity="0.16"/>`;
     const ya=top+h[i+1],yb=top+h[i],w=Math.max(yb-ya,0.8),xt=xs+34,xo=xt+w;
-    s+=`<path d="M${xs},${ya} C${xo},${ya} ${xo},${ya} ${xo},${sinkY} L${xt},${sinkY} C${xt},${yb} ${xt},${yb} ${xs},${yb} Z" fill="var(--loss)" fill-opacity="0.55" data-loss="${i}" style="cursor:pointer"/>`;
+    s+=`<path d="M${xs},${ya} C${xo},${ya} ${xo},${ya} ${xo},${sinkY} L${xt},${sinkY} C${xt},${yb} ${xt},${yb} ${xs},${yb} Z" fill="var(--loss)" fill-opacity="0.45" data-loss="${i}" style="cursor:pointer"/>`;
     const lx=Math.min(xt+w/2,W-60);
-    s+=`<text x="${lx}" y="${sinkY+20}" text-anchor="middle" font-size="15" font-weight="500" class="lossT">${fmt(f[i]-f[i+1])}</text><text x="${lx}" y="${sinkY+38}" text-anchor="middle" font-size="12" class="muted">${LOSS[i]}</text>`;
+    s+=`<text x="${lx}" y="${sinkY+20}" text-anchor="middle" font-size="15" font-weight="500">${fmt(f[i]-f[i+1])}</text><text x="${lx}" y="${sinkY+38}" text-anchor="middle" font-size="12" class="muted">${LOSS[i]}</text>`;
   }
   for(let i=0;i<n;i++){
     const on=sel===i;
@@ -695,7 +592,7 @@ function sankey(svg,f,onPick,sel){
   svg.querySelectorAll('[data-stage]').forEach(r=>r.addEventListener('click',()=>onPick&&onPick(+r.dataset.stage)));
   svg.querySelectorAll('[data-loss]').forEach(r=>{
     const i=+r.dataset.loss;
-    r.addEventListener('mousemove',e=>showTip(e,`<b>${fmt(f[i]-f[i+1])} leads</b><br>${LOSS[i]}, between "${STAGES[i]}" and "${STAGES[i+1]}"`));
+    r.addEventListener('mousemove',e=>showTip(e,`<b>${fmt(f[i]-f[i+1])} leads</b><br>${LOSS[i]}, after "${STAGES[i]}"`));
     r.addEventListener('mouseleave',hideTip);
     r.addEventListener('click',()=>onPick&&onPick(i+1));
   });
@@ -706,241 +603,183 @@ function renderOvKpis(){
   const all=tfAll(),m=mAgg(()=>true),ai=aiAgg(),wb=D.days.filter(d=>inTF(d.date)).reduce((s,d)=>s+d.total,0);
   const W='Whole period, 1 Sep – 15 Oct';
   const K=all?[
-   ['Total spend','₹1,10,284','Meta ₹99,188 · Google ₹8,458 · AI calling ₹2,638','','spend'],
-   ['Leads','5,458','5,287 Meta leads in Zoho and 171 Google leads','','leads'],
-   ['Spoke to the lead','1,887','38% of Meta leads called','','spoke'],
-   ['Scheduled visits','165','192 including college and seminar leads','','booked'],
-   ['Attended visits','8','Bengaluru 7, Andheri East 1','bad','walked'],
-   ['Admissions','0','Target is 125 a month','bad','adm'],
-   ['Open leads','838','621 follow-ups due, 217 interested but not scheduled','','open'],
-   ['Cost per scheduled visit','₹617','₹219 at Khalapur to ₹2,641 at Goa','','cps'],
-   ['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),'Meta, '+fmt(D.mtotal.clicksAll)+' clicks on '+fmt(D.mtotal.impr)+' impressions','','ctr'],
-   ['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),'Meta, '+fmt(D.mtotal.linkClicks)+' link clicks','','cpc']
+   ['Leads','5,458','5,287 Meta leads in Zoho and 171 Google leads','leads'],
+   ['Spoke to the lead','1,887','38% of Meta leads called','spoke'],
+   ['Scheduled visits','165','192 including college and seminar leads','booked'],
+   ['Attended visits','8','Bengaluru 7, Andheri East 1','walked'],
+   ['Admissions','0','Target is 125 a month','adm'],
+   ['Open leads','838','621 follow-ups due, 217 interested with a visit to book','open'],
+   ['Cost per lead','₹19.3','Meta leads in Zoho','cpml'],
+   ['Cost per scheduled visit','₹617','₹219 at Khalapur to ₹2,641 at Goa','cps'],
+   ['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),'Meta, '+fmt(D.mtotal.clicksAll)+' clicks on '+fmt(D.mtotal.impr)+' impressions','ctr'],
+   ['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),'Meta, '+fmt(D.mtotal.linkClicks)+' link clicks','cpc']
   ]:[
-   ['Meta spend',rs(m.spend),periodLabel(),'','spend'],
-   ['Meta leads',fmt(m.leads),periodLabel()+' · '+rs(m.leads?m.spend/m.leads:null)+' per lead','','leads'],
-   ['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks on '+fmt(m.impr)+' impressions','','ctr'],
-   ['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks','','cpc'],
-   ['AI calls',fmt(ai.calls),fmt(ai.con)+' connected · '+fmt(ai.int)+' interested','','acalls'],
-   ['AI calling cost',rs(ai.min),fmt(ai.min)+' call minutes','','acalls'],
-   ['Walk-ins booked',fmt(wb),'By walk-in date, all sources','','wbooked'],
-   ['Attended visits','8',W,'bad','walked'],
-   ['Admissions','0',W,'bad','adm'],
-   ['Open leads','838',W,'','open']
+   ['Meta leads',fmt(m.leads),periodLabel(),'leads'],
+   ['Cost per lead',rs(m.leads?m.spend/m.leads:null),periodLabel(),'cpml'],
+   ['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks on '+fmt(m.impr)+' impressions','ctr'],
+   ['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks','cpc'],
+   ['AI calls',fmt(ai.calls),fmt(ai.con)+' connected · '+fmt(ai.int)+' interested','acalls'],
+   ['Walk-ins booked',fmt(wb),'By walk-in date, all sources','wbooked'],
+   ['Spoke to the lead','1,887',W,'spoke'],
+   ['Attended visits','8',W,'walked'],
+   ['Admissions','0',W,'adm'],
+   ['Open leads','838',W,'open']
   ];
-  $('#kpis').innerHTML=K.map(k=>`<div class="panel s3 kpi drill ${k[3]}" role="button" tabindex="0" data-drill="${k[4]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
+  $('#kpis').innerHTML=K.map(k=>`<div class="panel s3 kpi drill" role="button" tabindex="0" data-drill="${k[3]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
 }
 TFL.push(renderOvKpis);
-sankey($('#ovSankey'),FUN.all.f,i=>{openTab('funnel',true);pickStage(i)});
-hbars($('#spendBars'),[['Meta ads',99188,'var(--accent)'],['Google Ads',8458.49,'var(--c2)'],['AI calling',2638,'var(--c4)']],{money:true});
 
-const STATUS=[
- ['Creatives','We fell behind on creatives.','Sorted','good','We are 2 weeks ahead of schedule now, and will be a month ahead by 31 October.'],
- ['Copywriting','We rushed long-pending creatives and missed the basics.','Sorted','good','Every piece of copy now goes through 3 levels of review.'],
- ['Website','Weak copy had passed 3 earlier reviews, so we did not recheck it.','Delivered','good','The copy is rewritten with better phrasing and is ready to publish.'],
- ['Digital marketing','We were slow to start.','Regular','good','Posting is regular now, and quality goes up from here.'],
- ['WhatsApp','Verification took time. It moved forward a week ago, in line with our October commitment.','In beta','warn','The chatbot is in beta now and goes to full scale from 25 October.'],
- ['Zoho','IESP’s current system needed to move to Zoho.','Done','good','The migration is done and basic training for the IESP team is complete. More training sessions are planned for next week.'],
- ['AI calling','Not yet at the standard we want.','Improving','warn','We are improving it every day, in both call quality and the number of calls it can handle.'],
- ['Lead generation','Leads came in. Admissions did not.','Main issue','crit','This is the main issue. The Funnel, Centres, Campaigns and Plan tabs set out the analysis and the plan to fix it.']
-];
-const stEl=$('#status'),stD=$('#statusDetail');
-stEl.innerHTML=STATUS.map((s,i)=>`<button type="button" class="st" data-i="${i}" aria-expanded="false"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3>${s[0]}</h3><span class="chip ${s[3]}">${s[2]}</span></div><span class="was">${s[1]}</span></button>`).join('');
-stEl.addEventListener('click',e=>{const b=e.target.closest('.st');if(!b)return;const open=b.getAttribute('aria-expanded')==='true';stEl.querySelectorAll('.st').forEach(x=>x.setAttribute('aria-expanded','false'));if(open){stD.hidden=true;return}b.setAttribute('aria-expanded','true');const s=STATUS[+b.dataset.i];stD.hidden=false;stD.innerHTML=`<div style="display:flex;flex-direction:column;gap:6px;max-width:72ch"><h3>${s[0]} <span class="chip ${s[3]}" style="margin-left:8px">${s[2]}</span></h3><p><b>What went wrong:</b> ${s[1]}</p><p><b>Where it stands now:</b> ${s[4]}</p>${s[0]==='Lead generation'?'<p><button class="btn" data-go="funnel" type="button">Open the funnel</button></p>':''}</div>`});
-
-/* ---------- Funnel tab ---------- */
+/* ---------- Funnel and centres ---------- */
 let fKey='all',fStage=0;
-const fC=$('#fCentres');
-fC.innerHTML=Object.entries(FUN).map(([k,v])=>`<button type="button" data-k="${k}" aria-pressed="${k==='all'}">${v.name.replace(/^T\d /,'')}</button>`).join('');
-fC.addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;fKey=b.dataset.k;fC.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderFunnel()});
 function pickStage(i){fStage=i;renderFunnel()}
 function renderFunnel(){
   const c=FUN[fKey],f=c.f;
   $('#fTitle').textContent='Lead funnel · '+c.name;
-  $('#fSpend').textContent='Spend '+rs(c.spend);
   sankey($('#fSankey'),f,pickStage,fStage);
   const i=fStage,prev=i?f[i-1]:null;
   $('#fDetail').innerHTML=`<div class="kpi"><span class="lab">${STAGES[i]}</span><span class="val">${fmt(f[i])}</span><span class="det">${i?pf(pct(f[i],prev))+' of the step before':'Starting point'}</span></div>
-   <div class="kpi"><span class="lab">Dropped at this step</span><span class="val" style="color:var(--loss)">${i?fmt(prev-f[i]):'–'}</span><span class="det">${i?LOSS[i-1]:''}</span></div>
-   <div class="kpi"><span class="lab">Cost per lead at this stage</span><span class="val">${f[i]?rs(c.spend/f[i]):'–'}</span><span class="det">Spend ÷ leads at this stage</span></div>
+   <div class="kpi"><span class="lab">Moved out at this step</span><span class="val">${i?fmt(prev-f[i]):'–'}</span><span class="det">${i?LOSS[i-1]:''}</span></div>
+   <div class="kpi"><span class="lab">Cost per lead at this stage</span><span class="val">${f[i]?rs(c.spend/f[i]):'–'}</span><span class="det">Budget ÷ leads at this stage</span></div>
    <div class="kpi"><span class="lab">Share of all leads</span><span class="val">${pf(pct(f[i],f[0]),f[i]/f[0]<0.01?2:1)}</span></div>`;
-  $('#fTable').innerHTML=`<thead><tr><th>Stage</th><th class="num">Leads</th><th class="num">Of previous</th><th class="num">Dropped</th><th class="num">Cost per lead</th></tr></thead><tbody>${f.map((v,j)=>`<tr class="click ${j===i?'sel':''}" data-j="${j}"><td>${STAGES[j]}</td><td class="num">${fmt(v)}</td><td class="num">${j?pf(pct(v,f[j-1])):'–'}</td><td class="num">${j?fmt(f[j-1]-v):'–'}</td><td class="num">${v?rs(c.spend/v):'–'}</td></tr>`).join('')}</tbody>`;
-  $('#fTable').querySelectorAll('tr[data-j]').forEach(r=>r.addEventListener('click',()=>pickStage(+r.dataset.j)));
-  hbars($('#fStatus'),c.status.map((v,j)=>[STATUS_L[j][0],v,STATUS_L[j][1]]));
-  hbars($('#fReasons'),c.reasons,{color:'var(--c3)'});
-  if(typeof centreStrip==='function'&&document.querySelector('#cTable tbody'))centreStrip(fKey);
+  if(FT){FT.sel=fKey;FT.draw()}
 }
+const FCOLS=[['leads','Leads','int',d=>d.leads],['called','Called','int',d=>d.called],['spoke','Spoke','int',d=>d.spoke],['int','Interested','int',d=>d.int],['booked','Walk-ins booked','int',d=>d.booked],['walked','Walked in','int',d=>d.walked],['contact','Contact rate','pct',d=>d.called?dv(d.spoke,d.called):null],['bookr','Booking rate','pct',d=>d.spoke?dv(d.booked,d.spoke):null],['show','Show-up rate','pct',d=>d.booked?dv(d.walked,d.booked):null],['cpl','Cost per lead','money',d=>d.spend!=null&&d.leads?d.spend/d.leads:null],['cpb','Cost per walk-in booked','money',d=>d.spend!=null&&d.booked?d.spend/d.booked:null]];
+const fData=c=>({leads:c.f[0],called:c.f[1],spoke:c.f[2],int:c.f[3],booked:c.f[4],walked:c.f[5],spend:c.spend});
+const only=v=>({leads:v});
+let FT=null;
+function fRoot(){
+  const by=$('#fBy').value;
+  const kids=(k,c)=>()=>by==='status'?c.status.map((v,j)=>({id:k+'s'+j,label:STATUS_L[j][0],d:only(v)})):by==='reasons'?c.reasons.map(([r,v],j)=>({id:k+'r'+j,label:soft(r),d:only(v)})):c.f.map((v,j)=>({id:k+'f'+j,label:STAGES[j],sub:j?pf(pct(v,c.f[j-1]),1)+' of the step before':'',d:only(v)}));
+  return Object.entries(FUN).filter(([k])=>k!=='all').map(([k,c])=>({id:k,label:c.name,d:fData(c),kids:kids(k,c)}));
+}
+FT=TT($('#fTable'),{first:'Centre',cols:FCOLS,bar:'leads',root:fRoot,total:()=>({label:'All centres',d:fData(FUN.all)}),pick:id=>{if(FUN[id]){fKey=id;fStage=0;renderFunnel()}else{const k=id.slice(0,2);const j=+id.slice(3);if(FUN[k]){fKey=k;if(id[2]==='f')fStage=j;renderFunnel()}}}});
+$('#fBy').addEventListener('change',()=>{FT.open.clear();FT.draw()});
 renderFunnel();
 
-/* ---------- Centres ---------- */
-const CK=c=>({'T1 Andheri East':'t1','T2 Khalapur':'t2','T3 Roha':'t3','T4 Alibag':'t4','T5 Goa':'t5','T6 Bengaluru':'t6','Other & unassigned':'ot','Total':'all'})[c];
-function cRow(k){return D.centres.find(c=>CK(c.Centre)===k)}
-function centreStrip(k){
-  const c=cRow(k);if(!c){$('#fCentre').innerHTML='';return}
-  $('#fCentre').innerHTML=[
-   ['Total spend',rs(c['Total spend (₹)']),'Meta '+rs(c['Meta spend (₹)'])+' · AI '+rs(c['AI calling (₹)'])],
-   ['Cost per lead',rs(c['Cost per lead (₹)']),fmt(c.Leads)+' leads'],
-   ['Contact rate',pf(c['Contact rate']*100,0),'Spoke ÷ called'],
-   ['Booking rate',pf(c['Booking rate (booked ÷ spoke)']*100,1),'Walk-ins booked ÷ spoke'],
-   ['Cost per walk-in booked',rs(c['Cost per walk-in booked (₹)']),fmt(c['Walk-ins booked'])+' booked'],
-   ['Walked in',fmt(c['Walked in (actual)']),c['Walked in (actual)']?rs(c['Cost per walk-in (₹)'])+' each · '+pf(c['Show-up rate (walked ÷ booked)']*100,1)+' show-up':'None reported yet']
-  ].map(x=>`<div class="kpi"><span class="lab">${x[0]}</span><span class="val">${x[1]}</span><span class="det">${x[2]}</span></div>`).join('');
-  $('#cTable').querySelectorAll('tr[data-k]').forEach(r=>r.classList.toggle('sel',r.dataset.k===k));
-}
-$('#cTable').innerHTML=`<thead><tr><th>Centre</th><th class="num">Total spend</th><th class="num">Leads</th><th class="num">Cost per lead</th><th class="num">Contact rate</th><th class="num">Walk-ins booked</th><th class="num">Cost per walk-in booked</th><th class="num">Walked in</th><th class="num">Show-up rate</th></tr></thead><tbody>${D.centres.map(c=>{const k=CK(c.Centre);const tot=c.Centre==='Total';return `<tr class="click ${tot?'total':''}" data-k="${k}"><td>${tot?'All centres':esc(c.Centre)}</td><td class="num">${rs(c['Total spend (₹)'])}</td><td class="num">${fmt(c.Leads)}</td><td class="num">${rs(c['Cost per lead (₹)'])}</td><td class="num">${pf(c['Contact rate']*100,0)}</td><td class="num">${fmt(c['Walk-ins booked'])}</td><td class="num">${rs(c['Cost per walk-in booked (₹)'])}</td><td class="num">${fmt(c['Walked in (actual)'])}</td><td class="num">${pf(c['Show-up rate (walked ÷ booked)']*100,1)}</td></tr>`}).join('')}</tbody>`;
-$('#cTable').querySelectorAll('tr[data-k]').forEach(r=>r.addEventListener('click',()=>{fKey=r.dataset.k;fStage=0;fC.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===fKey));renderFunnel();$('#t-funnel').scrollIntoView({behavior:'smooth',block:'start'})}));
-centreStrip(fKey);
-
-/* ---------- Campaigns drill-down ---------- */
+/* ---------- Campaigns ---------- */
 const sp=r=>r['Spend (₹)']||0,im=r=>r.Impressions||0,rc=r=>r.Reach||0,ml=r=>r['Leads (Meta)']||0,zl=r=>r['Leads (Zoho)']||0,bk=r=>r['Walk-ins booked']||0;
-const dv=(a,b)=>b?a/b:null;
 const MET=[
- ['spend','Spend','money',sp],
+ ['mleads','Leads (Meta)','int',ml],
+ ['cpml','Cost per Meta lead','money',r=>dv(sp(r),ml(r))],
  ['impr','Impressions','int',im],
- ['reach','Reach','int',rc],
- ['freq','Frequency','dec',r=>dv(im(r),rc(r))],
+ ['reach','Reach','int',r=>r.Reach==null?null:rc(r)],
+ ['freq','Frequency','dec',r=>r.Reach==null?null:dv(im(r),rc(r))],
  ['cpm','CPM','money',r=>dv(sp(r)*1000,im(r))],
  ['ctr','CTR (all)','pct',r=>r.rImpr?r.clicksAll/r.rImpr:null],
  ['cpc','CPC (link click)','money',r=>r.linkClicks?r.rSpend/r.linkClicks:null],
  ['lclicks','Link clicks','int',r=>r.linkClicks!=null?r.linkClicks:null],
- ['mleads','Leads (Meta)','int',ml],
- ['cpml','Cost per Meta lead','money',r=>dv(sp(r),ml(r))],
  ['lr','Leads per 1,000 impressions','dec',r=>dv(ml(r)*1000,im(r))],
- ['zleads','Leads in Zoho','int',zl],
- ['cpl','Cost per Zoho lead','money',r=>dv(sp(r),zl(r))],
- ['called','Called','int',r=>r.Called||0],
- ['spoke','Spoke','int',r=>r.Spoke||0],
- ['contact','Contact rate','pct',r=>dv(r.Spoke||0,r.Called||0)],
- ['int','Interested','int',r=>r.Interested||0],
- ['booked','Walk-ins booked','int',bk],
- ['bookr','Booking rate','pct',r=>dv(bk(r),r.Spoke||0)],
- ['cpb','Cost per walk-in booked','money',r=>dv(sp(r),bk(r))]
+ ['zleads','Leads in Zoho','int',r=>r['Leads (Zoho)']==null?null:zl(r)],
+ ['called','Called','int',r=>r.Called==null?null:r.Called],
+ ['spoke','Spoke','int',r=>r.Spoke==null?null:r.Spoke],
+ ['contact','Contact rate','pct',r=>r.Called==null?null:dv(r.Spoke||0,r.Called||0)],
+ ['int','Interested','int',r=>r.Interested==null?null:r.Interested],
+ ['booked','Walk-ins booked','int',r=>r['Walk-ins booked']==null?null:bk(r)],
+ ['bookr','Booking rate','pct',r=>r['Walk-ins booked']==null?null:dv(bk(r),r.Spoke||0)],
+ ['cpb','Cost per walk-in booked','money',r=>r['Walk-ins booked']==null?null:dv(sp(r),bk(r))]
 ];
-const fv=(t,v)=>v==null||!isFinite(v)?'–':t==='money'?rs(v):t==='pct'?pf(v*100,1):t==='dec'?(Math.round(v*100)/100).toLocaleString('en-IN'):fmt(v);
 function sumRow(rows){const o={};['Spend (₹)','Impressions','Reach','Leads (Meta)','Leads (Zoho)','Called','Spoke','Interested','Walk-ins booked','rSpend','rImpr','clicksAll','linkClicks'].forEach(k=>o[k]=rows.reduce((a,r)=>a+(r[k]||0),0));return o}
 function renderMK(){
   let K,KD;
+  $('#mTitle').textContent='Meta ads, '+(tfAll()?'1 September to 16 October 2026':periodLabel());
   if(tfAll()){
     const t=D.campaigns.find(r=>r.Campaign==='Total');const ads=D.ads.filter(a=>a.Campaign!=='Total'&&a.Campaign!=='Not in export');
     const live=ads.filter(a=>sp(a)>0);const cpls=live.filter(a=>ml(a)>0).map(a=>sp(a)/ml(a)).sort((a,b)=>a-b);const med=cpls.length?cpls[Math.floor(cpls.length/2)]:null;
-    KD=['spend','impr','impr','cpm','ctr','cpc','leads','cpml','lr','cps','aspend','aleads','contact','bookr'];
-    K=[['Spend',rs(sp(t)),'46 ads in 4 campaigns'],['Impressions',fmt(im(t)),'Reach '+fmt(rc(t))],['Frequency',fv('dec',im(t)/rc(t)),'Average times each person saw an ad'],['CPM',rs(sp(t)*1000/im(t)),'Cost per 1,000 impressions'],['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),fmt(D.mtotal.clicksAll)+' clicks'],['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),fmt(D.mtotal.linkClicks)+' link clicks'],
+    KD=['impr','impr','cpm','ctr','cpc','leads','cpml','lr','cps','aleads','contact','bookr'];
+    K=[['Impressions',fmt(im(t)),'Reach '+fmt(rc(t))],['Frequency',fv('dec',im(t)/rc(t)),'Average times each person saw an ad'],['CPM',rs(sp(t)*1000/im(t)),'Cost per 1,000 impressions'],['CTR (all)',pf(D.mtotal.clicksAll/D.mtotal.impr*100,2),fmt(D.mtotal.clicksAll)+' clicks'],['CPC (link click)',rs(D.mtotal.spend/D.mtotal.linkClicks),fmt(D.mtotal.linkClicks)+' link clicks'],
      ['Leads (Meta)',fmt(ml(t)),fmt(zl(t))+' in Zoho'],['Cost per Meta lead',rs(sp(t)/ml(t)),'Median across ads '+rs(med)],['Leads per 1,000 impressions',fv('dec',ml(t)*1000/im(t)),''],['Cost per walk-in booked',rs(sp(t)/bk(t)),fmt(bk(t))+' walk-ins booked'],
-     ['Average spend per ad',rs(sp(t)/live.length),live.length+' ads with spend'],['Average leads per ad',fv('dec',ml(t)/live.length),'Meta-reported'],['Average contact rate',pf((t.Spoke/t.Called)*100,1),'Spoke ÷ called'],['Average booking rate',pf(bk(t)/t.Spoke*100,1),'Walk-ins booked ÷ spoke']];
+     ['Average leads per ad',fv('dec',ml(t)/live.length),live.length+' ads delivering'],['Contact rate',pf((t.Spoke/t.Called)*100,1),'Spoke ÷ called'],['Booking rate',pf(bk(t)/t.Spoke*100,1),'Walk-ins booked ÷ spoke']];
   }else{
     const m=mAgg(()=>true);const n=new Set(D.mdaily.filter(r=>inTF(r[0])&&r[5]>0).map(r=>nrm(r[2])+'|'+nrm(r[3]))).size;
-    KD=['spend','impr','cpm','ctr','cpc','leads','cpml','lr','aspend','aleads','cpc','spend'];
-    K=[['Spend',rs(m.spend),periodLabel()],['Impressions',fmt(m.impr),''],['CPM',rs(m.impr?m.spend*1000/m.impr:null),'Cost per 1,000 impressions'],['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks'],['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks'],['Leads (Meta)',fmt(m.leads),''],
-     ['Cost per Meta lead',rs(m.leads?m.spend/m.leads:null),''],['Leads per 1,000 impressions',fv('dec',m.impr?m.leads*1000/m.impr:null),''],['Average spend per ad',rs(n?m.spend/n:null),n+' ads with spend'],['Average leads per ad',fv('dec',n?m.leads/n:null),''],['Link clicks',fmt(m.link),''],['Ads delivering',fmt(n),'in this period']];
+    KD=['impr','cpm','ctr','cpc','leads','cpml','lr','aleads','cpc','aleads','ctr','cpml'];
+    K=[['Impressions',fmt(m.impr),''],['CPM',rs(m.impr?m.spend*1000/m.impr:null),'Cost per 1,000 impressions'],['CTR (all)',pf(m.impr?m.clicks/m.impr*100:NaN,2),fmt(m.clicks)+' clicks'],['CPC (link click)',rs(m.link?m.spend/m.link:null),fmt(m.link)+' link clicks'],['Leads (Meta)',fmt(m.leads),''],
+     ['Cost per Meta lead',rs(m.leads?m.spend/m.leads:null),''],['Leads per 1,000 impressions',fv('dec',m.impr?m.leads*1000/m.impr:null),''],['Average leads per ad',fv('dec',n?m.leads/n:null),''],['Link clicks',fmt(m.link),''],['Ads delivering',fmt(n),'in this period']];
   }
   $('#mKpis').innerHTML=K.map((k,i)=>`<div class="s3 kpi drill" role="button" tabindex="0" data-drill="${KD[i]}" style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px"><span class="lab">${k[0]}</span><span class="val" style="font-size:26px">${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}<span class="more">See the breakdown ›</span></div>`).join('');
 }
 TFL.push(renderMK);
-let lvl={campaign:null,adset:null},metric='spend',sortKey='spend',sortDir=-1,campMode='tree',adName=null;
 const adN=s=>String(s||'').replace(/[\[\]]/g,'').trim();
-const ADGROUPS=(()=>{const g={};D.ads.filter(a=>a.Campaign!=='Total'&&a.Campaign!=='Not in export').forEach(a=>{const k=adN(a.Ad);(g[k]=g[k]||[]).push(a)});return Object.entries(g).map(([k,items])=>Object.assign(sumRow(items),{_name:k,_n:items.length}))})();
-$('#campMode').addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(!b)return;campMode=b.dataset.m;adName=null;lvl={campaign:null,adset:null};$('#campMode').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderCamp()});
-$('#metricSel').innerHTML=MET.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join('');
-$('#metricSel').addEventListener('change',e=>{metric=e.target.value;sortKey=metric;sortDir=-1;renderCamp()});
-function campRows(){
-  if(campMode==='name'){if(!adName)return {rows:ADGROUPS,name:r=>r._name+(r._n>1?` (${r._n} ad sets)`:''),level:'Ad name'};return {rows:D.ads.filter(a=>a.Campaign!=='Total'&&a.Campaign!=='Not in export'&&adN(a.Ad)===adName),name:r=>r['Ad set']+' · '+r.Campaign,level:'Ad'}}
-  if(!lvl.campaign)return {rows:D.campaigns.filter(r=>r.Campaign!=='Total'&&r.Campaign!=='Not in export'),name:r=>r.Campaign,level:'Campaign'};
-  if(!lvl.adset)return {rows:D.adsets.filter(r=>r.Campaign===lvl.campaign),name:r=>r['Ad set'],level:'Ad set'};
-  return {rows:D.ads.filter(r=>r.Campaign===lvl.campaign&&r['Ad set']===lvl.adset),name:r=>r.Ad,level:'Ad'};
-}
+const ADS=D.ads.filter(a=>a.Campaign!=='Total'&&a.Campaign!=='Not in export');
 const RES={'actions:leadgen.other':'Leads','video_continuous_2_sec_watched_actions':'2-second video plays','actions:post_engagement':'Post engagement'};
-function periodRow(r,level){
+const DLV={active:'Active',not_delivering:'Not running',inactive:'Paused'};
+const RNK=v=>!v||v==='-'?'':String(v).replace(/Below average – bottom (\d+)% of ads/,'Room to improve (bottom $1%)');
+function adSub(a){const r=a.rank;const p=[DLV[a.Delivery]||''];if(r){if(r.resultType&&RES[r.resultType]&&RES[r.resultType]!=='Leads')p.push(RES[r.resultType]);if(RNK(r.quality))p.push('Quality: '+RNK(r.quality));if(r.budgetType==='Daily')p.push(rs(+r.budget)+' a day')}return p.filter(Boolean).join(' · ')}
+function periodRow(r,pred){
   if(tfAll())return r;
-  let pred;
-  if(level==='Campaign'){const sets=new Set(D.ads.filter(a=>a.Campaign===r.Campaign).map(a=>nrm(a['Ad set'])));pred=x=>sets.has(nrm(x[2]))}
-  else if(level==='Ad set')pred=x=>nrm(x[2])===nrm(r['Ad set']);
-  else if(level==='Ad name')pred=x=>nrm(x[3])===nrm(r._name);
-  else pred=x=>nrm(x[2])===nrm(r['Ad set'])&&nrm(x[3])===nrm(r.Ad);
   const m=mAgg(pred);
   return Object.assign({},r,{'Spend (₹)':m.spend,Impressions:m.impr,Reach:null,'Leads (Meta)':m.leads,'Leads (Zoho)':null,Called:null,Spoke:null,Interested:null,'Walk-ins booked':null,rSpend:m.spend,rImpr:m.impr,clicksAll:m.clicks,linkClicks:m.link});
 }
-function renderCamp(){
-  let {rows,name,level}=campRows();
-  rows=rows.map(r=>periodRow(r,level));
-  const cr=$('#crumbs');
-  let c=campMode==='name'?(adName?`<button type="button" data-l="n">All ad names</button><span class="sep">›</span><b style="font-weight:500">${esc(adName)}</b>`:'<b style="font-weight:500">All ad names</b>'):`<button type="button" data-l="0">All campaigns</button>`;
-  if(campMode==='tree'&&lvl.campaign)c+=`<span class="sep">›</span>${lvl.adset?`<button type="button" data-l="1">${esc(lvl.campaign)}</button>`:`<b style="font-weight:500">${esc(lvl.campaign)}</b>`}`;
-  if(campMode==='tree'&&lvl.adset)c+=`<span class="sep">›</span><b style="font-weight:500">${esc(lvl.adset)}</b>`;
-  cr.innerHTML=c;
-  cr.querySelectorAll('[data-l]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.l==='n')adName=null;else if(b.dataset.l==='0')lvl={campaign:null,adset:null};else lvl.adset=null;renderCamp()}));
-  $('#metricSel').value=metric;
-  const M=MET.find(m=>m[0]===metric);
-  const keyFn=sortKey==='name'?name:(MET.find(m=>m[0]===sortKey)||M)[3];
-  const sorted=rows.slice().sort((a,b)=>{const va=keyFn(a),vb=keyFn(b);if(va==null)return 1;if(vb==null)return -1;return (va>vb?1:va<vb?-1:0)*sortDir});
-  const vals=sorted.map(r=>M[3](r));const max=Math.max(1e-9,...vals.filter(v=>v!=null&&isFinite(v)));
-  const rowH=30,lw=320,W=1000,H=sorted.length*rowH+10;
-  const bad=['cpm','cpml','cpl','cpb','freq'].includes(metric);
-  let s='';sorted.forEach((r,i)=>{const v=vals[i];const w=v==null||!isFinite(v)?0:(v/max)*(W-lw-120);const y=i*rowH+4;const nm=String(name(r));
-    s+=`<g data-i="${i}" style="cursor:${level==='Ad'?'default':'pointer'}"><rect x="0" y="${y}" width="${W}" height="${rowH-4}" fill="transparent"/><text x="${lw-10}" y="${y+18}" text-anchor="end" font-size="13">${esc(nm.length>44?nm.slice(0,43)+'…':nm)}</text><rect x="${lw}" y="${y+4}" width="${Math.max(w,v?1:0)}" height="${rowH-12}" rx="4" fill="${bad?'var(--c4)':'var(--accent)'}"/><text x="${lw+w+6}" y="${y+18}" font-size="13" class="muted">${v==null||!isFinite(v)?'not applicable':fv(M[2],v)}</text></g>`});
-  $('#campChart').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" style="min-width:680px" role="img" aria-label="${esc(M[1])} by ${level.toLowerCase()}">${s}</svg>`;
-  const go=i=>{const r=sorted[i];if(level==='Ad name')adName=r._name;else if(level==='Campaign')lvl.campaign=r.Campaign;else if(level==='Ad set')lvl.adset=r['Ad set'];else return;renderCamp()};
-  $('#campChart').querySelectorAll('g[data-i]').forEach(g=>g.addEventListener('click',()=>go(+g.dataset.i)));
-  const adsOf=r=>[...new Set(D.ads.filter(a=>a.Campaign===r.Campaign&&(level==='Campaign'||a['Ad set']===r['Ad set'])).map(a=>adN(a.Ad)))].join(', ');
-  const extra=level==='Ad'?[['Delivery'],['Result type'],['Quality'],['Engagement'],['Conversion'],['Ad set budget']]:[];
-  const tot=sumRow(rows);
-  const avg=MET.map(m=>{const v=rows.map(m[3]).filter(x=>x!=null&&isFinite(x));return v.length?v.reduce((a,b)=>a+b,0)/v.length:null});
-  const showAds=level==='Campaign'||level==='Ad set';
-  const head=`<thead><tr><th class="sortable" data-s="name">${level}${sortKey==='name'?(sortDir<0?' ↓':' ↑'):''}</th>${showAds?'<th>Ads</th>':''}${MET.map(m=>`<th class="sortable num" data-s="${m[0]}">${m[1]}${sortKey===m[0]?(sortDir<0?' ↓':' ↑'):''}</th>`).join('')}${extra.map(e=>`<th>${e[0]}</th>`).join('')}</tr></thead>`;
-  const dl=d=>d==='active'?'<span class="chip good">Active</span>':d==='not_delivering'?'<span class="chip warn">Not delivering</span>':d?'<span class="chip info">Inactive</span>':'';
-  const rk=v=>!v||v==='-'?'<span class="note">No ranking</span>':/Below/.test(v)?`<span class="chip crit">${esc(v)}</span>`:/Above/.test(v)?`<span class="chip good">${esc(v)}</span>`:`<span class="chip info">${esc(v)}</span>`;
-  const cvAvg=ml(tot)?sp(tot)/ml(tot):null,cvMaxL=Math.max(1,...rows.map(ml));
-  const body=sorted.map((r,i)=>`<tr class="${level==='Ad'?'':'click'}" data-i="${i}"><td class="wrap-cell">${esc(name(r))}</td>${showAds?`<td class="wrap-cell" style="min-width:260px">${esc(adsOf(r))}</td>`:''}${MET.map(m=>cvCell(m,r,cvAvg,cvMaxL)).join('')}${level==='Ad'?(r.rank?`<td>${dl(r.Delivery)}</td><td>${esc(RES[r.rank.resultType]||r.rank.resultType||'–')}</td><td>${rk(r.rank.quality)}</td><td>${rk(r.rank.engagement)}</td><td>${rk(r.rank.conversion)}</td><td>${r.rank.budgetType==='Daily'?rs(+r.rank.budget)+' a day':'Campaign budget'}</td>`:`<td>${dl(r.Delivery)}</td><td></td><td></td><td></td><td></td><td></td>`):''}</tr>`).join('');
-  const foot=`<tr class="total"><td>Average of ${rows.length} rows</td>${showAds?'<td></td>':''}${avg.map((v,j)=>`<td class="num">${fv(MET[j][2],v)}</td>`).join('')}${extra.map(()=>'<td></td>').join('')}</tr><tr class="total"><td>Total</td>${showAds?'<td></td>':''}${MET.map(m=>`<td class="num">${fv(m[2],m[3](tot))}</td>`).join('')}${extra.map(()=>'<td></td>').join('')}</tr>`;
-  $('#campTable').innerHTML=head+'<tbody>'+body+foot+'</tbody>';
-  $('#campTable').querySelectorAll('th[data-s]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.s;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=k==='name'?1:-1}renderCamp()}));
-  $('#campTable').querySelectorAll('tr[data-i]').forEach(tr=>tr.addEventListener('click',()=>go(+tr.dataset.i)));
-  $('#campNote').textContent=(tfAll()?'':'Meta figures for '+periodLabel()+'. Call and walk-in columns are not available by period. ')+(level==='Ad name'?'Each ad name is totalled across every ad set it ran in. Select one to see it ad set by ad set.':level==='Ad'?(campMode==='name'?'This ad in each ad set it ran in. Use the link above to go back.':'These are the individual ads in this ad set. Use the links above to go back.'):'Select a '+(level==='Campaign'?'campaign to see its ad sets':'an ad set to see its ads')+'. Select a column heading to sort. The average row is the plain average of the rows shown; the total row recalculates each rate from the totals.');
+const pAd=a=>x=>nrm(x[2])===nrm(a['Ad set'])&&nrm(x[3])===nrm(a.Ad);
+const pSet=s=>x=>nrm(x[2])===nrm(s);
+const pCamp=c=>{const sets=new Set(ADS.filter(a=>a.Campaign===c).map(a=>nrm(a['Ad set'])));return x=>sets.has(nrm(x[2]))};
+const pName=n=>x=>nrm(x[3])===nrm(n);
+const live=n=>!tfAll()?(n.d['Spend (₹)']||n.d['Leads (Meta)']||n.d.Impressions):true;
+const byLeads=(a,b)=>(ml(b.d)-ml(a.d));
+function adNode(a,label){return {id:'a|'+a['Ad set']+'|'+a.Ad+'|'+a.Campaign,label:label||adN(a.Ad),sub:adSub(a),d:periodRow(a,pAd(a))}}
+function campRoot(){
+  const by=$('#cBy').value;
+  if(by==='tree')return D.campaigns.filter(r=>r.Campaign!=='Total'&&r.Campaign!=='Not in export').map(c=>({id:'c|'+c.Campaign,label:c.Campaign,d:periodRow(c,pCamp(c.Campaign)),
+    kids:()=>D.adsets.filter(s=>s.Campaign===c.Campaign).map(s=>({id:'s|'+c.Campaign+'|'+s['Ad set'],label:s['Ad set'],d:periodRow(s,pSet(s['Ad set'])),kids:()=>ADS.filter(a=>a.Campaign===c.Campaign&&a['Ad set']===s['Ad set']).map(a=>adNode(a)).filter(live).sort(byLeads)})).filter(live).sort(byLeads)})).filter(live).sort(byLeads);
+  if(by==='adset')return D.adsets.filter(s=>s.Campaign!=='Not in export'&&s.Campaign!=='Total').map(s=>({id:'s|'+s.Campaign+'|'+s['Ad set'],label:s['Ad set'],sub:s.Campaign,d:periodRow(s,pSet(s['Ad set'])),kids:()=>ADS.filter(a=>a.Campaign===s.Campaign&&a['Ad set']===s['Ad set']).map(a=>adNode(a)).filter(live).sort(byLeads)})).filter(live).sort(byLeads);
+  if(by==='name'){const g={};ADS.forEach(a=>{const k=adN(a.Ad);(g[k]=g[k]||[]).push(a)});
+    return Object.entries(g).map(([k,items])=>({id:'n|'+k,label:k,sub:items.length>1?items.length+' ad sets':'',d:periodRow(Object.assign(sumRow(items),{}),pName(k)),kids:items.length>1?()=>items.map(a=>adNode(a,a['Ad set'])).filter(live).sort(byLeads):null})).filter(live).sort(byLeads)}
+  /* period › campaign › ad set › ad, from the daily Meta data */
+  const add=(o,r)=>{o['Spend (₹)']+=r[5];o.Impressions+=r[6];o['Leads (Meta)']+=r[4];o.rSpend+=r[5];o.rImpr+=r[6];o.clicksAll+=r[7];o.linkClicks+=r[8];return o};
+  const z=()=>({'Spend (₹)':0,Impressions:0,Reach:null,'Leads (Meta)':0,'Leads (Zoho)':null,Called:null,Spoke:null,Interested:null,'Walk-ins booked':null,rSpend:0,rImpr:0,clicksAll:0,linkClicks:0});
+  const rows=D.mdaily.filter(r=>inTF(r[0]));
+  const per=groupRows(rows,r=>r[0],(a,r)=>{(a.rows=a.rows||[]).push(r);return a});
+  const nest=(list,idx,lab,next,pre)=>{const m=new Map();list.forEach(r=>{const k=r[idx];if(!m.has(k))m.set(k,[]);m.get(k).push(r)});return [...m.entries()].map(([k,rs_])=>({id:pre+'|'+k,label:lab(k),d:rs_.reduce(add,z()),kids:next?()=>next(rs_,pre+'|'+k):null})).sort(byLeads)};
+  return per.map(p=>({id:'p|'+p.key,label:p.label,d:p.rows.reduce(add,z()),kids:()=>nest(p.rows,1,cname,(r1,pre1)=>nest(r1,2,cname,(r2,pre2)=>nest(r2,3,cname,null,pre2),pre1),'p|'+p.key)}));
 }
+const CT=TT($('#campTable'),{first:'Campaign',cols:MET,bar:'mleads',root:campRoot,total:()=>{const t=D.campaigns.find(r=>r.Campaign==='Total');return {label:'Total',d:periodRow(t,()=>true)}}});
+function renderCamp(){
+  const by=$('#cBy').value;CT.first={tree:'Campaign',adset:'Ad set',name:'Ad name',period:TF.g==='day'?'Date':TF.g==='week'?'Week':'Month'}[by];
+  CT.draw();
+  $('#campNote').textContent=(by==='period'||!tfAll()?'Meta figures for '+periodLabel()+'. Call and walk-in figures show for the whole period only. ':'')+'Select a row to open the next level. Each ad name is totalled across every ad set it ran in.';
+}
+$('#cBy').addEventListener('change',()=>{CT.open.clear();renderCamp()});
 renderCamp();
+TFL.push(renderCamp);
 let rankKey='quality';
 function renderRank(){
   const ads=D.ads.filter(a=>a.rank&&sp(a)>0);const order=['Above average','Average','Below average – bottom 35% of ads','Below average – bottom 20% of ads','Below average – bottom 10% of ads','-'];
   const cnt={};ads.forEach(a=>{const v=a.rank[rankKey]||'-';cnt[v]=(cnt[v]||0)+1});
   const keys=Object.keys(cnt).sort((a,b)=>(order.indexOf(a)<0?9:order.indexOf(a))-(order.indexOf(b)<0?9:order.indexOf(b)));
-  hbars($('#rankBars'),keys.map(k=>[k==='-'?'No ranking given':k,cnt[k],/Below/.test(k)?'var(--loss)':/Above/.test(k)?'var(--good)':k==='-'?'var(--c7)':undefined]));
+  hbars($('#rankBars'),keys.map(k=>[k==='-'?'Not ranked yet':RNK(k),cnt[k],/Below/.test(k)?'var(--warn)':/Above/.test(k)?'var(--good)':k==='-'?'var(--c7)':undefined]));
 }
 $('#rankPick').addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(!b)return;rankKey=b.dataset.r;$('#rankPick').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderRank()});
 renderRank();
-(function(){const g=D.google;$('#gNote').textContent=`${g.Campaign} · ${g['Campaign type']} · ${g['Campaign state']} · 3 to 21 September 2026`;
+(function(){const g=D.google;$('#gNote').textContent=`${g.Campaign} · ${g['Campaign type']} · 3 to 21 September 2026`;
   const n=s=>parseFloat(String(s).replace(/[,%]/g,''));
-  $('#gKpis').innerHTML=[['Cost',rs(n(g.Cost)),''],['Impressions',fmt(n(g['Impr.'])),pf(n(g['Impr. (Abs. Top) %']),1)+' at the absolute top of results'],['Clicks',fmt(n(g.Clicks)),''],['CTR',pf(n(g.CTR),2),'Clicks ÷ impressions'],['Average CPC',rs(n(g['Avg. CPC'])),'Cost per click'],['Conversions',fmt(n(g.Conversions)),g['View-through conv.']+' view-through'],['Cost per conversion',rs(n(g['Cost / conv.'])),''],['Conversion rate',pf(n(g['Conv. rate']),2),'Conversions ÷ clicks']]
-  .map(k=>`<div class="kpi drill" role="button" tabindex="0" data-drill="gads" style="border:1px solid transparent"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}</div>`).join('')})();
+  $('#gKpis').innerHTML=[['Impressions',fmt(n(g['Impr.'])),pf(n(g['Impr. (Abs. Top) %']),1)+' at the absolute top of results'],['Clicks',fmt(n(g.Clicks)),''],['CTR',pf(n(g.CTR),2),'Clicks ÷ impressions'],['Average CPC',rs(n(g['Avg. CPC'])),'Cost per click'],['Conversions',fmt(n(g.Conversions)),g['View-through conv.']+' view-through'],['Cost per conversion',rs(n(g['Cost / conv.'])),''],['Conversion rate',pf(n(g['Conv. rate']),2),'Conversions ÷ clicks'],['Status',g['Campaign state']==='Paused'?'Paused':g['Campaign state'],'Smart campaign']]
+  .map(k=>`<div class="kpi drill" role="button" tabindex="0" data-drill="gads"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}</div>`).join('')})();
 
 /* ---------- Courses ---------- */
 const short=n=>n.replace(/\s*\(.*$/,'');
-hbars($('#courseBars'),D.courses.map(c=>[short(c.Course),c.Leads]));
-$('#courseTable').innerHTML=`<thead><tr><th>Course</th><th class="num">Leads</th><th class="num">Contact rate</th><th class="num">Walk-ins booked</th><th class="num">Booking rate</th></tr></thead><tbody>${D.courses.map(c=>`<tr><td class="wrap-cell">${esc(c.Course)}</td><td class="num">${fmt(c.Leads)}</td><td class="num">${pf(c['Contact rate']*100,0)}</td><td class="num">${fmt(c['Walk-ins booked'])}</td><td class="num">${pf(c['Booking rate (booked ÷ spoke)']*100,0)}</td></tr>`).join('')}</tbody>`;
-(function(){
-  const cols=['Cabin crew ads','Driver / GSE ads','10th / 12th pass ads','GC (general course) ads','Student testimonial ads','Other ads'];
-  const max=Math.max(...D.themes.flatMap(t=>cols.map(c=>t[c]||0)));
-  $('#themeTable').innerHTML=`<thead><tr><th>Course</th>${cols.map(c=>`<th class="num">${esc(c)}</th>`).join('')}<th class="num">Total</th></tr></thead><tbody>${D.themes.map((t,i)=>`<tr><td class="wrap-cell">${esc(short(t.Course))}</td>${cols.map((c,j)=>{const v=t[c]||0;const a=v/max;return `<td class="num" tabindex="0" data-r="${i}" data-c="${j}" style="cursor:pointer;background:color-mix(in srgb, var(--accent) ${Math.round(Math.sqrt(a)*60)}%, transparent);${a>0.3?'color:var(--surface)':''}">${fmt(v)}</td>`}).join('')}<td class="num"><b style="font-weight:500">${fmt(t.Total)}</b></td></tr>`).join('')}</tbody>`;
-  const note=$('#themeNote');
-  const say=(i,j)=>{const t=D.themes[i];const v=t[cols[j]]||0;const colTot=D.themes.reduce((a,x)=>a+(x[cols[j]]||0),0);note.textContent=`${fmt(v)} leads from ${cols[j].toLowerCase()} said "${short(t.Course)}". That is ${pf(pct(v,colTot),0)} of the leads from those ads.`};
-  $('#themeTable').querySelectorAll('td[data-r]').forEach(td=>{const f=()=>say(+td.dataset.r,+td.dataset.c);td.addEventListener('click',f);td.addEventListener('keydown',e=>{if(e.key==='Enter')f()})});
-  say(0,2);
-})();
+const THEMES=['Cabin crew ads','Driver / GSE ads','10th / 12th pass ads','GC (general course) ads','Student testimonial ads','Other ads'];
+const COLS_C=[['leads','Leads','int',d=>d.leads],['share','Share of leads','pct',d=>d.share],['called','Called','int',d=>d.called],['spoke','Spoke','int',d=>d.spoke],['int','Interested','int',d=>d.int],['booked','Walk-ins booked','int',d=>d.booked],['contact','Contact rate','pct',d=>d.called?dv(d.spoke,d.called):null],['bookr','Booking rate','pct',d=>d.spoke?dv(d.booked,d.spoke):null]];
+const totalLeads=D.courses.reduce((a,c)=>a+c.Leads,0);
+TT($('#courseTable'),{first:'Course',cols:COLS_C,bar:'leads',
+  root:()=>D.courses.slice().sort((a,b)=>b.Leads-a.Leads).map(c=>{const t=D.themes.find(x=>x.Course===c.Course);return {id:c.Course,label:c.Course==='Not stated'?'Course not stated':c.Course,d:{leads:c.Leads,share:c.Leads/totalLeads,called:c.Called,spoke:c.Spoke,int:c.Interested,booked:c['Walk-ins booked']},
+    kids:t?()=>THEMES.map(th=>({id:c.Course+'|'+th,label:'From '+th.toLowerCase(),d:{leads:t[th]||0,share:c.Leads?(t[th]||0)/c.Leads:null}})).filter(n=>n.d.leads).sort((a,b)=>b.d.leads-a.d.leads):null}}),
+  total:()=>({label:'All courses',d:{leads:totalLeads,share:1,called:D.courses.reduce((a,c)=>a+c.Called,0),spoke:D.courses.reduce((a,c)=>a+c.Spoke,0),int:D.courses.reduce((a,c)=>a+c.Interested,0),booked:D.courses.reduce((a,c)=>a+c['Walk-ins booked'],0)}})});
 
 /* ---------- Walk-ins ---------- */
 const CENTRE_N=['Andheri East','Khalapur','Roha','Alibag','Goa','Bengaluru','Other'];
 const CENTRE_C=['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)','var(--c6)','var(--c7)'];
-const wl=D.walkinList,bt=D.bookedTotals;
+const wl=D.walkinList;
 $('#wKpis').innerHTML=[
- ['Walk-ins booked','192','157 from Meta ads, 35 from college data and seminars'],
- ['With a walk-in date','112','80 have no date set yet'],
- ['Sent in a daily list','74','Lists of 12, 13 and 14 October'],
- ['Attended so far','8','Bengaluru 7, Andheri East 1']
-].map((k,i)=>`<div class="panel s3 kpi drill" role="button" tabindex="0" data-drill="${['wbooked','wdate','wlist','walked'][i]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
+ ['Walk-ins booked','192','157 from Meta ads, 35 from college data and seminars','wbooked'],
+ ['With a walk-in date','112','80 with the date to be set','wdate'],
+ ['Sent in a daily list','74','Lists of 12, 13 and 14 October','wlist'],
+ ['Attended so far','8','Bengaluru 7, Andheri East 1','walked']
+].map(k=>`<div class="panel s3 kpi drill" role="button" tabindex="0" data-drill="${k[3]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
 let wOn=CENTRE_N.map(()=>true);
 function renderW(){
   $('#wLegend').innerHTML=CENTRE_N.map((n,i)=>`<button type="button" data-i="${i}" aria-pressed="${wOn[i]}"><span class="sw" style="background:${CENTRE_C[i]}"></span>${n}</button>`).join('');
   $('#wLegend').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{wOn[+b.dataset.i]=!wOn[+b.dataset.i];renderW()}));
   const days=groupRows(D.days.filter(d=>inTF(d.date)),d=>d.date,(a,d)=>{a.c=a.c?a.c.map((v,i)=>v+d.c[i]):d.c.slice();a.total=(a.total||0)+d.total;a.listed=(a.listed||0)+d.listed;a.day=d.day;return a});
-  if(!days.length){$('#wChart').innerHTML='<p class="note">No walk-ins booked in this period.</p>';return}
+  if(!days.length){$('#wChart').innerHTML='<p class="note">Walk-ins in this period will appear here once they are booked.</p>';return}
   const W=1000,H=300,pl=36,pb=46,bw=(W-pl)/days.length;
   const tot=days.map(d=>d.c.reduce((a,v,i)=>a+(wOn[i]?v:0),0));
   const max=Math.max(5,...tot);const step=max>40?10:5;const top=Math.ceil(max/step)*step;
@@ -954,30 +793,36 @@ function renderW(){
   $('#wChart').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" style="min-width:700px" role="img" aria-label="Walk-ins booked by date and centre">${s}</svg>`;
   $('#wChart').querySelectorAll('[data-d]').forEach(r=>{const d=days[+r.dataset.d];r.addEventListener('mousemove',e=>showTip(e,`<b>${esc(d.label)}</b><br>${d.c.map((v,j)=>v?`${CENTRE_N[j]}: ${v}`:'').filter(Boolean).join('<br>')}<br>Total ${d.total} · ${d.listed} in a daily list`));r.addEventListener('mouseleave',hideTip)});
 }
-hbars($('#wSource'),wl.source);
-hbars($('#wConn'),wl.connection.map(([k,v])=>[k,v,k==='Not Connected'?'var(--loss)':k==='Converted'?'var(--good)':undefined]));
-hbars($('#wAi'),wl.aiCalls.sort((a,b)=>a[0]-b[0]).map(([k,v])=>[k===0?'No AI call':k===1?'1 AI call':k+' AI calls',v]));
-hbars($('#wLists'),D.listsSent.byFile.map(([k,v])=>[k.replace('.xlsx','').replace(/_/g,' '),v]));
-$('#wListStatus').innerHTML=D.listsSent.statusNow.map(([k,v])=>`<div class="kpi"><span class="lab">${esc(k)}</span><span class="val" ${/No longer/.test(k)?'style="color:var(--loss)"':''}>${v}</span></div>`).join('');
-hbars($('#wNoDate'),CENTRE_N.map((n,i)=>[n,D.noDate[i],CENTRE_C[i]]).filter(x=>x[1]),{total:D.noDate[7]});
+const WCOLS=[['n','Walk-ins booked','int',d=>d.n],['share','Share','pct',d=>d.share]];
+const CENT_FULL=['T1 Andheri East','T2 Khalapur','T3 Roha','T4 Alibag','T5 Goa','T6 Bengaluru','Northern Unassigned'];
+const cs=wl.byCentreSource.map(([k,v])=>{const [c,s]=k.split('|');return {c,s,v}});
+const listCentre=n=>{const m={'Andheri East':'T1 Andheri East','Khalapur':'T2 Khalapur','Bengaluru (Jayanagar)':'T6 Bengaluru'};return m[n]||n};
+function wRoot(){
+  const by=$('#wBy').value,N=wl.n,node=(id,label,v,kids,sub)=>({id,label,sub,d:{n:v,share:v/N},kids});
+  if(by==='centre')return wl.centre.map(([c,v])=>{const i=CENT_FULL.indexOf(c);const nd=i>=0&&i<6?D.noDate[i]:null;const li=D.listsSent.byCentre.filter(([k])=>listCentre(k)===c).reduce((a,x)=>a+x[1],0);
+    return node('c|'+c,c,v,()=>cs.filter(x=>x.c===c).sort((a,b)=>b.v-a.v).map(x=>node('c|'+c+'|'+x.s,x.s,x.v)),[nd!=null?nd+' with the date to be set':'',li?li+' in daily lists':''].filter(Boolean).join(' · '))});
+  if(by==='source')return wl.source.map(([s,v])=>node('s|'+s,s,v,()=>cs.filter(x=>x.s===s).sort((a,b)=>b.v-a.v).map(x=>node('s|'+s+'|'+x.c,x.c,x.v))));
+  if(by==='conn')return mergeSoft(wl.connection).map(([k,v])=>node('k|'+k,k,v));
+  if(by==='ai')return wl.aiCalls.slice().sort((a,b)=>a[0]-b[0]).map(([k,v])=>node('a|'+k,k===0?'Not called by the AI yet':k===1?'1 AI call':k+' AI calls',v));
+  if(by==='platform')return wl.platform.map(([k,v])=>node('p|'+k,k==='ig'?'Instagram':k==='fb'?'Facebook':'Platform not recorded',v));
+  const L=D.listsSent.n,ln=(id,label,v)=>({id,label,d:{n:v,share:v/L}});
+  return [{group:true,label:'By list',kids:()=>D.listsSent.byFile.map(([k,v])=>ln('l|'+k,k.replace('.xlsx','').replace(/_/g,' '),v))},
+          {group:true,label:'By centre',kids:()=>{const m=new Map();D.listsSent.byCentre.forEach(([k,v])=>{const c=listCentre(k);m.set(c,(m.get(c)||0)+v)});return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(([k,v])=>ln('lc|'+k,k,v))}},
+          {group:true,label:'Status in Zoho now',kids:()=>D.listsSent.statusNow.map(([k,v])=>ln('ls|'+k,soft(k),v))}];
+}
+const WT=TT($('#wTable'),{first:'Group',cols:WCOLS,bar:'n',root:wRoot,total:()=>$('#wBy').value==='lists'?{label:'All rows in the daily lists',d:{n:D.listsSent.n,share:1}}:{label:'All walk-ins booked',d:{n:wl.n,share:1}}});
+$('#wBy').addEventListener('change',()=>{WT.open.clear();WT.first={centre:'Centre',source:'Lead source',conn:'Connection status',ai:'AI calls per lead',platform:'Platform',lists:'Daily walk-in lists'}[$('#wBy').value];WT.draw()});
+WT.first='Centre';WT.draw();
 
 /* ---------- AI calls ---------- */
 const A=D.ai,ai=D.aiCalls;
 const AF=[['People called',A.leads,fmt(A.calls)+' calls','acalls'],['Connected',A.peopleConnected,fmt(A.connected)+' calls connected','aconn'],['Interested',A.peopleInterested,fmt(A.interested)+' calls','aint'],['Walk-in time recorded in Zoho',85,'of 125 booked leads the AI called','arec']];
-const ANC=[A.peopleRNROnly,A.notConnected];
-$('#aiFunnel').innerHTML=AF.map((s,i)=>`${i?'<span class="arrow" aria-hidden="true">→</span>':''}<button type="button" class="step" data-drill="${s[3]}"><span class="n">${i===3?'Zoho':'Step '+(i+1)}</span><span class="t" style="font-size:24px">${fmt(s[1])}</span><span class="c"><b style="font-weight:500;color:var(--ink)">${s[0]}</b><br>${s[2]}${i&&i<3?' · '+pf(pct(s[1],AF[i-1][1]),1)+' of the step before':''}</span></button>`).join('');
-$('#aiFunnel').insertAdjacentHTML('beforeend',`<button type="button" class="step" data-drill="anc" style="border-color:var(--loss)"><span class="n">Not connected</span><span class="t" style="font-size:24px;color:var(--loss)">${fmt(ANC[0])}</span><span class="c"><b style="font-weight:500;color:var(--ink)">People never connected</b><br>${fmt(ANC[1])} unanswered calls · ${pf(pct(ANC[0],A.leads),1)} of people called</span></button>`);
-$('#aiOnCall').textContent=`${fmt(A.leads)} people were called ${fmt(A.calls)} times. ${fmt(A.peopleConnected)} people connected and ${fmt(A.peopleInterested)} said they were interested. ${fmt(A.peopleRNROnly)} people never connected, after ${fmt(A.notConnected)} unanswered calls.`;
-$('#aiZoho').textContent='192 leads are booked for a walk-in in Zoho. 125 of them were called by the AI, and 85 of those have a walk-in date and time recorded.';
-$('#aKpis').innerHTML=[
- ['Call minutes',fmt(A.talkAllMin)+' min','₹'+fmt(A.talkAllMin)+' at ₹1 a minute · '+fmt(A.talkMin)+' min on connected calls','acalls'],
- ['Average connected call',Math.floor(A.avgSec/60)+' min '+(A.avgSec%60)+' s','Across '+fmt(A.connected)+' connected calls','adur'],
- ['Connection rate',pf(pct(A.peopleConnected,A.leads),1),fmt(A.peopleConnected)+' of '+fmt(A.leads)+' people · '+pf(pct(A.connected,A.calls),1)+' of calls','aconn'],
- ['Interest rate',pf(pct(A.peopleInterested,A.peopleConnected),1),'Interested people ÷ people connected','aint']
-].map(k=>`<div class="panel s3 kpi drill" role="button" tabindex="0" data-drill="${k[3]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
+$('#aiFunnel').innerHTML=AF.map((s,i)=>`${i?'<span class="arrow" aria-hidden="true">→</span>':''}<button type="button" class="step" data-drill="${s[3]}"><span class="n">${i===3?'Zoho':'Step '+(i+1)}</span><span class="t" style="font-size:24px">${fmt(s[1])}</span><span class="c"><b style="font-weight:500;color:var(--ink)">${s[0]}</b><br>${s[2]}${i&&i<3?' · '+pf(pct(s[1],AF[i-1][1]),1)+' of the step before':''}</span></button>`).join('')+
+  `<button type="button" class="step" data-drill="anc"><span class="n">To retry</span><span class="t" style="font-size:24px">${fmt(A.peopleRNROnly)}</span><span class="c"><b style="font-weight:500;color:var(--ink)">People not reached yet</b><br>${fmt(A.notConnected)} calls with no answer yet</span></button>`;
+$('#aiNote').textContent=`The average connected call lasts ${Math.floor(A.avgSec/60)} min ${A.avgSec%60} s. Select a step for its breakdown.`;
 function renderAIDaily(){
   const days=groupRows(A.byDay.filter(d=>inTF(d[0])).map(d=>({date:d[0],calls:d[1],con:d[2],int:d[3]})),d=>d.date,(a,d)=>{a.calls=(a.calls||0)+d.calls;a.con=(a.con||0)+d.con;a.int=(a.int||0)+d.int;return a});
-  if(!days.length){$('#aDaily').innerHTML='<p class="note">No AI calls in this period.</p>';$('#aDayTbl').innerHTML='';return}
+  if(!days.length){$('#aDaily').innerHTML='<p class="note">AI call data covers 29 September to 15 October 2026.</p>';return}
   const W=1000,H=280,pl=40,pb=40,bw=(W-pl)/days.length;const max=Math.max(...days.map(d=>d.calls));const step=max>1500?500:max>400?100:50;const top=Math.ceil(max/step)*step;const y=v=>H-pb-(v/top)*(H-pb-14);
   let s='';for(let g=0;g<=top;g+=step){s+=`<line x1="${pl}" x2="${W}" y1="${y(g)}" y2="${y(g)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(g)+4}" text-anchor="end" font-size="11" class="muted">${g}</text>`}
   days.forEach((d,i)=>{const x=pl+i*bw+5,w=bw-10;const parts=[[d.calls-d.con,'var(--loss)'],[d.con-d.int,'var(--accent)'],[d.int,'var(--good)']];let acc=0;
@@ -985,26 +830,30 @@ function renderAIDaily(){
     s+=`<text x="${x+w/2}" y="${y(d.calls)-5}" text-anchor="middle" font-size="11">${fmt(d.calls)}</text><text x="${x+w/2}" y="${H-pb+16}" text-anchor="middle" font-size="11" class="muted">${esc(d.short)}</text><rect x="${x-5}" y="0" width="${bw}" height="${H-pb}" fill="transparent" data-d="${i}"/>`});
   $('#aDaily').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" style="min-width:680px" role="img" aria-label="AI calls by period">${s}</svg>`;
   $('#aDaily').querySelectorAll('[data-d]').forEach(r=>{const d=days[+r.dataset.d];r.addEventListener('mousemove',e=>showTip(e,`<b>${esc(d.label)}</b><br>${fmt(d.calls)} calls · ${fmt(d.con)} connected · ${fmt(d.int)} interested`));r.addEventListener('mouseleave',hideTip)});
-  const cols=D.ai.dayCols.slice(1).filter(c=>c!=='Unique leads called');
-  const rowsT=groupRows(D.ai.days.filter(r=>inTF(r.Date)),r=>r.Date,(a,r)=>{cols.forEach(c=>{if(c!=='Connected %')a[c]=(a[c]||0)+(r[c]||0)});return a});
-  rowsT.forEach(r=>r['Connected %']=r['Calls made']?r['Connected']/r['Calls made']:0);
-  const tot={label:'Total'};cols.forEach(c=>tot[c]=rowsT.reduce((a,r)=>a+(r[c]||0),0));tot['Connected %']=tot['Calls made']?tot['Connected']/tot['Calls made']:0;
-  const f=(c,v)=>c==='Connected %'?pf(v*100,1):fmt(v);
-  const row=r=>`<td>${esc(r.label)}</td>`+cols.map(c=>`<td class="num">${f(c,r[c])}</td>`).join('');
-  $('#aDayTbl').innerHTML=`<thead><tr><th>${TF.g==='day'?'Date':TF.g==='week'?'Week':'Month'}</th>${cols.map(c=>`<th class="num">${esc(c==='Connected %'?'Connected':c==='Connected'?'Connected calls':c)}</th>`).join('')}</tr></thead><tbody>${rowsT.map(r=>`<tr>${row(r)}</tr>`).join('')}<tr class="total">${row(tot)}</tr></tbody>`;
 }
 TFL.push(renderAIDaily);
-const okc=k=>/Not interested|RNR|Disconnected|DND/.test(k)?'var(--loss)':/Interested/.test(k)?'var(--good)':undefined;
-hbars($('#aOutcome'),A.outcome.map(([k,v])=>[k,v,/RNR/.test(k)?'var(--loss)':/Walk-in/.test(k)?'var(--good)':okc(k)]));
-hbars($('#aNext'),A.nextAction.map(([k,v])=>[k==='None'?'None set':k,v]));
-hbars($('#aLang'),A.language,{color:'var(--c3)'});
-hbars($('#aDur'),A.duration,{color:'var(--c2)'});
-hbars($('#aPer'),A.callsPerPerson.sort((a,b)=>a[0]-b[0]).map(([k,v])=>[k===1?'1 call':k+' calls',v]),{color:'var(--c4)'});
-hbars($('#aState'),A.state.map(([k,v])=>[k==='General'?'General (outside Maharashtra and Karnataka)':k,v]));
-hbars($('#aCourse'),A.courseInterested.map(([k,v])=>[short(k),v]),{color:'var(--good)'});
-hbars($('#aBOutcome'),Object.entries(ai.outcome.reduce((o,[k,v])=>{k=k==='Interested - walk-in booked'?'Interested':k;o[k]=(o[k]||0)+v;return o},{})).sort((x,y)=>y[1]-x[1]).map(([k,v])=>[k,v,okc(k)]));
-hbars($('#aBLang'),ai.language,{color:'var(--c3)'});
-
+const DAYC=['Calls made','Connected','Connected %','Interested','Call back','More nurturing','Not interested','Disconnected','RNR (no answer)','Talk time (min)'];
+const ACOLS_P=DAYC.filter(c=>c!=='Talk time (min)').map(c=>[c,c==='Connected'?'Connected calls':c==='Connected %'?'Connected':soft(c),c==='Connected %'?'pct':'int',d=>c==='Connected %'?(d['Calls made']?d['Connected']/d['Calls made']:null):d[c]]);
+const ACOLS_N=[['n','Calls','int',d=>d.n],['share','Share','pct',d=>d.share]];
+function aRoot(){
+  const by=$('#aBy').value;
+  if(by==='period'){const sum=(a,r)=>{DAYC.forEach(c=>{if(c!=='Connected %')a[c]=(a[c]||0)+(r[c]||0)});return a};
+    const per=groupRows(D.ai.days.filter(r=>inTF(r.Date)),r=>r.Date,(a,r)=>{(a.rows=a.rows||[]).push(r);return sum(a,r)});
+    return per.map(p=>({id:'p|'+p.key,label:p.label,d:p,kids:TF.g==='day'?null:()=>p.rows.map(r=>({id:'d|'+r.Date,label:new Date(r.Date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}),d:r}))}))}
+  const N=by==='booked'?ai.n:A.calls;
+  const list={outcome:mergeSoft(A.outcome),next:A.nextAction.map(([k,v])=>[soft(k),v]),lang:A.language,dur:A.duration,per:A.callsPerPerson.slice().sort((a,b)=>a[0]-b[0]).map(([k,v])=>[k===1?'1 call':k+' calls',v]),state:A.state.map(([k,v])=>[k==='General'?'General (outside Maharashtra and Karnataka)':k,v]),course:A.courseInterested.map(([k,v])=>[short(k),v])}[by];
+  if(by==='booked')return mergeSoft(ai.outcome).map(([k,v])=>({id:'b|'+k,label:k,d:{n:v,share:v/N}})).concat([{group:true,label:'Language of these calls',kids:()=>ai.language.map(([k,v])=>({id:'bl|'+k,label:k,d:{n:v,share:v/N}}))}]);
+  const tot=by==='dur'?A.connected:by==='per'?A.leads:by==='course'?A.peopleInterested:N;
+  return list.map(([k,v])=>({id:by+'|'+k,label:k,d:{n:v,share:v/tot}}));
+}
+const AT=TT($('#aTable'),{first:'Period',cols:ACOLS_P,bar:'Calls made',root:aRoot,total:()=>{const by=$('#aBy').value;if(by!=='period')return null;const t={};D.ai.days.filter(r=>inTF(r.Date)).forEach(r=>DAYC.forEach(c=>{if(c!=='Connected %')t[c]=(t[c]||0)+(r[c]||0)}));return {label:'Total',d:t}}});
+function renderAT(){const by=$('#aBy').value;AT.cols=by==='period'?ACOLS_P:ACOLS_N;AT.bar=by==='period'?'Calls made':'n';
+  AT.first={period:TF.g==='day'?'Date':TF.g==='week'?'Week':'Month',outcome:'Call outcome',next:'Next action',lang:'Language',dur:'Length of connected call',per:'Calls per person',state:'Region',course:'Course',booked:'Outcome of calls to booked leads'}[by];
+  if(by==='dur')AT.cols=[['n','Connected calls','int',d=>d.n],['share','Share','pct',d=>d.share]];
+  if(by==='per'||by==='course')AT.cols=[['n','People','int',d=>d.n],['share','Share','pct',d=>d.share]];
+  AT.draw()}
+$('#aBy').addEventListener('change',()=>{AT.open.clear();renderAT()});
+renderAT();TFL.push(renderAT);
 
 /* ---------- Workflows ---------- */
 const WF={
@@ -1017,7 +866,7 @@ const WF={
    ['Visit booked','Rajneethi','During the call','Walk-in booked, with Walk-in Date and Time','165 booked'],
    ['WhatsApp confirmation and reminders','Rajneethi','On booking, 24 hours before and 2 hours before','WhatsApp history','WhatsApp in beta'],
    ['Student walks in','Rajneethi','Booked slot','Walked in, set the same day','8 walked in'],
-   ['Missed visit recovered','Rajneethi','WhatsApp 1 hour after, call the next morning','New Walk-in Date and Time','157 did not walk in'],
+   ['Missed visit recovered','Rajneethi','WhatsApp 1 hour after, call the next morning','New Walk-in Date and Time','157 to rebook'],
    ['Counselling and admission','IESP','During the visit','Admission, with the fee receipt number','0 admissions so far']
   ],cols:['Owner','Time limit','Zoho record','First 45 days']},
  ai:{name:'AI call outcomes',intro:'Each AI call ends in one of six outcomes, and each outcome sets a disposition in Zoho. Counts are from the 158 AI calls to booked leads.',
@@ -1025,16 +874,16 @@ const WF={
    ['Interested, walk-in booked','Day and time agreed','Interested - walk-in booked','1 call'],
    ['Call back','Busy, or asked for another time','Call back','5 calls'],
    ['More nurturing','Still unsure after the visit pitch; follow-up scheduled','Call back, with a follow-up date','123 calls'],
-   ['Not interested','Declines at the introduction or the interest check','Not interested','5 calls'],
+   ['Chose not to proceed','Declines at the introduction or the interest check','Not interested','5 calls'],
    ['Wrong number','A different person answers','Wrong number','None recorded'],
-   ['Disconnected','No reply after 20 seconds, or the call drops','Call back if there was any reply, otherwise RNR','2 disconnected, 14 RNR']
+   ['Call dropped','No reply after 20 seconds, or the call drops','Call back if there was any reply, otherwise RNR','2 dropped, 14 with no answer yet']
   ],cols:['When','Zoho disposition','Booked leads']},
  offline:{name:'Offline leads',intro:'Leads that do not come from Meta: college data, seminars, referrals, the walk-in register and direct enquiries.',
   steps:[
    ['College data and seminar sheets','Same day as received','AI call within 24 hours','The college or seminar name','35 walk-ins booked from college data and seminars'],
-   ['Referrals','Same day','AI call within 24 hours','The name of the person who referred','Not tracked yet'],
-   ['Walk-in register, no earlier lead','End of the day','Centre call the next morning','The centre visit','Not tracked yet'],
-   ['Direct enquiry by phone or social media','Within 1 hour','AI call within 1 hour','The enquiry made','Not tracked yet']
+   ['Referrals','Same day','AI call within 24 hours','The name of the person who referred','To be tracked'],
+   ['Walk-in register, no earlier lead','End of the day','Centre call the next morning','The centre visit','To be tracked'],
+   ['Direct enquiry by phone or social media','Within 1 hour','AI call within 1 hour','The enquiry made','To be tracked']
   ],cols:['Upload','First contact','Opening line refers to','First 45 days']},
  wa:{name:'WhatsApp chatbot',intro:'What the chatbot does at each step and what it writes to Zoho. It is in beta now and goes to full scale from 25 October.',
   steps:[
@@ -1068,29 +917,23 @@ function renderWf(){
   $('#wfDetail').innerHTML=`<div style="display:flex;flex-direction:column;gap:8px;max-width:80ch"><h3>${esc(s[0])}</h3>${w.cols.map((c,j)=>`<p><b style="font-weight:500">${esc(c)}:</b> ${esc(s[j+1])}</p>`).join('')}${wf==='lead'?'<p class="note">Dashed box: owned by IESP. All other steps are owned by Rajneethi.</p>':''}</div>`;
 }
 renderWf();
-const IV=[['AI call connected, with a summary','Yes'],['Walk-in booked with date and time','Yes'],['WhatsApp message with a reply from the student','Yes'],['Unanswered call (RNR)','No'],['Unread WhatsApp message','No']];
-$('#ivTable').innerHTML=`<thead><tr><th>Intervention</th><th>Counts</th></tr></thead><tbody>${IV.map(r=>`<tr><td class="wrap-cell">${r[0]}</td><td><span class="chip ${r[1]==='Yes'?'good':'crit'}">${r[1]}</span></td></tr>`).join('')}</tbody>`;
+const IV=[['AI call connected, with a summary','Yes'],['Walk-in booked with date and time','Yes'],['WhatsApp message with a reply from the student','Yes'],['Call with no answer (RNR)','No'],['WhatsApp message not yet read','No']];
+$('#ivTable').innerHTML=`<thead><tr><th>Intervention</th><th>Counts</th></tr></thead><tbody>${IV.map(r=>`<tr><td class="wrap-cell">${r[0]}</td><td><span class="chip ${r[1]==='Yes'?'good':'info'}">${r[1]}</span></td></tr>`).join('')}</tbody>`;
 function attr(){
   const s=$('#atSource').value,a=$('#atAct').value,q=['call','book','wa'].includes(a);
   let credit,why;
   if(s==='meta'){credit='100%';why='Every admission from a Rajneethi Meta campaign counts in full, whatever happened after the lead arrived.'}
-  else if(s==='manual'){credit=q?'50%':'0%';why=q?'A manual upload counts at half credit when we made at least one qualifying intervention.':'A manual upload with no qualifying intervention earns no credit. An unanswered call or an unread WhatsApp message does not qualify.'}
+  else if(s==='manual'){credit=q?'50%':'0%';why=q?'A manual upload counts at half credit when we made at least one qualifying intervention.':'A manual upload counts once we make a qualifying intervention: a connected AI call, a booked walk-in or a WhatsApp reply.'}
   else{credit='100% if the Meta lead came first';why='When the same student is both a Meta lead and a manual lead, the earliest record decides the credit.'}
   $('#atOut').innerHTML=`<div class="kpi"><span class="lab">Credit to Rajneethi</span><span class="val">${credit}</span></div><p style="max-width:60ch">${why}</p>`;
 }
 $('#atSource').addEventListener('change',attr);$('#atAct').addEventListener('change',attr);attr();
-
-/* ---------- Plan ---------- */
-const ACTIONS=[['Send a WhatsApp message to every new lead within 5 minutes','Unanswered calls'],['Add a second phone number and best time to call on lead forms','Unanswered calls'],['Call between 10 AM and 1 PM and between 5 PM and 8 PM, with three tries over 48 hours','Unanswered calls'],['Stay in touch from booking to visit through WhatsApp and more calls','Missed visits'],['Call all 838 open leads before we spend more on ads','Open leads'],['Send IESP a report every Monday','Reporting']];
-$('#actions').innerHTML=`<thead><tr><th>Action</th><th>Solves</th><th>Owner</th></tr></thead><tbody>${ACTIONS.map(a=>`<tr><td class="wrap-cell">${a[0]}</td><td>${a[1]}</td><td>Rajneethi</td></tr>`).join('')}</tbody>`;
-const PH=[['16 Oct – 30 Nov',60,180000,120000],['1 Dec – 31 Jan',30,90000,210000],['From 1 Feb',10,30000,270000]];
+/* ---------- Simulator ---------- */
 const CALL=4946/5287;
 const C={budget:120000,meta:55,google:30,cplM:19.3,cplG:49.5,ans:60,sch:15,att:25,adm:40};
-const PRESETS=[['today','Today’s results',{budget:100000,meta:100,google:0,ans:38.2,sch:8.5,att:4.8,adm:40}],['fixed','After the fixes',{budget:120000,meta:55,google:30,ans:60,sch:15,att:25,adm:40}]];
+const PRESETS=[['today','Current rates',{budget:100000,meta:100,google:0,ans:38.2,sch:8.5,att:4.8,adm:40}],['fixed','Target rates',{budget:120000,meta:55,google:30,ans:60,sch:15,att:25,adm:40}]];
 $('#presets').innerHTML=PRESETS.map(p=>`<button type="button" data-p="${p[0]}" aria-pressed="${p[0]==='fixed'}">${p[1]}</button>`).join('');
-$('#presets').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(!b)return;Object.assign(C,PRESETS.find(p=>p[0]===b.dataset.p)[2]);$('#presets').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#phases').querySelectorAll('.ph').forEach(x=>x.setAttribute('aria-pressed','false'));syncInputs();calc()});
-$('#phases').innerHTML=PH.map((p,i)=>`<button type="button" class="ph" data-i="${i}" aria-pressed="false"><span class="note">${p[0]}</span><b style="font-size:22px;font-weight:500">${p[1]} / ${100-p[1]}</b><div class="split"><span style="width:${p[1]}%;background:var(--c4)"></span><span style="width:${100-p[1]}%;background:var(--accent)"></span></div><span class="note">Persona ${lakh(p[2])} · Lead generation ${lakh(p[3])}</span><span id="ph${i}" class="note"></span></button>`).join('');
-$('#phases').addEventListener('click',e=>{const b=e.target.closest('.ph');if(!b)return;const p=PH[+b.dataset.i];Object.assign(C,{budget:p[3],meta:55,google:30,ans:60,sch:15,att:25,adm:40});$('#phases').querySelectorAll('.ph').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#presets').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'));syncInputs();calc()});
+$('#presets').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(!b)return;Object.assign(C,PRESETS.find(p=>p[0]===b.dataset.p)[2]);$('#presets').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));syncInputs();calc()});
 function model(c){
   const yt=Math.max(0,100-c.meta-c.google);
   const ch=[['Meta',c.meta,c.cplM,'var(--accent)'],['Google Search',c.google,c.cplG,'var(--c2)'],['YouTube',yt,c.cplG,'var(--c4)']].map(([n,sh,cpl,col])=>{const spend=c.budget*sh/100;const leads=spend/cpl;const att=leads*CALL*(c.ans/100)*(c.sch/100)*(c.att/100);return {n,sh,spend,leads,att,col}});
@@ -1098,7 +941,6 @@ function model(c){
   const sched=ch.reduce((a,x)=>a+x.leads*CALL*(c.ans/100)*(c.sch/100),0);
   return {ch,leads,att,adm,sched,yt,cpa:adm?c.budget/adm:Infinity,need:adm?125/(adm/c.budget):Infinity};
 }
-PH.forEach((p,i)=>{const m=model(Object.assign({},C,{budget:p[3],meta:55,google:30,ans:60,sch:15,att:25,adm:40}));$('#ph'+i).textContent=`About ${fmt(m.att)} attended visits and ${fmt(m.adm)} admissions a month`});
 const IN={budget:'#iBudget',meta:'#iMeta',google:'#iGoogle',cplM:'#iCplM',cplG:'#iCplG',ans:'#iAns',sch:'#iSch',att:'#iAtt',adm:'#iAdm'};
 function syncInputs(){Object.entries(IN).forEach(([k,s])=>{$(s).value=C[k]})}
 Object.entries(IN).forEach(([k,s])=>$(s).addEventListener('input',()=>{let v=parseFloat($(s).value);if(isNaN(v))return;
@@ -1112,8 +954,8 @@ function calc(){
   const ok=m.adm>=125;
   $('#calcOut').innerHTML=[
    ['Leads a month',fmt(m.leads),''],['Scheduled visits',fmt(m.sched),''],['Attended visits',fmt(m.att),''],['Admissions a month',fmt(m.adm),ok?'Meets the target of 125':'Target is 125'],
-   ['Cost per admission',isFinite(m.cpa)?rs(m.cpa):'–',''],['Budget needed for 125',isFinite(m.need)?lakh(m.need)+' a month':'–','At these rates']
-  ].map((k,i)=>`<div class="kpi"><span class="lab">${k[0]}</span><span class="val" ${i===3?`style="color:${ok?'var(--good)':'var(--loss)'}"`:''}>${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}</div>`).join('');
+   ['Cost per admission',isFinite(m.cpa)?rs(m.cpa):'–',''],['Budget for 125 admissions',isFinite(m.need)?lakh(m.need)+' a month':'–','At these rates']
+  ].map((k,i)=>`<div class="kpi"><span class="lab">${k[0]}</span><span class="val" ${i===3&&ok?'style="color:var(--good)"':''}>${k[1]}</span>${k[2]?`<span class="det">${k[2]}</span>`:''}</div>`).join('');
   hbars($('#calcChannels'),m.ch.map(x=>[`${x.n} · ${x.sh}% · ${fmt(x.leads)} leads`,Math.round(x.att),x.col]),{total:m.att});
 }
 syncInputs();calc();
@@ -1141,35 +983,32 @@ const byAd=(f,o={},n=10,asc=false)=>el=>hbars(el,D.ads.filter(a=>a.Campaign!=='T
 const byFun=(i,o={})=>el=>hbars(el,Object.entries(FUN).filter(([k])=>k!=='all').map(([k,v])=>[v.name,v.f[i]]).sort((a,b)=>b[1]-a[1]),o);
 const ratioCentre=(a,b)=>el=>hbars(el,CEN().map(c=>[c.Centre,c[b]?c[a]/c[b]*100:0]).sort((x,y)=>y[1]-x[1]),{share:false,pctv:true});
 const DRILL={
- spend:{title:'Total spend',lead:'₹1,10,284 from 1 September to 15 October 2026.',parts:[['By channel',el=>hbars(el,[['Meta ads',99188],['Google Ads',8458.49],['AI calling',2638]],{money:true})],['Meta and AI calling, by centre',byCentre(c=>c['Total spend (₹)'],{money:true})],['Meta, by campaign',byCamp(sp,{money:true})],['Top 10 ad sets by spend',byAdset(sp,{money:true})]],go:['campaigns','Open campaigns']},
  leads:{title:'Leads',lead:'5,287 Meta leads in Zoho on 15 October, plus 171 Google leads.',parts:[['By centre',byFun(0)],['By campaign (Zoho, 16 October)',byCamp(zl)],['By course of interest',el=>hbars(el,D.courses.map(c=>[short(c.Course),c.Leads]))],['Top 10 ads by leads',byAd(zl)]],go:['funnel','Open the funnel']},
  spoke:{title:'Spoke to the lead',lead:'1,887 of 4,946 called leads, or 38%.',parts:[['By centre',byFun(2)],['Contact rate by centre (spoke ÷ called)',ratioCentre('Spoke','Called')],['Contact rate by campaign',byCamp(r=>dv(r.Spoke,r.Called)*100,{share:false,pctv:true})]],go:['funnel','Open the funnel']},
- booked:{title:'Scheduled visits',lead:'165 Meta leads booked a walk-in. Including college data and seminars, 192 are booked.',parts:[['By centre',byFun(4)],['By campaign',byCamp(bk)],['Top 10 ad sets',byAdset(bk)],['By walk-in date (all sources)',el=>hbars(el,D.days.map(d=>[new Date(d.date+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' '+d.day,d.total]).concat([['No date set',D.noDate[7]]]),{color:'var(--c2)'})]],go:['walkins','Open walk-ins']},
+ booked:{title:'Scheduled visits',lead:'165 Meta leads booked a walk-in. Including college data and seminars, 192 are booked.',parts:[['By centre',byFun(4)],['By campaign',byCamp(bk)],['Top 10 ad sets',byAdset(bk)],['By walk-in date (all sources)',el=>hbars(el,D.days.map(d=>[new Date(d.date+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' '+d.day,d.total]).concat([['Date to be set',D.noDate[7]]]),{color:'var(--c2)'})]],go:['walkins','Open walk-ins']},
  walked:{title:'Attended visits',lead:'8 attended visits so far, as reported by the centres.',parts:[['By centre',byFun(5)],['Show-up rate by centre (walked in ÷ booked)',ratioCentre('Walked in (actual)','Walk-ins booked')]],go:['funnel','Open the funnel']},
- adm:{title:'Admissions',lead:'0 admissions against a target of 125 a month.',parts:[['What 125 admissions need',`<ul class="plain"><li>About 312 attended visits a month, if 40% of visitors take admission.</li><li>At today’s rates: about 2.07 lakh leads, or about ₹40 lakh a month.</li><li>At the after-fix rates of 60% answered, 15% scheduled, 25% attended and 40% admitted: about 14,850 leads, or about ₹2.9 lakh a month.</li></ul>`]],go:['plan','Open the plan']},
- open:{title:'Open leads',lead:'838 leads are still open.',parts:[['Follow-up pending, by centre',byFun(-1)],['Interested but not yet scheduled, by centre',el=>hbars(el,Object.entries(FUN).filter(([k])=>k!=='all').map(([k,v])=>[v.name,v.status[4]-v.f[4]]).sort((a,b)=>b[1]-a[1]))]],go:['funnel','Open the funnel']},
- cps:{title:'Cost per scheduled visit',lead:'₹617 across all centres: total spend ÷ walk-ins booked.',parts:[['By centre',byCentre(c=>c['Cost per walk-in booked (₹)']||null,{money:true,share:false,color:'var(--c4)'})],['By campaign',byCamp(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'})],['Lowest 10 ads',byAd(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'},10,true)]],go:['funnel','Open funnel and centres']},
+ adm:{title:'Admissions',lead:'Target: 125 admissions a month.',parts:[['What 125 admissions need',`<ul class="plain"><li>About 312 attended visits a month, if 40% of visitors take admission.</li><li>At today’s rates: about 2.07 lakh leads, or about ₹40 lakh a month.</li><li>At the after-fix rates of 60% answered, 15% scheduled, 25% attended and 40% admitted: about 14,850 leads, or about ₹2.9 lakh a month.</li></ul>`]],go:['sim','Open the simulator']},
+ open:{title:'Open leads',lead:'838 leads are open for follow-up.',parts:[['Follow-up pending, by centre',byFun(-1)],['Interested, visit to book, by centre',el=>hbars(el,Object.entries(FUN).filter(([k])=>k!=='all').map(([k,v])=>[v.name,v.status[4]-v.f[4]]).sort((a,b)=>b[1]-a[1]))]],go:['funnel','Open the funnel']},
+ cps:{title:'Cost per scheduled visit',lead:'₹617 across all centres: budget ÷ walk-ins booked.',parts:[['By centre',byCentre(c=>c['Cost per walk-in booked (₹)']||null,{money:true,share:false,color:'var(--c4)'})],['By campaign',byCamp(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'})],['Lowest-cost 10 ads',byAd(r=>dv(sp(r),bk(r)),{money:true,share:false,color:'var(--c4)'},10,true)]],go:['funnel','Open funnel and centres']},
  impr:{title:'Impressions and reach',parts:[['Impressions by campaign',byCamp(im)],['Reach by campaign',byCamp(rc)],['Frequency by campaign',byCamp(r=>dv(im(r),rc(r)),{share:false,dec:true})],['Top 10 ad sets by impressions',byAdset(im)]],go:['campaigns','Open campaigns']},
  cpm:{title:'CPM',lead:'Cost per 1,000 impressions.',parts:[['By campaign',byCamp(r=>dv(sp(r)*1000,im(r)),{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>dv(sp(r)*1000,im(r)),{money:true,share:false,color:'var(--c4)'},25)]],go:['campaigns','Open campaigns']},
- cpml:{title:'Cost per Meta lead',parts:[['By campaign',byCamp(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'},25)],['Lowest 10 ads',byAd(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'},10,true)]],go:['campaigns','Open campaigns']},
+ cpml:{title:'Cost per Meta lead',parts:[['By campaign',byCamp(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'},25)],['Lowest-cost 10 ads',byAd(r=>dv(sp(r),ml(r)),{money:true,share:false,color:'var(--c4)'},10,true)]],go:['campaigns','Open campaigns']},
  lr:{title:'Leads per 1,000 impressions',parts:[['By campaign',byCamp(r=>dv(ml(r)*1000,im(r)),{share:false,dec:true})],['By ad set',byAdset(r=>dv(ml(r)*1000,im(r)),{share:false,dec:true},25)]],go:['campaigns','Open campaigns']},
- aspend:{title:'Spend per ad',parts:[['Top 10 ads by spend',byAd(sp,{money:true})],['Lowest-spend ads',byAd(sp,{money:true},10,true)]],go:['campaigns','Open campaigns']},
- aleads:{title:'Leads per ad',parts:[['Top 10 ads by Meta leads',byAd(ml)],['Ads with spend and the fewest leads',byAd(r=>sp(r)>0?ml(r)+0.0001:null,{},10,true)]],go:['campaigns','Open campaigns']},
+ aleads:{title:'Leads per ad',parts:[['Top 10 ads by Meta leads',byAd(ml)],['Ads with room to grow leads',byAd(r=>sp(r)>0?ml(r)+0.0001:null,{},10,true)]],go:['campaigns','Open campaigns']},
  contact:{title:'Contact rate',lead:'Spoke ÷ called.',parts:[['By centre',ratioCentre('Spoke','Called')],['By campaign',byCamp(r=>dv(r.Spoke,r.Called)*100,{share:false,pctv:true})],['By course',el=>hbars(el,D.courses.map(c=>[short(c.Course),c['Contact rate']*100]),{share:false,pctv:true})]],go:['funnel','Open the funnel']},
  bookr:{title:'Booking rate',lead:'Walk-ins booked ÷ spoke.',parts:[['By centre',ratioCentre('Walk-ins booked','Spoke')],['By campaign',byCamp(r=>dv(bk(r),r.Spoke)*100,{share:false,pctv:true})],['By course',el=>hbars(el,D.courses.map(c=>[short(c.Course),c['Booking rate (booked ÷ spoke)']*100]),{share:false,pctv:true})]],go:['courses','Open courses']},
  wbooked:{title:'Walk-ins booked, all sources',parts:[['By lead source',el=>hbars(el,D.walkinList.source)],['By centre',el=>hbars(el,D.walkinList.centre)],['By platform',el=>hbars(el,D.walkinList.platform.map(([k,v])=>[k==='ig'?'Instagram':k==='fb'?'Facebook':k,v]))]],go:['walkins','Open walk-ins']},
- wdate:{title:'Walk-in date',parts:[['With and without a date',el=>hbars(el,[['With a walk-in date',112],['No date set',80]])],['No date set, by centre',el=>hbars(el,CENTRE_N.map((n,i)=>[n,D.noDate[i]]).filter(x=>x[1]))]],go:['walkins','Open walk-ins']},
- wlist:{title:'Daily walk-in lists',parts:[['By list',el=>hbars(el,D.listsSent.byFile)],['By centre',el=>hbars(el,D.listsSent.byCentre)],['Status in Zoho now',el=>hbars(el,D.listsSent.statusNow)]],go:['walkins','Open walk-ins']},
- acalls:{title:'AI calls',lead:fmt(D.ai.calls)+' calls to '+fmt(D.ai.leads)+' people, 29 September to 15 October 2026: '+fmt(D.ai.connected)+' connected and '+fmt(D.ai.notConnected)+' not connected.',parts:[['Calls by day',el=>hbars(el,D.ai.byDay.map(d=>[new Date(d[0]+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'}),d[1]]))],['Outcome',el=>hbars(el,D.ai.outcome)],['Language',el=>hbars(el,D.ai.language)],['Region of the call script',el=>hbars(el,D.ai.state)]],go:['ai','Open AI calls']},
- aconn:{title:'Connected AI calls',lead:fmt(D.ai.connected)+' calls connected, reaching '+fmt(D.ai.peopleConnected)+' people. '+fmt(D.ai.peopleRNROnly)+' people never connected.',parts:[['Connection',el=>hbars(el,D.ai.connection)],['Connected calls by day',el=>hbars(el,D.ai.byDay.map(d=>[new Date(d[0]+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'}),d[2]]))],['Calls per person',el=>hbars(el,D.ai.callsPerPerson.map(([k,v])=>[k===1?'1 call':k+' calls',v]))]],go:['ai','Open AI calls']},
+ wdate:{title:'Walk-in date',parts:[['With and without a date',el=>hbars(el,[['With a walk-in date',112],['Date to be set',80]])],['Date to be set, by centre',el=>hbars(el,CENTRE_N.map((n,i)=>[n,D.noDate[i]]).filter(x=>x[1]))]],go:['walkins','Open walk-ins']},
+ wlist:{title:'Daily walk-in lists',parts:[['By list',el=>hbars(el,D.listsSent.byFile)],['By centre',el=>hbars(el,D.listsSent.byCentre)],['Status in Zoho now',el=>hbars(el,D.listsSent.statusNow.map(([k,v])=>[soft(k),v]))]],go:['walkins','Open walk-ins']},
+ acalls:{title:'AI calls',lead:fmt(D.ai.calls)+' calls to '+fmt(D.ai.leads)+' people, 29 September to 15 October 2026: '+fmt(D.ai.connected)+' connected and '+fmt(D.ai.notConnected)+' with no answer yet.',parts:[['Calls by day',el=>hbars(el,D.ai.byDay.map(d=>[new Date(d[0]+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'}),d[1]]))],['Outcome',el=>hbars(el,mergeSoft(D.ai.outcome))],['Language',el=>hbars(el,D.ai.language)],['Region of the call script',el=>hbars(el,D.ai.state)]],go:['ai','Open AI calls']},
+ aconn:{title:'Connected AI calls',lead:fmt(D.ai.connected)+' calls connected, reaching '+fmt(D.ai.peopleConnected)+' people. '+fmt(D.ai.peopleRNROnly)+' people are not reached yet.',parts:[['Connection',el=>hbars(el,mergeSoft(D.ai.connection))],['Connected calls by day',el=>hbars(el,D.ai.byDay.map(d=>[new Date(d[0]+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'}),d[2]]))],['Calls per person',el=>hbars(el,D.ai.callsPerPerson.map(([k,v])=>[k===1?'1 call':k+' calls',v]))]],go:['ai','Open AI calls']},
  aint:{title:'Interested on the AI call',lead:'78 people, from 79 calls with the outcome "Interested".',parts:[['Course they named',el=>hbars(el,D.ai.courseInterested.map(([k,v])=>[short(k),v]))],['Interested calls by day',el=>hbars(el,D.ai.byDay.map(d=>[new Date(d[0]+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'}),d[3]]).filter(x=>x[1]))],['Sentiment of all calls',el=>hbars(el,D.ai.sentiment)]],go:['ai','Open AI calls']},
- arec:{title:'Walk-in time recorded in Zoho',lead:'85 of the 125 booked leads that the AI called have a walk-in date and time in Zoho.',parts:[['Booked leads by number of AI calls',el=>hbars(el,D.walkinList.aiCalls.slice().sort((a,b)=>a[0]-b[0]).map(([k,v])=>[k===0?'No AI call':k===1?'1 AI call':k+' AI calls',v]))],['Booked leads by centre',el=>hbars(el,D.walkinList.centre)]],go:['walkins','Open walk-ins']},
- anc:{title:'Not connected',lead:fmt(D.ai.peopleRNROnly)+' of '+fmt(D.ai.leads)+' people never connected. They received '+fmt(D.ai.notConnected)+' unanswered calls (ring, no response).',parts:[['Unanswered calls by day',el=>hbars(el,D.ai.byDay.map(d=>[new Date(d[0]+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'}),d[1]-d[2]]),{color:'var(--loss)'})],['Calls per person',el=>hbars(el,D.ai.callsPerPerson.map(([k,v])=>[k===1?'1 call':k+' calls',v]))]],go:['ai','Open AI calls']},
+ arec:{title:'Walk-in time recorded in Zoho',lead:'85 of the 125 booked leads that the AI called have a walk-in date and time in Zoho.',parts:[['Booked leads by number of AI calls',el=>hbars(el,D.walkinList.aiCalls.slice().sort((a,b)=>a[0]-b[0]).map(([k,v])=>[k===0?'Not called by the AI yet':k===1?'1 AI call':k+' AI calls',v]))],['Booked leads by centre',el=>hbars(el,D.walkinList.centre)]],go:['walkins','Open walk-ins']},
+ anc:{title:'People not reached yet',lead:fmt(D.ai.peopleRNROnly)+' of '+fmt(D.ai.leads)+' people are not reached yet, after '+fmt(D.ai.notConnected)+' calls with no answer (RNR). They stay on the retry list.',parts:[['Calls with no answer yet, by day',el=>hbars(el,D.ai.byDay.map(d=>[new Date(d[0]+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'}),d[1]-d[2]]),{color:'var(--warn)'})],['Calls per person',el=>hbars(el,D.ai.callsPerPerson.map(([k,v])=>[k===1?'1 call':k+' calls',v]))]],go:['ai','Open AI calls']},
  adur:{title:'Call length',parts:[['Connected AI calls',el=>hbars(el,D.ai.duration)],['Calls to booked leads',el=>hbars(el,D.aiCalls.duration)]],go:['ai','Open AI calls']},
  gads:{title:'Google Ads',lead:'IESP Campaign 1 (Smart), 3 to 21 September 2026.',parts:[['Funnel',el=>hbars(el,[['Impressions',7239],['Clicks',691],['Conversions',171]],{share:false})],['Rates',`<ul class="plain"><li>CTR 9.55%: 691 clicks from 7,239 impressions.</li><li>Conversion rate 24.75%: 171 conversions from 691 clicks.</li><li>Average CPC ₹12.24 and cost per conversion ₹49.46.</li></ul>`]],go:['campaigns','Open campaigns']}
 };
 DRILL.open.parts[0][1]=el=>hbars(el,Object.entries(FUN).filter(([k])=>k!=='all').map(([k,v])=>[v.name,v.status[2]]).sort((a,b)=>b[1]-a[1]));
-
 /* ---------- Period filter ---------- */
 const PRE={all:['2026-09-01','2026-11-20'],sep:['2026-09-01','2026-09-30'],oct:['2026-10-01','2026-10-31'],nov:['2026-11-01','2026-11-30'],};
 function syncTF(){document.querySelectorAll('.gran button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===TF.g));$('#tfPreset').querySelectorAll('button').forEach(b=>{const p=PRE[b.dataset.p];b.setAttribute('aria-pressed',p[0]===TF.from&&p[1]===TF.to)});}
@@ -1177,38 +1016,8 @@ function tfChanged(){syncTF();TFL.forEach(f=>f())}
 $('#tfPreset').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(!b)return;[TF.from,TF.to]=PRE[b.dataset.p];tfChanged()});
 document.addEventListener('click',e=>{const b=e.target.closest('.gran [data-g]');if(!b)return;TF.g=b.dataset.g;tfChanged()});
 TFL.push(renderW);
-
-/* ---------- Meta performance over time ---------- */
-const TMET=[['spend','Spend','money'],['impr','Impressions','int'],['leads','Leads','int'],['cpl','Cost per lead','money'],['cpm','CPM','money'],['ctr','CTR (all)','pct'],['cpc','CPC (link click)','money'],['link','Link clicks','int']];
-const tv=(m,a)=>m==='spend'?a.spend:m==='impr'?a.impr:m==='leads'?a.leads:m==='cpl'?(a.leads?a.spend/a.leads:null):m==='cpm'?(a.impr?a.spend*1000/a.impr:null):m==='ctr'?(a.impr?a.clicks/a.impr:null):m==='cpc'?(a.link?a.spend/a.link:null):a.link;
 const CAMPS=[...new Set(D.mdaily.map(r=>r[1]))];
 const cname=c=>String(c).replace(/[\[\]]/g,'').trim();
-$('#tMetric').innerHTML=TMET.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join('');
-let tMetric='spend';
-$('#tMetric').addEventListener('change',e=>{tMetric=e.target.value;renderTime()});
-function renderTime(){
-  const rows=D.mdaily.filter(r=>inTF(r[0]));
-  const add=(a,r)=>{a.leads=(a.leads||0)+r[4];a.spend=(a.spend||0)+r[5];a.impr=(a.impr||0)+r[6];a.clicks=(a.clicks||0)+r[7];a.link=(a.link||0)+r[8];return a};
-  const tot=rows.reduce((a,r)=>add(a,r),{});
-  const fvT=(t,v)=>v==null||!isFinite(v)?'–':t==='money'?rs(v):t==='pct'?pf(v*100,2):fmt(v);
-  $('#tKpis').innerHTML=rows.length?TMET.map(m=>`<div class="kpi"><span class="lab">${m[1]}</span><span class="val">${fvT(m[2],tv(m[0],tot))}</span></div>`).join(''):'';
-  const B=groupRows(rows,r=>r[0],add);
-  if(!B.length){$('#tChart').innerHTML='<p class="note">No Meta ad delivery in this period. Meta data runs from 9 September to 16 October 2026.</p>';$('#tTable').innerHTML='';return}
-  const M=TMET.find(m=>m[0]===tMetric);const vals=B.map(b=>tv(tMetric,b));const max=Math.max(1e-9,...vals.filter(v=>v!=null));
-  const W=1000,H=260,pl=60,pb=34,bw=(W-pl)/B.length,y=v=>H-pb-(v/max)*(H-pb-20);
-  let s=`<line x1="${pl}" x2="${W}" y1="${H-pb}" y2="${H-pb}" stroke="var(--line)"/>`;
-  const line=['cpl','cpm','ctr','cpc'].includes(tMetric);
-  if(line){const pts=B.map((b,i)=>vals[i]==null?null:[pl+i*bw+bw/2,y(vals[i])]).filter(Boolean);s+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="var(--accent)"/>`).join('')}
-  B.forEach((b,i)=>{const v=vals[i],x=pl+i*bw;if(!line&&v)s+=`<rect x="${x+bw/2-Math.min(bw*0.7,40)/2}" y="${y(v)}" width="${Math.min(bw*0.7,40)}" height="${H-pb-y(v)}" fill="var(--accent)" rx="4"/>`;
-    if(B.length<=20&&v!=null)s+=`<text x="${x+bw/2}" y="${y(v)-7}" text-anchor="middle" font-size="11">${fvT(M[2],v)}</text>`;
-    if(B.length<=20||i%Math.ceil(B.length/12)===0)s+=`<text x="${x+bw/2}" y="${H-pb+16}" text-anchor="middle" font-size="11" class="muted">${esc(b.short)}</text>`;
-    s+=`<rect x="${x}" y="0" width="${bw}" height="${H-pb}" fill="transparent" data-b="${i}"/>`});
-  $('#tChart').innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" style="min-width:680px" role="img" aria-label="${esc(M[1])} over time">${s}</svg>`;
-  $('#tChart').querySelectorAll('[data-b]').forEach(r=>{const b=B[+r.dataset.b];r.addEventListener('mousemove',e=>showTip(e,`<b>${esc(b.label)}</b><br>`+TMET.map(m=>`${m[1]}: ${fvT(m[2],tv(m[0],b))}`).join('<br>')));r.addEventListener('mouseleave',hideTip)});
-  $('#tTable').innerHTML=`<thead><tr><th>${TF.g==='day'?'Date':TF.g==='week'?'Week':'Month'}</th>${TMET.map(m=>`<th class="num">${m[1]}</th>`).join('')}</tr></thead><tbody>${B.map(b=>`<tr><td>${esc(b.label)}</td>${TMET.map(m=>`<td class="num">${fvT(m[2],tv(m[0],b))}</td>`).join('')}</tr>`).join('')}<tr class="total"><td>Total</td>${TMET.map(m=>`<td class="num">${fvT(m[2],tv(m[0],tot))}</td>`).join('')}</tr></tbody>`;
-}
-TFL.push(renderTime);
-TFL.push(()=>renderCamp());
 
 /* ---------- Campaigns & Ads visuals (same charts, tables and colours as the online Campaigns & Ads dashboard) ---------- */
 const CV_COL=['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)','var(--c6)','var(--c8)'];
@@ -1271,7 +1080,7 @@ function renderCV(){
   /* Share of spend vs share of leads */
   {const per=present.map(c=>{const a=rows.filter(r=>r[1]===c).reduce((o,r)=>{o.l+=r[4];o.s+=r[5];return o},{l:0,s:0});return [c,a]});
    $('#cShare').innerHTML=per.map(([c,a])=>{const ls=T.leads?a.l/T.leads:0,ss=T.spend?a.s/T.spend:0;
-     return `<div class="cv-share-row"><div class="cv-share-n"><span>${esc(cname(c))}</span><span>${fmt(a.l)} leads · ${rs(a.s)} · ${rs(a.l?a.s/a.l:null)} a lead</span></div>
+     return `<div class="cv-share-row"><div class="cv-share-n"><span>${esc(cname(c))}</span><span>${fmt(a.l)} leads · ${rs(a.l?a.s/a.l:null)} a lead</span></div>
      <div class="cv-bar"><i><b style="width:${ls*100}%;background:${cvCol(c)}"></b></i><span>${pf(ls*100,0)}</span></div>
      <div class="cv-bar"><i><b style="width:${ss*100}%;background:var(--faint)"></b></i><span>${pf(ss*100,0)}</span></div></div>`}).join('')}
 
@@ -1288,11 +1097,11 @@ function renderCV(){
    const x=v=>pl+(v/mx)*(W-pl-pr),y=v=>H-pb-(v/my)*(H-pb-pt);
    let s=cvGrid(W,pl,pr,y,my,v=>fmt(v));
    for(let i=1,st=cvNice(mx/4);st*i<=mx+1e-9;i++){const v=st*i;s+=cvT(x(v),H-pb+16,'₹'+cvShort(v),'text-anchor="middle" class="cv-t"')}
-   s+=cvT(pl+(W-pl-pr)/2,H-6,'Money spent','text-anchor="middle" class="cv-t"')+cvT(pl-8,pt-16,'Leads','text-anchor="start" class="cv-t"');
+   s+=cvT(pl+(W-pl-pr)/2,H-6,'Budget used','text-anchor="middle" class="cv-t"')+cvT(pl-8,pt-16,'Leads','text-anchor="start" class="cv-t"');
    if(avgCpl){const xe=Math.min(mx,my*avgCpl);s+=`<line x1="${x(0)}" y1="${y(0)}" x2="${x(xe)}" y2="${y(xe/avgCpl)}" stroke="var(--faint)" stroke-dasharray="4 4"/>`+cvT(x(xe)-4,y(xe/avgCpl)+(xe<mx?-6:14),'Average '+rs(avgCpl)+' a lead','text-anchor="end" class="cv-t"')}
    pts.sort((a,b)=>b.s-a.s).forEach((p,i)=>{s+=`<circle cx="${x(p.s)}" cy="${y(p.l)}" r="5.5" fill="${cvCol(p.c)}" fill-opacity=".9" stroke="var(--surface)" stroke-width="2"/><circle cx="${x(p.s)}" cy="${y(p.l)}" r="10" fill="transparent" data-p="${i}"/>`});
    el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Every ad, spend against leads">${s}</svg>`;
-   cvHover(el,'[data-p]',n=>{const p=pts[+n.dataset.p];return cvTip(p.ad,[['Ad set',esc(p.set)],['Campaign',esc(cname(p.c)),cvCol(p.c)],['Spend',rs(p.s)],['Leads',fmt(p.l)],['Cost per lead',p.l?rs(p.s/p.l):'No leads']])})}
+   cvHover(el,'[data-p]',n=>{const p=pts[+n.dataset.p];return cvTip(p.ad,[['Ad set',esc(p.set)],['Campaign',esc(cname(p.c)),cvCol(p.c)],['Spend',rs(p.s)],['Leads',fmt(p.l)],['Cost per lead',p.l?rs(p.s/p.l):'Leads to come']])})}
 }
 TFL.push(renderCV);
 let cvRT;window.addEventListener('resize',()=>{clearTimeout(cvRT);cvRT=setTimeout(renderCV,150)});
@@ -1300,7 +1109,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-tab="campa
 requestAnimationFrame(()=>renderCV());
 
 DRILL.ctr={title:'CTR (all)',lead:'All clicks ÷ impressions on Meta, 9 September to 16 October 2026.',parts:[['By campaign',byCamp(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true})],['By ad set',byAdset(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true},25)],['Top 10 ads',byAd(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true})]],go:['campaigns','Open campaigns']};
-DRILL.cpc={title:'CPC (link click)',lead:'Spend ÷ link clicks on Meta, 9 September to 16 October 2026.',parts:[['By campaign',byCamp(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},25)],['Lowest 10 ads',byAd(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},10,true)]],go:['campaigns','Open campaigns']};
+DRILL.cpc={title:'CPC (link click)',lead:'Spend ÷ link clicks on Meta, 9 September to 16 October 2026.',parts:[['By campaign',byCamp(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},25)],['Lowest-cost 10 ads',byAd(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},10,true)]],go:['campaigns','Open campaigns']};
 tfChanged();
 
 /* Initial tab */
