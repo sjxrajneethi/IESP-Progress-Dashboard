@@ -298,7 +298,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     <div class="detail" id="fDetail"></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>Centres</h2><label class="note tt-by" for="fBy">Break down by <select id="fBy" class="btn" style="border-radius:6px"><option value="status">Lead status now</option><option value="reasons">Reasons leads were closed</option><option value="stages">Funnel stages</option></select></label></div>
+    <div class="panel-h"><h2>Centres</h2><label class="note tt-by" for="fBy">Break down by <select id="fBy" class="btn" style="border-radius:6px"><option value="status">Lead status now › Reasons leads were closed</option><option value="stages">Funnel stages</option></select></label></div>
     <div class="tbl"><table id="fTable"></table></div>
     <p class="note">Select a centre to show it in the funnel above and open its breakdown.</p>
   </div>
@@ -392,7 +392,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     <div class="scroll-x" id="aDaily"></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>AI calls in detail</h2><label class="note tt-by" for="aBy">Break down by <select id="aBy" class="btn" style="border-radius:6px"><option value="period">Period › Day</option><option value="outcome">Call outcome</option><option value="next">Next action set by the AI</option><option value="lang">Language</option><option value="dur">Length of connected calls</option><option value="per">Calls per person</option><option value="state">Region of the call script</option><option value="course">Course named by interested leads</option><option value="booked">Calls to leads booked for a walk-in › Outcome</option></select></label></div>
+    <div class="panel-h"><h2>AI calls in detail</h2><label class="note tt-by" for="aBy">Break down by <select id="aBy" class="btn" style="border-radius:6px"><option value="period">Period › Day</option><option value="outcome">Call outcome</option><option value="next">Next action set by the AI</option><option value="lang">Language</option><option value="dur">Length of connected calls</option><option value="per">Calls per person</option><option value="state">Region of the call script</option><option value="course">Course named by interested leads</option><option value="booked">Calls to booked leads: outcome</option><option value="bookedlang">Calls to booked leads: language</option></select></label></div>
     <div class="tbl"><table id="aTable"></table></div>
   </div>
 </section>
@@ -649,10 +649,11 @@ const only=v=>({leads:v});
 let FT=null;
 function fRoot(){
   const by=$('#fBy').value;
-  const kids=(k,c)=>()=>by==='status'?c.status.map((v,j)=>({id:k+'s'+j,label:STATUS_L[j][0],d:only(v)})):by==='reasons'?c.reasons.map(([r,v],j)=>({id:k+'r'+j,label:soft(r),d:only(v)})):c.f.map((v,j)=>({id:k+'f'+j,label:STAGES[j],sub:j?pf(pct(v,c.f[j-1]),1)+' of the step before':'',d:only(v)}));
+  const reasons=(k,c)=>()=>{const l=c.reasons.map(([r,v],j)=>({id:k+'r'+j,label:soft(r),d:only(v)}));const rest=c.status[3]-c.reasons.reduce((a,x)=>a+x[1],0);if(rest>0)l.push({id:k+'rx',label:'Other reasons',d:only(rest)});return l};
+  const kids=(k,c)=>()=>by==='status'?c.status.map((v,j)=>({id:k+'s'+j,label:STATUS_L[j][0],sub:j===3?'Open for the reasons':'',d:only(v),kids:j===3?reasons(k,c):null})):by==='reasons'?(()=>{const l=c.reasons.map(([r,v],j)=>({id:k+'r'+j,label:soft(r),d:only(v)}));const rest=c.status[3]-c.reasons.reduce((a,x)=>a+x[1],0);if(rest>0)l.push({id:k+'rx',label:'Other reasons',d:only(rest)});return l})():c.f.map((v,j)=>({id:k+'f'+j,label:STAGES[j],sub:j?pf(pct(v,c.f[j-1]),1)+' of the step before':'',d:only(v)}));
   return Object.entries(FUN).filter(([k])=>k!=='all').map(([k,c])=>({id:k,label:c.name,d:fData(c),kids:kids(k,c)}));
 }
-FT=TT($('#fTable'),{first:'Centre',cols:FCOLS,bar:'leads',root:fRoot,total:()=>({label:'All centres',d:fData(FUN.all)}),pick:id=>{if(FUN[id]){fKey=id;fStage=0;renderFunnel()}else{const k=id.slice(0,2);const j=+id.slice(3);if(FUN[k]){fKey=k;if(id[2]==='f')fStage=j;renderFunnel()}}}});
+FT=TT($('#fTable'),{first:'Centre',cols:FCOLS,bar:'leads',root:fRoot,total:()=>({label:'All centres',d:fData(FUN.all)}),note:true,pick:id=>{if(FUN[id]){fKey=id;fStage=0;renderFunnel()}else{const k=id.slice(0,2);const j=+id.slice(3);if(FUN[k]){fKey=k;if(id[2]==='f')fStage=j;renderFunnel()}}}});
 $('#fBy').addEventListener('change',()=>{FT.open.clear();FT.draw()});
 renderFunnel();
 
@@ -716,11 +717,15 @@ const pName=n=>x=>nrm(x[3])===nrm(n);
 const live=n=>!tfAll()?(n.d['Spend (₹)']||n.d['Leads (Meta)']||n.d.Impressions):true;
 const byLeads=(a,b)=>(ml(b.d)-ml(a.d));
 function adNode(a,label){return {id:'a|'+a['Ad set']+'|'+a.Ad+'|'+a.Campaign,label:label||adN(a.Ad),sub:adSub(a),d:periodRow(a,pAd(a))}}
+function fromAds(list,wb){const d=sumRow(list.map(a=>periodRow(a,pAd(a))));d.Reach=tfAll()&&wb?wb.Reach:null;if(!tfAll())['Leads (Zoho)','Called','Spoke','Interested','Walk-ins booked'].forEach(k=>d[k]=null);return d}
+const wbSet=(c,s)=>D.adsets.find(x=>x.Campaign===c&&x['Ad set']===s);
 function campRoot(){
   const by=$('#cBy').value;
-  if(by==='tree')return D.campaigns.filter(r=>r.Campaign!=='Total'&&r.Campaign!=='Not in export').map(c=>({id:'c|'+c.Campaign,label:c.Campaign,d:periodRow(c,pCamp(c.Campaign)),
-    kids:()=>D.adsets.filter(s=>s.Campaign===c.Campaign).map(s=>({id:'s|'+c.Campaign+'|'+s['Ad set'],label:s['Ad set'],d:periodRow(s,pSet(s['Ad set'])),kids:()=>ADS.filter(a=>a.Campaign===c.Campaign&&a['Ad set']===s['Ad set']).map(a=>adNode(a)).filter(live).sort(byLeads)})).filter(live).sort(byLeads)})).filter(live).sort(byLeads);
-  if(by==='adset')return D.adsets.filter(s=>s.Campaign!=='Not in export'&&s.Campaign!=='Total').map(s=>({id:'s|'+s.Campaign+'|'+s['Ad set'],label:s['Ad set'],sub:s.Campaign,d:periodRow(s,pSet(s['Ad set'])),kids:()=>ADS.filter(a=>a.Campaign===s.Campaign&&a['Ad set']===s['Ad set']).map(a=>adNode(a)).filter(live).sort(byLeads)})).filter(live).sort(byLeads);
+  const setsOf=c=>[...new Set(ADS.filter(a=>a.Campaign===c).map(a=>a['Ad set']))];
+  const setNode=(c,s,sub)=>{const list=ADS.filter(a=>a.Campaign===c&&a['Ad set']===s);return {id:'s|'+c+'|'+s,label:s,sub,d:fromAds(list,wbSet(c,s)),kids:()=>list.map(a=>adNode(a)).filter(live).sort(byLeads)}};
+  if(by==='tree')return [...new Set(ADS.map(a=>a.Campaign))].map(c=>({id:'c|'+c,label:c,d:fromAds(ADS.filter(a=>a.Campaign===c),D.campaigns.find(x=>x.Campaign===c)),
+    kids:()=>setsOf(c).map(s=>setNode(c,s)).filter(live).sort(byLeads)})).filter(live).sort(byLeads);
+  if(by==='adset')return [...new Set(ADS.map(a=>a.Campaign))].flatMap(c=>setsOf(c).map(s=>setNode(c,s,c))).filter(live).sort(byLeads);
   if(by==='name'){const g={};ADS.forEach(a=>{const k=adN(a.Ad);(g[k]=g[k]||[]).push(a)});
     return Object.entries(g).map(([k,items])=>({id:'n|'+k,label:k,sub:items.length>1?items.length+' ad sets':'',d:periodRow(Object.assign(sumRow(items),{}),pName(k)),kids:items.length>1?()=>items.map(a=>adNode(a,a['Ad set'])).filter(live).sort(byLeads):null})).filter(live).sort(byLeads)}
   /* period › campaign › ad set › ad, from the daily Meta data */
@@ -731,11 +736,14 @@ function campRoot(){
   const nest=(list,idx,lab,next,pre)=>{const m=new Map();list.forEach(r=>{const k=r[idx];if(!m.has(k))m.set(k,[]);m.get(k).push(r)});return [...m.entries()].map(([k,rs_])=>({id:pre+'|'+k,label:lab(k),d:rs_.reduce(add,z()),kids:next?()=>next(rs_,pre+'|'+k):null})).sort(byLeads)};
   return per.map(p=>({id:'p|'+p.key,label:p.label,d:p.rows.reduce(add,z()),kids:()=>nest(p.rows,1,cname,(r1,pre1)=>nest(r1,2,cname,(r2,pre2)=>nest(r2,3,cname,null,pre2),pre1),'p|'+p.key)}));
 }
-const CT=TT($('#campTable'),{first:'Campaign',cols:MET,bar:'mleads',root:campRoot,total:()=>{const t=D.campaigns.find(r=>r.Campaign==='Total');return {label:'Total',d:periodRow(t,()=>true)}}});
+const CT=TT($('#campTable'),{first:'Campaign',cols:MET,bar:'mleads',root:campRoot,total:()=>{const by=$('#cBy').value;const rows=campRoot().map(n=>n.d);const t=sumRow(rows);
+  if(by==='period'||!tfAll()){['Reach','Leads (Zoho)','Called','Spoke','Interested','Walk-ins booked'].forEach(k=>t[k]=null)}
+  else{t.Reach=D.campaigns.find(r=>r.Campaign==='Total').Reach}
+  return {label:'Total',d:t}}});
 function renderCamp(){
   const by=$('#cBy').value;CT.first={tree:'Campaign',adset:'Ad set',name:'Ad name',period:TF.g==='day'?'Date':TF.g==='week'?'Week':'Month'}[by];
   CT.draw();
-  $('#campNote').textContent=(by==='period'||!tfAll()?'Meta figures for '+periodLabel()+'. Call and walk-in figures show for the whole period only. ':'')+'Select a row to open the next level. Each ad name is totalled across every ad set it ran in.';
+  $('#campNote').textContent=(by==='period'||!tfAll()?'Meta figures for '+periodLabel()+'. Call and walk-in figures show for the whole period only. ':'')+'Select a row to open the next level. Each ad name is totalled across every ad set it ran in. Reach in the total counts each person once, so it is lower than the sum of the rows.';
 }
 $('#cBy').addEventListener('change',()=>{CT.open.clear();renderCamp()});
 renderCamp();
@@ -842,13 +850,14 @@ function aRoot(){
     return per.map(p=>({id:'p|'+p.key,label:p.label,d:p,kids:TF.g==='day'?null:()=>p.rows.map(r=>({id:'d|'+r.Date,label:new Date(r.Date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}),d:r}))}))}
   const N=by==='booked'?ai.n:A.calls;
   const list={outcome:mergeSoft(A.outcome),next:A.nextAction.map(([k,v])=>[soft(k),v]),lang:A.language,dur:A.duration,per:A.callsPerPerson.slice().sort((a,b)=>a[0]-b[0]).map(([k,v])=>[k===1?'1 call':k+' calls',v]),state:A.state.map(([k,v])=>[k==='General'?'General (outside Maharashtra and Karnataka)':k,v]),course:A.courseInterested.map(([k,v])=>[short(k),v])}[by];
-  if(by==='booked')return mergeSoft(ai.outcome).map(([k,v])=>({id:'b|'+k,label:k,d:{n:v,share:v/N}})).concat([{group:true,label:'Language of these calls',kids:()=>ai.language.map(([k,v])=>({id:'bl|'+k,label:k,d:{n:v,share:v/N}}))}]);
-  const tot=by==='dur'?A.connected:by==='per'?A.leads:by==='course'?A.peopleInterested:N;
+  if(by==='booked')return mergeSoft(ai.outcome).map(([k,v])=>({id:'b|'+k,label:k,d:{n:v,share:v/N}}));
+  if(by==='bookedlang')return ai.language.map(([k,v])=>({id:'bl|'+k,label:k,d:{n:v,share:v/ai.n}}));
+  const tot=list.reduce((a,x)=>a+x[1],0);
   return list.map(([k,v])=>({id:by+'|'+k,label:k,d:{n:v,share:v/tot}}));
 }
-const AT=TT($('#aTable'),{first:'Period',cols:ACOLS_P,bar:'Calls made',root:aRoot,total:()=>{const by=$('#aBy').value;if(by!=='period')return null;const t={};D.ai.days.filter(r=>inTF(r.Date)).forEach(r=>DAYC.forEach(c=>{if(c!=='Connected %')t[c]=(t[c]||0)+(r[c]||0)}));return {label:'Total',d:t}}});
+const AT=TT($('#aTable'),{first:'Period',cols:ACOLS_P,bar:'Calls made',root:aRoot,total:()=>{const by=$('#aBy').value;if(by!=='period'){const rows=aRoot().filter(n=>!n.group);return {label:'Total',d:{n:rows.reduce((a,n)=>a+n.d.n,0),share:1}}}const t={};D.ai.days.filter(r=>inTF(r.Date)).forEach(r=>DAYC.forEach(c=>{if(c!=='Connected %')t[c]=(t[c]||0)+(r[c]||0)}));return {label:'Total',d:t}}});
 function renderAT(){const by=$('#aBy').value;AT.cols=by==='period'?ACOLS_P:ACOLS_N;AT.bar=by==='period'?'Calls made':'n';
-  AT.first={period:TF.g==='day'?'Date':TF.g==='week'?'Week':'Month',outcome:'Call outcome',next:'Next action',lang:'Language',dur:'Length of connected call',per:'Calls per person',state:'Region',course:'Course',booked:'Outcome of calls to booked leads'}[by];
+  AT.first={period:TF.g==='day'?'Date':TF.g==='week'?'Week':'Month',outcome:'Call outcome',next:'Next action',lang:'Language',dur:'Length of connected call',per:'Calls per person',state:'Region',course:'Course',booked:'Outcome of calls to booked leads',bookedlang:'Language of calls to booked leads'}[by];
   if(by==='dur')AT.cols=[['n','Connected calls','int',d=>d.n],['share','Share','pct',d=>d.share]];
   if(by==='per'||by==='course')AT.cols=[['n','People','int',d=>d.n],['share','Share','pct',d=>d.share]];
   AT.draw()}
