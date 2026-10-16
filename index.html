@@ -566,7 +566,7 @@ function TT(el,cfg){
     let html=`<thead><tr><th>${esc(cfg.first)}</th>${cols.map(c=>`<th class="num">${esc(c[1])}</th>`).join('')}</tr></thead><tbody>`;
     let TMAX=0;
     const walk=(nodes,depth)=>{
-      const bc=null;
+      const bc=cfg.bar&&cols.find(c=>c[0]===cfg.bar);
       if(depth===0)TMAX=bc?Math.max(1e-9,...nodes.filter(n=>!n.group).map(n=>bc[3](n.d)||0)):0;const max=TMAX;
       nodes.forEach(n=>{
         if(n.group){html+=`<tr class="group"><td colspan="${cols.length+1}" style="padding-left:${12+depth*20}px">${esc(n.label)}</td></tr>`;if(n.kids)walk(n.kids(),depth);return}
