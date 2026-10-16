@@ -475,14 +475,6 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
 </section>
 
 
-<!-- CALENDAR -->
-<section class="tab" id="t-calendar" role="tabpanel" aria-label="Calendar" hidden>
-  <div class="grid" id="calKpis"></div>
-  <div class="panel">
-    <div class="panel-h"><h2>Content and ad calendar</h2><div class="seg" style="gap:8px;align-items:center"><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div></div><div class="seg" id="calType"><button type="button" data-c="all" aria-pressed="true">All</button><button type="button" data-c="content">Content calendar</button><button type="button" data-c="ad">Ad calendar</button></div></div>
-    <div class="tbl"><table id="calTable"></table></div>
-  </div>
-</section>
 </div></main>
 
 <script>
@@ -523,7 +515,7 @@ themeBtn.addEventListener('click',()=>{document.documentElement.setAttribute('da
 const savedTheme=store.get('iesp-theme');if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);syncTheme();
 
 /* Tabs */
-const TABS=[['overview','Overview'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['workflows','Workflows'],['plan','Plan'],['calendar','Calendar']];
+const TABS=[['overview','Overview'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['workflows','Workflows'],['plan','Plan']];
 const tabsEl=$('#tabs');
 tabsEl.innerHTML=TABS.map(([k,l])=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}">${l}</button>`).join('');
 function openTab(k,push){
@@ -532,7 +524,7 @@ function openTab(k,push){
   TABS.forEach(([t])=>{$('#t-'+t).hidden=t!==k;$('#tab-'+t).setAttribute('aria-selected',t===k)});
   if(push){try{history.replaceState(null,'','#'+k)}catch(e){}}
   store.set('iesp-tab',k);
-  const bar=document.getElementById('tfbar');if(bar)bar.hidden=!['overview','campaigns','walkins','ai','calendar'].includes(k);
+  const bar=document.getElementById('tfbar');if(bar)bar.hidden=!['overview','campaigns','walkins','ai'].includes(k);
   window.scrollTo({top:0});
 }
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)openTab(b.dataset.tab,true)});
@@ -1104,24 +1096,6 @@ function renderTime(){
 TFL.push(renderTime);
 TFL.push(()=>renderCamp());
 
-/* ---------- Calendar ---------- */
-let calType='all';
-$('#calType').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;calType=b.dataset.c;$('#calType').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderCal()});
-function renderCal(){
-  const items=[...D.calContent.map(r=>({date:r.Date,kind:r.Type==='Festival'?'fest':'content',title:r.Post,fmt:r.Format,status:r['Video status'],appr:r.Approval,owner:r.Owner,action:r['Action needed']})),...D.calAds.map(r=>({date:r.Date,kind:'ad',title:r.Action,fmt:r.Platform,status:r.Centres,appr:'',owner:r.Creatives,action:r.Notes}))]
-   .filter(x=>inTF(x.date)&&(calType==='all'||(calType==='ad'?x.kind==='ad':x.kind!=='ad'))).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:(a.kind==='ad')-(b.kind==='ad'));
-  const n=k=>items.filter(x=>x.kind===k).length;
-  $('#calKpis').innerHTML=[['Content posts',n('content'),'Videos'],['Festival posts',n('fest'),'Generic greetings'],['Ad actions',n('ad'),'Lead generation'],['Need approval',items.filter(x=>x.kind!=='ad'&&/Pending|Not yet sent|Changes/.test(x.appr||'')).length,'Pending, changes or not yet sent']].map(k=>`<div class="panel s3 kpi"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span></div>`).join('');
-  const chip=v=>!v?'':/Approved|Done/.test(v)?`<span class="chip good">${esc(v)}</span>`:/Changes/.test(v)?`<span class="chip crit">${esc(v)}</span>`:/Pending|In progress/.test(v)?`<span class="chip warn">${esc(v)}</span>`:`<span class="chip info">${esc(v)}</span>`;
-  const tagL={content:'Content',fest:'Festival',ad:'Ad'};
-  let last='',body='';
-  items.forEach(x=>{const k=bkey(x.date);if(k!==last){last=k;body+=`<tr class="group"><td colspan="7">${esc(blab(k).label)}</td></tr>`}
-    const d=new Date(x.date+'T00:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
-    body+=x.kind==='ad'?`<tr><td>${d}</td><td><span class="tag ad">Ad</span></td><td class="wrap-cell"><b style="font-weight:500">${esc(x.title)}</b><br><span class="note">${esc(x.owner)}</span></td><td>${esc(x.fmt)}</td><td class="wrap-cell">${esc(x.status)}</td><td></td><td class="wrap-cell">${esc(x.action)}</td></tr>`
-      :`<tr><td>${d}</td><td><span class="tag ${x.kind}">${tagL[x.kind]}</span></td><td class="wrap-cell"><b style="font-weight:500">${esc(x.title)}</b><br><span class="note">${esc(x.fmt)} · ${esc(x.owner)}</span></td><td>${chip(x.status)}</td><td>${chip(x.appr)}</td><td></td><td class="wrap-cell">${esc(x.action)}</td></tr>`});
-  $('#calTable').innerHTML=`<thead><tr><th>Date</th><th>Type</th><th>Post or action</th><th>Video status or platform</th><th>Approval or centres</th><th></th><th>Action needed</th></tr></thead><tbody>${body||'<tr><td colspan="7" class="note">Nothing scheduled in this period.</td></tr>'}</tbody>`;
-}
-TFL.push(renderCal);
 DRILL.ctr={title:'CTR (all)',lead:'All clicks ÷ impressions on Meta, 9 September to 16 October 2026.',parts:[['By campaign',byCamp(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true})],['By ad set',byAdset(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true},25)],['Top 10 ads',byAd(r=>r.rImpr?r.clicksAll/r.rImpr*100:null,{share:false,pctv:true})]],go:['campaigns','Open campaigns']};
 DRILL.cpc={title:'CPC (link click)',lead:'Spend ÷ link clicks on Meta, 9 September to 16 October 2026.',parts:[['By campaign',byCamp(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'})],['By ad set',byAdset(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},25)],['Lowest 10 ads',byAd(r=>r.linkClicks?r.rSpend/r.linkClicks:null,{money:true,share:false,color:'var(--c4)'},10,true)]],go:['campaigns','Open campaigns']};
 tfChanged();
