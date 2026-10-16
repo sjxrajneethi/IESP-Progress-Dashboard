@@ -198,7 +198,6 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
 <main class="gut"><div class="wrap" id="main">
 <div class="tfbar" id="tfbar">
   <span class="note">Period</span><div class="seg" id="tfPreset"><button type="button" data-p="all">All</button><button type="button" data-p="sep">September</button><button type="button" data-p="oct">October</button><button type="button" data-p="nov">November</button></div>
-  <span class="note">View by</span><div class="seg" id="tfGran"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div>
 </div>
 
 <!-- OVERVIEW -->
@@ -264,7 +263,7 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
     <div class="grid" id="mKpis"></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>Meta performance over time</h2><div class="seg" style="gap:8px"><select id="tMetric" class="btn" style="border-radius:6px" aria-label="Measure"></select></div></div>
+    <div class="panel-h"><h2>Meta performance over time</h2><div class="seg" style="gap:8px;align-items:center"><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div><select id="tMetric" class="btn" style="border-radius:6px" aria-label="Measure"></select></div></div>
     <div class="out" id="tKpis" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
     <div class="scroll-x" id="tChart"></div>
     <div class="tbl"><table id="tTable"></table></div>
@@ -313,7 +312,7 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
 <section class="tab" id="t-walkins" role="tabpanel" aria-label="Walk-ins" hidden>
   <div class="grid" id="wKpis"></div>
   <div class="panel">
-    <div class="panel-h"><h2>Walk-ins booked, by walk-in date</h2><div class="legend" id="wLegend"></div></div>
+    <div class="panel-h"><h2>Walk-ins booked, by walk-in date</h2><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div><div class="legend" id="wLegend"></div></div>
     <div class="scroll-x" id="wChart"></div>
     <p class="note">All 192 leads with the disposition "Interested – walk-in booked" from 1 October 2026, from every lead source. 80 of them have no walk-in date in Zoho yet.</p>
   </div>
@@ -348,7 +347,7 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
   </div>
   <div class="grid" id="aKpis"></div>
   <div class="panel">
-    <div class="panel-h"><h2>AI calls by day</h2><div class="legend"><span><span class="sw" style="background:var(--loss)"></span> Not connected</span><span><span class="sw" style="background:var(--accent)"></span> Connected</span><span><span class="sw" style="background:var(--good)"></span> Interested</span></div></div>
+    <div class="panel-h"><h2>AI calls over time</h2><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div><div class="legend"><span><span class="sw" style="background:var(--loss)"></span> Not connected</span><span><span class="sw" style="background:var(--accent)"></span> Connected</span><span><span class="sw" style="background:var(--good)"></span> Interested</span></div></div>
     <div class="scroll-x" id="aDaily"></div>
     <div class="tbl"><table id="aDayTbl"></table></div>
   </div>
@@ -480,7 +479,7 @@ tr.group td{background:var(--sunk);font-weight:500;font-size:13px}
 <section class="tab" id="t-calendar" role="tabpanel" aria-label="Calendar" hidden>
   <div class="grid" id="calKpis"></div>
   <div class="panel">
-    <div class="panel-h"><h2>Content and ad calendar</h2><div class="seg" id="calType"><button type="button" data-c="all" aria-pressed="true">All</button><button type="button" data-c="content">Content calendar</button><button type="button" data-c="ad">Ad calendar</button></div></div>
+    <div class="panel-h"><h2>Content and ad calendar</h2><div class="seg" style="gap:8px;align-items:center"><div class="seg gran" aria-label="View by"><button type="button" data-g="day">Day</button><button type="button" data-g="week" aria-pressed="true">Week</button><button type="button" data-g="month">Month</button></div></div><div class="seg" id="calType"><button type="button" data-c="all" aria-pressed="true">All</button><button type="button" data-c="content">Content calendar</button><button type="button" data-c="ad">Ad calendar</button></div></div>
     <div class="tbl"><table id="calTable"></table></div>
   </div>
 </section>
@@ -1067,10 +1066,10 @@ DRILL.open.parts[0][1]=el=>hbars(el,Object.entries(FUN).filter(([k])=>k!=='all')
 
 /* ---------- Period filter ---------- */
 const PRE={all:['2026-09-01','2026-11-20'],sep:['2026-09-01','2026-09-30'],oct:['2026-10-01','2026-10-31'],nov:['2026-11-01','2026-11-30'],};
-function syncTF(){$('#tfGran').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===TF.g));$('#tfPreset').querySelectorAll('button').forEach(b=>{const p=PRE[b.dataset.p];b.setAttribute('aria-pressed',p[0]===TF.from&&p[1]===TF.to)});}
+function syncTF(){document.querySelectorAll('.gran button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===TF.g));$('#tfPreset').querySelectorAll('button').forEach(b=>{const p=PRE[b.dataset.p];b.setAttribute('aria-pressed',p[0]===TF.from&&p[1]===TF.to)});}
 function tfChanged(){syncTF();TFL.forEach(f=>f())}
 $('#tfPreset').addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(!b)return;[TF.from,TF.to]=PRE[b.dataset.p];tfChanged()});
-$('#tfGran').addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;TF.g=b.dataset.g;tfChanged()});
+document.addEventListener('click',e=>{const b=e.target.closest('.gran [data-g]');if(!b)return;TF.g=b.dataset.g;tfChanged()});
 TFL.push(renderW);
 
 /* ---------- Meta performance over time ---------- */
