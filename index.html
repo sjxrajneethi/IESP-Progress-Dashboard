@@ -1676,13 +1676,13 @@ const BAR=n=>[n,'Share','pct',null];
 const STAGES=['Leads received','Called at least once','Spoke to the lead','Interested','Walk-in booked','Walked in','Enrolled'];
 const LOSS=['To be called','Not reached yet','Closed or follow-up due','Interested, visit to book','Visit to reschedule','Admission to follow'];
 const FUN={
- all:{name:'All centres',spend:101826,f:[5287,4946,1887,382,165,8,0],status:[341,3059,621,884,382],reasons:[['Not interested',371],['Not eligible (age or qualification)',221],['Junk or did not enquire',138],['Too far from the centre',74],['Looking for a job only',39],['Fee concern',18],['Duplicate',18],['Do not disturb or opted out',5]]},
+ all:{name:'All centres',spend:101826,f:[5287,4946,1887,382,165,12,1],status:[341,3059,621,884,382],reasons:[['Not interested',371],['Not eligible (age or qualification)',221],['Junk or did not enquire',138],['Too far from the centre',74],['Looking for a job only',39],['Fee concern',18],['Duplicate',18],['Do not disturb or opted out',5]]},
  t1:{name:'T1 Andheri East',spend:23847,f:[1164,1078,303,86,45,1,0],status:[86,775,155,62,86],reasons:[['Not interested',25],['Not eligible (age or qualification)',22],['Too far from the centre',6],['Duplicate',4]]},
  t2:{name:'T2 Khalapur',spend:7453,f:[1084,1053,340,59,34,0,0],status:[31,713,166,115,59],reasons:[['Not interested',42],['Invalid enquiry',23],['Too far from the centre',18],['Not eligible (age or qualification)',18]]},
  t3:{name:'T3 Roha',spend:3198,f:[237,223,55,10,7,0,0],status:[14,168,35,10,10],reasons:[['Not interested',5],['Looking for a job only',2],['Fee concern',1],['Invalid enquiry',1]]},
  t4:{name:'T4 Alibag',spend:3191,f:[148,107,52,10,8,0,0],status:[41,55,12,30,10],reasons:[['Looking for a job only',11],['Not interested',10],['Not eligible (age or qualification)',5],['Do not disturb or opted out',2]]},
  t5:{name:'T5 Goa',spend:23771,f:[497,478,137,23,9,0,0],status:[19,341,48,66,23],reasons:[['Not interested',49],['Invalid enquiry',7],['Not eligible (age or qualification)',6],['Too far from the centre',3]]},
- t6:{name:'T6 Bengaluru',spend:33080,f:[1648,1635,839,176,60,7,0],status:[13,796,153,510,176],reasons:[['Not interested',198],['Not eligible (age or qualification)',156],['Invalid enquiry',82],['Too far from the centre',38]]},
+ t6:{name:'T6 Bengaluru',spend:33080,f:[1648,1635,839,176,60,11,1],status:[13,796,153,510,176],reasons:[['Not interested',198],['Not eligible (age or qualification)',156],['Invalid enquiry',82],['Too far from the centre',38]]},
  ot:{name:'Other and unassigned',spend:7287,f:[509,372,161,18,2,0,0],status:[137,211,52,91,18],reasons:[['Not interested',42],['Invalid enquiry',22],['Not eligible (age or qualification)',13],['Too far from the centre',8]]}
 };
 const STATUS_L=[['To be called','var(--c7)'],['Not reached yet','var(--loss)'],['Follow-up due','var(--warn)'],['Closed (not a fit)','var(--c3)'],['Interested or booked','var(--good)']];
@@ -1896,7 +1896,7 @@ $('#wKpis').innerHTML=[
  ['Walk-ins booked','192','157 from Meta ads, 35 from college data and seminars','wbooked'],
  ['With a walk-in date','112','80 with the date to be set','wdate'],
  ['Sent in a daily list','74','Lists of 12, 13 and 14 October','wlist'],
- ['Attended so far','8','Bengaluru 7, Andheri East 1','walked']
+ ['Attended so far','12','Bengaluru 11, Andheri East 1','walked']
 ].map(k=>`<div class="panel s3 kpi drill" role="button" tabindex="0" data-drill="${k[3]}"><span class="lab">${k[0]}</span><span class="val">${k[1]}</span><span class="det">${k[2]}</span><span class="more">See the breakdown ›</span></div>`).join('');
 let wOn=CENTRE_N.map(()=>true);
 function renderW(){
