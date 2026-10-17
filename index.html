@@ -473,551 +473,1012 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 
 <!-- WORKFLOWS -->
 <section class="tab" id="t-workflows" role="tabpanel" aria-label="Workflows" hidden>
-<div class="panel" id="wf-index"><div class="panel-h"><h2>Workflows</h2></div><p class="note">Each flowchart has one Start and one End. Codes: ZH for Zoho, WA for the WhatsApp bot, AI for AI calls; a branch adds a letter (ZH1A, ZH1B). Click any blue box to jump to the flowchart it hands over to.</p><div class="wf-leg"><span><i class="lg se"></i>Start / End</span><span><i class="lg pr"></i>Step</span><span><i class="lg dc"></i>Decision</span><span><i class="lg br"></i>Branch (ZH1A, WA2B…)</span><span><i class="lg lk"></i>Link to another flowchart (click)</span></div><div class="wfn-wrap"><div class="wfn-g"><span class="wfn-h">Overview</span><button type="button" class="wfn" onclick="goWF('OV')"><b>OV</b> How the flowcharts connect</button></div><div class="wfn-g"><span class="wfn-h">Zoho</span><button type="button" class="wfn" onclick="goWF('ZH1')"><b>ZH1</b> Meta Lead Intake and Routing</button><button type="button" class="wfn" onclick="goWF('ZH2')"><b>ZH2</b> Manual and Seminar Leads</button><button type="button" class="wfn" onclick="goWF('ZH3')"><b>ZH3</b> Telecaller First Conversation</button><button type="button" class="wfn" onclick="goWF('ZH4')"><b>ZH4</b> Counselling Booking and Confirmation</button><button type="button" class="wfn" onclick="goWF('ZH5')"><b>ZH5</b> Walk-in Day and No-show</button><button type="button" class="wfn" onclick="goWF('ZH6')"><b>ZH6</b> Counselling to Admission</button><button type="button" class="wfn" onclick="goWF('ZH7')"><b>ZH7</b> Nurture and Re-engagement</button></div><div class="wfn-g"><span class="wfn-h">WhatsApp Bot</span><button type="button" class="wfn" onclick="goWF('WA1')"><b>WA1</b> Entry and Greeting</button><button type="button" class="wfn" onclick="goWF('WA2')"><b>WA2</b> Six Questions and Cabin Crew Pre-check</button><button type="button" class="wfn" onclick="goWF('WA3')"><b>WA3</b> Next Step and Booking</button><button type="button" class="wfn" onclick="goWF('WA4')"><b>WA4</b> Follow-ups and Opt-out</button><button type="button" class="wfn" onclick="goWF('WA5')"><b>WA5</b> Questions and Escalation</button></div><div class="wfn-g"><span class="wfn-h">AI Call</span><button type="button" class="wfn" onclick="goWF('AI1')"><b>AI1</b> First AI Call</button><button type="button" class="wfn" onclick="goWF('AI2')"><b>AI2</b> Reminder and No-show Call</button><button type="button" class="wfn" onclick="goWF('AI3')"><b>AI3</b> Nurture and Out-of-state Call</button></div></div></div>
+<div class="panel" id="wf-index"><div class="panel-h"><h2>Workflows</h2></div><p class="note">Each flowchart has one Start and one End. Codes: ZH for Zoho, WA for the WhatsApp bot, AI for AI calls; a branch adds a letter (ZH1A, ZH1B). Click any blue box to jump to the flowchart it hands over to.</p><div class="wf-leg"><span><i class="lg se"></i>Start / End</span><span><i class="lg pr"></i>Step</span><span><i class="lg dc"></i>Decision</span><span><i class="lg br"></i>Branch (ZH1A, WA2B…)</span><span><i class="lg lk"></i>Link to another flowchart (click)</span></div><div class="wfn-wrap"><div class="wfn-g"><span class="wfn-h">Overview</span><button type="button" class="wfn" onclick="goWF('OV')"><b>OV</b> How the Flowcharts Connect</button></div><div class="wfn-g"><span class="wfn-h">Zoho</span><button type="button" class="wfn" onclick="goWF('ZH1')"><b>ZH1</b> Digital Lead Capture</button><button type="button" class="wfn" onclick="goWF('ZH2')"><b>ZH2</b> Offline Lead Capture</button><button type="button" class="wfn" onclick="goWF('ZH3')"><b>ZH3</b> Lead Matching and Attribution</button><button type="button" class="wfn" onclick="goWF('ZH4')"><b>ZH4</b> Qualification and Routing</button><button type="button" class="wfn" onclick="goWF('ZH5')"><b>ZH5</b> Who Contacts the Lead</button><button type="button" class="wfn" onclick="goWF('ZH6')"><b>ZH6</b> Telecaller Conversation</button><button type="button" class="wfn" onclick="goWF('ZH7')"><b>ZH7</b> Counselling Booking and Confirmation</button><button type="button" class="wfn" onclick="goWF('ZH8')"><b>ZH8</b> Counselling Day and Walk-ins</button><button type="button" class="wfn" onclick="goWF('ZH9')"><b>ZH9</b> Admission</button><button type="button" class="wfn" onclick="goWF('ZH10')"><b>ZH10</b> Nurture and Reactivation</button><button type="button" class="wfn" onclick="goWF('ZH11')"><b>ZH11</b> Consent and Opt-out</button><button type="button" class="wfn" onclick="goWF('ZH12')"><b>ZH12</b> Daily Operations</button></div><div class="wfn-g"><span class="wfn-h">WhatsApp Bot</span><button type="button" class="wfn" onclick="goWF('WA1')"><b>WA1</b> Entry and Greeting</button><button type="button" class="wfn" onclick="goWF('WA2')"><b>WA2</b> Questions and Eligibility</button><button type="button" class="wfn" onclick="goWF('WA3')"><b>WA3</b> Next Step</button><button type="button" class="wfn" onclick="goWF('WA4')"><b>WA4</b> Follow-ups and STOP</button><button type="button" class="wfn" onclick="goWF('WA5')"><b>WA5</b> Questions and Escalation</button><button type="button" class="wfn" onclick="goWF('WA6')"><b>WA6</b> Booking Messages</button><button type="button" class="wfn" onclick="goWF('WA7')"><b>WA7</b> When the Bot Is Not Available</button></div><div class="wfn-g"><span class="wfn-h">AI Call</span><button type="button" class="wfn" onclick="goWF('AI1')"><b>AI1</b> First AI Call</button><button type="button" class="wfn" onclick="goWF('AI2')"><b>AI2</b> Reminder and No-show Call</button><button type="button" class="wfn" onclick="goWF('AI3')"><b>AI3</b> Nurture and Reactivation Call</button><button type="button" class="wfn" onclick="goWF('AI4')"><b>AI4</b> Missed Call Callback</button><button type="button" class="wfn" onclick="goWF('AI5')"><b>AI5</b> AI to Person Hand-off</button></div></div></div>
 <h2 class="wf-grp">Overview</h2>
-<div class="panel wf-sec" id="wf-OV"><div class="panel-h"><h2><span class="wf-code">OV</span> How the flowcharts connect</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every lead enters through ZH1 or ZH2 and leaves through admission, nurture or closure.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-OV"><div class="panel-h"><h2><span class="wf-code">OV</span> How the Flowcharts Connect</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every enquiry, from any channel, ends as admitted, nurtured, closed or opted out.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: enquiry received&quot;]):::se
-A{&quot;Where did the lead come from?&quot;}
-L1[[&quot;→ ZH1: Meta Lead Intake and Routing&quot;]]:::lk
-L2[[&quot;→ ZH2: Manual and Seminar Leads&quot;]]:::lk
-L3[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
-B[&quot;Lead routed to a centre&quot;]
-L4[[&quot;→ AI1: First AI Call&quot;]]:::lk
-L5[[&quot;→ ZH3: Telecaller First Conversation&quot;]]:::lk
+S([&quot;Start: someone shows interest or a day begins&quot;]):::se
+A{&quot;What is happening?&quot;}
+L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
+L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
+L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
+L12[[&quot;→ ZH12: Daily Operations&quot;]]:::lk
+Lq[[&quot;→ WA5: Questions and Escalation&quot;]]:::lk
+L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
+L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
+L5[[&quot;→ ZH5: Who Contacts the Lead&quot;]]:::lk
+B{&quot;Who makes first contact?&quot;}
+La[[&quot;→ AI1: First AI Call&quot;]]:::lk
+Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
+L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
+Lm[[&quot;→ AI4: Missed Call Callback&quot;]]:::lk
 C{&quot;Agreed to counselling?&quot;}
-L6[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-L7[[&quot;→ ZH5: Walk-in Day and No-show&quot;]]:::lk
-L8[[&quot;→ ZH6: Counselling to Admission&quot;]]:::lk
-L9[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
-E([&quot;End: admitted, nurtured or closed&quot;]):::se
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
+L9[[&quot;→ ZH9: Admission&quot;]]:::lk
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+E([&quot;End: admitted, nurtured, closed or opted out&quot;]):::se
 S --&gt; A
-A --&gt;|Meta lead form| L1 --&gt; B
-A --&gt;|Seminar, college list, referral, walk-in register| L2 --&gt; B
-A --&gt;|WhatsApp link| L3 --&gt; B
-B --&gt; L4 --&gt; C
-B --&gt;|Hot lead or call-back| L5 --&gt; C
-C --&gt;|Yes| L6 --&gt; L7 --&gt; L8 --&gt; E
-C --&gt;|Not yet| L9 --&gt; E
+A --&gt;|Digital enquiry| L1 --&gt; L3
+A --&gt;|Offline enquiry or list| L2 --&gt; L3
+A --&gt;|Opt-out or DND request| L11 --&gt; E
+A --&gt;|Daily routine| L12 --&gt; E
+A --&gt;|Question on WhatsApp at any point| Lq --&gt; E
+L3 --&gt; L4 --&gt; L5 --&gt; B
+B --&gt;|AI call| La --&gt; C
+B --&gt;|WhatsApp bot| Lw --&gt; C
+B --&gt;|Telecaller| L6 --&gt; C
+B --&gt;|Missed call back| Lm --&gt; C
+C --&gt;|Yes| L7 --&gt; L8 --&gt; L9 --&gt; E
+C --&gt;|Not yet| L10 --&gt; E
+C --&gt;|Closed| E
 click L1 call goWF(&quot;ZH1&quot;)
 click L2 call goWF(&quot;ZH2&quot;)
-click L3 call goWF(&quot;WA1&quot;)
-click L4 call goWF(&quot;AI1&quot;)
-click L5 call goWF(&quot;ZH3&quot;)
-click L6 call goWF(&quot;ZH4&quot;)
-click L7 call goWF(&quot;ZH5&quot;)
-click L8 call goWF(&quot;ZH6&quot;)
-click L9 call goWF(&quot;ZH7&quot;)</pre></div></div>
+click L11 call goWF(&quot;ZH11&quot;)
+click L12 call goWF(&quot;ZH12&quot;)
+click Lq call goWF(&quot;WA5&quot;)
+click L3 call goWF(&quot;ZH3&quot;)
+click L4 call goWF(&quot;ZH4&quot;)
+click L5 call goWF(&quot;ZH5&quot;)
+click La call goWF(&quot;AI1&quot;)
+click Lw call goWF(&quot;WA1&quot;)
+click L6 call goWF(&quot;ZH6&quot;)
+click Lm call goWF(&quot;AI4&quot;)
+click L7 call goWF(&quot;ZH7&quot;)
+click L8 call goWF(&quot;ZH8&quot;)
+click L9 call goWF(&quot;ZH9&quot;)
+click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
 <h2 class="wf-grp">Zoho</h2>
-<div class="panel wf-sec" id="wf-ZH1"><div class="panel-h"><h2><span class="wf-code">ZH1</span> Meta Lead Intake and Routing</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">From a Meta lead form to a routed lead in the right queue.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH1"><div class="panel-h"><h2><span class="wf-code">ZH1</span> Digital Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every digital channel lands in Zoho with its source, time and campaign.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: Meta lead form submitted&quot;]):::se
-A[&quot;Lead created in Zoho through the Meta integration&quot;]
-B{&quot;Ad set ID in the routing rule?&quot;}
-B1[&quot;ZH1A: Flag new ad set and add its ID to rule Territory - Meta Ad Set ID&quot;]:::br
-C[&quot;Centre and territory set automatically&quot;]
-D{&quot;Phone number already in Zoho?&quot;}
-D1[&quot;ZH1B: Merge into existing lead, add new source as a note, earliest record keeps credit&quot;]:::br
-F{&quot;Lead&#x27;s state served by a centre?&quot;}
-F1[&quot;ZH1C: Park lead and tag Out of state&quot;]:::br
-L1[[&quot;→ AI3: Nurture and Out-of-state Call&quot;]]:::lk
-G{&quot;Course interest is Driver?&quot;}
-G1[&quot;ZH1D: Tag Driver and keep out of the telecaller queue&quot;]:::br
-L2[[&quot;→ AI1: First AI Call&quot;]]:::lk
-H[&quot;WhatsApp welcome sent with the bot link&quot;]
-I[&quot;Lead placed in the AI priority queue&quot;]
-L3[[&quot;→ AI1: First AI Call&quot;]]:::lk
-E([&quot;End: lead routed&quot;]):::se
-S --&gt; A --&gt; B
-B --&gt;|Yes| C
-B --&gt;|No| B1 --&gt; C
-C --&gt; D
-D --&gt;|Yes| D1 --&gt; E
-D --&gt;|No| F
-F --&gt;|No| F1 --&gt; L1 --&gt; E
-F --&gt;|Yes| G
-G --&gt;|Yes| G1 --&gt; L2 --&gt; E
-G --&gt;|No| H --&gt; I --&gt; L3 --&gt; E
-click L1 call goWF(&quot;AI3&quot;)
-click L2 call goWF(&quot;AI1&quot;)
-click L3 call goWF(&quot;AI1&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH2"><div class="panel-h"><h2><span class="wf-code">ZH2</span> Manual and Seminar Leads</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Offline lists cleaned, checked and uploaded before anyone calls.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
-classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
-classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
-classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: offline leads available&quot;]):::se
-A{&quot;Source of the leads?&quot;}
-A1[&quot;ZH2A: Seminar on the monthly calendar, leads captured on the Zoho form&quot;]:::br
-A2[&quot;ZH2B: College list, referral or walk-in register sent by the centre in the upload template&quot;]:::br
-B[&quot;Remove duplicates and invalid numbers&quot;]
-C{&quot;Meets the course age and eligibility criteria?&quot;}
-C1[&quot;ZH2C: Mark Ineligible with the reason&quot;]:::br
-D{&quot;Already in Zoho?&quot;}
-D1[&quot;ZH2D: Add the new source as a note, earliest record keeps credit&quot;]:::br
-F[&quot;Upload with lead source Seminar plus college, Referral or Walk-in, and the Filled by name&quot;]
-G[&quot;Centre and territory set from the location&quot;]
-H[&quot;Lead counts shared with Gary for sign-off before use in marketing&quot;]
-L1[[&quot;→ AI1: First AI Call&quot;]]:::lk
-E([&quot;End: offline leads ready for calling&quot;]):::se
+S([&quot;Start: digital enquiry&quot;]):::se
+A{&quot;Which channel?&quot;}
+A1[&quot;ZH1A: Meta instant lead form&quot;]:::br
+B1[&quot;Pulled in by the Meta integration with ad, ad set and form&quot;]
+A2[&quot;ZH1B: Website or Google Ads form&quot;]:::br
+B2[&quot;Form posts to Zoho with UTM source, campaign and page&quot;]
+A3[&quot;ZH1C: Click-to-WhatsApp ad, website WhatsApp button or QR on print&quot;]:::br
+Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
+A4[&quot;ZH1D: Instagram or Facebook DM&quot;]:::br
+B4{&quot;Instagram bot live?&quot;}
+B4a[&quot;Bot asks course, area and number, lead created as Instagram DM&quot;]
+B4b[&quot;Social team logs name, number and state in the upload template&quot;]
+A5[&quot;ZH1E: Call to a centre number or Google Business Profile&quot;]:::br
+B5{&quot;Answered?&quot;}
+B5a[&quot;Counsellor logs the lead, source Inbound call&quot;]
+B5b[&quot;Missed call logged, WhatsApp auto-reply with calling hours and centre number&quot;]
+Lm[[&quot;→ AI4: Missed Call Callback&quot;]]:::lk
+C[&quot;Raw lead captured with source, time and campaign&quot;]
+D{&quot;Received between 9 AM and 8 PM?&quot;}
+D1[&quot;ZH1F: Night lead, instant WhatsApp acknowledgement, queued for 9 AM&quot;]:::br
+L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
+E([&quot;End: lead captured&quot;]):::se
 S --&gt; A
-A --&gt;|Seminar| A1 --&gt; B
-A --&gt;|Other list| A2 --&gt; B
-B --&gt; C
-C --&gt;|No| C1 --&gt; E
-C --&gt;|Yes| D
-D --&gt;|Yes| D1 --&gt; E
-D --&gt;|No| F --&gt; G --&gt; H --&gt; L1 --&gt; E
-click L1 call goWF(&quot;AI1&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH3"><div class="panel-h"><h2><span class="wf-code">ZH3</span> Telecaller First Conversation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">A human call, logged in First Conversation, ending in one clear disposition.</p><div class="wf-chart"><pre class="mermaid">flowchart LR
+A --&gt; A1 --&gt; B1 --&gt; C
+A --&gt; A2 --&gt; B2 --&gt; C
+A --&gt; A3 --&gt; Lw --&gt; E
+A --&gt; A4 --&gt; B4
+B4 --&gt;|Yes| B4a --&gt; C
+B4 --&gt;|No| B4b --&gt; C
+A --&gt; A5 --&gt; B5
+B5 --&gt;|Yes| B5a --&gt; C
+B5 --&gt;|No| B5b --&gt; Lm --&gt; E
+C --&gt; D
+D --&gt;|Yes| L3
+D --&gt;|No| D1 --&gt; L3
+L3 --&gt; E
+click Lw call goWF(&quot;WA1&quot;)
+click Lm call goWF(&quot;AI4&quot;)
+click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH2"><div class="panel-h"><h2><span class="wf-code">ZH2</span> Offline Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Seminars, lists, referrals, events and walk-ins reach Zoho clean and attributed.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: offline enquiry or list&quot;]):::se
+A{&quot;Which source?&quot;}
+A1[&quot;ZH2A: Seminar or college visit&quot;]:::br
+A1a{&quot;On the monthly seminar calendar?&quot;}
+A1b[&quot;Centre adds it to the calendar, SOP shared&quot;]
+A1c[&quot;Leads captured live on the Zoho form&quot;]
+A2[&quot;ZH2B: Booth or field activation&quot;]:::br
+A2a[&quot;Field form: name, age, phone, Aadhaar, course&quot;]
+A3[&quot;ZH2C: College data sheet or list from IESP&quot;]:::br
+A3a[&quot;Sent in the upload template by D+1&quot;]
+A4[&quot;ZH2D: Referral from a student, parent, alumnus or staff&quot;]:::br
+A4a[&quot;Referrer recorded in Description, source Referral&quot;]
+A5[&quot;ZH2E: Event, launch or job fair&quot;]:::br
+A5a[&quot;Event registration sheet in the upload template&quot;]
+A6[&quot;ZH2F: Direct walk-in with no enquiry&quot;]:::br
+A6a[&quot;Reception registers the student, source Walk-in&quot;]
+L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
+A7[&quot;ZH2G: Corporate or B2B enquiry&quot;]:::br
+A7a[&quot;Passed to the head office corporate desk&quot;]
+A8[&quot;ZH2H: Newspaper, flyer or hoarding&quot;]:::br
+L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
+V[&quot;Cleaned: duplicates, invalid numbers and junk removed, Filled by name set&quot;]
+X[&quot;Uploaded with lead source and college or event name&quot;]
+Y[&quot;Counts shared with Gary for sign-off before use in marketing&quot;]
+L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
+E([&quot;End: offline lead in Zoho&quot;]):::se
+S --&gt; A
+A --&gt; A1 --&gt; A1a
+A1a --&gt;|No| A1b --&gt; A1c
+A1a --&gt;|Yes| A1c
+A1c --&gt; V
+A --&gt; A2 --&gt; A2a --&gt; V
+A --&gt; A3 --&gt; A3a --&gt; V
+A --&gt; A4 --&gt; A4a --&gt; V
+A --&gt; A5 --&gt; A5a --&gt; V
+A --&gt; A6 --&gt; A6a --&gt; L8 --&gt; E
+A --&gt; A7 --&gt; A7a --&gt; E
+A --&gt; A8 --&gt;|Arrives as a call or QR scan| L1 --&gt; E
+V --&gt; X --&gt; Y --&gt; L3 --&gt; E
+click L8 call goWF(&quot;ZH8&quot;)
+click L1 call goWF(&quot;ZH1&quot;)
+click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH3"><div class="panel-h"><h2><span class="wf-code">ZH3</span> Lead Matching and Attribution</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">One record per person, with the right status and the right credit.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: lead arrives in Zoho&quot;]):::se
+A{&quot;Calling or WhatsApp number already in Zoho?&quot;}
+N[&quot;ZH3A: New lead created, source and Filled by recorded&quot;]:::br
+B{&quot;Status of the existing record&quot;}
+B1[&quot;ZH3B: Open lead, merge and add the new source as a note&quot;]:::br
+B2[&quot;ZH3C: Lost, not now or nurture, reopen as New enquiry&quot;]:::br
+B3[&quot;ZH3D: Admitted or existing student, flag Existing student&quot;]:::br
+B3a{&quot;Enquiring for a friend?&quot;}
+B3b[&quot;Friend created as a new lead, source Referral&quot;]
+B4[&quot;ZH3E: DND or opted out, no contact&quot;]:::br
+L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
+B5[&quot;ZH3F: Counselling already booked, keep the booking, notify the counsellor&quot;]:::br
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+AT{&quot;How did the lead first arrive?&quot;}
+AT1[&quot;ZH3G: Rajneethi campaign, full credit&quot;]:::br
+AT2[&quot;ZH3H: Manual upload, half credit once a qualifying intervention happens&quot;]:::br
+L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
+E([&quot;End: one clean record&quot;]):::se
+S --&gt; A
+A --&gt;|No| N --&gt; AT
+A --&gt;|Yes| B
+B --&gt; B1 --&gt; AT
+B --&gt; B2 --&gt; AT
+B --&gt; B3 --&gt; B3a
+B3a --&gt;|Yes| B3b --&gt; AT
+B3a --&gt;|No| E
+B --&gt; B4 --&gt; L11 --&gt; E
+B --&gt; B5 --&gt; L7 --&gt; E
+AT --&gt; AT1 --&gt; L4
+AT --&gt; AT2 --&gt; L4
+L4 --&gt; E
+click L11 call goWF(&quot;ZH11&quot;)
+click L7 call goWF(&quot;ZH7&quot;)
+click L4 call goWF(&quot;ZH4&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH4"><div class="panel-h"><h2><span class="wf-code">ZH4</span> Qualification and Routing</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Junk, age, course entry needs and location are checked before anyone calls.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: lead ready for checks&quot;]):::se
+J{&quot;Junk? fake name, invalid or test number&quot;}
+J1[&quot;ZH4A: Mark Junk&quot;]:::br
+A{&quot;Age against the course limit&quot;}
+A1[&quot;ZH4B: Under 18, speak to a parent, park until 18&quot;]:::br
+L10a[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+A2[&quot;ZH4C: Over the limit, suggest a course with a wider limit&quot;]:::br
+A3{&quot;Accepts another course?&quot;}
+A4[&quot;Mark Ineligible, age&quot;]
+C{&quot;Course entry need&quot;}
+C1[&quot;ZH4D: Cabin crew height not met, offer Airline Handling or Airport Operations&quot;]:::br
+C2[&quot;ZH4E: Driver course without an LMV licence, nurture until licensed&quot;]:::br
+L10b[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+C3[&quot;ZH4F: GSE without ITI, offer Ramp Equipment or Airline Handling&quot;]:::br
+D{&quot;Location&quot;}
+D1[&quot;Centre and territory set&quot;]
+D2[&quot;ZH4G: Near an upcoming centre (Rewa, Indore), park until launch&quot;]:::br
+L10c[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+D3[&quot;ZH4H: No centre nearby, offer online counselling or the nearest centre&quot;]:::br
+D4{&quot;Open to it?&quot;}
+D5[&quot;Mark Out of state&quot;]
+D6[&quot;ZH4I: Wrong centre chosen, transfer, territory follows&quot;]:::br
+F[&quot;Language set: Marathi, Kannada, Hindi, Gujarati, Konkani or English&quot;]
+G[&quot;Lead quality tag: good, average or poor&quot;]
+L5[[&quot;→ ZH5: Who Contacts the Lead&quot;]]:::lk
+E([&quot;End: lead qualified, parked or closed&quot;]):::se
+S --&gt; J
+J --&gt;|Yes| J1 --&gt; E
+J --&gt;|No| A
+A --&gt;|Under 18| A1 --&gt; L10a --&gt; E
+A --&gt;|Over the limit| A2 --&gt; A3
+A --&gt;|Within limit or not known yet| C
+A3 --&gt;|Yes| D
+A3 --&gt;|No| A4 --&gt; E
+C --&gt;|Cabin crew standard not met| C1 --&gt; A3
+C --&gt;|No driving licence| C2 --&gt; L10b --&gt; E
+C --&gt;|No ITI for GSE| C3 --&gt; A3
+C --&gt;|Met or not known yet| D
+D --&gt;|Near an open centre| D1
+D --&gt;|Near an upcoming centre| D2 --&gt; L10c --&gt; E
+D --&gt;|No centre nearby| D3 --&gt; D4
+D --&gt;|Wrong centre| D6 --&gt; D1
+D4 --&gt;|Yes| D1
+D4 --&gt;|No| D5 --&gt; E
+D1 --&gt; F --&gt; G --&gt; L5 --&gt; E
+click L10a call goWF(&quot;ZH10&quot;)
+click L10b call goWF(&quot;ZH10&quot;)
+click L10c call goWF(&quot;ZH10&quot;)
+click L5 call goWF(&quot;ZH5&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH5"><div class="panel-h"><h2><span class="wf-code">ZH5</span> Who Contacts the Lead</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The first contact is decided by lead type: AI, WhatsApp or a person.</p><div class="wf-chart"><pre class="mermaid">flowchart LR
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: qualified lead&quot;]):::se
+A{&quot;Lead type&quot;}
+A1[&quot;ZH5A: Asked for a call in the WhatsApp bot&quot;]:::br
+A1a[&quot;Counsellor calls within 90 minutes in working hours&quot;]
+L6a[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
+A2[&quot;ZH5B: New Meta or website lead&quot;]:::br
+A2a[&quot;AI first call within 24 hours&quot;]
+La[[&quot;→ AI1: First AI Call&quot;]]:::lk
+A3[&quot;ZH5C: Driver course lead&quot;]:::br
+A3a[&quot;AI calling only, kept out of the telecaller queue&quot;]
+Lb[[&quot;→ AI1: First AI Call&quot;]]:::lk
+A4[&quot;ZH5D: Seminar, college or event list&quot;]:::br
+A4a[&quot;AI call or WhatsApp within 24 hours, opening line names the seminar or college&quot;]
+Lc[[&quot;→ AI1: First AI Call&quot;]]:::lk
+A5[&quot;ZH5E: Referral&quot;]:::br
+A5a[&quot;Telecaller calls and mentions the referrer&quot;]
+L6b[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
+A6[&quot;ZH5F: Missed call to a centre&quot;]:::br
+Lm[[&quot;→ AI4: Missed Call Callback&quot;]]:::lk
+A7[&quot;ZH5G: Parent decision pending&quot;]:::br
+A7a[&quot;Telecaller calls the parent&quot;]
+L6c[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
+A8[&quot;ZH5H: Has WhatsApp, no call answered yet&quot;]:::br
+Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
+A9[&quot;ZH5I: AI says interested or asked for a person&quot;]:::br
+Lh[[&quot;→ AI5: AI to Person Hand-off&quot;]]:::lk
+E([&quot;End: first contact assigned&quot;]):::se
+S --&gt; A
+A --&gt; A1 --&gt; A1a --&gt; L6a --&gt; E
+A --&gt; A2 --&gt; A2a --&gt; La --&gt; E
+A --&gt; A3 --&gt; A3a --&gt; Lb --&gt; E
+A --&gt; A4 --&gt; A4a --&gt; Lc --&gt; E
+A --&gt; A5 --&gt; A5a --&gt; L6b --&gt; E
+A --&gt; A6 --&gt; Lm --&gt; E
+A --&gt; A7 --&gt; A7a --&gt; L6c --&gt; E
+A --&gt; A8 --&gt; Lw --&gt; E
+A --&gt; A9 --&gt; Lh --&gt; E
+click L6a call goWF(&quot;ZH6&quot;)
+click La call goWF(&quot;AI1&quot;)
+click Lb call goWF(&quot;AI1&quot;)
+click Lc call goWF(&quot;AI1&quot;)
+click L6b call goWF(&quot;ZH6&quot;)
+click Lm call goWF(&quot;AI4&quot;)
+click L6c call goWF(&quot;ZH6&quot;)
+click Lw call goWF(&quot;WA1&quot;)
+click Lh call goWF(&quot;AI5&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH6"><div class="panel-h"><h2><span class="wf-code">ZH6</span> Telecaller Conversation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">A human call, logged in First Conversation, ending in one disposition.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead in Telecaller My Queue&quot;]):::se
-A[&quot;Open the lead and read the AI call summary&quot;]
-B[&quot;Call the lead, log caller name and call time&quot;]
+Q[&quot;Queue by centre: hot leads, call-backs due today, new leads from the last 48 hours, no driver leads&quot;]
+A[&quot;Read the AI call summary and WhatsApp answers&quot;]
+B[&quot;Call, log caller name and call time&quot;]
 C{&quot;Connected?&quot;}
-C1[&quot;ZH3A: Log RNR and add one attempt&quot;]:::br
+C1[&quot;ZH6A: No answer, busy or switched off, add one attempt&quot;]:::br
 C2{&quot;Fewer than 5 attempts?&quot;}
-C3[&quot;Retry in the next calling slot&quot;]
-L1[[&quot;→ AI3: Nurture and Out-of-state Call&quot;]]:::lk
-D{&quot;Disposition&quot;}
-D1[&quot;ZH3B: Interested, walk-in booked&quot;]:::br
-L2[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-D2[&quot;ZH3C: Parent decision pending, offer online counselling with the parent&quot;]:::br
-L3[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-D3[&quot;ZH3D: Call back, set call-back date and time&quot;]:::br
-D4[&quot;Lead returns to the queue on that date&quot;]
-D5[&quot;ZH3E: Interested, no date yet&quot;]:::br
-L4[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
-D6[&quot;ZH3F: Ineligible for this course&quot;]:::br
-D7{&quot;Another course fits?&quot;}
-L5[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-D8[&quot;ZH3G: Not interested, mark Lost with reason&quot;]:::br
-D9[&quot;ZH3H: Wrong number or invalid, mark Junk&quot;]:::br
-D10[&quot;ZH3I: Out of state or too far, park&quot;]:::br
-L6[[&quot;→ AI3: Nurture and Out-of-state Call&quot;]]:::lk
-D11[&quot;ZH3J: Existing student, mark Existing student&quot;]:::br
-D12[&quot;ZH3K: DND or opt-out, stop all contact&quot;]:::br
-E([&quot;End: disposition saved in Zoho&quot;]):::se
-S --&gt; A --&gt; B --&gt; C
+C3[&quot;WhatsApp nudge, retry in the next slot&quot;]
+Lr[[&quot;→ AI1: First AI Call&quot;]]:::lk
+P{&quot;Who answered?&quot;}
+P1[&quot;ZH6B: Parent or family, speak to the parent, save the parent number&quot;]:::br
+P2[&quot;ZH6C: Wrong number, mark Junk&quot;]:::br
+P3[&quot;ZH6D: Language the caller does not speak, pass to a caller or AI in that language&quot;]:::br
+D{&quot;Disposition group&quot;}
+Dp{&quot;Wants counselling&quot;}
+Dl{&quot;Later&quot;}
+Dn{&quot;Not suitable&quot;}
+D1[&quot;ZH6E: Interested, counselling booked&quot;]:::br
+L7a[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+D2[&quot;ZH6F: Parent decision pending, book online counselling with the parent&quot;]:::br
+L7b[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+D3[&quot;ZH6G: Call back, set date and time&quot;]:::br
+D4[&quot;ZH6H: Interested, no date yet&quot;]:::br
+L10a[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+D5[&quot;ZH6I: Wants a job only, explain placement-linked training&quot;]:::br
+D5a{&quot;Interested now?&quot;}
+D6[&quot;ZH6J: Fee concern, explain fees and payment options&quot;]:::br
+D7[&quot;ZH6K: Ineligible for the course&quot;]:::br
+L4a[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
+D8[&quot;ZH6L: Not interested, Lost with reason&quot;]:::br
+D9[&quot;ZH6M: Joined another institute, Lost, note which&quot;]:::br
+D10[&quot;ZH6N: Out of state or too far&quot;]:::br
+L4b[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
+D11[&quot;ZH6O: Existing student, flag it&quot;]:::br
+D12[&quot;ZH6P: Asks not to be contacted&quot;]:::br
+L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
+W[&quot;Disposition saved, status updates automatically, comment added on a new line&quot;]
+E([&quot;End: call logged&quot;]):::se
+S --&gt; Q --&gt; A --&gt; B --&gt; C
 C --&gt;|No| C1 --&gt; C2
 C2 --&gt;|Yes| C3 --&gt; B
-C2 --&gt;|No| L1 --&gt; E
-C --&gt;|Yes| D
-D --&gt; D1 --&gt; L2 --&gt; E
-D --&gt; D2 --&gt; L3 --&gt; E
-D --&gt; D3 --&gt; D4 --&gt; E
-D --&gt; D5 --&gt; L4 --&gt; E
-D --&gt; D6 --&gt; D7
-D7 --&gt;|Yes| L5 --&gt; E
-D7 --&gt;|No| D8
-D --&gt; D8 --&gt; E
-D --&gt; D9 --&gt; E
-D --&gt; D10 --&gt; L6 --&gt; E
-D --&gt; D11 --&gt; E
-D --&gt; D12 --&gt; E
-click L1 call goWF(&quot;AI3&quot;)
-click L2 call goWF(&quot;ZH4&quot;)
-click L3 call goWF(&quot;ZH4&quot;)
-click L4 call goWF(&quot;ZH7&quot;)
-click L5 call goWF(&quot;ZH4&quot;)
-click L6 call goWF(&quot;AI3&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH4"><div class="panel-h"><h2><span class="wf-code">ZH4</span> Counselling Booking and Confirmation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every agreed lead gets a mode, a slot, a counsellor and a confirmed booking.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+C2 --&gt;|No| Lr --&gt; W
+C --&gt;|Yes| P
+P --&gt;|Parent or family| P1 --&gt; D
+P --&gt;|The lead| D
+P --&gt;|Not the lead| P2 --&gt; W
+P --&gt;|Language mismatch| P3 --&gt; W
+Dp --&gt; D1 --&gt; L7a --&gt; W
+Dp --&gt; D2 --&gt; L7b --&gt; W
+Dl --&gt; D3 --&gt; W
+Dl --&gt; D4 --&gt; L10a --&gt; W
+Dp --&gt; D5 --&gt; D5a
+D5a --&gt;|Yes| L7a
+D5a --&gt;|No| D8
+Dp --&gt; D6 --&gt; L7b
+Dn --&gt; D7 --&gt; L4a --&gt; W
+Dn --&gt; D8 --&gt; W
+Dn --&gt; D9 --&gt; W
+Dn --&gt; D10 --&gt; L4b --&gt; W
+Dn --&gt; D11 --&gt; W
+Dn --&gt; D12 --&gt; L11 --&gt; W
+D --&gt;|Interested| Dp
+D --&gt;|Not now| Dl
+D --&gt;|Not suitable| Dn
+W --&gt; E
+click Lr call goWF(&quot;AI1&quot;)
+click L7a call goWF(&quot;ZH7&quot;)
+click L7b call goWF(&quot;ZH7&quot;)
+click L10a call goWF(&quot;ZH10&quot;)
+click L4a call goWF(&quot;ZH4&quot;)
+click L4b call goWF(&quot;ZH4&quot;)
+click L11 call goWF(&quot;ZH11&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH7"><div class="panel-h"><h2><span class="wf-code">ZH7</span> Counselling Booking and Confirmation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every agreed lead gets a mode, a slot, a counsellor and a confirmed booking.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead agrees to counselling&quot;]):::se
-A{&quot;Counselling mode?&quot;}
-A1[&quot;ZH4A: Centre visit&quot;]:::br
-A2[&quot;ZH4B: Online, 15-minute call, parent contact mandatory&quot;]:::br
-A3[&quot;ZH4C: Home counselling&quot;]:::br
-A4[&quot;ZH4D: Mass counselling at the next session&quot;]:::br
-B[&quot;Set date and time slot in Zoho, status Walk-in booked&quot;]
-C[&quot;Counsellor assigned, default counsellor for the centre&quot;]
-D[&quot;WhatsApp confirmation with address and map, or the meeting link&quot;]
-F{&quot;Reconfirmed by WhatsApp at T-24h?&quot;}
-L1[[&quot;→ AI2: Reminder and No-show Call&quot;]]:::lk
-F2{&quot;Confirmed after the reminder call?&quot;}
-F3{&quot;Wants a new slot?&quot;}
-L2[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
-G[&quot;Reminders at 7 PM the day before and 8 AM on the day&quot;]
-L3[[&quot;→ ZH5: Walk-in Day and No-show&quot;]]:::lk
-E([&quot;End: booking confirmed or moved to nurture&quot;]):::se
+A{&quot;Counselling mode&quot;}
+A1[&quot;ZH7A: Centre visit&quot;]:::br
+A2[&quot;ZH7B: Online, 15 minutes, parent joins&quot;]:::br
+A3[&quot;ZH7C: Home counselling&quot;]:::br
+A4[&quot;ZH7D: Mass counselling session&quot;]:::br
+B{&quot;Slot available?&quot;}
+B1[&quot;Offer the next free slot&quot;]
+C[&quot;Date and time set, status Walk-in booked&quot;]
+D[&quot;Counsellor assigned, centre default, can be reassigned&quot;]
+F{&quot;WhatsApp reachable?&quot;}
+Lw[[&quot;→ WA6: Booking Messages&quot;]]:::lk
+F1[&quot;ZH7E: SMS and an AI confirmation call instead&quot;]:::br
+La[[&quot;→ AI2: Reminder and No-show Call&quot;]]:::lk
+E([&quot;End: booking made and confirmations running&quot;]):::se
+S --&gt; A
+A --&gt; A1 --&gt; B
+A --&gt; A2 --&gt; B
+A --&gt; A3 --&gt; B
+A --&gt; A4 --&gt; B
+B --&gt;|No| B1 --&gt; C
+B --&gt;|Yes| C
+C --&gt; D --&gt; F
+F --&gt;|Yes| Lw --&gt; E
+F --&gt;|No| F1 --&gt; La --&gt; E
+click Lw call goWF(&quot;WA6&quot;)
+click La call goWF(&quot;AI2&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH8"><div class="panel-h"><h2><span class="wf-code">ZH8</span> Counselling Day and Walk-ins</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Booked and unbooked visitors are recorded, counselled and passed on.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: counselling day, or a student walks in&quot;]):::se
+A{&quot;How did they arrive?&quot;}
+B[&quot;Shows in Today&#x27;s Walk-in view with the counsellor&#x27;s name&quot;]
+B0{&quot;Phone number already in Zoho?&quot;}
+B0a[&quot;Create the lead, source Walk-in&quot;]
+B0b[&quot;Update the lead and mark Walk-in&quot;]
+C{&quot;Arrived or joined online?&quot;}
+C1[&quot;ZH8A: Not arrived, WhatsApp 1 hour after the slot&quot;]:::br
+La[[&quot;→ AI2: Reminder and No-show Call&quot;]]:::lk
+C2{&quot;Rebooked?&quot;}
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+R[&quot;Mark Student visited&quot;]
+G{&quot;At the centre they booked?&quot;}
+G1[&quot;ZH8B: Counsel here, or transfer the lead to the preferred centre&quot;]:::br
+H[&quot;Counselling: course fit, eligibility documents, fees, placement record, parent joins if possible&quot;]
+I[&quot;Counselling done and lead quality logged&quot;]
+L9[[&quot;→ ZH9: Admission&quot;]]:::lk
+E([&quot;End: visit recorded&quot;]):::se
+S --&gt; A
+A --&gt;|Booked| B --&gt; C
+A --&gt;|No booking| B0
+B0 --&gt;|No| B0a --&gt; R
+B0 --&gt;|Yes| B0b --&gt; R
+C --&gt;|No| C1 --&gt; La --&gt; C2
+C2 --&gt;|Yes| L7 --&gt; E
+C2 --&gt;|No| L10 --&gt; E
+C --&gt;|Yes| R --&gt; G
+G --&gt;|No| G1 --&gt; H
+G --&gt;|Yes| H
+H --&gt; I --&gt; L9 --&gt; E
+click La call goWF(&quot;AI2&quot;)
+click L7 call goWF(&quot;ZH7&quot;)
+click L10 call goWF(&quot;ZH10&quot;)
+click L9 call goWF(&quot;ZH9&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH9"><div class="panel-h"><h2><span class="wf-code">ZH9</span> Admission</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">From the decision to join, through documents and fees, to day one of the batch.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: counselling done&quot;]):::se
+A{&quot;Decision&quot;}
+A1[&quot;ZH9A: Join now&quot;]:::br
+B[&quot;Admission form filled&quot;]
+C{&quot;Eligibility documents complete? marksheet, ID, licence for driver, ITI for GSE&quot;}
+C1[&quot;Missing documents listed, follow-up in 48 hours&quot;]
+C2{&quot;Received within 7 days?&quot;}
+D{&quot;Fee payment&quot;}
+D1[&quot;Full payment&quot;]
+D2[&quot;Instalment plan set, first payment recorded&quot;]
+F[&quot;Fee receipt number entered, lead converted to Admission&quot;]
+G[&quot;Documents combined into a single PDF&quot;]
+H[&quot;Course code and batch assigned, pushed to the LMS&quot;]
+I[&quot;Welcome on WhatsApp, references and a testimonial asked&quot;]
+Lr[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
+J{&quot;Joins the batch on day one?&quot;}
+J1[&quot;ZH9B: Dropout before the batch, reason and refund as per policy&quot;]:::br
+A2[&quot;ZH9C: Not now&quot;]:::br
+K{&quot;Reason&quot;}
+K1[&quot;Fee, payment options explained&quot;]
+K2[&quot;Parent decision, online counselling with the parent&quot;]
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+K3[&quot;Later batch, batch month noted&quot;]
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+K4[&quot;Joined another institute, Lost&quot;]
+A3[&quot;ZH9D: Not eligible for the chosen course&quot;]:::br
+M{&quot;Accepts another course?&quot;}
+M1[&quot;Lost, ineligible&quot;]
+E([&quot;End: student in the batch, nurtured or closed&quot;]):::se
+S --&gt; A
+A --&gt; A1 --&gt; B --&gt; C
+C --&gt;|Yes| D
+C --&gt;|No| C1 --&gt; C2
+C2 --&gt;|Yes| D
+C2 --&gt;|No| A2
+D --&gt; D1 --&gt; F
+D --&gt; D2 --&gt; F
+F --&gt; G --&gt; H --&gt; I --&gt; Lr --&gt; J
+J --&gt;|Yes| E
+J --&gt;|No| J1 --&gt; E
+A --&gt; A2 --&gt; K
+K --&gt; K1 --&gt; L10
+K --&gt; K2 --&gt; L7 --&gt; E
+K --&gt; K3 --&gt; L10 --&gt; E
+K --&gt; K4 --&gt; E
+A --&gt; A3 --&gt; M
+M --&gt;|Yes| B
+M --&gt;|No| M1 --&gt; E
+click Lr call goWF(&quot;ZH2&quot;)
+click L7 call goWF(&quot;ZH7&quot;)
+click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH10"><div class="panel-h"><h2><span class="wf-code">ZH10</span> Nurture and Reactivation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Leads not ready now stay warm until they book, stop or run out of cycles.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: lead enters nurture&quot;]):::se
+A{&quot;Nurture reason&quot;}
+A1[&quot;ZH10A: Not ready yet or a later batch&quot;]:::br
+A2[&quot;ZH10B: Upcoming centre, reactivate all parked leads at launch&quot;]:::br
+A3[&quot;ZH10C: Minor or licence pending, recontact at the eligibility date&quot;]:::br
+A4[&quot;ZH10D: No response after the retries&quot;]:::br
+B[&quot;Follow-up date set, WhatsApp content every 21 days: videos, testimonials, placements&quot;]
+La[[&quot;→ AI3: Nurture and Reactivation Call&quot;]]:::lk
+D{&quot;Response&quot;}
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
+L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
+F{&quot;Fewer than 3 cycles done?&quot;}
+G[&quot;Mark Lost, no response&quot;]
+E([&quot;End: re-engaged, stopped or closed&quot;]):::se
+S --&gt; A
+A --&gt; A1 --&gt; B
+A --&gt; A2 --&gt; B
+A --&gt; A3 --&gt; B
+A --&gt; A4 --&gt; B
+B --&gt; La --&gt; D
+D --&gt;|Interested| L7 --&gt; E
+D --&gt;|Asks to stop| L11 --&gt; E
+D --&gt;|Enquires again from another channel| L3 --&gt; E
+D --&gt;|No response| F
+F --&gt;|Yes| B
+F --&gt;|No| G --&gt; E
+click La call goWF(&quot;AI3&quot;)
+click L7 call goWF(&quot;ZH7&quot;)
+click L11 call goWF(&quot;ZH11&quot;)
+click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH11"><div class="panel-h"><h2><span class="wf-code">ZH11</span> Consent and Opt-out</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">One opt-out stops every channel at once.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: opt-out signal&quot;]):::se
+A{&quot;Where did it come from?&quot;}
+A1[&quot;ZH11A: STOP on WhatsApp&quot;]:::br
+A2[&quot;ZH11B: Asked on an AI call&quot;]:::br
+A3[&quot;ZH11C: Asked a telecaller or counsellor&quot;]:::br
+A4[&quot;ZH11D: Number on the DND register&quot;]:::br
+B[&quot;Mark DND in Zoho with date and channel&quot;]
+C[&quot;Removed from AI, WhatsApp and telecaller queues&quot;]
+D[&quot;Excluded from Meta and Google custom audiences&quot;]
+F{&quot;Contacts IESP again on their own later?&quot;}
+F1[&quot;ZH11E: Consent noted, DND lifted for the new enquiry&quot;]:::br
+L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
+E([&quot;End: preference applied&quot;]):::se
 S --&gt; A
 A --&gt; A1 --&gt; B
 A --&gt; A2 --&gt; B
 A --&gt; A3 --&gt; B
 A --&gt; A4 --&gt; B
 B --&gt; C --&gt; D --&gt; F
-F --&gt;|Yes| G
-F --&gt;|No reply| L1 --&gt; F2
-F2 --&gt;|Yes| G
-F2 --&gt;|No| F3
-F3 --&gt;|Yes| B
-F3 --&gt;|No| L2 --&gt; E
-G --&gt; L3 --&gt; E
-click L1 call goWF(&quot;AI2&quot;)
-click L2 call goWF(&quot;ZH7&quot;)
-click L3 call goWF(&quot;ZH5&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH5"><div class="panel-h"><h2><span class="wf-code">ZH5</span> Walk-in Day and No-show</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every booked walk-in is marked arrived or not arrived on the day.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+F --&gt;|Yes| F1 --&gt; L3 --&gt; E
+F --&gt;|No| E
+click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-ZH12"><div class="panel-h"><h2><span class="wf-code">ZH12</span> Daily Operations</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">What runs every day, and the reports that close the day.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: walk-in date arrives&quot;]):::se
-A[&quot;Lead shows in Today&#x27;s Walk-in view with the counsellor&#x27;s name&quot;]
-B{&quot;Arrived or joined online?&quot;}
-B1[&quot;ZH5A: Mark Not arrived&quot;]:::br
-B2[&quot;WhatsApp at T+1h: missed you, pick a new slot&quot;]
-L1[[&quot;→ AI2: Reminder and No-show Call&quot;]]:::lk
-B4{&quot;Rebooked?&quot;}
-L2[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-L3[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
-C[&quot;Mark Student visited&quot;]
-D[&quot;Counsellor logs Counselling done&quot;]
-L4[[&quot;→ ZH6: Counselling to Admission&quot;]]:::lk
-E([&quot;End: visit recorded&quot;]):::se
-S --&gt; A --&gt; B
-B --&gt;|No| B1 --&gt; B2 --&gt; L1 --&gt; B4
-B4 --&gt;|Yes| L2 --&gt; E
-B4 --&gt;|No| L3 --&gt; E
-B --&gt;|Yes| C --&gt; D --&gt; L4 --&gt; E
-click L1 call goWF(&quot;AI2&quot;)
-click L2 call goWF(&quot;ZH4&quot;)
-click L3 call goWF(&quot;ZH7&quot;)
-click L4 call goWF(&quot;ZH6&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH6"><div class="panel-h"><h2><span class="wf-code">ZH6</span> Counselling to Admission</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Each counselled student ends as admitted, nurtured or closed, with a reason.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
-classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
-classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
-classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: counselling done&quot;]):::se
-A{&quot;Outcome of counselling&quot;}
-A1[&quot;ZH6A: Admission now&quot;]:::br
-B[&quot;Admission form details captured&quot;]
-C{&quot;All documents uploaded?&quot;}
-C1[&quot;Request missing documents, follow up in 48 hours&quot;]
-C2{&quot;Received within 7 days?&quot;}
-D[&quot;Documents combined into a single PDF&quot;]
-F[&quot;Course template, course code and course name set&quot;]
-G[&quot;Fee receipt number entered and lead converted&quot;]
-H[&quot;Student pushed to the LMS&quot;]
-I[&quot;References asked from the student&quot;]
-L1[[&quot;→ ZH2: Manual and Seminar Leads&quot;]]:::lk
-A2[&quot;ZH6B: Not now, reason recorded&quot;]:::br
-J{&quot;Reason is fee or parent decision?&quot;}
-J1[&quot;Offer online counselling with the parent&quot;]
-L2[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-L3[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
-A3[&quot;ZH6C: Not eligible for the chosen course&quot;]:::br
-K{&quot;Accepts another course?&quot;}
-K1[&quot;Mark Lost with reason&quot;]
-E([&quot;End: admitted, nurtured or closed&quot;]):::se
-S --&gt; A
-A --&gt; A1 --&gt; B --&gt; C
-C --&gt;|Yes| D --&gt; F --&gt; G --&gt; H --&gt; I --&gt; L1 --&gt; E
-C --&gt;|No| C1 --&gt; C2
-C2 --&gt;|Yes| D
-C2 --&gt;|No| A2
-A --&gt; A2 --&gt; J
-J --&gt;|Yes| J1 --&gt; L2 --&gt; E
-J --&gt;|No| L3 --&gt; E
-A --&gt; A3 --&gt; K
-K --&gt;|Yes| B
-K --&gt;|No| K1 --&gt; E
-click L1 call goWF(&quot;ZH2&quot;)
-click L2 call goWF(&quot;ZH4&quot;)
-click L3 call goWF(&quot;ZH7&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH7"><div class="panel-h"><h2><span class="wf-code">ZH7</span> Nurture and Re-engagement</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Leads not ready now are contacted on a cadence until they book, opt out or run out of cycles.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
-classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
-classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
-classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: lead enters nurture&quot;]):::se
-A[&quot;Nurture tag and next follow-up date set&quot;]
-B[&quot;WhatsApp every 21 days: videos, testimonials, placements&quot;]
-L1[[&quot;→ AI3: Nurture and Out-of-state Call&quot;]]:::lk
-D{&quot;Response&quot;}
-D1[&quot;ZH7A: Interested again&quot;]:::br
-L2[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-D2[&quot;ZH7B: Asked to stop&quot;]:::br
-D3[&quot;Opt-out, stop all contact&quot;]
-D4[&quot;ZH7C: No response&quot;]:::br
-F{&quot;Fewer than 3 cycles done?&quot;}
-G[&quot;Mark Lost, no response&quot;]
-E([&quot;End: re-engaged, opted out or closed&quot;]):::se
-S --&gt; A --&gt; B --&gt; L1 --&gt; D
-D --&gt; D1 --&gt; L2 --&gt; E
-D --&gt; D2 --&gt; D3 --&gt; E
-D --&gt; D4 --&gt; F
-F --&gt;|Yes| A
-F --&gt;|No| G --&gt; E
-click L1 call goWF(&quot;AI3&quot;)
-click L2 call goWF(&quot;ZH4&quot;)</pre></div></div>
+S([&quot;Start: 9 AM&quot;]):::se
+A[&quot;Night leads acknowledged and queued&quot;]
+B[&quot;Centres check Today&#x27;s Walk-in view and counsellor assignments&quot;]
+C[&quot;Telecallers work hot leads, call-backs due and new leads&quot;]
+D[&quot;AI runs first calls, retries, reminders and nurture calls&quot;]
+F[&quot;Daily call list emailed to each centre&quot;]
+G{&quot;By 8 PM: every walk-in marked arrived or not?&quot;}
+G1[&quot;ZH12A: Centre head prompted to update before close&quot;]:::br
+H[&quot;Caller-wise report against daily targets, daily summary to Gary&quot;]
+I{&quot;Friday?&quot;}
+I1[&quot;ZH12B: Weekly review: next week&#x27;s artwork approvals and targets for leads, walk-ins and admissions&quot;]:::br
+E([&quot;End: day closed&quot;]):::se
+S --&gt; A --&gt; B --&gt; C --&gt; D --&gt; F --&gt; G
+G --&gt;|Yes| H
+G --&gt;|No| G1 --&gt; H
+H --&gt; I
+I --&gt;|Yes| I1 --&gt; E
+I --&gt;|No| E
+</pre></div></div>
 <h2 class="wf-grp">WhatsApp Bot</h2>
-<div class="panel wf-sec" id="wf-WA1"><div class="panel-h"><h2><span class="wf-code">WA1</span> Entry and Greeting</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The first seconds of the chat: source, language and who the course is for.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA1"><div class="panel-h"><h2><span class="wf-code">WA1</span> Entry and Greeting</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every WhatsApp entry point, the language, and who the course is for.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: student taps a WhatsApp link&quot;]):::se
-A[&quot;Prefilled message read, source tagged: ad, website, reel, QR, Google or direct&quot;]
-B{&quot;Number already in Zoho?&quot;}
-B1[&quot;WA1A: Link the chat to the existing lead&quot;]:::br
-B2[&quot;WA1B: Create a new lead&quot;]:::br
-C[&quot;Greeting: IESP, centres, 14,000+ placed, reply is automatic&quot;]
-D[&quot;Language chosen: English, Hindi, Marathi, Kannada or Konkani&quot;]
+S([&quot;Start: a WhatsApp chat opens&quot;]):::se
+V{&quot;Bot live, business verified?&quot;}
+Lf[[&quot;→ WA7: When the Bot Is Not Available&quot;]]:::lk
+A{&quot;Entry point&quot;}
+A1[&quot;WA1A: Click-to-WhatsApp ad&quot;]:::br
+A2[&quot;WA1B: Website button or QR on print&quot;]:::br
+A3[&quot;WA1C: Reel, Instagram bio or Google profile&quot;]:::br
+A4[&quot;WA1D: Auto-reply after a form fill or missed call&quot;]:::br
+B[&quot;Source tagged from the prefilled message&quot;]
+C{&quot;Number already in Zoho?&quot;}
+C1[&quot;Chat linked to the existing lead&quot;]
+C2[&quot;New lead created&quot;]
+G[&quot;Greeting: IESP, centres, 14,000+ placed, replies are automatic&quot;]
+H[&quot;Language chosen: English, Hindi, Marathi, Kannada or Konkani&quot;]
 F{&quot;Who is the course for?&quot;}
-F1[&quot;WA1C: Company staff, capture company and need&quot;]:::br
-F2[&quot;Hand off to the head office corporate desk&quot;]
-L1[[&quot;→ WA2: Six Questions and Cabin Crew Pre-check&quot;]]:::lk
-L2[[&quot;→ WA4: Follow-ups and Opt-out&quot;]]:::lk
-E([&quot;End: student profiled or handed off&quot;]):::se
-S --&gt; A --&gt; B
-B --&gt;|Yes| B1 --&gt; C
-B --&gt;|No| B2 --&gt; C
-C --&gt; D --&gt; F
-F --&gt;|Company staff| F1 --&gt; F2 --&gt; E
-F --&gt;|Myself or my child| L1 --&gt; E
-F --&gt;|No reply| L2 --&gt; E
-click L1 call goWF(&quot;WA2&quot;)
-click L2 call goWF(&quot;WA4&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA2"><div class="panel-h"><h2><span class="wf-code">WA2</span> Six Questions and Cabin Crew Pre-check</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Six tap-to-answer questions; anything already known is skipped.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+F1[&quot;WA1E: Company staff, company and need captured, passed to head office&quot;]:::br
+F2[&quot;WA1F: Parent chatting for a child, parent saved as contact&quot;]:::br
+L2[[&quot;→ WA2: Questions and Eligibility&quot;]]:::lk
+L4[[&quot;→ WA4: Follow-ups and STOP&quot;]]:::lk
+E([&quot;End: chat set up&quot;]):::se
+S --&gt; V
+V --&gt;|No| Lf --&gt; E
+V --&gt;|Yes| A
+A --&gt; A1 --&gt; B
+A --&gt; A2 --&gt; B
+A --&gt; A3 --&gt; B
+A --&gt; A4 --&gt; B
+B --&gt; C
+C --&gt;|Yes| C1 --&gt; G
+C --&gt;|No| C2 --&gt; G
+G --&gt; H --&gt; F
+F --&gt;|Company staff| F1 --&gt; E
+F --&gt;|My child| F2 --&gt; L2
+F --&gt;|Myself| L2
+F --&gt;|No reply| L4 --&gt; E
+L2 --&gt; E
+click Lf call goWF(&quot;WA7&quot;)
+click L2 call goWF(&quot;WA2&quot;)
+click L4 call goWF(&quot;WA4&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-WA2"><div class="panel-h"><h2><span class="wf-code">WA2</span> Questions and Eligibility</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Tap-to-answer questions; anything already known is skipped; eligibility checked per course.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: profile questions&quot;]):::se
-Q1[&quot;Q1 Course of interest&quot;]
+Q1{&quot;Q1 Course of interest&quot;}
+Q1a[&quot;WA2A: Not sure, help me choose from interest and qualification&quot;]:::br
 Q2[&quot;Q2 Area or city&quot;]
-Q3[&quot;Q3 12th result&quot;]
-Q4[&quot;Q4 When to start&quot;]
-Q5[&quot;Q5 Name&quot;]
-Q6[&quot;Q6 Parent&#x27;s contact number&quot;]
-H{&quot;Course is Cabin crew?&quot;}
-H1[&quot;WA2A: Pre-check: male or female, age band, height band&quot;]:::br
-H2{&quot;Meets the entry standard?&quot;}
-H3[&quot;WA2B: Offer Airline Handling or Airport Operations instead&quot;]:::br
-I{&quot;Area served by a centre?&quot;}
-I1[&quot;WA2C: Out of state, park the lead&quot;]:::br
-L1[[&quot;→ AI3: Nurture and Out-of-state Call&quot;]]:::lk
-J[&quot;Nearest centre set, student can type CHANGE&quot;]
-L2[[&quot;→ WA3: Next Step and Booking&quot;]]:::lk
+Q3[&quot;Q3 Qualification: 10th, 12th, graduate or ITI&quot;]
+Q4[&quot;Q4 Age&quot;]
+Q5[&quot;Q5 When to start&quot;]
+Q6[&quot;Q6 Name&quot;]
+Q7[&quot;Q7 Parent&#x27;s contact number&quot;]
+K{&quot;Course entry check&quot;}
+K1[&quot;WA2B: Cabin crew pre-check: male or female, height band&quot;]:::br
+K1a{&quot;Meets the standard?&quot;}
+K2[&quot;WA2C: Driver: LMV licence held for a year&quot;]:::br
+K2a{&quot;Has the licence?&quot;}
+K3[&quot;WA2D: GSE: ITI in mechanical or electrical&quot;]:::br
+K3a{&quot;Has ITI?&quot;}
+AG{&quot;Age within the course limit?&quot;}
+X[&quot;WA2E: Offer a course that fits&quot;]:::br
+X1{&quot;Accepts?&quot;}
+X2[&quot;Lead noted as Ineligible, nurture content only&quot;]
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+LOC{&quot;Area served by a centre?&quot;}
+LOC1[&quot;WA2F: Upcoming centre or none, offer online counselling&quot;]:::br
+LOC2[&quot;Nearest centre set, student can type CHANGE&quot;]
+L3[[&quot;→ WA3: Next Step&quot;]]:::lk
 E([&quot;End: profile complete&quot;]):::se
-S --&gt; Q1 --&gt; Q2 --&gt; Q3 --&gt; Q4 --&gt; Q5 --&gt; Q6 --&gt; H
-H --&gt;|Yes| H1 --&gt; H2
-H2 --&gt;|Yes| I
-H2 --&gt;|No| H3 --&gt; I
-H --&gt;|No| I
-I --&gt;|No| I1 --&gt; L1 --&gt; E
-I --&gt;|Yes| J --&gt; L2 --&gt; E
-click L1 call goWF(&quot;AI3&quot;)
-click L2 call goWF(&quot;WA3&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA3"><div class="panel-h"><h2><span class="wf-code">WA3</span> Next Step and Booking</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The student chooses a call or a counselling booking.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+S --&gt; Q1
+Q1 --&gt;|Chosen| Q2
+Q1 --&gt;|Not sure| Q1a --&gt; Q2
+Q2 --&gt; Q3 --&gt; Q4 --&gt; Q5 --&gt; Q6 --&gt; Q7 --&gt; K
+K --&gt;|Cabin crew| K1 --&gt; K1a
+K --&gt;|Driver| K2 --&gt; K2a
+K --&gt;|GSE| K3 --&gt; K3a
+K --&gt;|Other courses| AG
+K1a --&gt;|Yes| AG
+K1a --&gt;|No| X
+K2a --&gt;|Yes| AG
+K2a --&gt;|No| X
+K3a --&gt;|Yes| AG
+K3a --&gt;|No| X
+AG --&gt;|Yes| LOC
+AG --&gt;|No| X
+X --&gt; X1
+X1 --&gt;|Yes| LOC
+X1 --&gt;|No| X2 --&gt; L10 --&gt; E
+LOC --&gt;|Yes| LOC2 --&gt; L3
+LOC --&gt;|No| LOC1 --&gt; L3
+L3 --&gt; E
+click L10 call goWF(&quot;ZH10&quot;)
+click L3 call goWF(&quot;WA3&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-WA3"><div class="panel-h"><h2><span class="wf-code">WA3</span> Next Step</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The student chooses a call, a counselling booking or information only.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: profile complete&quot;]):::se
-A{&quot;Call me, or book counselling?&quot;}
+A{&quot;What next?&quot;}
 A1[&quot;WA3A: Call me&quot;]:::br
-B1[&quot;Zoho record updated with a five-line summary&quot;]
-B2[&quot;Counsellor calls within 90 minutes in working hours&quot;]
-L1[[&quot;→ ZH3: Telecaller First Conversation&quot;]]:::lk
+T{&quot;Working hours, 9 AM to 8 PM?&quot;}
+T1[&quot;Counsellor calls within 90 minutes&quot;]
+T2[&quot;Told the call will come after 9 AM&quot;]
+B1[&quot;Zoho updated with a five-line summary&quot;]
+L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 A2[&quot;WA3B: Book counselling&quot;]:::br
-C1{&quot;Mode: centre, online, home or mass?&quot;}
+C1{&quot;Centre, online, home or mass?&quot;}
 C2[&quot;Pick centre, day and slot&quot;]
-C3[&quot;Confirmation sent, reminders at 7 PM and 8 AM&quot;]
-L2[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-A3[&quot;WA3C: No reply&quot;]:::br
-L3[[&quot;→ WA4: Follow-ups and Opt-out&quot;]]:::lk
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+A3[&quot;WA3C: Send details only&quot;]:::br
+A3a[&quot;Brochure, fees range and course video sent&quot;]
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+A4[&quot;WA3D: No reply&quot;]:::br
+L4[[&quot;→ WA4: Follow-ups and STOP&quot;]]:::lk
 E([&quot;End: next step set&quot;]):::se
 S --&gt; A
-A --&gt; A1 --&gt; B1 --&gt; B2 --&gt; L1 --&gt; E
-A --&gt; A2 --&gt; C1 --&gt; C2 --&gt; C3 --&gt; L2 --&gt; E
-A --&gt; A3 --&gt; L3 --&gt; E
-click L1 call goWF(&quot;ZH3&quot;)
-click L2 call goWF(&quot;ZH4&quot;)
-click L3 call goWF(&quot;WA4&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA4"><div class="panel-h"><h2><span class="wf-code">WA4</span> Follow-ups and Opt-out</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Three follow-ups, then nurture; STOP ends everything at once.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+A --&gt; A1 --&gt; T
+T --&gt;|Yes| T1 --&gt; B1
+T --&gt;|No| T2 --&gt; B1
+B1 --&gt; L6 --&gt; E
+A --&gt; A2 --&gt; C1 --&gt; C2 --&gt; L7 --&gt; E
+A --&gt; A3 --&gt; A3a --&gt; L10 --&gt; E
+A --&gt; A4 --&gt; L4 --&gt; E
+click L6 call goWF(&quot;ZH6&quot;)
+click L7 call goWF(&quot;ZH7&quot;)
+click L10 call goWF(&quot;ZH10&quot;)
+click L4 call goWF(&quot;WA4&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-WA4"><div class="panel-h"><h2><span class="wf-code">WA4</span> Follow-ups and STOP</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Three follow-ups, then nurture; STOP ends everything at once.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: student stops replying&quot;]):::se
 A{&quot;STOP received?&quot;}
-A1[&quot;WA4A: Opt-out, all message sequences end&quot;]:::br
+L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
 B[&quot;Follow-up on day 1&quot;]
 B1{&quot;Reply?&quot;}
 C[&quot;Follow-up on day 3&quot;]
 C1{&quot;Reply?&quot;}
 D[&quot;Follow-up on day 7&quot;]
 D1{&quot;Reply?&quot;}
-L1[[&quot;→ WA3: Next Step and Booking&quot;]]:::lk
-L2[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
+L3[[&quot;→ WA3: Next Step&quot;]]:::lk
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 E([&quot;End: re-engaged, nurtured or opted out&quot;]):::se
 S --&gt; A
-A --&gt;|Yes| A1 --&gt; E
+A --&gt;|Yes| L11 --&gt; E
 A --&gt;|No| B --&gt; B1
-B1 --&gt;|Yes| L1
+B1 --&gt;|Yes| L3
 B1 --&gt;|No| C --&gt; C1
-C1 --&gt;|Yes| L1
+C1 --&gt;|Yes| L3
 C1 --&gt;|No| D --&gt; D1
-D1 --&gt;|Yes| L1
-D1 --&gt;|No| L2 --&gt; E
-L1 --&gt; E
-click L1 call goWF(&quot;WA3&quot;)
-click L2 call goWF(&quot;ZH7&quot;)</pre></div></div>
+D1 --&gt;|Yes| L3
+D1 --&gt;|No| L10 --&gt; E
+L3 --&gt; E
+click L11 call goWF(&quot;ZH11&quot;)
+click L3 call goWF(&quot;WA3&quot;)
+click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
 <div class="panel wf-sec" id="wf-WA5"><div class="panel-h"><h2><span class="wf-code">WA5</span> Questions and Escalation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Any question at any point is answered, noted or passed to a person.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: student asks a question&quot;]):::se
-A{&quot;Topic is money, refund, complaint or medical?&quot;}
-A1[&quot;WA5A: Flag to the centre head, a person replies&quot;]:::br
-B{&quot;Topic is fees or batch dates?&quot;}
-B1[&quot;WA5B: Noted, counsellor shares on the call&quot;]:::br
+A{&quot;Topic&quot;}
+A1[&quot;WA5A: Money, refund, complaint or medical, flagged to the centre head&quot;]:::br
+A2[&quot;WA5B: Fees or batch dates, noted for the counsellor&quot;]:::br
+A3[&quot;WA5C: Asks for a person&quot;]:::br
+L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 C{&quot;Matched in the FAQ bank?&quot;}
 C1[&quot;Answer, then repeat the open question&quot;]
 D{&quot;Second unmatched message?&quot;}
-D1[&quot;WA5C: Hand off to the counsellor&quot;]:::br
+D1[&quot;WA5D: Passed to the counsellor&quot;]:::br
 D2[&quot;Ask the student to rephrase&quot;]
-E([&quot;End: question handled, chat resumes&quot;]):::se
+E([&quot;End: question handled&quot;]):::se
 S --&gt; A
-A --&gt;|Yes| A1 --&gt; E
-A --&gt;|No| B
-B --&gt;|Yes| B1 --&gt; E
-B --&gt;|No| C
+A --&gt; A1 --&gt; E
+A --&gt; A2 --&gt; E
+A --&gt; A3 --&gt; L6 --&gt; E
+A --&gt;|General question| C
 C --&gt;|Yes| C1 --&gt; E
 C --&gt;|No| D
 D --&gt;|Yes| D1 --&gt; E
 D --&gt;|No| D2 --&gt; E
-</pre></div></div>
+click L6 call goWF(&quot;ZH6&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-WA6"><div class="panel-h"><h2><span class="wf-code">WA6</span> Booking Messages</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Confirmation, reconfirmation, reminders and no-show messages for every booking.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: counselling booked&quot;]):::se
+A[&quot;Confirmation: date, time, centre address and map, or the online link for student and parent&quot;]
+B{&quot;Reconfirm at T-24h: Yes, Reschedule or Cancel&quot;}
+B1[&quot;WA6A: No reply, AI reminder call&quot;]:::br
+La[[&quot;→ AI2: Reminder and No-show Call&quot;]]:::lk
+B2[&quot;WA6B: Reschedule&quot;]:::br
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+B3[&quot;WA6C: Cancel, reason asked&quot;]:::br
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+C[&quot;Reminders at 7 PM the day before and 8 AM on the day&quot;]
+L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
+E([&quot;End: student reminded, rebooked or cancelled&quot;]):::se
+S --&gt; A --&gt; B
+B --&gt;|Yes| C --&gt; L8 --&gt; E
+B --&gt;|No reply| B1 --&gt; La --&gt; E
+B --&gt;|Reschedule| B2 --&gt; L7 --&gt; E
+B --&gt;|Cancel| B3 --&gt; L10 --&gt; E
+click La call goWF(&quot;AI2&quot;)
+click L7 call goWF(&quot;ZH7&quot;)
+click L10 call goWF(&quot;ZH10&quot;)
+click L8 call goWF(&quot;ZH8&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-WA7"><div class="panel-h"><h2><span class="wf-code">WA7</span> When the Bot Is Not Available</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Leads keep moving while business verification is pending or the bot is down.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: bot not available&quot;]):::se
+A{&quot;Reason&quot;}
+A1[&quot;WA7A: Business verification pending or rejected, resubmit to Meta&quot;]:::br
+A2[&quot;WA7B: Outage or template not approved&quot;]:::br
+B[&quot;Incoming chats answered by the team from the business app in working hours&quot;]
+C[&quot;Lead created in Zoho by hand, source WhatsApp&quot;]
+D[&quot;First contact moved to AI call and SMS&quot;]
+La[[&quot;→ AI1: First AI Call&quot;]]:::lk
+E([&quot;End: lead still contacted&quot;]):::se
+S --&gt; A
+A --&gt; A1 --&gt; B
+A --&gt; A2 --&gt; B
+B --&gt; C --&gt; D --&gt; La --&gt; E
+click La call goWF(&quot;AI1&quot;)</pre></div></div>
 <h2 class="wf-grp">AI Call</h2>
 <div class="panel wf-sec" id="wf-AI1"><div class="panel-h"><h2><span class="wf-code">AI1</span> First AI Call</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The first call to a new lead, ending in one disposition written back to Zoho.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: lead in the AI priority queue&quot;]):::se
-A[&quot;Call within 24 hours, 9 AM to 8 PM, in the lead&#x27;s language&quot;]
+S([&quot;Start: lead in the AI queue&quot;]):::se
+A[&quot;Call in the lead&#x27;s language with the regional script: Maharashtra, Karnataka or general&quot;]
 B{&quot;Answered?&quot;}
 B1[&quot;AI1A: No answer, retry: 5 attempts over 7 days plus a WhatsApp nudge&quot;]:::br
-B2{&quot;All 5 attempts missed?&quot;}
-C[&quot;Opening: confirm the name&quot;]
-D{&quot;Right person?&quot;}
-D1[&quot;AI1B: Wrong number&quot;]:::br
-F[&quot;Introduction: IESP and the enquiry&quot;]
+B2{&quot;All 5 missed?&quot;}
+B3[&quot;AI1B: Voicemail or call dropped, retry within 1 hour&quot;]:::br
+P{&quot;Who answered?&quot;}
+P1[&quot;AI1C: Parent, speak to the parent&quot;]:::br
+P2[&quot;AI1D: Wrong number&quot;]:::br
+P3[&quot;AI1E: Language not supported, pass to a person&quot;]:::br
+F[&quot;Introduction: IESP and the enquiry, or the seminar or college for offline leads&quot;]
 G{&quot;Response&quot;}
-G1[&quot;AI1C: Busy, note the call-back time&quot;]:::br
-G2[&quot;AI1D: Not interested, polite close&quot;]:::br
+G1[&quot;AI1F: Busy, call-back time noted&quot;]:::br
+G2[&quot;AI1G: Not interested, polite close&quot;]:::br
+G3[&quot;AI1H: Asks not to be called&quot;]:::br
+G4[&quot;AI1I: Asks for a person&quot;]:::br
 H[&quot;Interest check: a career in aviation?&quot;]
 I{&quot;Answer&quot;}
-I1[&quot;AI1E: Wants a direct job only, explain the placement-linked course&quot;]:::br
-J[&quot;Qualification: 12th or graduation, course, nearest centre&quot;]
-K{&quot;Eligible for the course?&quot;}
-K1[&quot;AI1F: Ineligible, suggest another course or close&quot;]:::br
-M[&quot;Counselling pitch: centre visit or online with a parent&quot;]
+I1[&quot;AI1J: Wants a job only, explain placement-linked training&quot;]:::br
+J[&quot;Qualification, course, age and nearest centre&quot;]
+K{&quot;Eligible and near a centre?&quot;}
+K1[&quot;AI1K: Not eligible or no centre, suggest another course or online counselling&quot;]:::br
+M[&quot;Counselling pitch: centre visit, or online with a parent&quot;]
 N{&quot;Agrees?&quot;}
-N1[&quot;Confirm date and time, WhatsApp sends the details&quot;]
-N2[&quot;AI1G: Unsure, more nurturing with a follow-up date&quot;]:::br
-W[&quot;Write back to Zoho: disposition, connection status, attempts, summary, next action&quot;]
+N1[&quot;Date and time confirmed&quot;]
+N2[&quot;AI1L: Unsure, follow-up date set&quot;]:::br
+W[&quot;Written back to Zoho: disposition, connection status, attempts, summary, next action&quot;]
 X{&quot;Next action&quot;}
-L1[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-L2[[&quot;→ ZH3: Telecaller First Conversation&quot;]]:::lk
-L3[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+L5[[&quot;→ AI5: AI to Person Hand-off&quot;]]:::lk
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
 E([&quot;End: call logged&quot;]):::se
 S --&gt; A --&gt; B
-B --&gt;|No| B1 --&gt; B2
+B --&gt;|No answer| B1 --&gt; B2
 B2 --&gt;|No| A
 B2 --&gt;|Yes| W
-B --&gt;|Yes| C --&gt; D
-D --&gt;|No| D1 --&gt; W
-D --&gt;|Yes| F --&gt; G
+B --&gt;|Voicemail or dropped| B3 --&gt; A
+B --&gt;|Yes| P
+P --&gt;|The lead| F
+P --&gt;|Parent| P1 --&gt; F
+P --&gt;|Wrong number| P2 --&gt; W
+P --&gt;|Language not supported| P3 --&gt; W
+F --&gt; G
 G --&gt;|Busy| G1 --&gt; W
 G --&gt;|Not interested| G2 --&gt; W
+G --&gt;|Do not call| G3 --&gt; W
+G --&gt;|Wants a person| G4 --&gt; W
 G --&gt;|Engaged| H --&gt; I
-I --&gt;|Direct job only| I1 --&gt; J
 I --&gt;|Interested| J
+I --&gt;|Job only| I1 --&gt; J
 I --&gt;|Not interested| G2
 J --&gt; K
-K --&gt;|No| K1 --&gt; W
+K --&gt;|No| K1 --&gt; N
 K --&gt;|Yes| M --&gt; N
 N --&gt;|Yes| N1 --&gt; W
-N --&gt;|Hesitates| N2 --&gt; W
+N --&gt;|Not sure| N2 --&gt; W
+N --&gt;|No| G2
 W --&gt; X
-X --&gt;|Booked| L1 --&gt; E
-X --&gt;|Call-back or hot lead| L2 --&gt; E
-X --&gt;|Nurture| L3 --&gt; E
+X --&gt;|Booked| L7 --&gt; E
+X --&gt;|Person needed| L5 --&gt; E
+X --&gt;|Follow-up or no answer| L10 --&gt; E
+X --&gt;|Do not call| L11 --&gt; E
 X --&gt;|Closed| E
-click L1 call goWF(&quot;ZH4&quot;)
-click L2 call goWF(&quot;ZH3&quot;)
-click L3 call goWF(&quot;ZH7&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-AI2"><div class="panel-h"><h2><span class="wf-code">AI2</span> Reminder and No-show Call</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Calls that protect a booking: reconfirmation and next-morning no-show recovery.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+click L7 call goWF(&quot;ZH7&quot;)
+click L5 call goWF(&quot;AI5&quot;)
+click L10 call goWF(&quot;ZH10&quot;)
+click L11 call goWF(&quot;ZH11&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-AI2"><div class="panel-h"><h2><span class="wf-code">AI2</span> Reminder and No-show Call</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Calls that protect a booking before and after the slot.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: booked lead needs a call&quot;]):::se
 A{&quot;Call type&quot;}
 A1[&quot;AI2A: Reminder, no WhatsApp reconfirmation&quot;]:::br
+A2[&quot;AI2B: Confirmation call, no WhatsApp on the number&quot;]:::br
+A3[&quot;AI2C: No-show, next morning&quot;]:::br
 B{&quot;Answered?&quot;}
-B1[&quot;WhatsApp reminder sent instead&quot;]
-B2{&quot;Still coming?&quot;}
-B3[&quot;Slot confirmed&quot;]
-A2[&quot;AI2B: No-show, next morning&quot;]:::br
-F{&quot;Answered?&quot;}
-F1[&quot;Retry once in the evening&quot;]
-F2{&quot;Answered on retry?&quot;}
-G{&quot;Rebook?&quot;}
-G1[&quot;Reason for no-show recorded&quot;]
-W[&quot;Write back to Zoho&quot;]
+B1[&quot;Retry once in the evening, SMS sent&quot;]
+B2{&quot;Answered on retry?&quot;}
+C{&quot;Coming as booked?&quot;}
+C1[&quot;Slot confirmed&quot;]
+G{&quot;Wants a new slot?&quot;}
+G1[&quot;Reason recorded&quot;]
+W[&quot;Written back to Zoho&quot;]
 X{&quot;Result&quot;}
-L1[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
-L2[[&quot;→ ZH7: Nurture and Re-engagement&quot;]]:::lk
-E([&quot;End: booking confirmed, rebooked or nurtured&quot;]):::se
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+E([&quot;End: confirmed, rebooked or nurtured&quot;]):::se
 S --&gt; A
 A --&gt; A1 --&gt; B
-B --&gt;|No| B1 --&gt; W
-B --&gt;|Yes| B2
-B2 --&gt;|Yes| B3 --&gt; W
-B2 --&gt;|No| G
-A --&gt; A2 --&gt; F
-F --&gt;|Yes| G
-F --&gt;|No| F1 --&gt; F2
-F2 --&gt;|Yes| G
-F2 --&gt;|No| G1
+A --&gt; A2 --&gt; B
+A --&gt; A3 --&gt; B
+B --&gt;|Yes| C
+B --&gt;|No| B1 --&gt; B2
+B2 --&gt;|Yes| C
+B2 --&gt;|No| G1
+C --&gt;|Yes| C1 --&gt; W
+C --&gt;|No| G
 G --&gt;|Yes| W
 G --&gt;|No| G1 --&gt; W
 W --&gt; X
 X --&gt;|Confirmed| E
-X --&gt;|New slot| L1 --&gt; E
-X --&gt;|Not coming| L2 --&gt; E
-click L1 call goWF(&quot;ZH4&quot;)
-click L2 call goWF(&quot;ZH7&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-AI3"><div class="panel-h"><h2><span class="wf-code">AI3</span> Nurture and Out-of-state Call</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Periodic calls to parked and nurture leads until they book or stop.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+X --&gt;|New slot| L7 --&gt; E
+X --&gt;|Not coming| L10 --&gt; E
+click L7 call goWF(&quot;ZH7&quot;)
+click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-AI3"><div class="panel-h"><h2><span class="wf-code">AI3</span> Nurture and Reactivation Call</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Periodic calls to parked and nurture leads until they book or stop.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead due for a nurture call&quot;]):::se
 A{&quot;Lead type&quot;}
-A1[&quot;AI3A: Out of state, offer online counselling or the nearest centre&quot;]:::br
-A2[&quot;AI3B: Nurture, monthly check-in with placements and new batches&quot;]:::br
+A1[&quot;AI3A: Upcoming centre now open, invite to the launch counselling&quot;]:::br
+A2[&quot;AI3B: Minor turned 18 or licence received, recheck eligibility&quot;]:::br
+A3[&quot;AI3C: Later batch or not ready, update on placements and new batch&quot;]:::br
+A4[&quot;AI3D: Out of state, offer online counselling or the nearest centre&quot;]:::br
 B{&quot;Answered?&quot;}
-B1[&quot;Log RNR, next cycle date set&quot;]
+B1[&quot;Log no answer, next cycle date set&quot;]
 C{&quot;Interested now?&quot;}
 D{&quot;Asks to stop?&quot;}
-D1[&quot;AI3C: DND, stop all contact&quot;]:::br
-D2[&quot;Next cycle in 30 days&quot;]
-W[&quot;Write back to Zoho&quot;]
-L1[[&quot;→ ZH4: Counselling Booking and Confirmation&quot;]]:::lk
+D1[&quot;Next cycle in 30 days&quot;]
+W[&quot;Written back to Zoho&quot;]
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
 E([&quot;End: booked, scheduled or stopped&quot;]):::se
 S --&gt; A
 A --&gt; A1 --&gt; B
 A --&gt; A2 --&gt; B
+A --&gt; A3 --&gt; B
+A --&gt; A4 --&gt; B
 B --&gt;|No| B1 --&gt; W
 B --&gt;|Yes| C
-C --&gt;|Yes| L1 --&gt; E
+C --&gt;|Yes| L7 --&gt; W
 C --&gt;|No| D
-D --&gt;|Yes| D1 --&gt; W
-D --&gt;|No| D2 --&gt; W
+D --&gt;|Yes| L11 --&gt; W
+D --&gt;|No| D1 --&gt; W
 W --&gt; E
-click L1 call goWF(&quot;ZH4&quot;)</pre></div></div>
+click L7 call goWF(&quot;ZH7&quot;)
+click L11 call goWF(&quot;ZH11&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-AI4"><div class="panel-h"><h2><span class="wf-code">AI4</span> Missed Call Callback</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Missed calls to centre numbers, including late-night calls from the call button, are called back.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: missed call on a centre number&quot;]):::se
+A[&quot;Auto-reply on WhatsApp with calling hours and the centre number&quot;]
+B{&quot;Between 9 AM and 8 PM?&quot;}
+B1[&quot;Callback within 15 minutes&quot;]
+B2[&quot;AI4A: Night call, callback at 9 AM&quot;]:::br
+C{&quot;Number already in Zoho?&quot;}
+C1[&quot;Matched to the existing lead&quot;]
+C2[&quot;New lead, source Missed call&quot;]
+L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
+D{&quot;Answered?&quot;}
+L1[[&quot;→ AI1: First AI Call&quot;]]:::lk
+D1[&quot;Two more tries, then nurture&quot;]
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+E([&quot;End: caller reached or nurtured&quot;]):::se
+S --&gt; A --&gt; B
+B --&gt;|Yes| B1 --&gt; C
+B --&gt;|No| B2 --&gt; C
+C --&gt;|Yes| C1 --&gt; D
+C --&gt;|No| C2 --&gt; L3 --&gt; D
+D --&gt;|Yes| L1 --&gt; E
+D --&gt;|No| D1 --&gt; L10 --&gt; E
+click L3 call goWF(&quot;ZH3&quot;)
+click L1 call goWF(&quot;AI1&quot;)
+click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
+<div class="panel wf-sec" id="wf-AI5"><div class="panel-h"><h2><span class="wf-code">AI5</span> AI to Person Hand-off</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">When the AI passes a lead to a person, and what the person receives.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
+classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
+classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
+S([&quot;Start: AI flags a hand-off&quot;]):::se
+A{&quot;Reason&quot;}
+A1[&quot;AI5A: Interested but no date&quot;]:::br
+A2[&quot;AI5B: Parent decision pending&quot;]:::br
+A3[&quot;AI5C: Asked for a person or language not supported&quot;]:::br
+A4[&quot;AI5D: Complaint or upset caller&quot;]:::br
+A5[&quot;AI5E: Hot lead, wants to join soon&quot;]:::br
+B[&quot;Hand-off note in Zoho: call summary, recording link, best time to call&quot;]
+C{&quot;Who takes it?&quot;}
+C1[&quot;Telecaller the same day&quot;]
+C2[&quot;Centre head the same day&quot;]
+C3[&quot;Counsellor within 2 hours&quot;]
+L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
+E([&quot;End: a person owns the lead&quot;]):::se
+S --&gt; A
+A --&gt; A1 --&gt; B
+A --&gt; A2 --&gt; B
+A --&gt; A3 --&gt; B
+A --&gt; A4 --&gt; B
+A --&gt; A5 --&gt; B
+B --&gt; C
+C --&gt;|Interested, parent or language| C1 --&gt; L6
+C --&gt;|Complaint| C2 --&gt; E
+C --&gt;|Hot lead| C3 --&gt; L6
+L6 --&gt; E
+click L6 call goWF(&quot;ZH6&quot;)</pre></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
 <script>
 window.goWF=function(c){const t=c==='TOP'?document.getElementById('wf-index'):document.getElementById('wf-'+c);if(!t)return;t.scrollIntoView({behavior:'smooth',block:'start'});if(c!=='TOP'){t.classList.add('wf-hl');setTimeout(()=>t.classList.remove('wf-hl'),1600)}};
