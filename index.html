@@ -473,63 +473,91 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 
 <!-- WORKFLOWS -->
 <section class="tab" id="t-workflows" role="tabpanel" aria-label="Workflows" hidden>
-<div class="panel" id="wf-index"><div class="panel-h"><h2>Workflows</h2></div><p class="note">Each flowchart has one Start and one End. Codes: ZH for Zoho, WA for the WhatsApp bot, AI for AI calls; a branch adds a letter (ZH1A, ZH1B). Click any blue box to jump to the flowchart it hands over to.</p><div class="wf-leg"><span><i class="lg se"></i>Start / End</span><span><i class="lg pr"></i>Step</span><span><i class="lg dc"></i>Decision</span><span><i class="lg br"></i>Branch (ZH1A, WA2B…)</span><span><i class="lg lk"></i>Link to another flowchart (click)</span></div><div class="wfn-wrap"><div class="wfn-g"><span class="wfn-h">Overview</span><button type="button" class="wfn" onclick="goWF('OV')"><b>OV</b> How the Flowcharts Connect</button></div><div class="wfn-g"><span class="wfn-h">Zoho</span><button type="button" class="wfn" onclick="goWF('ZH1')"><b>ZH1</b> Digital Lead Capture</button><button type="button" class="wfn" onclick="goWF('ZH2')"><b>ZH2</b> Offline Lead Capture</button><button type="button" class="wfn" onclick="goWF('ZH3')"><b>ZH3</b> Lead Matching and Attribution</button><button type="button" class="wfn" onclick="goWF('ZH4')"><b>ZH4</b> Qualification and Routing</button><button type="button" class="wfn" onclick="goWF('ZH5')"><b>ZH5</b> Who Contacts the Lead</button><button type="button" class="wfn" onclick="goWF('ZH6')"><b>ZH6</b> Telecaller Conversation</button><button type="button" class="wfn" onclick="goWF('ZH7')"><b>ZH7</b> Counselling Booking and Confirmation</button><button type="button" class="wfn" onclick="goWF('ZH8')"><b>ZH8</b> Counselling Day and Walk-ins</button><button type="button" class="wfn" onclick="goWF('ZH9')"><b>ZH9</b> Admission</button><button type="button" class="wfn" onclick="goWF('ZH10')"><b>ZH10</b> Nurture and Reactivation</button><button type="button" class="wfn" onclick="goWF('ZH11')"><b>ZH11</b> Consent and Opt-out</button><button type="button" class="wfn" onclick="goWF('ZH12')"><b>ZH12</b> Daily Operations</button></div><div class="wfn-g"><span class="wfn-h">WhatsApp Bot</span><button type="button" class="wfn" onclick="goWF('WA1')"><b>WA1</b> Entry and Greeting</button><button type="button" class="wfn" onclick="goWF('WA2')"><b>WA2</b> Questions and Eligibility</button><button type="button" class="wfn" onclick="goWF('WA3')"><b>WA3</b> Next Step</button><button type="button" class="wfn" onclick="goWF('WA4')"><b>WA4</b> Follow-ups and STOP</button><button type="button" class="wfn" onclick="goWF('WA5')"><b>WA5</b> Questions and Escalation</button><button type="button" class="wfn" onclick="goWF('WA6')"><b>WA6</b> Booking Messages</button><button type="button" class="wfn" onclick="goWF('WA7')"><b>WA7</b> When the Bot Is Not Available</button></div><div class="wfn-g"><span class="wfn-h">AI Call</span><button type="button" class="wfn" onclick="goWF('AI1')"><b>AI1</b> First AI Call</button><button type="button" class="wfn" onclick="goWF('AI2')"><b>AI2</b> Reminder and No-show Call</button><button type="button" class="wfn" onclick="goWF('AI3')"><b>AI3</b> Nurture and Reactivation Call</button><button type="button" class="wfn" onclick="goWF('AI4')"><b>AI4</b> Missed Call Callback</button><button type="button" class="wfn" onclick="goWF('AI5')"><b>AI5</b> AI to Person Hand-off</button></div></div></div>
+<div class="panel" id="wf-index"><div class="panel-h"><h2>Workflows</h2></div><p class="note">Each flowchart has one Start and one End. Codes: ZH for Zoho, WA for the WhatsApp bot, AI for AI calls; a branch adds a letter (ZH1A, ZH1B). Click any blue box to jump to the flowchart it hands over to.</p><div class="wf-leg"><span><i class="lg se"></i>Start / End</span><span><i class="lg pr"></i>Step</span><span><i class="lg dc"></i>Decision</span><span><i class="lg br"></i>Branch (ZH1A, WA2B…)</span><span><i class="lg lk"></i>Link to another flowchart (click)</span></div><div class="wfn-wrap"><div class="wfn-g"><span class="wfn-h">Overview</span><button type="button" class="wfn" onclick="goWF('OV')"><b>OV</b> Main Lead Journey</button></div><div class="wfn-g"><span class="wfn-h">Zoho</span><button type="button" class="wfn" onclick="goWF('ZH1')"><b>ZH1</b> Digital Lead Capture</button><button type="button" class="wfn" onclick="goWF('ZH2')"><b>ZH2</b> Offline Lead Capture</button><button type="button" class="wfn" onclick="goWF('ZH3')"><b>ZH3</b> Lead Matching and Attribution</button><button type="button" class="wfn" onclick="goWF('ZH4')"><b>ZH4</b> Qualification and Routing</button><button type="button" class="wfn" onclick="goWF('ZH5')"><b>ZH5</b> Who Contacts the Lead</button><button type="button" class="wfn" onclick="goWF('ZH6')"><b>ZH6</b> Telecaller Conversation</button><button type="button" class="wfn" onclick="goWF('ZH7')"><b>ZH7</b> Counselling Booking and Confirmation</button><button type="button" class="wfn" onclick="goWF('ZH8')"><b>ZH8</b> Counselling Day and Walk-ins</button><button type="button" class="wfn" onclick="goWF('ZH9')"><b>ZH9</b> Admission</button><button type="button" class="wfn" onclick="goWF('ZH10')"><b>ZH10</b> Nurture and Reactivation</button><button type="button" class="wfn" onclick="goWF('ZH11')"><b>ZH11</b> Consent and Opt-out</button><button type="button" class="wfn" onclick="goWF('ZH12')"><b>ZH12</b> Daily Operations</button></div><div class="wfn-g"><span class="wfn-h">WhatsApp Bot</span><button type="button" class="wfn" onclick="goWF('WA1')"><b>WA1</b> Entry and Greeting</button><button type="button" class="wfn" onclick="goWF('WA2')"><b>WA2</b> Questions and Eligibility</button><button type="button" class="wfn" onclick="goWF('WA3')"><b>WA3</b> Next Step</button><button type="button" class="wfn" onclick="goWF('WA4')"><b>WA4</b> Follow-ups and STOP</button><button type="button" class="wfn" onclick="goWF('WA5')"><b>WA5</b> Questions and Escalation</button><button type="button" class="wfn" onclick="goWF('WA6')"><b>WA6</b> Booking Messages</button><button type="button" class="wfn" onclick="goWF('WA7')"><b>WA7</b> When the Bot Is Not Available</button></div><div class="wfn-g"><span class="wfn-h">AI Call</span><button type="button" class="wfn" onclick="goWF('AI1')"><b>AI1</b> First AI Call</button><button type="button" class="wfn" onclick="goWF('AI2')"><b>AI2</b> Reminder and No-show Call</button><button type="button" class="wfn" onclick="goWF('AI3')"><b>AI3</b> Nurture and Reactivation Call</button><button type="button" class="wfn" onclick="goWF('AI4')"><b>AI4</b> Missed Call Callback</button><button type="button" class="wfn" onclick="goWF('AI5')"><b>AI5</b> AI to Person Hand-off</button></div></div></div>
 <h2 class="wf-grp">Overview</h2>
-<div class="panel wf-sec" id="wf-OV"><div class="panel-h"><h2><span class="wf-code">OV</span> How the Flowcharts Connect</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every enquiry, from any channel, ends as admitted, nurtured, closed or opted out.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-OV"><div class="panel-h"><h2><span class="wf-code">OV</span> Main Lead Journey</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The agreed journey from the 17 October review: lead entry, routing, counselling booking, walk-in, counselling, admission, with seminar entry feeding step 1.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: someone shows interest or a day begins&quot;]):::se
-A{&quot;What is happening?&quot;}
-L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
+S([&quot;Start: lead comes in from Meta, WhatsApp, a seminar or offline&quot;]):::se
+SE[&quot;Seminar entry: seminar from the monthly calendar, Zoho form filled with source Seminar and the college from the dropdown&quot;]
 L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
+S1[&quot;1. Lead entry: lead entered in Zoho with source, centre, territory and the name of whoever entered it&quot;]
+L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
+L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
+D1{&quot;Out of state?&quot;}
+P1[&quot;Park the lead&quot;]
+La3[[&quot;→ AI3: Nurture and Reactivation Call&quot;]]:::lk
+S2[&quot;2. Routing: centre and territory assigned&quot;]
+L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
+D2{&quot;Bot or human caller?&quot;}
+B1[&quot;WhatsApp chatbot with videos, testimonials and the reel&quot;]
+Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
+H1[&quot;Telecaller at the Khalapur call centre&quot;]
+L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
+S3[&quot;3. Counselling booking&quot;]
+D3{&quot;Counselling type?&quot;}
+C1[&quot;Centre visit, walk-in&quot;]
+C2[&quot;Online, 15 minutes, parents mandatory&quot;]
+C3[&quot;Home counselling&quot;]
+C4[&quot;Mass counselling&quot;]
+C5[&quot;WhatsApp confirmation, then reconfirmation&quot;]
+C6[&quot;Counsellor assigned&quot;]
+L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
+D4{&quot;4. Walk-in: arrived?&quot;}
+N1[&quot;No-show follow-up&quot;]
+D4b{&quot;Rebook?&quot;}
+L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
+S5[&quot;5. Counselling done&quot;]
+D5{&quot;Admission?&quot;}
+R1[&quot;Reason captured in stages&quot;]
+R2[&quot;Follow-up&quot;]
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+S6[&quot;6. Admission: process, documents uploaded as one PDF, admission details, admission done&quot;]
+S6a[&quot;References asked&quot;]
+S6b[&quot;Data flows to the LMS&quot;]
+L9[[&quot;→ ZH9: Admission&quot;]]:::lk
+Lq[[&quot;→ WA5: Questions and Escalation&quot;]]:::lk
 L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
 L12[[&quot;→ ZH12: Daily Operations&quot;]]:::lk
-Lq[[&quot;→ WA5: Questions and Escalation&quot;]]:::lk
-L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
-L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
-L5[[&quot;→ ZH5: Who Contacts the Lead&quot;]]:::lk
-B{&quot;Who makes first contact?&quot;}
-La[[&quot;→ AI1: First AI Call&quot;]]:::lk
-Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
-L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-Lm[[&quot;→ AI4: Missed Call Callback&quot;]]:::lk
-C{&quot;Agreed to counselling?&quot;}
-L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
-L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
-L9[[&quot;→ ZH9: Admission&quot;]]:::lk
-L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
-E([&quot;End: admitted, nurtured, closed or opted out&quot;]):::se
-S --&gt; A
-A --&gt;|Digital enquiry| L1 --&gt; L3
-A --&gt;|Offline enquiry or list| L2 --&gt; L3
-A --&gt;|Opt-out or DND request| L11 --&gt; E
-A --&gt;|Daily routine| L12 --&gt; E
-A --&gt;|Question on WhatsApp at any point| Lq --&gt; E
-L3 --&gt; L4 --&gt; L5 --&gt; B
-B --&gt;|AI call| La --&gt; C
-B --&gt;|WhatsApp bot| Lw --&gt; C
-B --&gt;|Telecaller| L6 --&gt; C
-B --&gt;|Missed call back| Lm --&gt; C
-C --&gt;|Yes| L7 --&gt; L8 --&gt; L9 --&gt; E
-C --&gt;|Not yet| L10 --&gt; E
-C --&gt;|Closed| E
-click L1 call goWF(&quot;ZH1&quot;)
+E([&quot;End&quot;]):::se
+S --&gt;|Seminar| SE --&gt; L2 --&gt; S1
+S --&gt;|Meta, WhatsApp, offline| S1
+S1 --&gt; L1 --&gt; L3 --&gt; D1
+D1 --&gt;|Yes| P1 --&gt; La3 --&gt; E
+D1 --&gt;|No| S2 --&gt; L4 --&gt; D2
+D2 --&gt;|Bot| B1 --&gt; Lw --&gt; S3
+D2 --&gt;|Human| H1 --&gt; L6 --&gt; S3
+S3 --&gt; D3
+D3 --&gt; C1 --&gt; C5
+D3 --&gt; C2 --&gt; C5
+D3 --&gt; C3 --&gt; C5
+D3 --&gt; C4 --&gt; C5
+C5 --&gt; C6 --&gt; L7 --&gt; D4
+D4 --&gt;|Yes| L8 --&gt; S5
+D4 --&gt;|No| N1 --&gt; D4b
+D4b --&gt;|Yes| S3
+D4b --&gt;|No, end the loop| E
+S5 --&gt; D5
+D5 --&gt;|Yes| S6 --&gt; S6a --&gt; S6b --&gt; L9 --&gt; E
+D5 --&gt;|No| R1 --&gt; R2 --&gt; L10 --&gt; E
+S --&gt;|Question on WhatsApp| Lq --&gt; E
+S --&gt;|Opt-out request| L11 --&gt; E
+S --&gt;|Daily routine| L12 --&gt; E
 click L2 call goWF(&quot;ZH2&quot;)
-click L11 call goWF(&quot;ZH11&quot;)
-click L12 call goWF(&quot;ZH12&quot;)
-click Lq call goWF(&quot;WA5&quot;)
+click L1 call goWF(&quot;ZH1&quot;)
 click L3 call goWF(&quot;ZH3&quot;)
+click La3 call goWF(&quot;AI3&quot;)
 click L4 call goWF(&quot;ZH4&quot;)
-click L5 call goWF(&quot;ZH5&quot;)
-click La call goWF(&quot;AI1&quot;)
 click Lw call goWF(&quot;WA1&quot;)
 click L6 call goWF(&quot;ZH6&quot;)
-click Lm call goWF(&quot;AI4&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L8 call goWF(&quot;ZH8&quot;)
+click L10 call goWF(&quot;ZH10&quot;)
 click L9 call goWF(&quot;ZH9&quot;)
-click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
+click Lq call goWF(&quot;WA5&quot;)
+click L11 call goWF(&quot;ZH11&quot;)
+click L12 call goWF(&quot;ZH12&quot;)</pre></div></div>
 <h2 class="wf-grp">Zoho</h2>
 <div class="panel wf-sec" id="wf-ZH1"><div class="panel-h"><h2><span class="wf-code">ZH1</span> Digital Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every digital channel lands in Zoho with its source, time and campaign.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
@@ -583,7 +611,7 @@ A{&quot;Which source?&quot;}
 A1[&quot;ZH2A: Seminar or college visit&quot;]:::br
 A1a{&quot;On the monthly seminar calendar?&quot;}
 A1b[&quot;Centre adds it to the calendar, SOP shared&quot;]
-A1c[&quot;Leads captured live on the Zoho form&quot;]
+A1c[&quot;Zoho form filled at the seminar: source Seminar, college from the dropdown&quot;]
 A2[&quot;ZH2B: Booth or field activation&quot;]:::br
 A2a[&quot;Field form: name, age, phone, Aadhaar, course&quot;]
 A3[&quot;ZH2C: College data sheet or list from IESP&quot;]:::br
@@ -682,7 +710,8 @@ D2[&quot;ZH4G: Near an upcoming centre (Rewa, Indore), park until launch&quot;]:
 L10c[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 D3[&quot;ZH4H: No centre nearby, offer online counselling or the nearest centre&quot;]:::br
 D4{&quot;Open to it?&quot;}
-D5[&quot;Mark Out of state&quot;]
+D5[&quot;ZH4J: Out of state, park the lead&quot;]:::br
+La3[[&quot;→ AI3: Nurture and Reactivation Call&quot;]]:::lk
 D6[&quot;ZH4I: Wrong centre chosen, transfer, territory follows&quot;]:::br
 F[&quot;Language set: Marathi, Kannada, Hindi, Gujarati, Konkani or English&quot;]
 G[&quot;Lead quality tag: good, average or poor&quot;]
@@ -690,33 +719,35 @@ L5[[&quot;→ ZH5: Who Contacts the Lead&quot;]]:::lk
 E([&quot;End: lead qualified, parked or closed&quot;]):::se
 S --&gt; J
 J --&gt;|Yes| J1 --&gt; E
-J --&gt;|No| A
+J --&gt;|No| D
 A --&gt;|Under 18| A1 --&gt; L10a --&gt; E
 A --&gt;|Over the limit| A2 --&gt; A3
 A --&gt;|Within limit or not known yet| C
-A3 --&gt;|Yes| D
+A3 --&gt;|Yes| F
 A3 --&gt;|No| A4 --&gt; E
 C --&gt;|Cabin crew standard not met| C1 --&gt; A3
 C --&gt;|No driving licence| C2 --&gt; L10b --&gt; E
 C --&gt;|No ITI for GSE| C3 --&gt; A3
-C --&gt;|Met or not known yet| D
+C --&gt;|Met or not known yet| F
 D --&gt;|Near an open centre| D1
 D --&gt;|Near an upcoming centre| D2 --&gt; L10c --&gt; E
 D --&gt;|No centre nearby| D3 --&gt; D4
 D --&gt;|Wrong centre| D6 --&gt; D1
 D4 --&gt;|Yes| D1
-D4 --&gt;|No| D5 --&gt; E
-D1 --&gt; F --&gt; G --&gt; L5 --&gt; E
+D4 --&gt;|No| D5 --&gt; La3 --&gt; E
+D1 --&gt; A
+F --&gt; G --&gt; L5 --&gt; E
 click L10a call goWF(&quot;ZH10&quot;)
 click L10b call goWF(&quot;ZH10&quot;)
 click L10c call goWF(&quot;ZH10&quot;)
+click La3 call goWF(&quot;AI3&quot;)
 click L5 call goWF(&quot;ZH5&quot;)</pre></div></div>
 <div class="panel wf-sec" id="wf-ZH5"><div class="panel-h"><h2><span class="wf-code">ZH5</span> Who Contacts the Lead</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The first contact is decided by lead type: AI, WhatsApp or a person.</p><div class="wf-chart"><pre class="mermaid">flowchart LR
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: qualified lead&quot;]):::se
-A{&quot;Lead type&quot;}
+A{&quot;Bot or human caller? decided by lead type&quot;}
 A1[&quot;ZH5A: Asked for a call in the WhatsApp bot&quot;]:::br
 A1a[&quot;Counsellor calls within 90 minutes in working hours&quot;]
 L6a[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
@@ -766,7 +797,7 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead in Telecaller My Queue&quot;]):::se
-Q[&quot;Queue by centre: hot leads, call-backs due today, new leads from the last 48 hours, no driver leads&quot;]
+Q[&quot;Telecaller at the Khalapur central call centre. Queue by centre: hot leads, call-backs due today, new leads from the last 48 hours, no driver leads&quot;]
 A[&quot;Read the AI call summary and WhatsApp answers&quot;]
 B[&quot;Call, log caller name and call time&quot;]
 C{&quot;Connected?&quot;}
@@ -948,7 +979,7 @@ C2 --&gt;|Yes| D
 C2 --&gt;|No| A2
 D --&gt; D1 --&gt; F
 D --&gt; D2 --&gt; F
-F --&gt; G --&gt; H --&gt; I --&gt; Lr --&gt; J
+F --&gt; G --&gt; I --&gt; Lr --&gt; H --&gt; J
 J --&gt;|Yes| E
 J --&gt;|No| J1 --&gt; E
 A --&gt; A2 --&gt; K
@@ -1065,6 +1096,7 @@ C1[&quot;Chat linked to the existing lead&quot;]
 C2[&quot;New lead created&quot;]
 G[&quot;Greeting: IESP, centres, 14,000+ placed, replies are automatic&quot;]
 H[&quot;Language chosen: English, Hindi, Marathi, Kannada or Konkani&quot;]
+H2[&quot;Intro video, student testimonials and the Tejasvi Surya reel shared&quot;]
 F{&quot;Who is the course for?&quot;}
 F1[&quot;WA1E: Company staff, company and need captured, passed to head office&quot;]:::br
 F2[&quot;WA1F: Parent chatting for a child, parent saved as contact&quot;]:::br
@@ -1081,7 +1113,7 @@ A --&gt; A4 --&gt; B
 B --&gt; C
 C --&gt;|Yes| C1 --&gt; G
 C --&gt;|No| C2 --&gt; G
-G --&gt; H --&gt; F
+G --&gt; H --&gt; H2 --&gt; F
 F --&gt;|Company staff| F1 --&gt; E
 F --&gt;|My child| F2 --&gt; L2
 F --&gt;|Myself| L2
