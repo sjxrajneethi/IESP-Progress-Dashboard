@@ -480,7 +480,7 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead comes in from Meta, WhatsApp, a seminar or offline&quot;]):::se
-SE[&quot;Seminar entry: seminar from the monthly calendar, Zoho form filled with source Seminar and the college from the dropdown&quot;]
+SE[&quot;Seminar entry: mass counselling at a seminar or college visit from the monthly calendar, Zoho form filled with source Seminar and the college from the dropdown&quot;]
 L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
 S1[&quot;1. Lead entry: lead entered in Zoho with source, centre, territory and the name of whoever entered it&quot;]
 L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
@@ -508,7 +508,6 @@ D3{&quot;Counselling type?&quot;}
 C1[&quot;Centre visit, walk-in&quot;]
 C2[&quot;Online, 15 minutes, parents mandatory&quot;]
 C3[&quot;Home counselling&quot;]
-C4[&quot;Mass counselling&quot;]
 C5[&quot;WhatsApp confirmation, then reconfirmation&quot;]
 C6[&quot;Counsellor assigned&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
@@ -548,7 +547,6 @@ S3 --&gt; D3
 D3 --&gt; C1 --&gt; C5
 D3 --&gt; C2 --&gt; C5
 D3 --&gt; C3 --&gt; C5
-D3 --&gt; C4 --&gt; C5
 C5 --&gt; C6 --&gt; L7 --&gt; D4
 D4 --&gt;|Yes| L8 --&gt; S5
 D4 --&gt;|No| N1 --&gt; D4b
@@ -627,10 +625,11 @@ classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: offline enquiry or list&quot;]):::se
 A{&quot;Which source?&quot;}
-A1[&quot;ZH2A: Seminar or college visit&quot;]:::br
+A1[&quot;ZH2A: Mass counselling: seminar or college visit&quot;]:::br
 A1a{&quot;On the monthly seminar calendar?&quot;}
 A1b[&quot;Centre adds it to the calendar, SOP shared&quot;]
-A1c[&quot;Zoho form filled at the seminar: source Seminar, college from the dropdown&quot;]
+A1d[&quot;Counsellor runs the session for the group: courses, airport jobs, placements&quot;]
+A1c[&quot;Zoho form filled by each student at the session: source Seminar, college from the dropdown&quot;]
 A2[&quot;ZH2B: Booth or field activation&quot;]:::br
 A2a[&quot;Field form: name, age, phone, Aadhaar, course&quot;]
 A3[&quot;ZH2C: College data sheet or list from IESP&quot;]:::br
@@ -653,8 +652,9 @@ L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
 E([&quot;End: offline lead in Zoho&quot;]):::se
 S --&gt; A
 A --&gt; A1 --&gt; A1a
-A1a --&gt;|No| A1b --&gt; A1c
-A1a --&gt;|Yes| A1c
+A1a --&gt;|No| A1b --&gt; A1d
+A1a --&gt;|Yes| A1d
+A1d --&gt; A1c
 A1c --&gt; V
 A --&gt; A2 --&gt; A2a --&gt; V
 A --&gt; A3 --&gt; A3a --&gt; V
@@ -892,20 +892,18 @@ A{&quot;Counselling mode&quot;}
 A1[&quot;ZH7A: Centre visit&quot;]:::br
 A2[&quot;ZH7B: Online, 15 minutes, parent joins&quot;]:::br
 A3[&quot;ZH7C: Home counselling&quot;]:::br
-A4[&quot;ZH7D: Mass counselling session&quot;]:::br
 B{&quot;Slot available?&quot;}
 B1[&quot;Offer the next free slot&quot;]
 C[&quot;Date and time set, status Walk-in booked&quot;]
 D[&quot;Counsellor assigned, centre default, can be reassigned&quot;]
 F{&quot;WhatsApp reachable?&quot;}
 Lw[[&quot;→ WA6: Booking Messages&quot;]]:::lk
-F1[&quot;ZH7E: SMS and a telecaller confirmation call instead&quot;]:::br
+F1[&quot;ZH7D: SMS and a telecaller confirmation call instead&quot;]:::br
 E([&quot;End: booking made and confirmations running&quot;]):::se
 S --&gt; A
 A --&gt; A1 --&gt; B
 A --&gt; A2 --&gt; B
 A --&gt; A3 --&gt; B
-A --&gt; A4 --&gt; B
 B --&gt;|No| B1 --&gt; C
 B --&gt;|Yes| C
 C --&gt; D --&gt; F
@@ -1208,7 +1206,7 @@ T2[&quot;Told the call will come after 9 AM&quot;]
 B1[&quot;Zoho updated with a five-line summary&quot;]
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 A2[&quot;WA3B: Book counselling&quot;]:::br
-C1{&quot;Centre, online, home or mass?&quot;}
+C1{&quot;Centre, online or home?&quot;}
 C2[&quot;Pick centre, day and slot&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 A3[&quot;WA3C: Send details only&quot;]:::br
