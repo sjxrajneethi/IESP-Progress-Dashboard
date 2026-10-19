@@ -505,7 +505,8 @@ SG{&quot;Signed off by IESP?&quot;}
 BU[&quot;Bulk upload to Zoho&quot;]
 S1[&quot;1. Lead entry in Zoho&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
-R3[&quot;2. Routing: centre and territory assigned&quot;]
+R3{&quot;2. Select channel by business rules&quot;}
+La1[[&quot;→ AI1: AI Call Script&quot;]]:::lk
 P1[&quot;Out of state: park the lead&quot;]
 La5[[&quot;→ AI5: Parked Out-of-state Follow-up&quot;]]:::lk
 L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
@@ -515,13 +516,20 @@ L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 Lb[[&quot;→ AI2: Bulk Uploaded Leads&quot;]]:::lk
 I{&quot;Call outcome?&quot;}
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
-S3[&quot;3. Counselling booking&quot;]
+AT{&quot;Attempts left?&quot;}
+CL[&quot;Close: wrong number, DND or declined&quot;]
+S3[&quot;3. Call to action: walk-in, online with parent, district day or doorstep&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
-D4{&quot;4. Walk-in: arrived?&quot;}
+S4[&quot;4. Appointment confirmed: reminders and reconfirmation&quot;]
+Lw6[[&quot;→ WA6: Booking Messages&quot;]]:::lk
+D4{&quot;5. Showed up?&quot;}
+RB{&quot;Rebooked?&quot;}
 L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
-S5[&quot;5. Counselling done&quot;]
+S5[&quot;6. Counselling done&quot;]
 D5{&quot;Admission?&quot;}
-S6[&quot;6. Admission&quot;]
+LQ{&quot;Lost?&quot;}
+CL2[&quot;Close: ineligible, joined elsewhere or declined&quot;]
+S6[&quot;7. Admission&quot;]
 L9[[&quot;→ ZH9: Admission&quot;]]:::lk
 E([&quot;End&quot;]):::se
 S --&gt; A
@@ -532,21 +540,36 @@ L1 --&gt; S1
 L2 --&gt; SN --&gt; SG
 SG --&gt;|Yes| BU --&gt; Lwa --&gt; Lb
 SG --&gt;|Changes| SN
-S1 --&gt; L3 --&gt; R3 --&gt; L4 --&gt; Lwb
-Lwb --&gt; L6 --&gt; I
+S1 --&gt; L3 --&gt; L4 --&gt; R3
+R3 --&gt;|High intent| L6
+R3 --&gt;|Default| La1
+R3 --&gt;|Chat-origin| Lwb
+L6 --&gt; I
+La1 --&gt; I
+Lwb --&gt; I
 Lb --&gt; I
-I --&gt;|Not now| L10 --&gt; E
+I --&gt;|First conversation done| S3
+I --&gt;|Call back or no answer| AT
+AT --&gt;|Yes, re-run rules| R3
+AT --&gt;|No| L10
+I --&gt;|Wrong number, DND or declined| CL --&gt; E
+I --&gt;|Not now| L10
 I --&gt;|Out of state| P1 --&gt; La5 --&gt; E
-I --&gt;|Interested| S3 --&gt; L7 --&gt; D4
-D4 --&gt;|Yes| L8 --&gt; S5
-D4 --&gt;|No-show, rebooked| S3
-D4 --&gt;|No-show, not rebooked| L10
-S5 --&gt; D5
+S3 --&gt; L7 --&gt; S4 --&gt; Lw6 --&gt; D4
+D4 --&gt;|No-show| RB
+RB --&gt;|Yes| S4
+RB --&gt;|No| L10
+D4 --&gt;|Yes| L8 --&gt; S5 --&gt; D5
 D5 --&gt;|Yes| S6 --&gt; L9 --&gt; E
-D5 --&gt;|No| L10
+D5 --&gt;|No| LQ
+LQ --&gt;|Yes| CL2 --&gt; E
+LQ --&gt;|No| L10
+L10 --&gt;|Ready to book| S3
+L10 --&gt;|No response| E
 click L1 call goWF(&quot;ZH1&quot;)
 click L2 call goWF(&quot;ZH2&quot;)
 click L3 call goWF(&quot;ZH3&quot;)
+click La1 call goWF(&quot;AI1&quot;)
 click La5 call goWF(&quot;AI5&quot;)
 click L4 call goWF(&quot;ZH4&quot;)
 click Lwa call goWF(&quot;WA1&quot;)
@@ -555,6 +578,7 @@ click L6 call goWF(&quot;ZH6&quot;)
 click Lb call goWF(&quot;AI2&quot;)
 click L10 call goWF(&quot;ZH10&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
+click Lw6 call goWF(&quot;WA6&quot;)
 click L8 call goWF(&quot;ZH8&quot;)
 click L9 call goWF(&quot;ZH9&quot;)</pre></div></div>
 <h2 class="wf-grp">Zoho</h2>
