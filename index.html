@@ -792,7 +792,6 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead in Telecaller My Queue&quot;]):::se
-Q[&quot;Telecaller at the Khalapur central call centre. Queue by centre: hot leads, call-backs due today, new leads from the last 48 hours, driver leads under the Driver filter&quot;]
 A[&quot;Read the AI call summary and WhatsApp answers&quot;]
 B[&quot;Call, log caller name and call time&quot;]
 C{&quot;Connected?&quot;}
@@ -830,7 +829,7 @@ D12[&quot;ZH6P: Asks not to be contacted&quot;]:::br
 L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
 W[&quot;Disposition saved, status updates automatically, comment added on a new line&quot;]
 E([&quot;End: call logged&quot;]):::se
-S --&gt; Q --&gt; A --&gt; B --&gt; C
+S --&gt; A --&gt; B --&gt; C
 C --&gt;|No| C1 --&gt; C2
 C2 --&gt;|Yes| C3 --&gt; B
 C2 --&gt;|No| Lr --&gt; W
