@@ -503,14 +503,14 @@ L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
 S1[&quot;1. Lead entry in Zoho&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
 R3[&quot;2. Routing: centre and territory assigned&quot;]
-D1{&quot;Out of state?&quot;}
+P1[&quot;Out of state: park the lead&quot;]
 La5[[&quot;→ AI5: Parked Out-of-state Follow-up&quot;]]:::lk
 L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
 F{&quot;First contact&quot;}
 Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 Lb[[&quot;→ AI2: Bulk Uploaded Leads&quot;]]:::lk
-I{&quot;Interested?&quot;}
+I{&quot;Call outcome?&quot;}
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 S3[&quot;3. Counselling booking&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
@@ -527,14 +527,13 @@ A --&gt;|WhatsApp or call| W1 --&gt; L1
 A --&gt;|Offline| O1 --&gt; L2
 L1 --&gt; S1
 L2 --&gt; S1
-S1 --&gt; L3 --&gt; R3 --&gt; D1
-D1 --&gt;|Yes| La5 --&gt; E
-D1 --&gt;|No| L4 --&gt; F
+S1 --&gt; L3 --&gt; R3 --&gt; L4 --&gt; F
 F --&gt;|WhatsApp bot| Lw --&gt; I
 F --&gt;|Telecaller| L6 --&gt; I
 F --&gt;|Bulk list, AI| Lb --&gt; I
 I --&gt;|Not now| L10 --&gt; E
-I --&gt;|Yes| S3 --&gt; L7 --&gt; D4
+I --&gt;|Out of state| P1 --&gt; La5 --&gt; E
+I --&gt;|Interested| S3 --&gt; L7 --&gt; D4
 D4 --&gt;|Yes| L8 --&gt; S5
 D4 --&gt;|No-show, rebooked| S3
 D4 --&gt;|No-show, not rebooked| L10
