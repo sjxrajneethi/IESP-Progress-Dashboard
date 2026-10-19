@@ -494,105 +494,65 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead comes in&quot;]):::se
-M1[&quot;Meta lead form from a centre-wise campaign&quot;]
+A{&quot;Where from?&quot;}
+M1[&quot;Meta lead form, centre-wise campaign&quot;]
 W1[&quot;WhatsApp message or direct call&quot;]
-SE[&quot;Seminar entry: mass counselling at a seminar or college visit from the monthly calendar, Zoho form filled with source Seminar and the college from the dropdown&quot;]
-O1[&quot;Other offline lead: referral, event, college list or walk-in&quot;]
+O1[&quot;Seminar, college visit or other offline source&quot;]
 L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
 L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
-CL[&quot;Offline leads cleaned and saved by lead source&quot;]
-S1[&quot;1. Lead entry: lead entered in Zoho with source, centre, territory and the name of whoever entered it&quot;]
+S1[&quot;1. Lead entry in Zoho&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
-D0{&quot;How did the lead come in?&quot;}
-R1[&quot;Centre and territory come from the campaign&quot;]
-D1{&quot;Out of state?&quot;}
-P1[&quot;Park the lead&quot;]
-La5[[&quot;→ AI5: Parked Out-of-state Follow-up&quot;]]:::lk
-R2[&quot;Centre set from the lead&#x27;s location&quot;]
-G1[&quot;Centre and territory of the centre that collected the lead&quot;]
 R3[&quot;2. Routing: centre and territory assigned&quot;]
+D1{&quot;Out of state?&quot;}
+La5[[&quot;→ AI5: Parked Out-of-state Follow-up&quot;]]:::lk
 L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
-T{&quot;Lead type&quot;}
-Lb[[&quot;→ AI2: Bulk Uploaded Leads&quot;]]:::lk
-D2{&quot;Bot or human caller?&quot;}
-B1[&quot;WhatsApp chatbot with videos, testimonials and the reel&quot;]
+F{&quot;First contact&quot;}
 Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
-H1[&quot;Telecaller at the Khalapur call centre&quot;]
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-HX{&quot;Call outcome&quot;}
-Lr[[&quot;→ AI3: Old RNR Digital Leads&quot;]]:::lk
-Ln[[&quot;→ AI4: Not Interested Leads&quot;]]:::lk
+Lb[[&quot;→ AI2: Bulk Uploaded Leads&quot;]]:::lk
+I{&quot;Interested?&quot;}
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 S3[&quot;3. Counselling booking&quot;]
-D3{&quot;Counselling type?&quot;}
-C1[&quot;Centre visit, walk-in&quot;]
-C2[&quot;Online counselling, 15 minutes, recommended with parents&quot;]
-C3[&quot;Home counselling&quot;]
-C5[&quot;WhatsApp confirmation, then reconfirmation&quot;]
-C6[&quot;Counsellor assigned&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 D4{&quot;4. Walk-in: arrived?&quot;}
-N1[&quot;No-show follow-up&quot;]
-D4b{&quot;Rebook?&quot;}
 L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
 S5[&quot;5. Counselling done&quot;]
 D5{&quot;Admission?&quot;}
-R4[&quot;Reason captured in stages&quot;]
-R5[&quot;Follow-up&quot;]
-L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
-S6[&quot;6. Admission: process, documents uploaded as one PDF, admission details, admission done&quot;]
-S6a[&quot;References asked&quot;]
-S6b[&quot;Data flows to the LMS&quot;]
+S6[&quot;6. Admission&quot;]
 L9[[&quot;→ ZH9: Admission&quot;]]:::lk
-Lq[[&quot;→ WA5: Questions and Escalation&quot;]]:::lk
 E([&quot;End&quot;]):::se
-S --&gt;|Meta lead form| M1 --&gt; L1
-S --&gt;|WhatsApp or call| W1 --&gt; L1
-S --&gt;|Seminar| SE --&gt; L2
-S --&gt;|Other offline| O1 --&gt; L2
-L2 --&gt; CL --&gt; S1
+S --&gt; A
+A --&gt;|Meta| M1 --&gt; L1
+A --&gt;|WhatsApp or call| W1 --&gt; L1
+A --&gt;|Offline| O1 --&gt; L2
 L1 --&gt; S1
-S1 --&gt; L3 --&gt; D0
-D0 --&gt;|Centre-wise campaign| R1 --&gt; R3
-D0 --&gt;|WhatsApp or call| D1
-D1 --&gt;|Yes| P1 --&gt; La5 --&gt; E
-D1 --&gt;|No| R2 --&gt; R3
-D0 --&gt;|Seminar or offline| G1 --&gt; R3
-R3 --&gt; L4 --&gt; T
-T --&gt;|Bulk uploaded list| Lb --&gt; S3
-T --&gt;|New digital lead| D2
-D2 --&gt;|Bot| B1 --&gt; Lw --&gt; S3
-D2 --&gt;|Human| H1 --&gt; L6 --&gt; HX
-HX --&gt;|Interested| S3
-HX --&gt;|No answer after 5 attempts| Lr --&gt; E
-HX --&gt;|Not interested| Ln --&gt; E
-S3 --&gt; D3
-D3 --&gt; C1 --&gt; C5
-D3 --&gt; C2 --&gt; C5
-D3 --&gt; C3 --&gt; C5
-C5 --&gt; C6 --&gt; L7 --&gt; D4
+L2 --&gt; S1
+S1 --&gt; L3 --&gt; R3 --&gt; D1
+D1 --&gt;|Yes| La5 --&gt; E
+D1 --&gt;|No| L4 --&gt; F
+F --&gt;|WhatsApp bot| Lw --&gt; I
+F --&gt;|Telecaller| L6 --&gt; I
+F --&gt;|Bulk list, AI| Lb --&gt; I
+I --&gt;|Not now| L10 --&gt; E
+I --&gt;|Yes| S3 --&gt; L7 --&gt; D4
 D4 --&gt;|Yes| L8 --&gt; S5
-D4 --&gt;|No| N1 --&gt; D4b
-D4b --&gt;|Yes| S3
-D4b --&gt;|No, end the loop| E
+D4 --&gt;|No-show, rebooked| S3
+D4 --&gt;|No-show, not rebooked| L10
 S5 --&gt; D5
-D5 --&gt;|Yes| S6 --&gt; S6a --&gt; S6b --&gt; L9 --&gt; E
-D5 --&gt;|No| R4 --&gt; R5 --&gt; L10 --&gt; E
-S --&gt;|Question on WhatsApp| Lq --&gt; E
+D5 --&gt;|Yes| S6 --&gt; L9 --&gt; E
+D5 --&gt;|No| L10
 click L1 call goWF(&quot;ZH1&quot;)
 click L2 call goWF(&quot;ZH2&quot;)
 click L3 call goWF(&quot;ZH3&quot;)
 click La5 call goWF(&quot;AI5&quot;)
 click L4 call goWF(&quot;ZH4&quot;)
-click Lb call goWF(&quot;AI2&quot;)
 click Lw call goWF(&quot;WA1&quot;)
 click L6 call goWF(&quot;ZH6&quot;)
-click Lr call goWF(&quot;AI3&quot;)
-click Ln call goWF(&quot;AI4&quot;)
+click Lb call goWF(&quot;AI2&quot;)
+click L10 call goWF(&quot;ZH10&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L8 call goWF(&quot;ZH8&quot;)
-click L10 call goWF(&quot;ZH10&quot;)
-click L9 call goWF(&quot;ZH9&quot;)
-click Lq call goWF(&quot;WA5&quot;)</pre></div></div>
+click L9 call goWF(&quot;ZH9&quot;)</pre></div></div>
 <h2 class="wf-grp">Zoho</h2>
 <div class="panel wf-sec" id="wf-ZH1"><div class="panel-h"><h2><span class="wf-code">ZH1</span> Digital Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
