@@ -493,18 +493,23 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: lead comes in from Meta, WhatsApp, a seminar or offline&quot;]):::se
+S([&quot;Start: lead comes in&quot;]):::se
+M1[&quot;Meta lead form from a centre-wise campaign&quot;]
+W1[&quot;WhatsApp message or direct call&quot;]
 SE[&quot;Seminar entry: mass counselling at a seminar or college visit from the monthly calendar, Zoho form filled with source Seminar and the college from the dropdown&quot;]
-L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
-S1[&quot;1. Lead entry: lead entered in Zoho with source, centre, territory and the name of whoever entered it&quot;]
+O1[&quot;Other offline lead: referral, event, college list or walk-in&quot;]
 L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
+L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
+CL[&quot;Offline leads cleaned and saved by lead source&quot;]
+S1[&quot;1. Lead entry: lead entered in Zoho with source, centre, territory and the name of whoever entered it&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
-D0{&quot;Campaign type?&quot;}
-R1[&quot;Centre-wise campaign: centre and territory come from the campaign&quot;]
-R2[&quot;State or national campaign: location derived from the form answers&quot;]
+D0{&quot;How did the lead come in?&quot;}
+R1[&quot;Centre and territory come from the campaign&quot;]
 D1{&quot;Out of state?&quot;}
 P1[&quot;Park the lead&quot;]
 La5[[&quot;→ AI5: Parked Out-of-state Follow-up&quot;]]:::lk
+R2[&quot;Centre set from the lead&#x27;s location&quot;]
+G1[&quot;Centre and territory of the centre that collected the lead&quot;]
 R3[&quot;2. Routing: centre and territory assigned&quot;]
 L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
 T{&quot;Lead type&quot;}
@@ -539,17 +544,20 @@ S6a[&quot;References asked&quot;]
 S6b[&quot;Data flows to the LMS&quot;]
 L9[[&quot;→ ZH9: Admission&quot;]]:::lk
 Lq[[&quot;→ WA5: Questions and Escalation&quot;]]:::lk
-L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
-L12[[&quot;→ ZH12: Daily Operations&quot;]]:::lk
 E([&quot;End&quot;]):::se
-S --&gt;|Seminar| SE --&gt; L2 --&gt; S1
-S --&gt;|Meta, WhatsApp, offline| S1
-S1 --&gt; L1 --&gt; L3 --&gt; D0
-D0 --&gt;|Centre-wise| R1 --&gt; L4
-D0 --&gt;|State or national| R2 --&gt; D1
+S --&gt;|Meta lead form| M1 --&gt; L1
+S --&gt;|WhatsApp or call| W1 --&gt; L1
+S --&gt;|Seminar| SE --&gt; L2
+S --&gt;|Other offline| O1 --&gt; L2
+L2 --&gt; CL --&gt; S1
+L1 --&gt; S1
+S1 --&gt; L3 --&gt; D0
+D0 --&gt;|Centre-wise campaign| R1 --&gt; R3
+D0 --&gt;|WhatsApp or call| D1
 D1 --&gt;|Yes| P1 --&gt; La5 --&gt; E
-D1 --&gt;|No| R3 --&gt; L4
-L4 --&gt; T
+D1 --&gt;|No| R2 --&gt; R3
+D0 --&gt;|Seminar or offline| G1 --&gt; R3
+R3 --&gt; L4 --&gt; T
 T --&gt;|Bulk uploaded list| Lb --&gt; S3
 T --&gt;|New digital lead| D2
 D2 --&gt;|Bot| B1 --&gt; Lw --&gt; S3
@@ -570,10 +578,8 @@ S5 --&gt; D5
 D5 --&gt;|Yes| S6 --&gt; S6a --&gt; S6b --&gt; L9 --&gt; E
 D5 --&gt;|No| R4 --&gt; R5 --&gt; L10 --&gt; E
 S --&gt;|Question on WhatsApp| Lq --&gt; E
-S --&gt;|Opt-out request| L11 --&gt; E
-S --&gt;|Daily routine| L12 --&gt; E
-click L2 call goWF(&quot;ZH2&quot;)
 click L1 call goWF(&quot;ZH1&quot;)
+click L2 call goWF(&quot;ZH2&quot;)
 click L3 call goWF(&quot;ZH3&quot;)
 click La5 call goWF(&quot;AI5&quot;)
 click L4 call goWF(&quot;ZH4&quot;)
@@ -586,9 +592,7 @@ click L7 call goWF(&quot;ZH7&quot;)
 click L8 call goWF(&quot;ZH8&quot;)
 click L10 call goWF(&quot;ZH10&quot;)
 click L9 call goWF(&quot;ZH9&quot;)
-click Lq call goWF(&quot;WA5&quot;)
-click L11 call goWF(&quot;ZH11&quot;)
-click L12 call goWF(&quot;ZH12&quot;)</pre></div></div>
+click Lq call goWF(&quot;WA5&quot;)</pre></div></div>
 <h2 class="wf-grp">Zoho</h2>
 <div class="panel wf-sec" id="wf-ZH1"><div class="panel-h"><h2><span class="wf-code">ZH1</span> Digital Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
@@ -726,9 +730,9 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: lead ready for checks&quot;]):::se
 J{&quot;Junk? fake name, invalid or test number&quot;}
 J1[&quot;ZH4A: Mark Junk&quot;]:::br
-K{&quot;Campaign type&quot;}
-K1[&quot;ZH4B: Centre-wise campaign, centre and territory taken from the campaign&quot;]:::br
-K2[&quot;ZH4C: State or national campaign, location derived from the form answers&quot;]:::br
+K{&quot;How did the lead come in?&quot;}
+K1[&quot;ZH4B: Centre-wise campaign or offline lead, centre and territory from the campaign or the collecting centre&quot;]:::br
+K2[&quot;ZH4C: WhatsApp message or direct call, location asked in the chat or call&quot;]:::br
 D{&quot;Location&quot;}
 D1[&quot;Centre and territory assigned&quot;]
 D2[&quot;ZH4D: Near an upcoming centre (Rewa, Indore), park until launch&quot;]:::br
@@ -755,8 +759,8 @@ E([&quot;End: lead qualified, parked or closed&quot;]):::se
 S --&gt; J
 J --&gt;|Yes| J1 --&gt; E
 J --&gt;|No| K
-K --&gt;|Centre-wise| K1 --&gt; D6
-K --&gt;|State or national| K2 --&gt; D
+K --&gt;|Campaign or offline| K1 --&gt; D6
+K --&gt;|WhatsApp or call| K2 --&gt; D
 D --&gt;|Near an open centre| D1 --&gt; D6
 D --&gt;|Near an upcoming centre| D2 --&gt; L10c --&gt; E
 D --&gt;|Out of state| D3 --&gt; La5 --&gt; E
