@@ -564,13 +564,13 @@ classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: digital enquiry&quot;]):::se
 A{&quot;Which channel?&quot;}
-A1[&quot;ZH1A: Meta instant lead form&quot;]:::br
+A1[&quot;ZH1A: D1 Meta Ads lead form&quot;]:::br
 B1[&quot;Pulled in by the Meta integration with ad, ad set and form&quot;]
-A2[&quot;ZH1B: Website or Google Ads form&quot;]:::br
+A2[&quot;ZH1B: D2 Google Ads or D3 Website enquiry&quot;]:::br
 B2[&quot;Lead created in Zoho with source and campaign&quot;]
-A3[&quot;ZH1C: WhatsApp enquiry&quot;]:::br
+A3[&quot;ZH1C: D4 Website chatbot or WhatsApp&quot;]:::br
 Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
-A4[&quot;ZH1D: Instagram or Facebook DM&quot;]:::br
+A4[&quot;ZH1D: D5 Instagram messages&quot;]:::br
 B4{&quot;Instagram bot live?&quot;}
 B4a[&quot;Bot captures details, lead created in Zoho&quot;]
 B4b[&quot;Lead logged in Zoho by the team&quot;]
@@ -579,7 +579,7 @@ B5{&quot;Answered?&quot;}
 B5a[&quot;Lead logged in Zoho, source Inbound call&quot;]
 B5b[&quot;Missed call logged for a call back&quot;]
 Lm[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-C[&quot;Lead captured with source and campaign&quot;]
+C[&quot;Lead captured; source tagged (D1 to D5)&quot;]
 D{&quot;Received in working hours?&quot;}
 D1[&quot;ZH1F: Out-of-hours lead, acknowledged and queued for the next working day&quot;]:::br
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
@@ -605,49 +605,38 @@ click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: offline enquiry or list&quot;]):::se
+S([&quot;Start: offline lead source&quot;]):::se
 A{&quot;Which source?&quot;}
-A1[&quot;ZH2A: Mass counselling: seminar or college visit&quot;]:::br
-A1a{&quot;On the seminar calendar?&quot;}
-A1b[&quot;Added to the seminar calendar&quot;]
-A1d[&quot;Mass counselling session for the group&quot;]
-A1c[&quot;Student details captured, source Seminar and college&quot;]
-A2[&quot;ZH2B: Booth or field activation&quot;]:::br
-A2a[&quot;Student details captured&quot;]
-A3[&quot;ZH2C: College data sheet or list from IESP&quot;]:::br
-A3a[&quot;Shared in the upload template&quot;]
-A4[&quot;ZH2D: Referral from a student, parent, alumnus or staff&quot;]:::br
+A1[&quot;ZH2A: O10 Seminars and job fairs&quot;]:::br
+A1a{&quot;Planned or ad hoc?&quot;}
+A1b[&quot;Added to the monthly plan in the Zoho calendar&quot;]
+A1e[&quot;Ad hoc event added to the Zoho calendar&quot;]
+A1f[&quot;Zoho form created for the event&quot;]
+A1g[&quot;Form link and QR shared with the college or event team&quot;]
+A1d[&quot;Event held: mass counselling; students fill the Zoho form&quot;]
+A1c[&quot;Leads held in Zoho form submissions&quot;]
+A1h[&quot;Offline copy of the leads and counts emailed to owners&quot;]
+A3[&quot;ZH2B: O11 Cold lists&quot;]:::br
+A3a[&quot;List shared in the upload template&quot;]
+A4[&quot;ZH2C: R21 Referral from an existing or old student&quot;]:::br
 A4a[&quot;Referrer recorded, source Referral&quot;]
-A5[&quot;ZH2E: Event, launch or job fair&quot;]:::br
-A5a[&quot;Registrations shared in the upload template&quot;]
-A6[&quot;ZH2F: Direct walk-in with no enquiry&quot;]:::br
-A6a[&quot;Student registered, source Walk-in&quot;]
-L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
-A7[&quot;ZH2G: Corporate or B2B enquiry&quot;]:::br
-A7a[&quot;Passed to IESP for corporate training&quot;]
-A8[&quot;ZH2H: Newspaper, flyer or hoarding&quot;]:::br
-L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
 V[&quot;Lead sanitation&quot;]
-X[&quot;Bulk upload to Zoho by lead source&quot;]
-Y[&quot;Signed off by IESP&quot;]
+Y{&quot;Signed off by IESP?&quot;}
+Y1[&quot;Hold; chase the owner, sanitise and filter records&quot;]
+X[&quot;Leads ingested into Zoho by lead source&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
 E([&quot;End: offline lead in Zoho&quot;]):::se
 S --&gt; A
 A --&gt; A1 --&gt; A1a
-A1a --&gt;|No| A1b --&gt; A1d
-A1a --&gt;|Yes| A1d
-A1d --&gt; A1c
-A1c --&gt; V
-A --&gt; A2 --&gt; A2a --&gt; V
+A1a --&gt;|Planned| A1b --&gt; A1f
+A1a --&gt;|Ad hoc| A1e --&gt; A1f
+A1f --&gt; A1g --&gt; A1d --&gt; A1c --&gt; A1h --&gt; V
 A --&gt; A3 --&gt; A3a --&gt; V
-A --&gt; A4 --&gt; A4a --&gt; V
-A --&gt; A5 --&gt; A5a --&gt; V
-A --&gt; A6 --&gt; A6a --&gt; L8 --&gt; E
-A --&gt; A7 --&gt; A7a --&gt; E
-A --&gt; A8 --&gt;|Arrives as a call or WhatsApp| L1 --&gt; E
-V --&gt; Y --&gt; X --&gt; L3 --&gt; E
-click L8 call goWF(&quot;ZH8&quot;)
-click L1 call goWF(&quot;ZH1&quot;)
+A --&gt; A4 --&gt; A4a --&gt; L3
+V --&gt; Y
+Y --&gt;|Yes| X --&gt; L3
+Y --&gt;|No| Y1 --&gt; V
+L3 --&gt; E
 click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
 <div class="panel wf-sec" id="wf-ZH3"><div class="panel-h"><h2><span class="wf-code">ZH3</span> Lead Matching and Attribution</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
@@ -657,7 +646,7 @@ S([&quot;Start: lead arrives in Zoho&quot;]):::se
 A{&quot;Phone number already in Zoho?&quot;}
 N[&quot;ZH3A: New lead created with its source&quot;]:::br
 B{&quot;Status of the existing record&quot;}
-B1[&quot;ZH3B: Open lead, merge and add the new source as a note&quot;]:::br
+B1[&quot;ZH3B: Open lead: link to the earliest record, alert the owner; existing lead continues&quot;]:::br
 B2[&quot;ZH3C: Lost, not now or nurture, reopen as New enquiry&quot;]:::br
 B3[&quot;ZH3D: Admitted or existing student, flag Existing student&quot;]:::br
 B3a{&quot;Enquiring for a friend?&quot;}
@@ -695,7 +684,9 @@ S([&quot;Start: lead ready for checks&quot;]):::se
 J{&quot;Junk?&quot;}
 J1[&quot;ZH4A: Mark Junk&quot;]:::br
 K{&quot;How did the lead come in?&quot;}
-K1[&quot;ZH4B: Centre-wise campaign or offline lead, centre and territory from the campaign or the collecting centre&quot;]:::br
+RK{&quot;Routing key known?&quot;}
+K1[&quot;ZH4B: Centre and territory set automatically&quot;]:::br
+K3[&quot;ZH4L: Flag new ad set or source; add to routing rule&quot;]:::br
 K2[&quot;ZH4C: WhatsApp message or direct call, location asked in the chat or call&quot;]:::br
 D{&quot;Location&quot;}
 D1[&quot;Centre and territory assigned&quot;]
@@ -723,7 +714,9 @@ E([&quot;End: lead qualified, parked or closed&quot;]):::se
 S --&gt; J
 J --&gt;|Yes| J1 --&gt; E
 J --&gt;|No| K
-K --&gt;|Campaign or offline| K1 --&gt; D6
+K --&gt;|Campaign or offline| RK
+RK --&gt;|Yes| K1 --&gt; D6
+RK --&gt;|No| K3 --&gt; K1
 K --&gt;|WhatsApp or call| K2 --&gt; D
 D --&gt;|Near an open centre| D1 --&gt; D6
 D --&gt;|Near an upcoming centre| D2 --&gt; L10c --&gt; E
@@ -745,48 +738,28 @@ click La5 call goWF(&quot;AI5&quot;)
 click L10a call goWF(&quot;ZH10&quot;)
 click L10b call goWF(&quot;ZH10&quot;)
 click L5 call goWF(&quot;ZH5&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH5"><div class="panel-h"><h2><span class="wf-code">ZH5</span> Who Contacts the Lead</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart LR
+<div class="panel wf-sec" id="wf-ZH5"><div class="panel-h"><h2><span class="wf-code">ZH5</span> Who Contacts the Lead</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: qualified lead&quot;]):::se
-A{&quot;Who makes first contact?&quot;}
-A1[&quot;ZH5A: New digital lead from a centre-wise campaign&quot;]:::br
-A1a{&quot;Lead replied on WhatsApp?&quot;}
+S([&quot;Start: lead ready for the first conversation&quot;]):::se
+A{&quot;Channel by business rules&quot;}
+A1[&quot;ZH5A: High intent: human telecaller&quot;]:::br
+L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
+A2[&quot;ZH5B: Default: AI call&quot;]:::br
+La1[[&quot;→ AI1: AI Call Script&quot;]]:::lk
+A3[&quot;ZH5C: Chat-origin lead: chatbot on WhatsApp or web chat&quot;]:::br
 Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
-L6a[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-A2[&quot;ZH5B: Asked for a call in the WhatsApp bot&quot;]:::br
-A2a[&quot;Telecaller calls back&quot;]
-L6b[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-A3[&quot;ZH5C: Bulk uploaded list&quot;]:::br
-La2[[&quot;→ AI2: Bulk Uploaded Leads&quot;]]:::lk
-A4[&quot;ZH5D: Old digital lead, no answer after telecaller attempts&quot;]:::br
-La3[[&quot;→ AI3: Old RNR Digital Leads&quot;]]:::lk
-A5[&quot;ZH5E: Marked Not interested, cooling period over&quot;]:::br
-La4[[&quot;→ AI4: Not Interested Leads&quot;]]:::lk
-A6[&quot;ZH5F: Referral, parent pending or missed call&quot;]:::br
-L6c[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-A7[&quot;ZH5G: AI found interest or the lead asked for a person&quot;]:::br
-La6[[&quot;→ AI6: AI to Person Hand-off&quot;]]:::lk
-E([&quot;End: first contact assigned&quot;]):::se
+G[&quot;Reach-out attempt logged in Zoho&quot;]
+E([&quot;End: first contact made&quot;]):::se
 S --&gt; A
-A --&gt; A1 --&gt; A1a
-A1a --&gt;|Yes| Lw --&gt; E
-A1a --&gt;|No| L6a --&gt; E
-A --&gt; A2 --&gt; A2a --&gt; L6b --&gt; E
-A --&gt; A3 --&gt; La2 --&gt; E
-A --&gt; A4 --&gt; La3 --&gt; E
-A --&gt; A5 --&gt; La4 --&gt; E
-A --&gt; A6 --&gt; L6c --&gt; E
-A --&gt; A7 --&gt; La6 --&gt; E
-click Lw call goWF(&quot;WA1&quot;)
-click L6a call goWF(&quot;ZH6&quot;)
-click L6b call goWF(&quot;ZH6&quot;)
-click La2 call goWF(&quot;AI2&quot;)
-click La3 call goWF(&quot;AI3&quot;)
-click La4 call goWF(&quot;AI4&quot;)
-click L6c call goWF(&quot;ZH6&quot;)
-click La6 call goWF(&quot;AI6&quot;)</pre></div></div>
+A --&gt;|High intent| A1 --&gt; L6 --&gt; G
+A --&gt;|Default| A2 --&gt; La1 --&gt; G
+A --&gt;|Chat-origin| A3 --&gt; Lw --&gt; G
+G --&gt; E
+click L6 call goWF(&quot;ZH6&quot;)
+click La1 call goWF(&quot;AI1&quot;)
+click Lw call goWF(&quot;WA1&quot;)</pre></div></div>
 <div class="panel wf-sec" id="wf-ZH6"><div class="panel-h"><h2><span class="wf-code">ZH6</span> Telecaller Conversation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
@@ -797,12 +770,12 @@ B[&quot;Call made and logged&quot;]
 C{&quot;Connected?&quot;}
 C1[&quot;ZH6A: No answer, busy or switched off&quot;]:::br
 C2{&quot;Attempts left?&quot;}
-C3[&quot;WhatsApp nudge, retry later&quot;]
-Lr[[&quot;→ AI3: Old RNR Digital Leads&quot;]]:::lk
+C3[&quot;WhatsApp nudge; switch channel on the next attempt&quot;]
 P{&quot;Who answered?&quot;}
 P1[&quot;ZH6B: Parent or family answers, speak to the parent&quot;]:::br
 P2[&quot;ZH6C: Wrong number, mark Junk&quot;]:::br
 P3[&quot;ZH6D: Language mismatch, pass to a caller who speaks it&quot;]:::br
+QC[&quot;Interest and qualification captured; call to action presented&quot;]
 D{&quot;Disposition group&quot;}
 Dp{&quot;Wants counselling&quot;}
 Dl{&quot;Later&quot;}
@@ -832,10 +805,11 @@ E([&quot;End: call logged&quot;]):::se
 S --&gt; A --&gt; B --&gt; C
 C --&gt;|No| C1 --&gt; C2
 C2 --&gt;|Yes| C3 --&gt; B
-C2 --&gt;|No| Lr --&gt; W
+C2 --&gt;|No| L10a
 C --&gt;|Yes| P
-P --&gt;|Parent or family| P1 --&gt; D
-P --&gt;|The lead| D
+P --&gt;|Parent or family| P1 --&gt; QC
+P --&gt;|The lead| QC
+QC --&gt; D
 P --&gt;|Not the lead| P2 --&gt; W
 P --&gt;|Language mismatch| P3 --&gt; W
 Dp --&gt; D1 --&gt; L7a --&gt; W
@@ -856,7 +830,6 @@ D --&gt;|Interested| Dp
 D --&gt;|Not now| Dl
 D --&gt;|Not suitable| Dn
 W --&gt; E
-click Lr call goWF(&quot;AI3&quot;)
 click L7a call goWF(&quot;ZH7&quot;)
 click L7b call goWF(&quot;ZH7&quot;)
 click L10a call goWF(&quot;ZH10&quot;)
@@ -868,28 +841,40 @@ click L11 call goWF(&quot;ZH11&quot;)</pre></div></div>
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: lead agrees to counselling&quot;]):::se
-A{&quot;Counselling mode&quot;}
-A1[&quot;ZH7A: Centre visit&quot;]:::br
-A2[&quot;ZH7B: Online counselling, recommended with parents&quot;]:::br
-A3[&quot;ZH7C: Home counselling&quot;]:::br
-B{&quot;Slot available?&quot;}
-B1[&quot;Offer the next free slot&quot;]
-C[&quot;Date and time set, status Walk-in booked&quot;]
-D[&quot;Counsellor assigned&quot;]
+S([&quot;Start: first conversation done&quot;]):::se
+O1[&quot;ZH7A: Walk-in at the nearest centre&quot;]:::br
+Q1{&quot;Agrees?&quot;}
+Y1[&quot;Book walk-in: date and time slot&quot;]
+O2[&quot;ZH7B: Online counselling with parent&quot;]:::br
+Q2{&quot;Agrees?&quot;}
+Y2a[&quot;Collect parent details&quot;]
+Y2b[&quot;Schedule online counselling; link on WhatsApp&quot;]
+O3[&quot;ZH7C: District Counselling Day&quot;]:::br
+Q3{&quot;Agrees?&quot;}
+Y3[&quot;Added to the district cluster list; date set when the cluster fills&quot;]
+O4[&quot;ZH7D: Doorstep counselling&quot;]:::br
+Q4{&quot;Agrees?&quot;}
+Y4[&quot;Book home visit with a parent present&quot;]
+L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
+C[&quot;Appointment confirmed: type, date and owner recorded in Zoho&quot;]
+D[&quot;Assigned to the IESP counsellor, default branch head&quot;]
 F{&quot;WhatsApp reachable?&quot;}
 Lw[[&quot;→ WA6: Booking Messages&quot;]]:::lk
-F1[&quot;ZH7D: Telecaller confirmation call instead&quot;]:::br
-E([&quot;End: booking made and confirmations running&quot;]):::se
-S --&gt; A
-A --&gt; A1 --&gt; B
-A --&gt; A2 --&gt; B
-A --&gt; A3 --&gt; B
-B --&gt;|No| B1 --&gt; C
-B --&gt;|Yes| C
+F1[&quot;ZH7E: Telecaller confirmation call instead&quot;]:::br
+E([&quot;End: appointment confirmed&quot;]):::se
+S --&gt; O1 --&gt; Q1
+Q1 --&gt;|Yes| Y1 --&gt; C
+Q1 --&gt;|No| O2 --&gt; Q2
+Q2 --&gt;|Yes| Y2a --&gt; Y2b --&gt; C
+Q2 --&gt;|No| O3 --&gt; Q3
+Q3 --&gt;|Yes| Y3 --&gt; C
+Q3 --&gt;|No| O4 --&gt; Q4
+Q4 --&gt;|Yes| Y4 --&gt; C
+Q4 --&gt;|No| L10 --&gt; E
 C --&gt; D --&gt; F
 F --&gt;|Yes| Lw --&gt; E
 F --&gt;|No| F1 --&gt; E
+click L10 call goWF(&quot;ZH10&quot;)
 click Lw call goWF(&quot;WA6&quot;)</pre></div></div>
 <div class="panel wf-sec" id="wf-ZH8"><div class="panel-h"><h2><span class="wf-code">ZH8</span> Counselling Day and Walk-ins</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
@@ -901,15 +886,15 @@ B[&quot;Listed for the day with the counsellor&quot;]
 B0{&quot;Phone number already in Zoho?&quot;}
 B0a[&quot;Create the lead, source Walk-in&quot;]
 B0b[&quot;Update the lead and mark Walk-in&quot;]
-C{&quot;Arrived or joined online?&quot;}
+C{&quot;Showed up? walk-in, online, district day or home visit&quot;}
 C1[&quot;ZH8A: No-show, WhatsApp and telecaller follow-up&quot;]:::br
 C2{&quot;Rebooked?&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
-R[&quot;Mark Student visited&quot;]
+R[&quot;Marked Walked in / Attended in Zoho, same day&quot;]
 G{&quot;At the centre they booked?&quot;}
 G1[&quot;ZH8B: Counsel here, or transfer the lead to the preferred centre&quot;]:::br
-H[&quot;Counselling at the centre&quot;]
+H[&quot;Counselling: course fit, eligibility, fees, placement&quot;]
 I[&quot;Counselling outcome logged&quot;]
 L9[[&quot;→ ZH9: Admission&quot;]]:::lk
 E([&quot;End: visit recorded&quot;]):::se
@@ -989,11 +974,11 @@ classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead enters nurture&quot;]):::se
 A{&quot;Nurture reason&quot;}
-A1[&quot;ZH10A: Not ready yet or a later batch&quot;]:::br
-A2[&quot;ZH10B: Upcoming centre, reactivate parked leads at launch&quot;]:::br
-A3[&quot;ZH10C: Minor or licence pending, recontact at the eligibility date&quot;]:::br
+A1[&quot;ZH10A: Cancelled or no-show: re-engage on WhatsApp; new slot or online&quot;]:::br
+A2[&quot;ZH10B: Counselled, not admitted: follow-up by reason (fees, parents, later batch, documents)&quot;]:::br
+A3[&quot;ZH10C: Not ready yet, minor, licence pending or upcoming centre: recontact when ready&quot;]:::br
 A4[&quot;ZH10D: No response after the retries&quot;]:::br
-B[&quot;Follow-up date set, WhatsApp content at intervals&quot;]
+B[&quot;Nurture cycle: WhatsApp at intervals; call on each follow-up date&quot;]
 NC{&quot;Who calls?&quot;}
 La[[&quot;→ AI3: Old RNR Digital Leads&quot;]]:::lk
 Lni[[&quot;→ AI4: Not Interested Leads&quot;]]:::lk
@@ -1014,7 +999,7 @@ B --&gt; NC
 NC --&gt;|No response leads| La --&gt; D
 NC --&gt;|Not interested leads| Lni --&gt; D
 NC --&gt;|Other nurture| Ltc --&gt; D
-D --&gt;|Interested| L7 --&gt; E
+D --&gt;|Ready to book| L7 --&gt; E
 D --&gt;|Asks to stop| L11 --&gt; E
 D --&gt;|Enquires again from another channel| L3 --&gt; E
 D --&gt;|No response| F
@@ -1163,7 +1148,7 @@ T2[&quot;Told the call will come in working hours&quot;]
 B1[&quot;Chat summary saved in Zoho&quot;]
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 A2[&quot;WA3B: Book counselling&quot;]:::br
-C1{&quot;Centre, online or home?&quot;}
+C1{&quot;Walk-in, online, district day or doorstep?&quot;}
 C2[&quot;Pick centre, day and slot&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 A3[&quot;WA3C: Send details only&quot;]:::br
