@@ -500,6 +500,9 @@ W1[&quot;WhatsApp message or direct call&quot;]
 O1[&quot;Seminar, college visit or other offline source&quot;]
 L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
 L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
+SN[&quot;Lead sanitation: duplicates, invalid numbers and junk removed&quot;]
+SG{&quot;Signed off by IESP?&quot;}
+BU[&quot;Bulk upload to Zoho&quot;]
 S1[&quot;1. Lead entry in Zoho&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
 R3[&quot;2. Routing: centre and territory assigned&quot;]
@@ -526,11 +529,13 @@ A --&gt;|Meta| M1 --&gt; L1
 A --&gt;|WhatsApp or call| W1 --&gt; L1
 A --&gt;|Offline| O1 --&gt; L2
 L1 --&gt; S1
-L2 --&gt; S1
+L2 --&gt; SN --&gt; SG
+SG --&gt;|Yes| BU --&gt; Lb
+SG --&gt;|Changes| SN
 S1 --&gt; L3 --&gt; R3 --&gt; L4 --&gt; F
 F --&gt;|WhatsApp bot| Lw --&gt; I
 F --&gt;|Telecaller| L6 --&gt; I
-F --&gt;|Bulk list, AI| Lb --&gt; I
+Lb --&gt; I
 I --&gt;|Not now| L10 --&gt; E
 I --&gt;|Out of state| P1 --&gt; La5 --&gt; E
 I --&gt;|Interested| S3 --&gt; L7 --&gt; D4
