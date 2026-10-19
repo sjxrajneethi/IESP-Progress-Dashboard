@@ -489,7 +489,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 <section class="tab" id="t-workflows" role="tabpanel" aria-label="Workflows" hidden>
 <div class="wf-layout"><aside class="wf-side" aria-label="Workflow index"><div class="wfn-wrap"><div class="wfn-g"><span class="wfn-h">Overview</span><button type="button" class="wfn" data-wf="OV" onclick="goWF('OV')"><b>OV</b> <span>Main Lead Journey</span></button></div><div class="wfn-g"><span class="wfn-h">Zoho</span><button type="button" class="wfn" data-wf="ZH1" onclick="goWF('ZH1')"><b>ZH1</b> <span>Digital Lead Capture</span></button><button type="button" class="wfn" data-wf="ZH2" onclick="goWF('ZH2')"><b>ZH2</b> <span>Offline Lead Capture</span></button><button type="button" class="wfn" data-wf="ZH3" onclick="goWF('ZH3')"><b>ZH3</b> <span>Lead Matching and Attribution</span></button><button type="button" class="wfn" data-wf="ZH4" onclick="goWF('ZH4')"><b>ZH4</b> <span>Qualification and Routing</span></button><button type="button" class="wfn" data-wf="ZH5" onclick="goWF('ZH5')"><b>ZH5</b> <span>Who Contacts the Lead</span></button><button type="button" class="wfn" data-wf="ZH6" onclick="goWF('ZH6')"><b>ZH6</b> <span>Telecaller Conversation</span></button><button type="button" class="wfn" data-wf="ZH7" onclick="goWF('ZH7')"><b>ZH7</b> <span>Counselling Booking and Confirmation</span></button><button type="button" class="wfn" data-wf="ZH8" onclick="goWF('ZH8')"><b>ZH8</b> <span>Counselling Day and Walk-ins</span></button><button type="button" class="wfn" data-wf="ZH9" onclick="goWF('ZH9')"><b>ZH9</b> <span>Admission</span></button><button type="button" class="wfn" data-wf="ZH10" onclick="goWF('ZH10')"><b>ZH10</b> <span>Nurture and Reactivation</span></button><button type="button" class="wfn" data-wf="ZH11" onclick="goWF('ZH11')"><b>ZH11</b> <span>Consent and Opt-out</span></button><button type="button" class="wfn" data-wf="ZH12" onclick="goWF('ZH12')"><b>ZH12</b> <span>Daily Operations</span></button></div><div class="wfn-g"><span class="wfn-h">WhatsApp Bot</span><button type="button" class="wfn" data-wf="WA1" onclick="goWF('WA1')"><b>WA1</b> <span>Entry and Greeting</span></button><button type="button" class="wfn" data-wf="WA2" onclick="goWF('WA2')"><b>WA2</b> <span>Questions and Eligibility</span></button><button type="button" class="wfn" data-wf="WA3" onclick="goWF('WA3')"><b>WA3</b> <span>Next Step</span></button><button type="button" class="wfn" data-wf="WA4" onclick="goWF('WA4')"><b>WA4</b> <span>Follow-ups and STOP</span></button><button type="button" class="wfn" data-wf="WA5" onclick="goWF('WA5')"><b>WA5</b> <span>Questions and Escalation</span></button><button type="button" class="wfn" data-wf="WA6" onclick="goWF('WA6')"><b>WA6</b> <span>Booking Messages</span></button><button type="button" class="wfn" data-wf="WA7" onclick="goWF('WA7')"><b>WA7</b> <span>When the Bot Is Not Available</span></button></div><div class="wfn-g"><span class="wfn-h">AI Call</span><button type="button" class="wfn" data-wf="AI1" onclick="goWF('AI1')"><b>AI1</b> <span>AI Call Script</span></button><button type="button" class="wfn" data-wf="AI2" onclick="goWF('AI2')"><b>AI2</b> <span>Bulk Uploaded Leads</span></button><button type="button" class="wfn" data-wf="AI3" onclick="goWF('AI3')"><b>AI3</b> <span>Old RNR Digital Leads</span></button><button type="button" class="wfn" data-wf="AI4" onclick="goWF('AI4')"><b>AI4</b> <span>Not Interested Leads</span></button><button type="button" class="wfn" data-wf="AI5" onclick="goWF('AI5')"><b>AI5</b> <span>Parked Out-of-state Follow-up</span></button><button type="button" class="wfn" data-wf="AI6" onclick="goWF('AI6')"><b>AI6</b> <span>AI to Person Hand-off</span></button></div></div></aside><div class="wf-main"><div class="panel" id="wf-index"><div class="panel-h"><h2>Workflows</h2></div><p class="note">Each flowchart has one Start and one End. Codes: ZH for Zoho, WA for the WhatsApp bot, AI for AI calls; a branch adds a letter (ZH1A, ZH1B). Click any blue box to jump to the flowchart it hands over to.</p><div class="wf-leg"><span><i class="lg se"></i>Start / End</span><span><i class="lg pr"></i>Step</span><span><i class="lg dc"></i>Decision</span><span><i class="lg br"></i>Branch (ZH1A, WA2B…)</span><span><i class="lg lk"></i>Link to another flowchart (click)</span></div></div>
 <h2 class="wf-grp">Overview</h2>
-<div class="panel wf-sec" id="wf-OV"><div class="panel-h"><h2><span class="wf-code">OV</span> Main Lead Journey</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The agreed journey from the 17 October review. Centre comes from the campaign; AI calls only on bulk uploads, old RNR digital leads and not-interested leads.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-OV"><div class="panel-h"><h2><span class="wf-code">OV</span> Main Lead Journey</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -590,7 +590,7 @@ click Lq call goWF(&quot;WA5&quot;)
 click L11 call goWF(&quot;ZH11&quot;)
 click L12 call goWF(&quot;ZH12&quot;)</pre></div></div>
 <h2 class="wf-grp">Zoho</h2>
-<div class="panel wf-sec" id="wf-ZH1"><div class="panel-h"><h2><span class="wf-code">ZH1</span> Digital Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every digital channel lands in Zoho with its source, time and campaign.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH1"><div class="panel-h"><h2><span class="wf-code">ZH1</span> Digital Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -633,7 +633,7 @@ L3 --&gt; E
 click Lw call goWF(&quot;WA1&quot;)
 click Lm call goWF(&quot;ZH6&quot;)
 click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH2"><div class="panel-h"><h2><span class="wf-code">ZH2</span> Offline Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Seminars, lists, referrals, events and walk-ins reach Zoho clean and attributed.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH2"><div class="panel-h"><h2><span class="wf-code">ZH2</span> Offline Lead Capture</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -681,7 +681,7 @@ V --&gt; X --&gt; Y --&gt; L3 --&gt; E
 click L8 call goWF(&quot;ZH8&quot;)
 click L1 call goWF(&quot;ZH1&quot;)
 click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH3"><div class="panel-h"><h2><span class="wf-code">ZH3</span> Lead Matching and Attribution</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">One record per person, with the right status and the right credit.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH3"><div class="panel-h"><h2><span class="wf-code">ZH3</span> Lead Matching and Attribution</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -719,7 +719,7 @@ L4 --&gt; E
 click L11 call goWF(&quot;ZH11&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L4 call goWF(&quot;ZH4&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH4"><div class="panel-h"><h2><span class="wf-code">ZH4</span> Qualification and Routing</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Centre comes from the campaign for centre-wise campaigns; location is worked out only for state or national campaigns.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH4"><div class="panel-h"><h2><span class="wf-code">ZH4</span> Qualification and Routing</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -777,7 +777,7 @@ click La5 call goWF(&quot;AI5&quot;)
 click L10a call goWF(&quot;ZH10&quot;)
 click L10b call goWF(&quot;ZH10&quot;)
 click L5 call goWF(&quot;ZH5&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH5"><div class="panel-h"><h2><span class="wf-code">ZH5</span> Who Contacts the Lead</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Bot or human caller for digital leads; AI only for bulk uploads, old RNR digital leads and not-interested leads.</p><div class="wf-chart"><pre class="mermaid">flowchart LR
+<div class="panel wf-sec" id="wf-ZH5"><div class="panel-h"><h2><span class="wf-code">ZH5</span> Who Contacts the Lead</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart LR
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -819,7 +819,7 @@ click La3 call goWF(&quot;AI3&quot;)
 click La4 call goWF(&quot;AI4&quot;)
 click L6c call goWF(&quot;ZH6&quot;)
 click La6 call goWF(&quot;AI6&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH6"><div class="panel-h"><h2><span class="wf-code">ZH6</span> Telecaller Conversation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">A human call, logged in First Conversation, ending in one disposition.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH6"><div class="panel-h"><h2><span class="wf-code">ZH6</span> Telecaller Conversation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -897,7 +897,7 @@ click L4a call goWF(&quot;ZH4&quot;)
 click Ln call goWF(&quot;AI4&quot;)
 click L4b call goWF(&quot;ZH4&quot;)
 click L11 call goWF(&quot;ZH11&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH7"><div class="panel-h"><h2><span class="wf-code">ZH7</span> Counselling Booking and Confirmation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every agreed lead gets a mode, a slot, a counsellor and a confirmed booking.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH7"><div class="panel-h"><h2><span class="wf-code">ZH7</span> Counselling Booking and Confirmation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -924,7 +924,7 @@ C --&gt; D --&gt; F
 F --&gt;|Yes| Lw --&gt; E
 F --&gt;|No| F1 --&gt; E
 click Lw call goWF(&quot;WA6&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH8"><div class="panel-h"><h2><span class="wf-code">ZH8</span> Counselling Day and Walk-ins</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Booked and unbooked visitors are recorded, counselled and passed on.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH8"><div class="panel-h"><h2><span class="wf-code">ZH8</span> Counselling Day and Walk-ins</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -961,7 +961,7 @@ H --&gt; I --&gt; L9 --&gt; E
 click L7 call goWF(&quot;ZH7&quot;)
 click L10 call goWF(&quot;ZH10&quot;)
 click L9 call goWF(&quot;ZH9&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH9"><div class="panel-h"><h2><span class="wf-code">ZH9</span> Admission</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">From the decision to join, through documents and fees, to day one of the batch.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH9"><div class="panel-h"><h2><span class="wf-code">ZH9</span> Admission</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1016,7 +1016,7 @@ M --&gt;|No| M1 --&gt; E
 click Lr call goWF(&quot;ZH2&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH10"><div class="panel-h"><h2><span class="wf-code">ZH10</span> Nurture and Reactivation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Leads not ready now stay warm until they book, stop or run out of cycles.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH10"><div class="panel-h"><h2><span class="wf-code">ZH10</span> Nurture and Reactivation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1059,7 +1059,7 @@ click Ltc call goWF(&quot;ZH6&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L11 call goWF(&quot;ZH11&quot;)
 click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH11"><div class="panel-h"><h2><span class="wf-code">ZH11</span> Consent and Opt-out</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">One opt-out stops every channel at once.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH11"><div class="panel-h"><h2><span class="wf-code">ZH11</span> Consent and Opt-out</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1085,7 +1085,7 @@ B --&gt; C --&gt; D --&gt; F
 F --&gt;|Yes| F1 --&gt; L3 --&gt; E
 F --&gt;|No| E
 click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-ZH12"><div class="panel-h"><h2><span class="wf-code">ZH12</span> Daily Operations</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">What runs every day, and the reports that close the day.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-ZH12"><div class="panel-h"><h2><span class="wf-code">ZH12</span> Daily Operations</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1109,7 +1109,7 @@ I --&gt;|Yes| I1 --&gt; E
 I --&gt;|No| E
 </pre></div></div>
 <h2 class="wf-grp">WhatsApp Bot</h2>
-<div class="panel wf-sec" id="wf-WA1"><div class="panel-h"><h2><span class="wf-code">WA1</span> Entry and Greeting</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Every WhatsApp entry point, the language, and who the course is for.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA1"><div class="panel-h"><h2><span class="wf-code">WA1</span> Entry and Greeting</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1153,7 +1153,7 @@ L2 --&gt; E
 click Lf call goWF(&quot;WA7&quot;)
 click L2 call goWF(&quot;WA2&quot;)
 click L4 call goWF(&quot;WA4&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA2"><div class="panel-h"><h2><span class="wf-code">WA2</span> Questions and Eligibility</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Tap-to-answer questions; anything already known is skipped; eligibility checked per course.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA2"><div class="panel-h"><h2><span class="wf-code">WA2</span> Questions and Eligibility</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1207,7 +1207,7 @@ LOC --&gt;|No| LOC1 --&gt; L3
 L3 --&gt; E
 click L10 call goWF(&quot;ZH10&quot;)
 click L3 call goWF(&quot;WA3&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA3"><div class="panel-h"><h2><span class="wf-code">WA3</span> Next Step</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The student chooses a call, a counselling booking or information only.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA3"><div class="panel-h"><h2><span class="wf-code">WA3</span> Next Step</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1241,7 +1241,7 @@ click L6 call goWF(&quot;ZH6&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L10 call goWF(&quot;ZH10&quot;)
 click L4 call goWF(&quot;WA4&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA4"><div class="panel-h"><h2><span class="wf-code">WA4</span> Follow-ups and STOP</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Three follow-ups, then nurture; STOP ends everything at once.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA4"><div class="panel-h"><h2><span class="wf-code">WA4</span> Follow-ups and STOP</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1270,7 +1270,7 @@ L3 --&gt; E
 click L11 call goWF(&quot;ZH11&quot;)
 click L3 call goWF(&quot;WA3&quot;)
 click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA5"><div class="panel-h"><h2><span class="wf-code">WA5</span> Questions and Escalation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Any question at any point is answered, noted or passed to a person.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA5"><div class="panel-h"><h2><span class="wf-code">WA5</span> Questions and Escalation</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1296,7 +1296,7 @@ C --&gt;|No| D
 D --&gt;|Yes| D1 --&gt; E
 D --&gt;|No| D2 --&gt; E
 click L6 call goWF(&quot;ZH6&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA6"><div class="panel-h"><h2><span class="wf-code">WA6</span> Booking Messages</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Confirmation, reconfirmation, reminders and no-show messages for every booking.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA6"><div class="panel-h"><h2><span class="wf-code">WA6</span> Booking Messages</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1321,7 +1321,7 @@ click L6 call goWF(&quot;ZH6&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L10 call goWF(&quot;ZH10&quot;)
 click L8 call goWF(&quot;ZH8&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-WA7"><div class="panel-h"><h2><span class="wf-code">WA7</span> When the Bot Is Not Available</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Leads keep moving while business verification is pending or the bot is down.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-WA7"><div class="panel-h"><h2><span class="wf-code">WA7</span> When the Bot Is Not Available</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1340,7 +1340,7 @@ A --&gt; A2 --&gt; B
 B --&gt; C --&gt; D --&gt; La --&gt; E
 click La call goWF(&quot;ZH6&quot;)</pre></div></div>
 <h2 class="wf-grp">AI Call</h2>
-<div class="panel wf-sec" id="wf-AI1"><div class="panel-h"><h2><span class="wf-code">AI1</span> AI Call Script</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">The conversation every AI call follows, ending in one disposition written back to Zoho.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-AI1"><div class="panel-h"><h2><span class="wf-code">AI1</span> AI Call Script</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1412,7 +1412,7 @@ click L7 call goWF(&quot;ZH7&quot;)
 click L6 call goWF(&quot;AI6&quot;)
 click L10 call goWF(&quot;ZH10&quot;)
 click L11 call goWF(&quot;ZH11&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-AI2"><div class="panel-h"><h2><span class="wf-code">AI2</span> Bulk Uploaded Leads</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Seminar, college and event lists uploaded in bulk are called by AI first.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-AI2"><div class="panel-h"><h2><span class="wf-code">AI2</span> Bulk Uploaded Leads</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1438,7 +1438,7 @@ click L1 call goWF(&quot;AI1&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L6 call goWF(&quot;AI6&quot;)
 click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-AI3"><div class="panel-h"><h2><span class="wf-code">AI3</span> Old RNR Digital Leads</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Digital leads the telecallers could not reach after 5 attempts are handed to AI.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-AI3"><div class="panel-h"><h2><span class="wf-code">AI3</span> Old RNR Digital Leads</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1464,7 +1464,7 @@ click L1 call goWF(&quot;AI1&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L6 call goWF(&quot;AI6&quot;)
 click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-AI4"><div class="panel-h"><h2><span class="wf-code">AI4</span> Not Interested Leads</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Leads marked Not interested get one AI re-engagement call after a cooling period.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-AI4"><div class="panel-h"><h2><span class="wf-code">AI4</span> Not Interested Leads</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1488,7 +1488,7 @@ D --&gt;|Not interested or no answer| F --&gt; E
 click L1 call goWF(&quot;AI1&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L6 call goWF(&quot;AI6&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-AI5"><div class="panel-h"><h2><span class="wf-code">AI5</span> Parked Out-of-state Follow-up</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">Out-of-state leads from state or national campaigns are parked and followed up by AI.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-AI5"><div class="panel-h"><h2><span class="wf-code">AI5</span> Parked Out-of-state Follow-up</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
@@ -1511,7 +1511,7 @@ D --&gt;|Closed| E
 click L1 call goWF(&quot;AI1&quot;)
 click L7 call goWF(&quot;ZH7&quot;)
 click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
-<div class="panel wf-sec" id="wf-AI6"><div class="panel-h"><h2><span class="wf-code">AI6</span> AI to Person Hand-off</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><p class="note">When an AI call passes a lead to a person, and what the person receives.</p><div class="wf-chart"><pre class="mermaid">flowchart TD
+<div class="panel wf-sec" id="wf-AI6"><div class="panel-h"><h2><span class="wf-code">AI6</span> AI to Person Hand-off</h2><button type="button" class="btn wf-top" onclick="goWF('TOP')">Back to index</button></div><div class="wf-chart"><pre class="mermaid">flowchart TD
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
