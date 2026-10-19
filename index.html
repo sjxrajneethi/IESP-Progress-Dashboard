@@ -503,6 +503,7 @@ L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
 SN[&quot;Lead sanitation&quot;]
 SG{&quot;Signed off by IESP?&quot;}
 BU[&quot;Bulk upload to Zoho&quot;]
+OR[&quot;Channel for first conversation picked by business rules&quot;]
 S1[&quot;1. Lead entry in Zoho&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
 R3{&quot;2. Select channel by business rules&quot;}
@@ -538,7 +539,7 @@ A --&gt;|WhatsApp or call| W1 --&gt; L1
 A --&gt;|Offline| O1 --&gt; L2
 L1 --&gt; S1
 L2 --&gt; SN --&gt; SG
-SG --&gt;|Yes| BU --&gt; Lwa --&gt; Lb
+SG --&gt;|Yes| BU --&gt; OR --&gt; Lwa --&gt; Lb
 SG --&gt;|Changes| SN
 S1 --&gt; L3 --&gt; L4 --&gt; R3
 R3 --&gt;|High intent| L6
