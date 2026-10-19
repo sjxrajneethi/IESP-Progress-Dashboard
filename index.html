@@ -511,6 +511,8 @@ La5[[&quot;→ AI5: Parked Out-of-state Follow-up&quot;]]:::lk
 L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
 F{&quot;First contact&quot;}
 Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
+Lwa[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
+Lwb[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 Lb[[&quot;→ AI2: Bulk Uploaded Leads&quot;]]:::lk
 I{&quot;Call outcome?&quot;}
@@ -530,11 +532,11 @@ A --&gt;|WhatsApp or call| W1 --&gt; L1
 A --&gt;|Offline| O1 --&gt; L2
 L1 --&gt; S1
 L2 --&gt; SN --&gt; SG
-SG --&gt;|Yes| BU --&gt; Lb
+SG --&gt;|Yes| BU --&gt; Lwa --&gt; Lb
 SG --&gt;|Changes| SN
 S1 --&gt; L3 --&gt; R3 --&gt; L4 --&gt; F
 F --&gt;|WhatsApp bot| Lw --&gt; I
-F --&gt;|Telecaller| L6 --&gt; I
+F --&gt;|Telecaller| Lwb --&gt; L6 --&gt; I
 Lb --&gt; I
 I --&gt;|Not now| L10 --&gt; E
 I --&gt;|Out of state| P1 --&gt; La5 --&gt; E
@@ -551,6 +553,8 @@ click L3 call goWF(&quot;ZH3&quot;)
 click La5 call goWF(&quot;AI5&quot;)
 click L4 call goWF(&quot;ZH4&quot;)
 click Lw call goWF(&quot;WA1&quot;)
+click Lwa call goWF(&quot;WA1&quot;)
+click Lwb call goWF(&quot;WA1&quot;)
 click L6 call goWF(&quot;ZH6&quot;)
 click Lb call goWF(&quot;AI2&quot;)
 click L10 call goWF(&quot;ZH10&quot;)
