@@ -500,7 +500,7 @@ W1[&quot;WhatsApp message or direct call&quot;]
 O1[&quot;Seminar, college visit or other offline source&quot;]
 L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
 L2[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
-SN[&quot;Lead sanitation: duplicates, invalid numbers and junk removed&quot;]
+SN[&quot;Lead sanitation&quot;]
 SG{&quot;Signed off by IESP?&quot;}
 BU[&quot;Bulk upload to Zoho&quot;]
 S1[&quot;1. Lead entry in Zoho&quot;]
@@ -567,21 +567,21 @@ A{&quot;Which channel?&quot;}
 A1[&quot;ZH1A: Meta instant lead form&quot;]:::br
 B1[&quot;Pulled in by the Meta integration with ad, ad set and form&quot;]
 A2[&quot;ZH1B: Website or Google Ads form&quot;]:::br
-B2[&quot;Form posts to Zoho with UTM source, campaign and page&quot;]
-A3[&quot;ZH1C: Click-to-WhatsApp ad, website WhatsApp button or QR on print&quot;]:::br
+B2[&quot;Lead created in Zoho with source and campaign&quot;]
+A3[&quot;ZH1C: WhatsApp enquiry&quot;]:::br
 Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
 A4[&quot;ZH1D: Instagram or Facebook DM&quot;]:::br
 B4{&quot;Instagram bot live?&quot;}
-B4a[&quot;Bot asks course, area and number, lead created as Instagram DM&quot;]
-B4b[&quot;Social team logs name, number and state in the upload template&quot;]
-A5[&quot;ZH1E: Call to a centre number or Google Business Profile&quot;]:::br
+B4a[&quot;Bot captures details, lead created in Zoho&quot;]
+B4b[&quot;Lead logged in Zoho by the team&quot;]
+A5[&quot;ZH1E: Direct call to IESP&quot;]:::br
 B5{&quot;Answered?&quot;}
-B5a[&quot;Counsellor logs the lead, source Inbound call&quot;]
-B5b[&quot;Missed call logged, WhatsApp auto-reply with calling hours and centre number&quot;]
+B5a[&quot;Lead logged in Zoho, source Inbound call&quot;]
+B5b[&quot;Missed call logged for a call back&quot;]
 Lm[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-C[&quot;Raw lead captured with source, time and campaign&quot;]
-D{&quot;Received between 9 AM and 8 PM?&quot;}
-D1[&quot;ZH1F: Night lead, instant WhatsApp acknowledgement, queued for 9 AM&quot;]:::br
+C[&quot;Lead captured with source and campaign&quot;]
+D{&quot;Received in working hours?&quot;}
+D1[&quot;ZH1F: Out-of-hours lead, acknowledged and queued for the next working day&quot;]:::br
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
 E([&quot;End: lead captured&quot;]):::se
 S --&gt; A
@@ -608,28 +608,28 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: offline enquiry or list&quot;]):::se
 A{&quot;Which source?&quot;}
 A1[&quot;ZH2A: Mass counselling: seminar or college visit&quot;]:::br
-A1a{&quot;On the monthly seminar calendar?&quot;}
-A1b[&quot;Centre adds it to the calendar, SOP shared&quot;]
-A1d[&quot;Counsellor runs the session for the group: courses, airport jobs, placements&quot;]
-A1c[&quot;Zoho form filled by each student at the session: source Seminar, college from the dropdown&quot;]
+A1a{&quot;On the seminar calendar?&quot;}
+A1b[&quot;Added to the seminar calendar&quot;]
+A1d[&quot;Mass counselling session for the group&quot;]
+A1c[&quot;Student details captured, source Seminar and college&quot;]
 A2[&quot;ZH2B: Booth or field activation&quot;]:::br
-A2a[&quot;Field form: name, age, phone, Aadhaar, course&quot;]
+A2a[&quot;Student details captured&quot;]
 A3[&quot;ZH2C: College data sheet or list from IESP&quot;]:::br
-A3a[&quot;Sent in the upload template by D+1&quot;]
+A3a[&quot;Shared in the upload template&quot;]
 A4[&quot;ZH2D: Referral from a student, parent, alumnus or staff&quot;]:::br
-A4a[&quot;Referrer recorded in Description, source Referral&quot;]
+A4a[&quot;Referrer recorded, source Referral&quot;]
 A5[&quot;ZH2E: Event, launch or job fair&quot;]:::br
-A5a[&quot;Event registration sheet in the upload template&quot;]
+A5a[&quot;Registrations shared in the upload template&quot;]
 A6[&quot;ZH2F: Direct walk-in with no enquiry&quot;]:::br
-A6a[&quot;Reception registers the student, source Walk-in&quot;]
+A6a[&quot;Student registered, source Walk-in&quot;]
 L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
 A7[&quot;ZH2G: Corporate or B2B enquiry&quot;]:::br
-A7a[&quot;Passed to the head office corporate desk&quot;]
+A7a[&quot;Passed to IESP for corporate training&quot;]
 A8[&quot;ZH2H: Newspaper, flyer or hoarding&quot;]:::br
 L1[[&quot;→ ZH1: Digital Lead Capture&quot;]]:::lk
-V[&quot;Cleaned: duplicates, invalid numbers and junk removed, Filled by name set&quot;]
-X[&quot;Uploaded with lead source and college or event name&quot;]
-Y[&quot;Counts shared with Gary for sign-off before use in marketing&quot;]
+V[&quot;Lead sanitation&quot;]
+X[&quot;Bulk upload to Zoho by lead source&quot;]
+Y[&quot;Signed off by IESP&quot;]
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
 E([&quot;End: offline lead in Zoho&quot;]):::se
 S --&gt; A
@@ -644,8 +644,8 @@ A --&gt; A4 --&gt; A4a --&gt; V
 A --&gt; A5 --&gt; A5a --&gt; V
 A --&gt; A6 --&gt; A6a --&gt; L8 --&gt; E
 A --&gt; A7 --&gt; A7a --&gt; E
-A --&gt; A8 --&gt;|Arrives as a call or QR scan| L1 --&gt; E
-V --&gt; X --&gt; Y --&gt; L3 --&gt; E
+A --&gt; A8 --&gt;|Arrives as a call or WhatsApp| L1 --&gt; E
+V --&gt; Y --&gt; X --&gt; L3 --&gt; E
 click L8 call goWF(&quot;ZH8&quot;)
 click L1 call goWF(&quot;ZH1&quot;)
 click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
@@ -654,8 +654,8 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead arrives in Zoho&quot;]):::se
-A{&quot;Calling or WhatsApp number already in Zoho?&quot;}
-N[&quot;ZH3A: New lead created, source and Filled by recorded&quot;]:::br
+A{&quot;Phone number already in Zoho?&quot;}
+N[&quot;ZH3A: New lead created with its source&quot;]:::br
 B{&quot;Status of the existing record&quot;}
 B1[&quot;ZH3B: Open lead, merge and add the new source as a note&quot;]:::br
 B2[&quot;ZH3C: Lost, not now or nurture, reopen as New enquiry&quot;]:::br
@@ -667,8 +667,8 @@ L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
 B5[&quot;ZH3F: Counselling already booked, keep the booking, notify the counsellor&quot;]:::br
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 AT{&quot;How did the lead first arrive?&quot;}
-AT1[&quot;ZH3G: Rajneethi campaign, full credit&quot;]:::br
-AT2[&quot;ZH3H: Manual upload, half credit once a qualifying intervention happens&quot;]:::br
+AT1[&quot;ZH3G: Campaign lead, credit as per the attribution policy&quot;]:::br
+AT2[&quot;ZH3H: Manual upload, credit as per the attribution policy&quot;]:::br
 L4[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
 E([&quot;End: one clean record&quot;]):::se
 S --&gt; A
@@ -692,14 +692,14 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: lead ready for checks&quot;]):::se
-J{&quot;Junk? fake name, invalid or test number&quot;}
+J{&quot;Junk?&quot;}
 J1[&quot;ZH4A: Mark Junk&quot;]:::br
 K{&quot;How did the lead come in?&quot;}
 K1[&quot;ZH4B: Centre-wise campaign or offline lead, centre and territory from the campaign or the collecting centre&quot;]:::br
 K2[&quot;ZH4C: WhatsApp message or direct call, location asked in the chat or call&quot;]:::br
 D{&quot;Location&quot;}
 D1[&quot;Centre and territory assigned&quot;]
-D2[&quot;ZH4D: Near an upcoming centre (Rewa, Indore), park until launch&quot;]:::br
+D2[&quot;ZH4D: Near an upcoming centre, park until launch&quot;]:::br
 L10c[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 D3[&quot;ZH4E: Out of state, park the lead&quot;]:::br
 La5[[&quot;→ AI5: Parked Out-of-state Follow-up&quot;]]:::lk
@@ -712,12 +712,12 @@ A2[&quot;ZH4H: Over the limit, suggest a course with a wider limit&quot;]:::br
 A3{&quot;Accepts another course?&quot;}
 A4[&quot;Mark Ineligible, age&quot;]
 C{&quot;Course entry need&quot;}
-C1[&quot;ZH4I: Cabin crew height not met, offer Airline Handling or Airport Operations&quot;]:::br
-C2[&quot;ZH4J: Driver course without an LMV licence, nurture until licensed&quot;]:::br
+C1[&quot;ZH4I: Cabin crew criteria not met, offer another course&quot;]:::br
+C2[&quot;ZH4J: Driver course without a licence, nurture until licensed&quot;]:::br
 L10b[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
-C3[&quot;ZH4K: GSE without ITI, offer Ramp Equipment or Airline Handling&quot;]:::br
-F[&quot;Language set: Marathi, Kannada, Hindi, Gujarati, Konkani or English&quot;]
-G[&quot;Lead quality tag: good, average or poor&quot;]
+C3[&quot;ZH4K: GSE without ITI, offer another course&quot;]:::br
+F[&quot;Preferred language set&quot;]
+G[&quot;Lead quality tagged&quot;]
 L5[[&quot;→ ZH5: Who Contacts the Lead&quot;]]:::lk
 E([&quot;End: lead qualified, parked or closed&quot;]):::se
 S --&gt; J
@@ -750,17 +750,17 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: qualified lead&quot;]):::se
-A{&quot;Bot or human caller? decided by lead type&quot;}
+A{&quot;Who makes first contact?&quot;}
 A1[&quot;ZH5A: New digital lead from a centre-wise campaign&quot;]:::br
 A1a{&quot;Lead replied on WhatsApp?&quot;}
 Lw[[&quot;→ WA1: Entry and Greeting&quot;]]:::lk
 L6a[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 A2[&quot;ZH5B: Asked for a call in the WhatsApp bot&quot;]:::br
-A2a[&quot;Counsellor calls within 90 minutes in working hours&quot;]
+A2a[&quot;Telecaller calls back&quot;]
 L6b[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
-A3[&quot;ZH5C: Bulk uploaded list: seminar, college, event&quot;]:::br
+A3[&quot;ZH5C: Bulk uploaded list&quot;]:::br
 La2[[&quot;→ AI2: Bulk Uploaded Leads&quot;]]:::lk
-A4[&quot;ZH5D: Old digital lead, no answer after 5 telecaller attempts&quot;]:::br
+A4[&quot;ZH5D: Old digital lead, no answer after telecaller attempts&quot;]:::br
 La3[[&quot;→ AI3: Old RNR Digital Leads&quot;]]:::lk
 A5[&quot;ZH5E: Marked Not interested, cooling period over&quot;]:::br
 La4[[&quot;→ AI4: Not Interested Leads&quot;]]:::lk
@@ -791,18 +791,18 @@ click La6 call goWF(&quot;AI6&quot;)</pre></div></div>
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: lead in Telecaller My Queue&quot;]):::se
+S([&quot;Start: lead in the telecaller queue&quot;]):::se
 A[&quot;Read the AI call summary and WhatsApp answers&quot;]
-B[&quot;Call, log caller name and call time&quot;]
+B[&quot;Call made and logged&quot;]
 C{&quot;Connected?&quot;}
-C1[&quot;ZH6A: No answer, busy or switched off, add one attempt&quot;]:::br
-C2{&quot;Fewer than 5 attempts?&quot;}
-C3[&quot;WhatsApp nudge, retry in the next slot&quot;]
+C1[&quot;ZH6A: No answer, busy or switched off&quot;]:::br
+C2{&quot;Attempts left?&quot;}
+C3[&quot;WhatsApp nudge, retry later&quot;]
 Lr[[&quot;→ AI3: Old RNR Digital Leads&quot;]]:::lk
 P{&quot;Who answered?&quot;}
-P1[&quot;ZH6B: Parent or family, speak to the parent, save the parent number&quot;]:::br
+P1[&quot;ZH6B: Parent or family answers, speak to the parent&quot;]:::br
 P2[&quot;ZH6C: Wrong number, mark Junk&quot;]:::br
-P3[&quot;ZH6D: Language the caller does not speak, pass to a caller who speaks it&quot;]:::br
+P3[&quot;ZH6D: Language mismatch, pass to a caller who speaks it&quot;]:::br
 D{&quot;Disposition group&quot;}
 Dp{&quot;Wants counselling&quot;}
 Dl{&quot;Later&quot;}
@@ -816,10 +816,10 @@ D4[&quot;ZH6H: Interested, no date yet&quot;]:::br
 L10a[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 D5[&quot;ZH6I: Wants a job only, explain placement-linked training&quot;]:::br
 D5a{&quot;Interested now?&quot;}
-D6[&quot;ZH6J: Fee concern, explain fees and payment options&quot;]:::br
+D6[&quot;ZH6J: Fee concern, invite to free counselling&quot;]:::br
 D7[&quot;ZH6K: Ineligible for the course&quot;]:::br
 L4a[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
-D8[&quot;ZH6L: Not interested, reason noted, queued for AI re-engagement after 30 days&quot;]:::br
+D8[&quot;ZH6L: Not interested, reason noted, queued for AI re-engagement&quot;]:::br
 Ln[[&quot;→ AI4: Not Interested Leads&quot;]]:::lk
 D9[&quot;ZH6M: Joined another institute, Lost, note which&quot;]:::br
 D10[&quot;ZH6N: Out of state or too far&quot;]:::br
@@ -827,7 +827,7 @@ L4b[[&quot;→ ZH4: Qualification and Routing&quot;]]:::lk
 D11[&quot;ZH6O: Existing student, flag it&quot;]:::br
 D12[&quot;ZH6P: Asks not to be contacted&quot;]:::br
 L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
-W[&quot;Disposition saved, status updates automatically, comment added on a new line&quot;]
+W[&quot;Disposition and comment saved in Zoho&quot;]
 E([&quot;End: call logged&quot;]):::se
 S --&gt; A --&gt; B --&gt; C
 C --&gt;|No| C1 --&gt; C2
@@ -871,15 +871,15 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: lead agrees to counselling&quot;]):::se
 A{&quot;Counselling mode&quot;}
 A1[&quot;ZH7A: Centre visit&quot;]:::br
-A2[&quot;ZH7B: Online counselling, 15 minutes, recommended with parents&quot;]:::br
+A2[&quot;ZH7B: Online counselling, recommended with parents&quot;]:::br
 A3[&quot;ZH7C: Home counselling&quot;]:::br
 B{&quot;Slot available?&quot;}
 B1[&quot;Offer the next free slot&quot;]
 C[&quot;Date and time set, status Walk-in booked&quot;]
-D[&quot;Counsellor assigned, centre default, can be reassigned&quot;]
+D[&quot;Counsellor assigned&quot;]
 F{&quot;WhatsApp reachable?&quot;}
 Lw[[&quot;→ WA6: Booking Messages&quot;]]:::lk
-F1[&quot;ZH7D: SMS and a telecaller confirmation call instead&quot;]:::br
+F1[&quot;ZH7D: Telecaller confirmation call instead&quot;]:::br
 E([&quot;End: booking made and confirmations running&quot;]):::se
 S --&gt; A
 A --&gt; A1 --&gt; B
@@ -897,20 +897,20 @@ classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: counselling day, or a student walks in&quot;]):::se
 A{&quot;How did they arrive?&quot;}
-B[&quot;Shows in Today&#x27;s Walk-in view with the counsellor&#x27;s name&quot;]
+B[&quot;Listed for the day with the counsellor&quot;]
 B0{&quot;Phone number already in Zoho?&quot;}
 B0a[&quot;Create the lead, source Walk-in&quot;]
 B0b[&quot;Update the lead and mark Walk-in&quot;]
 C{&quot;Arrived or joined online?&quot;}
-C1[&quot;ZH8A: Not arrived, WhatsApp 1 hour after the slot, telecaller calls next morning&quot;]:::br
+C1[&quot;ZH8A: No-show, WhatsApp and telecaller follow-up&quot;]:::br
 C2{&quot;Rebooked?&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 R[&quot;Mark Student visited&quot;]
 G{&quot;At the centre they booked?&quot;}
 G1[&quot;ZH8B: Counsel here, or transfer the lead to the preferred centre&quot;]:::br
-H[&quot;Counselling: course fit, eligibility documents, fees, placement record, parent joins if possible&quot;]
-I[&quot;Counselling done and lead quality logged&quot;]
+H[&quot;Counselling at the centre&quot;]
+I[&quot;Counselling outcome logged&quot;]
 L9[[&quot;→ ZH9: Admission&quot;]]:::lk
 E([&quot;End: visit recorded&quot;]):::se
 S --&gt; A
@@ -936,22 +936,22 @@ S([&quot;Start: counselling done&quot;]):::se
 A{&quot;Decision&quot;}
 A1[&quot;ZH9A: Join now&quot;]:::br
 B[&quot;Admission form filled&quot;]
-C{&quot;Eligibility documents complete? marksheet, ID, licence for driver, ITI for GSE&quot;}
-C1[&quot;Missing documents listed, follow-up in 48 hours&quot;]
-C2{&quot;Received within 7 days?&quot;}
+C{&quot;Eligibility documents complete?&quot;}
+C1[&quot;Missing documents listed, follow-up&quot;]
+C2{&quot;Received?&quot;}
 D{&quot;Fee payment&quot;}
 D1[&quot;Full payment&quot;]
-D2[&quot;Instalment plan set, first payment recorded&quot;]
+D2[&quot;Instalment plan set&quot;]
 F[&quot;Fee receipt number entered, lead converted to Admission&quot;]
 G[&quot;Documents combined into a single PDF&quot;]
-H[&quot;Course code and batch assigned, pushed to the LMS&quot;]
-I[&quot;Welcome on WhatsApp, references and a testimonial asked&quot;]
+H[&quot;Batch assigned, data sent to the LMS&quot;]
+I[&quot;References asked&quot;]
 Lr[[&quot;→ ZH2: Offline Lead Capture&quot;]]:::lk
 J{&quot;Joins the batch on day one?&quot;}
-J1[&quot;ZH9B: Dropout before the batch, reason and refund as per policy&quot;]:::br
+J1[&quot;ZH9B: Dropout before the batch, reason recorded&quot;]:::br
 A2[&quot;ZH9C: Not now&quot;]:::br
 K{&quot;Reason&quot;}
-K1[&quot;Fee, payment options explained&quot;]
+K1[&quot;Fee concern, financing discussed at the centre&quot;]
 K2[&quot;Parent decision, online counselling with the parent&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 K3[&quot;Later batch, batch month noted&quot;]
@@ -990,10 +990,10 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: lead enters nurture&quot;]):::se
 A{&quot;Nurture reason&quot;}
 A1[&quot;ZH10A: Not ready yet or a later batch&quot;]:::br
-A2[&quot;ZH10B: Upcoming centre, reactivate all parked leads at launch&quot;]:::br
+A2[&quot;ZH10B: Upcoming centre, reactivate parked leads at launch&quot;]:::br
 A3[&quot;ZH10C: Minor or licence pending, recontact at the eligibility date&quot;]:::br
 A4[&quot;ZH10D: No response after the retries&quot;]:::br
-B[&quot;Follow-up date set, WhatsApp content every 21 days: videos, testimonials, placements&quot;]
+B[&quot;Follow-up date set, WhatsApp content at intervals&quot;]
 NC{&quot;Who calls?&quot;}
 La[[&quot;→ AI3: Old RNR Digital Leads&quot;]]:::lk
 Lni[[&quot;→ AI4: Not Interested Leads&quot;]]:::lk
@@ -1002,7 +1002,7 @@ D{&quot;Response&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
-F{&quot;Fewer than 3 cycles done?&quot;}
+F{&quot;Nurture cycles left?&quot;}
 G[&quot;Mark Lost, no response&quot;]
 E([&quot;End: re-engaged, stopped or closed&quot;]):::se
 S --&gt; A
@@ -1036,9 +1036,8 @@ A1[&quot;ZH11A: STOP on WhatsApp&quot;]:::br
 A2[&quot;ZH11B: Asked on an AI call&quot;]:::br
 A3[&quot;ZH11C: Asked a telecaller or counsellor&quot;]:::br
 A4[&quot;ZH11D: Number on the DND register&quot;]:::br
-B[&quot;Mark DND in Zoho with date and channel&quot;]
+B[&quot;Marked DND in Zoho&quot;]
 C[&quot;Removed from AI, WhatsApp and telecaller queues&quot;]
-D[&quot;Excluded from Meta and Google custom audiences&quot;]
 F{&quot;Contacts IESP again on their own later?&quot;}
 F1[&quot;ZH11E: Consent noted, DND lifted for the new enquiry&quot;]:::br
 L3[[&quot;→ ZH3: Lead Matching and Attribution&quot;]]:::lk
@@ -1048,7 +1047,7 @@ A --&gt; A1 --&gt; B
 A --&gt; A2 --&gt; B
 A --&gt; A3 --&gt; B
 A --&gt; A4 --&gt; B
-B --&gt; C --&gt; D --&gt; F
+B --&gt; C --&gt; F
 F --&gt;|Yes| F1 --&gt; L3 --&gt; E
 F --&gt;|No| E
 click L3 call goWF(&quot;ZH3&quot;)</pre></div></div>
@@ -1062,18 +1061,18 @@ V{&quot;Bot live, business verified?&quot;}
 Lf[[&quot;→ WA7: When the Bot Is Not Available&quot;]]:::lk
 A{&quot;Entry point&quot;}
 A1[&quot;WA1A: Click-to-WhatsApp ad&quot;]:::br
-A2[&quot;WA1B: Website button or QR on print&quot;]:::br
-A3[&quot;WA1C: Reel, Instagram bio or Google profile&quot;]:::br
+A2[&quot;WA1B: Website button or QR&quot;]:::br
+A3[&quot;WA1C: Social media link&quot;]:::br
 A4[&quot;WA1D: Auto-reply after a form fill or missed call&quot;]:::br
-B[&quot;Source tagged from the prefilled message&quot;]
+B[&quot;Source tagged&quot;]
 C{&quot;Number already in Zoho?&quot;}
 C1[&quot;Chat linked to the existing lead&quot;]
 C2[&quot;New lead created&quot;]
-G[&quot;Greeting: IESP, centres, 14,000+ placed, replies are automatic&quot;]
-H[&quot;Language chosen: English, Hindi, Marathi, Kannada or Konkani&quot;]
-H2[&quot;Intro video, student testimonials and the Tejasvi Surya reel shared&quot;]
+G[&quot;Greeting and introduction to IESP&quot;]
+H[&quot;Language chosen&quot;]
+H2[&quot;Intro video and testimonials shared&quot;]
 F{&quot;Who is the course for?&quot;}
-F1[&quot;WA1E: Company staff, company and need captured, passed to head office&quot;]:::br
+F1[&quot;WA1E: Company staff, passed to IESP for corporate training&quot;]:::br
 F2[&quot;WA1F: Parent chatting for a child, parent saved as contact&quot;]:::br
 L2[[&quot;→ WA2: Questions and Eligibility&quot;]]:::lk
 L4[[&quot;→ WA4: Follow-ups and STOP&quot;]]:::lk
@@ -1105,26 +1104,26 @@ S([&quot;Start: profile questions&quot;]):::se
 Q1{&quot;Q1 Course of interest&quot;}
 Q1a[&quot;WA2A: Not sure, help me choose from interest and qualification&quot;]:::br
 Q2[&quot;Q2 Area or city&quot;]
-Q3[&quot;Q3 Qualification: 10th, 12th, graduate or ITI&quot;]
+Q3[&quot;Q3 Qualification&quot;]
 Q4[&quot;Q4 Age&quot;]
 Q5[&quot;Q5 When to start&quot;]
 Q6[&quot;Q6 Name&quot;]
 Q7[&quot;Q7 Parent&#x27;s contact number&quot;]
 K{&quot;Course entry check&quot;}
-K1[&quot;WA2B: Cabin crew pre-check: male or female, height band&quot;]:::br
+K1[&quot;WA2B: Cabin crew criteria check&quot;]:::br
 K1a{&quot;Meets the standard?&quot;}
-K2[&quot;WA2C: Driver: LMV licence held for a year&quot;]:::br
+K2[&quot;WA2C: Driver: licence check&quot;]:::br
 K2a{&quot;Has the licence?&quot;}
-K3[&quot;WA2D: GSE: ITI in mechanical or electrical&quot;]:::br
+K3[&quot;WA2D: GSE: ITI check&quot;]:::br
 K3a{&quot;Has ITI?&quot;}
 AG{&quot;Age within the course limit?&quot;}
 X[&quot;WA2E: Offer a course that fits&quot;]:::br
 X1{&quot;Accepts?&quot;}
-X2[&quot;Lead noted as Ineligible, nurture content only&quot;]
+X2[&quot;Marked Ineligible&quot;]
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 LOC{&quot;Area served by a centre?&quot;}
 LOC1[&quot;WA2F: Upcoming centre or none, offer online counselling&quot;]:::br
-LOC2[&quot;Nearest centre set, student can type CHANGE&quot;]
+LOC2[&quot;Nearest centre set&quot;]
 L3[[&quot;→ WA3: Next Step&quot;]]:::lk
 E([&quot;End: profile complete&quot;]):::se
 S --&gt; Q1
@@ -1158,17 +1157,17 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: profile complete&quot;]):::se
 A{&quot;What next?&quot;}
 A1[&quot;WA3A: Call me&quot;]:::br
-T{&quot;Working hours, 9 AM to 8 PM?&quot;}
-T1[&quot;Counsellor calls within 90 minutes&quot;]
-T2[&quot;Told the call will come after 9 AM&quot;]
-B1[&quot;Zoho updated with a five-line summary&quot;]
+T{&quot;Within working hours?&quot;}
+T1[&quot;Telecaller calls back&quot;]
+T2[&quot;Told the call will come in working hours&quot;]
+B1[&quot;Chat summary saved in Zoho&quot;]
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 A2[&quot;WA3B: Book counselling&quot;]:::br
 C1{&quot;Centre, online or home?&quot;}
 C2[&quot;Pick centre, day and slot&quot;]
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 A3[&quot;WA3C: Send details only&quot;]:::br
-A3a[&quot;Brochure, fees range and course video sent&quot;]
+A3a[&quot;Course details sent&quot;]
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 A4[&quot;WA3D: No reply&quot;]:::br
 L4[[&quot;→ WA4: Follow-ups and STOP&quot;]]:::lk
@@ -1192,12 +1191,9 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: student stops replying&quot;]):::se
 A{&quot;STOP received?&quot;}
 L11[[&quot;→ ZH11: Consent and Opt-out&quot;]]:::lk
-B[&quot;Follow-up on day 1&quot;]
+B[&quot;Follow-up message&quot;]
 B1{&quot;Reply?&quot;}
-C[&quot;Follow-up on day 3&quot;]
-C1{&quot;Reply?&quot;}
-D[&quot;Follow-up on day 7&quot;]
-D1{&quot;Reply?&quot;}
+F{&quot;More follow-ups due?&quot;}
 L3[[&quot;→ WA3: Next Step&quot;]]:::lk
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
 E([&quot;End: re-engaged, nurtured or opted out&quot;]):::se
@@ -1205,11 +1201,9 @@ S --&gt; A
 A --&gt;|Yes| L11 --&gt; E
 A --&gt;|No| B --&gt; B1
 B1 --&gt;|Yes| L3
-B1 --&gt;|No| C --&gt; C1
-C1 --&gt;|Yes| L3
-C1 --&gt;|No| D --&gt; D1
-D1 --&gt;|Yes| L3
-D1 --&gt;|No| L10 --&gt; E
+B1 --&gt;|No| F
+F --&gt;|Yes| B
+F --&gt;|No| L10 --&gt; E
 L3 --&gt; E
 click L11 call goWF(&quot;ZH11&quot;)
 click L3 call goWF(&quot;WA3&quot;)
@@ -1220,13 +1214,13 @@ classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: student asks a question&quot;]):::se
 A{&quot;Topic&quot;}
-A1[&quot;WA5A: Money, refund, complaint or medical, flagged to the centre head&quot;]:::br
+A1[&quot;WA5A: Complaint or sensitive query, flagged to the centre&quot;]:::br
 A2[&quot;WA5B: Fees or batch dates, noted for the counsellor&quot;]:::br
 A3[&quot;WA5C: Asks for a person&quot;]:::br
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 C{&quot;Matched in the FAQ bank?&quot;}
 C1[&quot;Answer, then repeat the open question&quot;]
-D{&quot;Second unmatched message?&quot;}
+D{&quot;Still unmatched?&quot;}
 D1[&quot;WA5D: Passed to the counsellor&quot;]:::br
 D2[&quot;Ask the student to rephrase&quot;]
 E([&quot;End: question handled&quot;]):::se
@@ -1245,15 +1239,15 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: counselling booked&quot;]):::se
-A[&quot;Confirmation: date, time, centre address and map, or the online link for the student, and the parent if joining&quot;]
-B{&quot;Reconfirm at T-24h: Yes, Reschedule or Cancel&quot;}
+A[&quot;Confirmation with date, time and address, or the online link&quot;]
+B{&quot;Reconfirmation: Yes, Reschedule or Cancel&quot;}
 B1[&quot;WA6A: No reply, telecaller reminder call&quot;]:::br
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 B2[&quot;WA6B: Reschedule&quot;]:::br
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 B3[&quot;WA6C: Cancel, reason asked&quot;]:::br
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
-C[&quot;Reminders at 7 PM the day before and 8 AM on the day&quot;]
+C[&quot;Reminders before the appointment&quot;]
 L8[[&quot;→ ZH8: Counselling Day and Walk-ins&quot;]]:::lk
 E([&quot;End: student reminded, rebooked or cancelled&quot;]):::se
 S --&gt; A --&gt; B
@@ -1273,9 +1267,9 @@ S([&quot;Start: bot not available&quot;]):::se
 A{&quot;Reason&quot;}
 A1[&quot;WA7A: Business verification pending or rejected, resubmit to Meta&quot;]:::br
 A2[&quot;WA7B: Outage or template not approved&quot;]:::br
-B[&quot;Incoming chats answered by the team from the business app in working hours&quot;]
+B[&quot;Chats answered by the team&quot;]
 C[&quot;Lead created in Zoho by hand, source WhatsApp&quot;]
-D[&quot;First contact by telecaller and SMS&quot;]
+D[&quot;First contact by telecaller&quot;]
 La[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 E([&quot;End: lead still contacted&quot;]):::se
 S --&gt; A
@@ -1289,16 +1283,16 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: AI dials a lead from AI2, AI3, AI4 or AI5&quot;]):::se
-A[&quot;Call in the lead&#x27;s language with the regional script: Maharashtra, Karnataka or general&quot;]
+A[&quot;Call in the lead&#x27;s language&quot;]
 B{&quot;Answered?&quot;}
-B1[&quot;AI1A: No answer, next attempt as per the list&#x27;s schedule&quot;]:::br
-B3[&quot;AI1B: Voicemail or call dropped, retry within 1 hour&quot;]:::br
+B1[&quot;AI1A: No answer, next attempt scheduled&quot;]:::br
+B3[&quot;AI1B: Voicemail or call dropped, retry&quot;]:::br
 B4{&quot;Retry answered?&quot;}
 P{&quot;Who answered?&quot;}
 P1[&quot;AI1C: Parent, speak to the parent&quot;]:::br
 P2[&quot;AI1D: Wrong number&quot;]:::br
 P3[&quot;AI1E: Language not supported&quot;]:::br
-F[&quot;Opening line for the list: seminar or college, earlier enquiry, or a fresh update&quot;]
+F[&quot;Opening based on the list&quot;]
 G{&quot;Response&quot;}
 G1[&quot;AI1F: Busy, call-back time noted&quot;]:::br
 G2[&quot;AI1G: Not interested, polite close&quot;]:::br
@@ -1307,14 +1301,14 @@ G4[&quot;AI1I: Asks for a person&quot;]:::br
 H[&quot;Interest check: a career in aviation?&quot;]
 I{&quot;Answer&quot;}
 I1[&quot;AI1J: Wants a job only, explain placement-linked training&quot;]:::br
-J[&quot;Qualification, course, age and nearest centre&quot;]
+J[&quot;Qualification, course, age and location&quot;]
 K{&quot;Eligible and near a centre?&quot;}
 K1[&quot;AI1K: Not eligible or no centre, suggest another course or online counselling&quot;]:::br
 M[&quot;Counselling pitch: centre visit, or online counselling, recommended with parents&quot;]
 N{&quot;Agrees?&quot;}
 N1[&quot;Date and time confirmed&quot;]
 N2[&quot;AI1L: Unsure, follow-up date set&quot;]:::br
-W[&quot;Written back to Zoho: disposition, connection status, attempts, summary, next action&quot;]
+W[&quot;Call outcome and summary written to Zoho&quot;]
 X{&quot;Next action&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 L6[[&quot;→ AI6: AI to Person Hand-off&quot;]]:::lk
@@ -1361,12 +1355,12 @@ classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
 S([&quot;Start: bulk list uploaded to Zoho&quot;]):::se
-A[&quot;List tagged with source, college or event and upload date&quot;]
-B[&quot;Added to the AI queue, first call within 24 hours, 9 AM to 8 PM&quot;]
+A[&quot;List tagged with its source&quot;]
+B[&quot;Added to the AI calling queue&quot;]
 L1[[&quot;→ AI1: AI Call Script&quot;]]:::lk
 C{&quot;Outcome&quot;}
-D[&quot;AI2A: No answer, up to 5 attempts over 7 days with a WhatsApp nudge&quot;]:::br
-D1{&quot;Answered within 5 attempts?&quot;}
+D[&quot;AI2A: No answer, retry with a WhatsApp nudge&quot;]:::br
+D1{&quot;Attempts left?&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 L6[[&quot;→ AI6: AI to Person Hand-off&quot;]]:::lk
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
@@ -1386,13 +1380,13 @@ click L10 call goWF(&quot;ZH10&quot;)</pre></div></div>
 classDef se fill:#1F3A68,stroke:#1F3A68,color:#ffffff,font-weight:600
 classDef br fill:#FFF4E5,stroke:#E8A33D,color:#1b1b1b
 classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:pointer
-S([&quot;Start: digital lead with 5 unanswered telecaller attempts&quot;]):::se
+S([&quot;Start: digital lead unanswered after telecaller attempts&quot;]):::se
 A[&quot;Tagged RNR and moved from the telecaller queue to the AI queue&quot;]
-B[&quot;AI calls at different times of day, after 3 PM first&quot;]
+B[&quot;AI calls at different times of day&quot;]
 L1[[&quot;→ AI1: AI Call Script&quot;]]:::lk
 C{&quot;Outcome&quot;}
-D[&quot;AI3A: Still no answer after 3 AI cycles&quot;]:::br
-D1{&quot;Fewer than 3 cycles done?&quot;}
+D[&quot;AI3A: Still no answer&quot;]:::br
+D1{&quot;AI cycles left?&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
 L6[[&quot;→ AI6: AI to Person Hand-off&quot;]]:::lk
 L10[[&quot;→ ZH10: Nurture and Reactivation&quot;]]:::lk
@@ -1415,8 +1409,8 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: lead marked Not interested&quot;]):::se
 A{&quot;Reason was do not call or junk?&quot;}
 A1[&quot;AI4A: Excluded from AI calling&quot;]:::br
-B[&quot;Cooling period of 30 days&quot;]
-C[&quot;AI call with a fresh update: placements, new batch, online counselling&quot;]
+B[&quot;Cooling period&quot;]
+C[&quot;AI call with a fresh update&quot;]
 L1[[&quot;→ AI1: AI Call Script&quot;]]:::lk
 D{&quot;Outcome&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
@@ -1439,7 +1433,7 @@ classDef lk fill:#E8F0FB,stroke:#2A78D6,color:#1F3A68,font-weight:600,cursor:poi
 S([&quot;Start: lead parked as Out of state&quot;]):::se
 A{&quot;Centre opening near them?&quot;}
 A1[&quot;AI5A: Upcoming centre opens, invite to launch counselling&quot;]:::br
-A2[&quot;AI5B: No centre, offer online counselling or relocation to the nearest centre&quot;]:::br
+A2[&quot;AI5B: No centre, offer online counselling or the nearest centre&quot;]:::br
 L1[[&quot;→ AI1: AI Call Script&quot;]]:::lk
 D{&quot;Outcome&quot;}
 L7[[&quot;→ ZH7: Counselling Booking and Confirmation&quot;]]:::lk
@@ -1466,11 +1460,11 @@ A2[&quot;AI6B: Parent decision pending&quot;]:::br
 A3[&quot;AI6C: Asked for a person or language not supported&quot;]:::br
 A4[&quot;AI6D: Complaint or upset caller&quot;]:::br
 A5[&quot;AI6E: Hot lead, wants to join soon&quot;]:::br
-B[&quot;Hand-off note in Zoho: call summary, recording link, best time to call&quot;]
+B[&quot;Hand-off note in Zoho with the call summary&quot;]
 C{&quot;Who takes it?&quot;}
-C1[&quot;Telecaller the same day&quot;]
-C2[&quot;Centre head the same day&quot;]
-C3[&quot;Counsellor within 2 hours&quot;]
+C1[&quot;Telecaller&quot;]
+C2[&quot;Centre head&quot;]
+C3[&quot;Counsellor, on priority&quot;]
 L6[[&quot;→ ZH6: Telecaller Conversation&quot;]]:::lk
 E([&quot;End: a person owns the lead&quot;]):::se
 S --&gt; A
