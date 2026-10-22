@@ -364,7 +364,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
   <div class="panel" id="rrPanel">
     <div class="panel-h"><h2>Admissions Run Rate</h2><span class="note tt-by" id="rrAsOf"></span></div>
     <div class="rr-bar" aria-hidden="true"><span class="rr-fill" id="rrFill"></span><i class="rr-plan" id="rrPlan"></i></div>
-    <div class="rr-scale"><span id="rrDoneLab"></span><span id="rrPlanLab"></span><span>Target: 750</span></div>
+    <div class="rr-scale"><span id="rrDoneLab"></span><span>Target: 750</span></div>
     <div class="dl-sum" id="rrSum"></div>
   </div>
   <style>
@@ -390,7 +390,6 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     document.getElementById('rrFill').style.width=Math.min(100,RR.done/RR.target*100)+'%';
     document.getElementById('rrPlan').style.left='calc('+Math.min(100,plan/RR.target*100)+'% - 1px)';
     document.getElementById('rrDoneLab').textContent='Admissions: '+n(RR.done,0);
-    document.getElementById('rrPlanLab').textContent='Plan to Date: '+n(Math.round(plan),0);
     const k=(v,l,d,c)=>'<div class="kpi"><span class="val">'+v+'</span><span class="lab">'+l+'</span><span class="det">'+d+'</span></div>';
     document.getElementById('rrSum').innerHTML=[
       k(n(RR.done,0),'Admissions Done','Of 750, 1 September 2026 to 31 March 2027','--c1'),
