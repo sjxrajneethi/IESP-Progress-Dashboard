@@ -361,6 +361,14 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
 
 <!-- OVERVIEW -->
 <section class="tab" id="t-overview" role="tabpanel" aria-label="Overview">
+  <div class="panel">
+    <div class="panel-h"><h2>What We Have Delivered</h2><span class="note tt-by">1 September to 16 October 2026</span></div>
+    <div class="dl-sum" id="dlSum"></div>
+  </div>
+  <div class="dl-grid" id="dlCards"></div>
+  <dialog id="dlModal" class="dl-modal" aria-label="Details"><div class="dl-top dl-mhw"><div class="dl-top dl-mh"></div><button type="button" class="btn dl-x" aria-label="Close">✕</button></div><ul class="dl-list"></ul></dialog>
+</section>
+<section class="tab" id="t-performance" role="tabpanel" aria-label="Performance" hidden>
   <div class="panel" id="rrPanel">
     <div class="panel-h"><h2>Admissions Run Rate</h2><span class="note tt-by" id="rrAsOf"></span></div>
     <div class="rr-bar" aria-hidden="true"><span class="rr-fill" id="rrFill"></span><i class="rr-plan" id="rrPlan"></i></div>
@@ -369,6 +377,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
   </div>
   <style>
   #rrPanel{margin-bottom:16px}
+  @media (min-width:981px){#rrSum{grid-template-columns:repeat(7,minmax(0,1fr))}}
   .rr-bar{position:relative;height:14px;border-radius:7px;background:var(--sunk);margin:6px 0 6px;overflow:visible}
   .rr-fill{display:block;height:100%;border-radius:7px;background:var(--accent);min-width:4px}
   .rr-plan{position:absolute;top:-4px;width:2px;height:22px;background:var(--ink);border-radius:1px}
@@ -390,10 +399,12 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     document.getElementById('rrFill').style.width=Math.min(100,RR.done/RR.target*100)+'%';
     document.getElementById('rrPlan').style.left='calc('+Math.min(100,plan/RR.target*100)+'% - 1px)';
     document.getElementById('rrDoneLab').textContent='Admissions: '+n(RR.done,0);
-    const k=(v,l,d,c)=>'<div class="kpi"><span class="val">'+v+'</span><span class="lab">'+l+'</span><span class="det">'+d+'</span></div>';
+    const k=(v,l,d,c,st)=>'<div class="kpi"><span class="val"'+(st?' style="'+st+'"':'')+'>'+v+'</span><span class="lab">'+l+'</span><span class="det">'+d+'</span></div>';
+    const gap=RR.done-Math.round(plan);
     document.getElementById('rrSum').innerHTML=[
       k(n(RR.done,0),'Admissions Done','Of 750, 1 September 2026 to 31 March 2027','--c1'),
       k(n(Math.round(plan),0),'Plan to Date','At '+n(RR.target/total)+' a Day','--c2'),
+      k((gap>0?'+':gap<0?'−':'')+n(Math.abs(gap),0),'Current Performance','Against Plan to Date','--c2',gap<0?'color:var(--loss)':gap>0?'color:var(--good)':''),
       k(n(curDay,2),'Current Run Rate','Admissions a Day, Over '+elapsed+' Days','--c3'),
       k(n(reqDay),'Required Run Rate','A Day · '+n(reqDay*7,0)+' a Week · '+n(reqDay*30.4,0)+' a Month','--c4'),
       k(n(left,0),'Days Left','To 31 March 2027','--c6'),
@@ -401,12 +412,6 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     ].join('');
   })();
   </script>
-  <div class="panel">
-    <div class="panel-h"><h2>What We Have Delivered</h2><span class="note tt-by">1 September to 16 October 2026</span></div>
-    <div class="dl-sum" id="dlSum"></div>
-  </div>
-  <div class="dl-grid" id="dlCards"></div>
-  <dialog id="dlModal" class="dl-modal" aria-label="Details"><div class="dl-top dl-mhw"><div class="dl-top dl-mh"></div><button type="button" class="btn dl-x" aria-label="Close">✕</button></div><ul class="dl-list"></ul></dialog>
 </section>
 
 <!-- FUNNEL AND CENTRES -->
@@ -17991,7 +17996,7 @@ themeBtn.addEventListener('click',()=>{document.documentElement.setAttribute('da
 const savedTheme=store.get('iesp-theme');if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);syncTheme();
 
 /* Tabs */
-const TABS=[['overview','Overview'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['zoho','Zoho'],['workflows','Workflows'],['sim','Simulator']];
+const TABS=[['overview','Overview'],['performance','Performance'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['zoho','Zoho'],['workflows','Workflows'],['sim','Simulator']];
 const tabsEl=$('#tabs');
 tabsEl.innerHTML=TABS.map(([k,l])=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}">${l}</button>`).join('');
 function openTab(k,push){
