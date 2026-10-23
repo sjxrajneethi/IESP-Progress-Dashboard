@@ -86,6 +86,14 @@ button.dl-pop:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-
 .zt td:last-child{min-width:280px}
 .dl-card .tt-car{font-size:13px;color:var(--muted)}
 .zt td:nth-child(2){white-space:nowrap}
+
+nav.tabs .wrap#tabs{flex-direction:column;gap:0;overflow:visible}
+nav.tabs .tg-row{display:flex;gap:6px;padding:10px 0 8px;overflow-x:auto;scrollbar-width:none}
+nav.tabs .tg-row button.tg{font:inherit;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 16px;background:var(--surface);color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom-width:1px}
+nav.tabs .tg-row button.tg:hover{color:var(--ink);border-color:var(--faint)}
+nav.tabs .tg-row button.tg[aria-current="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:500}
+nav.tabs .ts-row{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;border-top:1px solid var(--line)}
+nav.tabs .ts-row button[hidden]{display:none}
 </style>
 <title>IESP Progress Dashboard</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -18157,17 +18165,22 @@ const savedTheme=store.get('iesp-theme');if(savedTheme)document.documentElement.
 /* Tabs */
 const TABS=[['overview','Overview'],['performance','Performance'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['zoho','Zoho'],['workflows','Workflows'],['callcentre','Call Centre'],['youth','Youth Reach-out'],['sim','Simulator']];
 const tabsEl=$('#tabs');
-tabsEl.innerHTML=TABS.map(([k,l])=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}">${l}</button>`).join('');
+const GROUPS=[['home','Overview',['overview','performance','sim']],['mkt','Marketing',['funnel','campaigns','courses','youth']],['calls','Calling',['walkins','ai','callcentre']],['proc','Process',['zoho','workflows']]];
+const TL=Object.fromEntries(TABS);
+tabsEl.innerHTML='<div class="tg-row">'+GROUPS.map(g=>`<button type="button" class="tg" data-grp="${g[0]}">${g[1]}</button>`).join('')+'</div>'+'<div class="ts-row" role="tablist">'+GROUPS.map(g=>g[2].map(k=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}" data-in="${g[0]}">${TL[k]}</button>`).join('')).join('')+'</div>';
+const grpOf=k=>(GROUPS.find(g=>g[2].includes(k))||GROUPS[0]);
+function syncGroups(k){const g=grpOf(k);store.set('iesp-tab-'+g[0],k);tabsEl.querySelectorAll('.tg').forEach(b=>b.setAttribute('aria-current',b.dataset.grp===g[0]?'true':'false'));tabsEl.querySelectorAll('[data-in]').forEach(b=>b.hidden=b.dataset.in!==g[0])}
+
 function openTab(k,push){
   const d0=document.getElementById('drawer');if(d0&&!d0.hidden){d0.hidden=true;document.getElementById('drawerBg').hidden=true;document.body.classList.remove('drawer-open')}
   if(!TABS.some(t=>t[0]===k))k='overview';
-  TABS.forEach(([t])=>{$('#t-'+t).hidden=t!==k;$('#tab-'+t).setAttribute('aria-selected',t===k)});
+  TABS.forEach(([t])=>{$('#t-'+t).hidden=t!==k;$('#tab-'+t).setAttribute('aria-selected',t===k)});syncGroups(k);
   if(push){try{history.replaceState(null,'','#'+k)}catch(e){}}
   store.set('iesp-tab',k);
   const bar=document.getElementById('tfbar');if(bar)bar.hidden=!['campaigns','walkins','ai'].includes(k);
   window.scrollTo({top:0});
 }
-tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)openTab(b.dataset.tab,true)});
+tabsEl.addEventListener('click',e=>{const g=e.target.closest('[data-grp]');if(g){const G=GROUPS.find(x=>x[0]===g.dataset.grp),last=store.get('iesp-tab-'+G[0]);openTab(G[2].includes(last)?last:G[2][0],true);return}const b=e.target.closest('[data-tab]');if(b)openTab(b.dataset.tab,true)});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)openTab(b.dataset.go,true)});
 
 /* Bars helper (horizontal) */
