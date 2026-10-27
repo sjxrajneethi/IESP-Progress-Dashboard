@@ -110,18 +110,6 @@ nav.tabs .ts-row button[hidden],nav.tabs .ts-row[hidden]{display:none}
   --font:'Google Sans','Google Sans Flex','Product Sans',Roboto,system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
   --r:10px;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0D0D0D; --surface:#1A1A19; --sunk:#262624; --ink:#F0EFEC; --muted:#C3C2B7; --faint:#898781; --line:#2C2C2A;
-  --accent:#3987E5; --accent-soft:#1A2A3E; --loss:#E66767; --loss-soft:#3A2020; --land:#2C2C2A; --sea:#141413;
-  --good:#0CA30C; --good-soft:#15301A; --warn:#FAB219; --warn-soft:#3A2E14; --crit:#E66767; --crit-soft:#3A2020;
-  --c1:#3987E5; --c2:#D95926; --c3:#199E70; --c4:#C98500; --c5:#D55181; --c6:#2E9B2E; --c7:#898781; --c8:#9085E9;
-  --grid:#2C2C2A; --axis:#383835; --st-good:#0CA30C; --st-warn:#FAB219; --st-bad:#E66767; --pop-shadow:0 6px 24px rgba(0,0,0,.45); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0D0D0D; --surface:#1A1A19; --sunk:#262624; --ink:#F0EFEC; --muted:#C3C2B7; --faint:#898781; --line:#2C2C2A;
-  --accent:#3987E5; --accent-soft:#1A2A3E; --loss:#E66767; --loss-soft:#3A2020; --land:#2C2C2A; --sea:#141413;
-  --good:#0CA30C; --good-soft:#15301A; --warn:#FAB219; --warn-soft:#3A2E14; --crit:#E66767; --crit-soft:#3A2020;
-  --c1:#3987E5; --c2:#D95926; --c3:#199E70; --c4:#C98500; --c5:#D55181; --c6:#2E9B2E; --c7:#898781; --c8:#9085E9;
-  --grid:#2C2C2A; --axis:#383835; --st-good:#0CA30C; --st-warn:#FAB219; --st-bad:#E66767; --pop-shadow:0 6px 24px rgba(0,0,0,.45); color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body.drawer-open{overflow:hidden}
@@ -354,7 +342,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       <h1>IESP Progress Dashboard</h1>
       <p class="sub">Lead generation, walk-ins and next steps · 1 September to 15 October 2026</p>
     </div>
-    <div class="tools"><button class="btn" id="themeBtn" type="button">Dark theme</button></div>
+
   </div>
 </header>
 
@@ -445,8 +433,6 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
   .pf-grp .bars{display:flex;flex-direction:column;gap:2px;padding:4px 0}
   .pf-grp .b{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
   .pf-grp .b i{display:block;height:10px;border-radius:0 3px 3px 0;min-width:2px}
-  .pf-foot{font-size:13px;color:var(--muted);line-height:1.6}
-  .pf-foot code{font-size:12px;background:var(--sunk);padding:1px 6px;border-radius:4px}
   </style>
 
   <style>
@@ -458,18 +444,72 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
   @keyframes pfspin{to{transform:rotate(360deg)}}
   @media (prefers-reduced-motion:reduce){.pf-src .btn[disabled] .spin{animation:none}}
   #pfRMsg.warn{color:var(--warn)}#pfRMsg.good{color:var(--good)}
-  .pf-bar{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r,10px);padding:14px 16px;margin:0 0 10px}
-  .pf-f{display:flex;flex-direction:column;gap:6px;min-width:0}
-  .pf-fl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-  .pf-f select{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 30px 7px 10px;max-width:280px;min-width:180px}
-  .pf-f select:focus,.pf-coltools input:focus{outline:2px solid var(--accent);outline-offset:1px}
-  .pf-f select.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-  #pfFCat button .sw{margin-right:6px}
-  #pfFCat button[aria-pressed="true"] .sw{outline:1px solid var(--surface)}
-  #pfFCat button[aria-pressed="true"] .note{color:inherit;opacity:.85}
-  @media (max-width:640px){.pf-f{width:100%}.pf-f select{max-width:none;width:100%}}
+  body:has(#t-performance:not([hidden])) .wrap{max-width:1720px}
+  .pf-layout{display:grid;grid-template-columns:272px minmax(0,1fr);gap:20px;align-items:start}
+  .pf-main{min-width:0;display:flex;flex-direction:column}
+  .pf-side{position:sticky;top:var(--pf-top,72px);max-height:calc(100vh - var(--pf-top,72px) - 12px);overflow-y:auto;scrollbar-width:thin;background:var(--surface);border:1px solid var(--line);border-radius:var(--r,10px);padding:4px 16px 12px}
+  .pf-side-h{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 0 10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
+  .pf-side-h h2{font-size:16px;margin:0}
+  .pf-side-t{display:none;font:inherit;font-size:14px;font-weight:500;background:none;border:0;color:var(--ink);padding:0;cursor:pointer}
+  .pf-clr{font:inherit;font-size:13px;background:none;border:0;color:var(--accent);cursor:pointer;padding:2px 0}
+  .pf-clr:hover{text-decoration:underline}
+  .pf-facet{padding:12px 0;border-bottom:1px solid var(--line)}
+  .pf-facet:last-child{border-bottom:0}
+  .pf-fh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .pf-fh .pf-clr{letter-spacing:0;text-transform:none;font-size:12px}
+  .pf-fq{font:inherit;font-size:13px;width:100%;box-sizing:border-box;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 9px;margin:0 0 8px}
+  .pf-fq:focus,.pf-coltools input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .pf-opts{display:flex;flex-direction:column;gap:1px}
+  .pf-opt{display:grid;grid-template-columns:18px auto minmax(0,1fr) auto;align-items:center;gap:8px;font-size:14px;line-height:1.3;padding:5px 6px;margin:0 -6px;border-radius:6px;cursor:pointer}
+  .pf-opt:hover{background:var(--sunk)}
+  .pf-opt input{margin:0;width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+  .pf-opt .sw{margin:0}
+  .pf-opt .t{min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:var(--ink)}
+  .pf-opt .c{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .pf-opt.zero .t,.pf-opt.zero .c{color:var(--faint)}
+  .pf-opt input:checked~.t{font-weight:500}
+  .pf-more{font:inherit;font-size:13px;background:none;border:0;color:var(--accent);cursor:pointer;padding:6px 0 0}
+  .pf-chips{display:inline-flex;flex-wrap:wrap;gap:6px;vertical-align:middle;margin-left:4px}
+  .pf-chip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:3px 10px;cursor:pointer}
+  .pf-chip:hover{border-color:var(--accent)}
+  .pf-chip .x{color:var(--muted);font-size:14px;line-height:1}
+  @media (max-width:900px){
+    .pf-layout{grid-template-columns:1fr}
+    .pf-side{position:static;max-height:none}
+    .pf-side-h h2{display:none}.pf-side-t{display:inline-flex;align-items:center;gap:6px}
+    .pf-side:not(.open) .pf-facet{display:none}
+    .pf-side:not(.open) .pf-side-h{border-bottom:0}
+  }
   .pf-sel{font-size:14px;color:var(--muted);margin:0 0 14px;min-height:1.4em}
   .pf-sel b{color:var(--ink);font-weight:500}
+  /* Shop-style filter rail and results header */
+  .pf-layout{gap:28px}
+  .pf-side{background:transparent;border:0;border-right:1px solid var(--line);border-radius:0;padding:0 22px 16px 0}
+  .pf-side-h{background:var(--bg);padding:6px 0 14px}
+  .pf-side-h h2{font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .pf-clrall{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .pf-facet{padding:18px 0}
+  .pf-fh{color:var(--ink);font-size:13px;font-weight:700;letter-spacing:.04em;margin:0 0 10px;align-items:center}
+  .pf-fa{display:inline-flex;align-items:center;gap:10px}
+  .pf-fsb{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;border:0;background:var(--sunk);color:var(--muted);cursor:pointer}
+  .pf-fsb:hover,.pf-fsb[aria-expanded="true"]{color:var(--ink)}
+  .pf-opts{gap:2px}
+  .pf-opt{grid-template-columns:16px auto minmax(0,1fr);gap:10px;padding:4px 0;margin:0}
+  .pf-opt:hover{background:none}
+  .pf-opt:hover .t{color:var(--accent)}
+  .pf-opt .t .c{font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap}
+  .pf-more{font-weight:500;padding:8px 0 0 26px}
+  .pf-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 24px;margin:0 0 10px}
+  .pf-head .pf-sel{margin:0;font-size:15px;color:var(--muted)}
+  .pf-head .pf-sel b{font-size:17px;font-weight:700;color:var(--ink)}
+  .pf-head .pf-src{margin:0;font-size:12px}
+  .pf-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .pf-chips:empty{display:none}
+  .pf-chip{font-size:12px;padding:4px 12px;border-color:var(--line)}
+  .pf-rmsg{font-size:13px;margin:-4px 0 12px}
+  .pf-rmsg:empty{display:none}
+  .pf-rmsg.warn{color:var(--warn)}.pf-rmsg.good{color:var(--good)}
+  @media (max-width:900px){.pf-side{border-right:0;border-bottom:1px solid var(--line);padding:0 0 4px}}
   .pf-link{font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
   .pf-link:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
   .pf-link[aria-pressed="true"]{color:var(--accent);font-weight:500}
@@ -478,22 +518,26 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
   #t-performance td .sub{display:block;font-size:12px;color:var(--muted)}
   </style>
 
+<div class="pf-layout">
+  <aside class="pf-side" id="pfSide" aria-label="Filters">
+    <div class="pf-side-h"><h2>Filters</h2><button type="button" class="pf-side-t" id="pfSideT" aria-expanded="false" aria-controls="pfSide">☰ Filters</button><button type="button" class="pf-clr pf-clrall" id="pfClrAll" hidden>Clear all</button></div>
+    <section class="pf-facet"><h3 class="pf-fh"><span>Lead category</span><button type="button" class="pf-clr" data-clr="category" hidden>Clear</button></h3><div class="pf-opts" id="pfO-category"></div></section>
+    <section class="pf-facet"><h3 class="pf-fh"><span>Lead source</span><button type="button" class="pf-clr" data-clr="source" hidden>Clear</button></h3><div class="pf-opts" id="pfO-source"></div><button type="button" class="pf-more" data-more="source" hidden></button></section>
+    <section class="pf-facet"><h3 class="pf-fh"><span>Centre</span><span class="pf-fa"><button type="button" class="pf-clr" data-clr="centre" hidden>Clear</button><button type="button" class="pf-fsb" data-q="centre" aria-label="Search centres" aria-expanded="false"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></span></h3><input type="search" class="pf-fq" id="pfFQ-centre" data-dim="centre" placeholder="Search centres" aria-label="Search centres" hidden><div class="pf-opts" id="pfO-centre"></div><button type="button" class="pf-more" data-more="centre" hidden></button></section>
+    <section class="pf-facet"><h3 class="pf-fh"><span>College / seminar</span><span class="pf-fa"><button type="button" class="pf-clr" data-clr="college" hidden>Clear</button><button type="button" class="pf-fsb" data-q="college" aria-label="Search colleges" aria-expanded="false"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></span></h3><input type="search" class="pf-fq" id="pfFQ-college" data-dim="college" placeholder="Search colleges" aria-label="Search colleges" hidden><div class="pf-opts" id="pfO-college"></div><button type="button" class="pf-more" data-more="college" hidden></button></section>
+  </aside>
+  <div class="pf-main">
+  <div class="pf-head">
+  <p class="pf-sel" id="pfSel"></p>
   <div class="pf-src">
     <span><span class="dot" id="pfDot"></span>Zoho CRM via the leadbot leads API</span>
     <span id="pfAsOf"></span>
     <span class="pf-every" id="pfEvery">Refreshed every 4 hours</span>
     <button type="button" class="btn" id="pfRefresh"><span class="spin" aria-hidden="true">↻</span> Refresh now</button>
-    <span id="pfRMsg" role="status" aria-live="polite"></span>
   </div>
-
-  <div class="pf-bar" role="search" aria-label="Filter the performance figures">
-    <div class="pf-f"><span class="pf-fl" id="pfFCatL">Lead category</span><div class="seg" id="pfFCat" role="group" aria-labelledby="pfFCatL"></div></div>
-    <label class="pf-f"><span class="pf-fl">Lead source</span><select id="pfFSrc" data-dim="source"></select></label>
-    <label class="pf-f"><span class="pf-fl">Centre</span><select id="pfFCen" data-dim="centre"></select></label>
-    <label class="pf-f"><span class="pf-fl">College / seminar</span><select id="pfFCol" data-dim="college"></select></label>
-    <button type="button" class="btn" id="pfFClear" hidden>Clear filters</button>
   </div>
-  <p class="pf-sel" id="pfSel"></p>
+  <div class="pf-chips" id="pfChips"></div>
+  <p class="pf-rmsg" id="pfRMsg" role="status" aria-live="polite"></p>
 
   <div class="pf-grid">
     <div class="panel pf-s12">
@@ -561,7 +605,8 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     </div>
   </div>
 
-  <p class="pf-foot" id="pfFoot"></p>
+  </div>
+</div>
 
   <script type="application/json" id="perfData">{"as_of":"2026-10-27T08:50:56+05:30","cached_until":"2026-10-27T12:50:56+05:30","refresh_every_s":14400,"overall":{"leads":13107,"booked":210,"walked_in":18,"admission":4,"no_status":3919,"lead_to_booking_pct":1.74,"booking_to_walk_in_pct":7.89,"walk_in_to_admission_pct":22.22,"lead_to_admission_pct":0.03},"target":{"target":750,"period":{"start":"2026-09-01","end":"2027-03-31"},"day":57,"days_total":212,"days_left":155,"admissions_done":4,"pct_of_target":0.53,"plan_to_date":202,"gap_to_plan":-198,"on_track":false,"current_run_rate_per_day":0.07,"projected_by_end":15,"required_run_rate":{"per_day":4.81,"per_week":33.7,"per_month":146.3},"to_hit_target":{"admissions_needed":746,"walk_ins_needed":3357,"walk_ins_per_day":21.7,"leads_needed":2486667}},"plan":{"target":750,"start":"2026-09-01","end":"2027-03-31","centre_targets":{}},"cube":{"dims":["centre","category","source","college","status"],"stages":{"Walk-in booked":"booked","Walked in":"walked_in","Counselling Done":"walked_in","Admission Not Done":"walked_in","Application Form Filled":"admission","Enrolled":"admission","Admission Done":"admission","Fees Paid":"admission"},"rows":[["T3 Roha","Offline","O10: Seminars & Job Fairs","S.S. Nikam English School","(blank)",829,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Contacted",742,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","Attempted to Contact",711,0],["T2 Khalapur","Digital","D1: Meta Ads","(blank)","Attempted to Contact",697,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Konkan Unnati Mitra Mandal's Vasantrao Naik College, Mhasala","(blank)",624,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","PNP College","New",599,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Lost",537,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Attempted to Contact",494,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Mangaon Junior College","(blank)",435,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","Contacted",407,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ashokdada Sable Vidyalay","(blank)",377,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College","(blank)",302,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","PNP College","Attempted to Contact",268,0],["T5 Goa","Digital","D1: Meta Ads","(blank)","Attempted to Contact",252,0],["T3 Roha","Offline","O11: Cold lists","(blank)","New",248,0],["T2 Khalapur","Digital","D1: Meta Ads","(blank)","Contacted",245,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","(blank)","Attempted to Contact",234,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Tikambhai Metha Commerce College Mangaon","(blank)",224,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ganesh Yashwant Waghare Shipurkar School","(blank)",194,0],["T5 Goa","Digital","D1: Meta Ads","(blank)","Contacted",164,0],["T3 Roha","Offline","O11: Cold lists","(blank)","Attempted to Contact",163,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Navjeevan Vidyamandir","(blank)",149,0],["T3 Roha","Digital","D1: Meta Ads","(blank)","Contacted",143,0],["Northern Unassigned","Digital","D1: Meta Ads","(blank)","New",138,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Indapur","(blank)",137,0],["T2 Khalapur","Digital","D1: Meta Ads","(blank)","New",134,0],["T4 Alibag","Digital","D1: Meta Ads","(blank)","Contacted",124,0],["T4 Alibag","Offline","O11: Cold lists","(blank)","New",122,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","(blank)","Lost",119,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","PNP College","Lost",114,0],["T2 Khalapur","Digital","D1: Meta Ads","(blank)","Lost",100,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","Lost",100,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Arts & Comm. & Late Sou. S.R. Datar Sci. Jr. College, Chondhi","New",100,0],["Northern Unassigned","Digital","D1: Meta Ads","(blank)","Attempted to Contact",94,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Industrial Training Institute, Lonavala","New",89,0],["T5 Goa","Digital","D1: Meta Ads","(blank)","Lost",86,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","S.S. High School Morba","(blank)",86,0],["T4 Alibag","Offline","O11: Cold lists","(blank)","Attempted to Contact",79,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Kamerkar High School","(blank)",77,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","(blank)","New",73,0],["T4 Alibag","Offline","O11: Cold lists","(blank)","Lost",70,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","K.E.S. Dr. Deshmukh College, Roha","Attempted to Contact",69,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","PNP College","Contacted",68,0],["T4 Alibag","Offline","O11: Cold lists","(blank)","Contacted",67,0],["HO Unassigned","Digital","D1: Meta Ads","(blank)","Lost",66,0],["(blank)","Digital","D1: Meta Ads","(blank)","(blank)",64,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Mangaon","(blank)",63,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","Walk-in booked",60,0],["HO Unassigned","Digital","D1: Meta Ads","(blank)","Attempted to Contact",59,0],["T3 Roha","Digital","D1: Meta Ads","(blank)","Attempted to Contact",58,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","N.M.V. Kharawali","(blank)",57,0],["T4 Alibag","Direct","X31: Direct Enquiry","(blank)","Lost",52,0],["Western Unassigned","Digital","D1: Meta Ads","(blank)","Contacted",52,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","KMC College (KP)","New",47,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Walk-in booked",46,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Modern English School Morba","(blank)",45,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.E.S. N.N. Patil","New",45,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","L.S.P.M. College","New",45,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Shraddha English Medium","(blank)",44,0],["T3 Roha","Digital","D1: Meta Ads","(blank)","Lost",40,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Jawali School","(blank)",39,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","K.E.S. Dr. Deshmukh College, Roha","Lost",39,0],["T2 Khalapur","Digital","D1: Meta Ads","(blank)","Walk-in booked",37,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Shri Chhatrapati Vidyalay & Jr. College, Vavoshi","(blank)",34,0],["T3 Roha","Offline","O11: Cold lists","(blank)","Contacted",34,0],["T4 Alibag","Digital","D1: Meta Ads","(blank)","Attempted to Contact",31,0],["T4 Alibag","Digital","D1: Meta Ads","(blank)","Lost",30,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Indapur","Attempted to Contact",30,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","New",28,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","New",27,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Auxilium, Lonavala","New",27,0],["T5 Goa","Digital","D1: Meta Ads","(blank)","New",26,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Sheth Shri Otarmal Sheshmal Parma College of Diploma Engineering","Contacted",25,0],["T3 Roha","Offline","O11: Cold lists","(blank)","Lost",25,0],["Western Unassigned","Digital","D1: Meta Ads","(blank)","Lost",24,0],["Northern Unassigned","Digital","D1: Meta Ads","(blank)","Contacted",24,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","English School Jawali","(blank)",23,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","JSM Seminar","(blank)",22,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","K.E.S. Dr. Deshmukh College, Roha","Contacted",21,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Neral Vidya Mandir","(blank)",20,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Shri Ekvira Vidya Mandir, Karla","New",20,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","(blank)","Contacted",20,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Sheth Shri Otarmal Sheshmal Parma College of Diploma Engineering","Attempted to Contact",19,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","English School Bamnoli","(blank)",19,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Janta Vidyala (KP)","New",19,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","T.S. Bhostekar Dahiwali","(blank)",17,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Shraddha English Medium","Lost",17,0],["T4 Alibag","Digital","D1: Meta Ads","(blank)","New",16,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","PNP College","Walk-in booked",16,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.G.K.C. Karjat","New",15,0],["T2 Khalapur","Offline","O11: Cold lists","(blank)","(blank)",14,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Sheth Shri Otarmal Sheshmal Parma College of Diploma Engineering","Lost",13,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Indapur","Lost",13,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Shraddha English Medium","Attempted to Contact",13,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ashokdada Sable Vidyalay","Attempted to Contact",12,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Auxilium, Lonavala","Attempted to Contact",11,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","N.N. Patil High School, Poynad","New",11,0],["HO Unassigned","Digital","D1: Meta Ads","(blank)","Contacted",11,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","K.E.S. Dr. Deshmukh College, Roha","New",10,0],["T5 Goa","Digital","D1: Meta Ads","(blank)","Walk-in booked",9,0],["T3 Roha","Offline","O11: Cold lists","(blank)","Walk-in booked",9,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Tikambhai Metha Commerce College Mangaon","Attempted to Contact",9,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Arts & Comm. & Late Sou. S.R. Datar Sci. Jr. College, Chondhi","Contacted",9,0],["Northern Unassigned","Digital","D1: Meta Ads","(blank)","Lost",9,0],["T3 Roha","Digital","D1: Meta Ads","(blank)","Walk-in booked",8,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","(blank)","Walk-in booked",8,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ashokdada Sable Vidyalay","Lost",8,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.E.S. Jr. College, Poynad","New",8,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Mangaon Junior College","New",8,0],["Western Unassigned","Digital","D1: Meta Ads","(blank)","Attempted to Contact",8,0],["T4 Alibag","Digital","D1: Meta Ads","(blank)","Walk-in booked",7,0],["T4 Alibag","Direct","X31: Direct Enquiry","(blank)","Attempted to Contact",7,0],["T4 Alibag","Direct","X31: Direct Enquiry","(blank)","New",7,0],["(blank)","Digital","D4: Website Chatbot","(blank)","(blank)",6,0],["T4 Alibag","Alumni","R21: Referrals","(blank)","Lost",6,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Indapur","New",6,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.E.S. N.N. Patil","Lost",6,0],["T9 Ahmedabad","Digital","D1: Meta Ads","(blank)","Attempted to Contact",6,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","Qualified",5,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","JSM Seminar","Lost",5,0],["T4 Alibag","Direct","X31: Direct Enquiry","(blank)","Contacted",5,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Arts & Comm. & Late Sou. S.R. Datar Sci. Jr. College, Chondhi","Lost",5,0],["Southern Unassigned","Digital","D1: Meta Ads","(blank)","New",5,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Namrata Acharya Junior College, Shelu","(blank)",4,0],["T4 Alibag","Offline","O11: Cold lists","(blank)","Walk-in booked",4,0],["T4 Alibag","Digital","D5: Insta Messages","(blank)","Lost",4,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ashokdada Sable Vidyalay","New",4,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Auxilium, Lonavala","Contacted",3,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","KMC College (KP)","Contacted",3,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","Not now",3,0],["T4 Alibag","Digital","D1: Meta Ads","(blank)","Walked in",3,0],["T4 Alibag","Alumni","R21: Referrals","(blank)","Attempted to Contact",3,0],["T4 Alibag","Digital","D5: Insta Messages","(blank)","Attempted to Contact",3,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Tikambhai Metha Commerce College Mangaon","Contacted",3,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Tikambhai Metha Commerce College Mangaon","Lost",3,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Shraddha English Medium","Contacted",3,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","L.S.P.M. College","Lost",3,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","S.S. Nikam English School","Attempted to Contact",3,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","S.S. Nikam English School","New",3,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.E.S. Laxmi Shalini College","New",3,0],["T7 Indore","Digital","D1: Meta Ads","(blank)","Contacted",3,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Orchid","(blank)",2,0],["T1 Andheri East","Digital","D1: Meta Ads","(blank)","Walked in",2,0],["T3 Roha","Digital","D1: Meta Ads","(blank)","Admission Not Done",2,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Auxilium, Lonavala","Not now",2,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Counselling Done",2,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Walked in",2,0],["T5 Goa","Digital","D1: Meta Ads","(blank)","Not now",2,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Konkan Unnati Mitra Mandal's Vasantrao Naik College, Mhasala","Lost",2,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Not now",2,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","K.E.S. Dr. Deshmukh College, Roha","Walk-in booked",2,0],["T4 Alibag","Alumni","R21: Referrals","(blank)","New",2,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","KMC College (KP)","Lost",2,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","L.S.P.M. College","Contacted",2,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ashokdada Sable Vidyalay","Contacted",2,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Abhinav J.M","New",2,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Jawali School","New",2,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Mangaon","Contacted",2,0],["T8 Rewa","Digital","D1: Meta Ads","(blank)","Lost",2,0],["T8 Rewa","Digital","D1: Meta Ads","(blank)","Contacted",2,0],["HO Unassigned","Digital","D1: Meta Ads","(blank)","New",2,0],["T3 Roha","Alumni","R21: Referrals","(blank)","Application Form Filled",1,1],["T6 Bengaluru","Digital","D4: Website Chatbot","(blank)","New",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","M.V.E.M.","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Mohan Bhausaheb Patil Vidyalaya","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Acharya College","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Biddhosth College","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","G.V. Acharya","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","A.T.M. Karjat","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","A.B.N.M.","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Dnyanmata Acharya College","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Abhinav Karjat","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Bhivabari Kanishtha Mahavidyalaya","(blank)",1,0],["T3 Roha","Direct","X32: Walk-in","(blank)","Application Form Filled",1,1],["(blank)","Digital","D5: Insta Messages","(blank)","(blank)",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Industrial Training Institute, Lonavala","Not now",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Industrial Training Institute, Lonavala","Lost",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Shri Ekvira Vidya Mandir, Karla","Not now",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Shri Ekvira Vidya Mandir, Karla","Walk-in booked",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Shri Ekvira Vidya Mandir, Karla","Contacted",1,0],["T2 Khalapur","Offline","O10: Seminars & Job Fairs","Auxilium, Lonavala","Lost",1,0],["T6 Bengaluru","Digital","D1: Meta Ads","(blank)","Enrolled",1,1],["T4 Alibag","Digital","D1: Meta Ads","(blank)","Not now",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Sheth Shri Otarmal Sheshmal Parma College of Diploma Engineering","Not now",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Sheth Shri Otarmal Sheshmal Parma College of Diploma Engineering","Walked in",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Konkan Unnati Mitra Mandal's Vasantrao Naik College, Mhasala","Contacted",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ganesh Yashwant Waghare Shipurkar School","Contacted",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Konkan Unnati Mitra Mandal's Vasantrao Naik College, Mhasala","Admission Not Done",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","K.E.S. Dr. Deshmukh College, Roha","(blank)",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","JSM Seminar","Contacted",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","(blank)","Lost",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Indapur","Contacted",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Indapur","Walk-in booked",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Mangaon","New",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","D.G. Tatkare College, Mangaon","Attempted to Contact",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Janta Vidyala (KP)","Contacted",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","KMC College (KP)","Contacted",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.E.S. Jr. College, Poynad","Lost",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","N.N. Patil High School, Poynad","Lost",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Navjeevan Vidyamandir","Attempted to Contact",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Kamerkar High School","Attempted to Contact",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Ganesh Yashwant Waghare Shipurkar School","Attempted to Contact",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","PNP College","Application Form Filled",1,1],["T3 Roha","Offline","O10: Seminars & Job Fairs","Modern English School Morba","New",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","S.S. Nikam English School","Contacted",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Jeevandeep Arts","New",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","MKMC","New",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Matoshree Sumati","New",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Adarsh College of Arts","New",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","Janta Vidyala (M)","New",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Tikambhai Metha Commerce College Mangaon","New",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","N.M.V. Kharawali","New",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Konkan Unnati Mitra Mandal's Vasantrao Naik College, Mhasala","New",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.E.S. Jr. College, Poynad","Attempted to Contact",1,0],["T4 Alibag","Offline","O10: Seminars & Job Fairs","K.E.S. N.N. Patil","Contacted",1,0],["T3 Roha","Offline","O10: Seminars & Job Fairs","Shraddha English Medium","New",1,0],["T7 Indore","Digital","D1: Meta Ads","(blank)","Attempted to Contact",1,0],["Western Unassigned","Digital","D1: Meta Ads","(blank)","Walk-in booked",1,0],["Northern Unassigned","Digital","D1: Meta Ads","(blank)","Walk-in booked",1,0],["T8 Rewa","Digital","D1: Meta Ads","(blank)","New",1,0],["T5 Goa","Digital","D1: Meta Ads","(blank)","Counselling Done",1,0],["T2 Khalapur","Digital","D1: Meta Ads","(blank)","Not now",1,0]]}}</script>
   <script>
@@ -591,7 +636,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     const label=(d,v)=>v==='(blank)'?NOT_SET[d]:v;
 
     let D=null,ROWS=[],ADV=new Set();
-    const F={category:'',source:'',centre:'',college:''};
+    const F={category:new Set(),source:new Set(),centre:new Set(),college:new Set()};
 
     function load(d){
       const dims=d.cube.dims,ix={};dims.forEach((k,i)=>ix[k]=i);
@@ -616,35 +661,41 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       return [...g].map(([key,list])=>{const f=funnel(list),top=d=>{const c={};list.forEach(r=>c[r[d]]=(c[r[d]]||0)+r.n);return Object.keys(c).sort((a,b)=>c[b]-c[a])[0]};
         return Object.assign({key,top},f)}).sort((a,b)=>b.leads-a.leads);
     }
-    const match=(r,skip)=>Object.keys(F).every(k=>k===skip||!F[k]||r[k]===F[k]);
-    const active=()=>Object.keys(F).filter(k=>F[k]);
+    const match=(r,skip)=>Object.keys(F).every(k=>k===skip||!F[k].size||F[k].has(r[k]));
+    const active=()=>Object.keys(F).filter(k=>F[k].size);
+    const only=dim=>F[dim].size===1?[...F[dim]][0]:null;
+    function setF(dim,v,on){const S=F[dim];if(on==null)on=!S.has(v);if(on)S.add(v);else S.delete(v);render()}
 
-    function setF(dim,v){F[dim]=F[dim]===v?'':v;
-      // a source belongs to one category: picking one that does not fit the category clears the category
-      if(dim==='source'&&F.source&&F.category&&!ROWS.some(r=>r.source===F.source&&r.category===F.category))F.category='';
-      if(dim==='category'&&F.category&&F.source&&!ROWS.some(r=>r.source===F.source&&r.category===F.category))F.source='';
-      render()}
-
-    /* Filter bar: every list counts leads under the other filters */
+    /* Filter sidebar: each option counts leads under the other filters, like a shop's facets */
+    const MORE={source:false,centre:false,college:false},LIMIT=8;
     function drawFilters(){
-      const base=ROWS.filter(r=>match(r,'category')),cc={};base.forEach(r=>cc[r.category]=(cc[r.category]||0)+r.n);
-      const tot=Object.values(cc).reduce((a,b)=>a+b,0);
-      const cats=catOrder([...new Set(ROWS.map(r=>r.category))]);
-      $('pfFCat').innerHTML='<button type="button" data-v="" aria-pressed="'+!F.category+'">All <span class="note">'+n(tot)+'</span></button>'+
-        cats.map(c=>'<button type="button" data-v="'+esc(c)+'" aria-pressed="'+(F.category===c)+'"><span class="sw" style="background:'+catColor(c)+'"></span>'+esc(label('category',c))+' <span class="note">'+n(cc[c]||0)+'</span></button>').join('');
-      [['pfFSrc','source','All lead sources'],['pfFCen','centre','All centres'],['pfFCol','college','All colleges and seminars']].forEach(([id,dim,all])=>{
-        const c={};let t=0;ROWS.forEach(r=>{if(match(r,dim)){c[r[dim]]=(c[r[dim]]||0)+r.n;t+=r.n}});
-        const vals=[...new Set(ROWS.map(r=>r[dim]))].sort((a,b)=>(c[b]||0)-(c[a]||0)||a.localeCompare(b));
-        const el=$(id);el.innerHTML='<option value="">'+all+' ('+n(t)+')</option>'+vals.filter(v=>c[v]||v===F[dim]).map(v=>'<option value="'+esc(v)+'"'+(v===F[dim]?' selected':'')+'>'+esc(label(dim,v))+' ('+n(c[v]||0)+')</option>').join('');
-        el.value=F[dim];el.classList.toggle('on',!!F[dim])});
-      $('pfFClear').hidden=!active().length;
+      const Q=d=>{const i=$('pfFQ-'+d);return i&&!i.hidden?(i.value||'').trim().toLowerCase():''},focus=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.v!=null?[document.activeElement.dataset.dim,document.activeElement.dataset.v]:null;
+      ['category','source','centre','college'].forEach(dim=>{
+        const c={};ROWS.forEach(r=>{if(match(r,dim))c[r[dim]]=(c[r[dim]]||0)+r.n});
+        let vals=[...new Set(ROWS.map(r=>r[dim]))];
+        vals=dim==='category'?catOrder(vals):vals.sort((a,b)=>(c[b]||0)-(c[a]||0)||label(dim,a).localeCompare(label(dim,b)));
+        vals=vals.filter(v=>c[v]||F[dim].has(v));
+        const q=Q(dim);if(q)vals=vals.filter(v=>label(dim,v).toLowerCase().includes(q));
+        const cut=dim!=='category'&&!MORE[dim]&&!q&&vals.length>LIMIT;
+        const shown=cut?vals.filter((v,i)=>i<LIMIT||F[dim].has(v)):vals;
+        $('pfO-'+dim).innerHTML=shown.length?shown.map(v=>'<label class="pf-opt'+(c[v]?'':' zero')+'"><input type="checkbox" data-dim="'+dim+'" data-v="'+esc(v)+'"'+(F[dim].has(v)?' checked':'')+'>'+
+          (dim==='category'||dim==='source'?'<span class="sw" style="background:'+catColor(dim==='category'?v:(ROWS.find(r=>r.source===v)||{}).category)+'"></span>':'<span></span>')+
+          '<span class="t" title="'+esc(label(dim,v))+'">'+esc(label(dim,v))+'<span class="c">('+n(c[v]||0)+')</span></span></label>').join(''):'<p class="note">No matches.</p>';
+        const more=document.querySelector('[data-more="'+dim+'"]');
+        if(more){more.hidden=!!q||vals.length<=LIMIT;more.textContent=MORE[dim]?'− Show fewer':'+ '+n(vals.length-LIMIT)+' more'}
+        document.querySelector('[data-clr="'+dim+'"]').hidden=!F[dim].size;
+      });
+      $('pfClrAll').hidden=!active().length;
+      $('pfSideT').textContent='☰ Filters'+(active().length?' ('+active().reduce((a,k)=>a+F[k].size,0)+')':'');
+      if(focus){const el=document.querySelector('.pf-opt input[data-dim="'+focus[0]+'"][data-v="'+CSS.escape(focus[1])+'"]');if(el)el.focus()}
     }
+
 
     /* Admissions target for the selection: 750 overall, a centre's own target if one is set, otherwise none */
     function targetFor(){
       const P=D.plan||{},a=active();
       if(!a.length)return P.target||750;
-      if(a.length===1&&a[0]==='centre'&&P.centre_targets&&P.centre_targets[F.centre])return P.centre_targets[F.centre];
+      if(a.length===1&&only('centre')&&P.centre_targets&&P.centre_targets[only('centre')])return P.centre_targets[only('centre')];
       return null;
     }
     function kpis(done,target,f){
@@ -660,11 +711,12 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     function render(){
       const rs=ROWS.filter(r=>match(r)),O=funnel(rs),ALL=funnel(ROWS),a=active(),P=D.plan||{};
       drawFilters();
-      $('pfSel').innerHTML=a.length?'Showing <b>'+n(O.leads)+'</b> of '+n(ALL.leads)+' leads ('+pc(pct(O.leads,ALL.leads),1)+') for '+a.map(k=>'<b>'+esc(label(k,F[k]))+'</b>').join(' · '):'Showing all <b>'+n(ALL.leads)+'</b> leads';
+      $('pfSel').innerHTML=a.length?'<b>Filtered leads</b> - '+n(O.leads)+' of '+n(ALL.leads)+' ('+pc(pct(O.leads,ALL.leads),1)+')':'<b>All leads</b> - '+n(ALL.leads);
+      $('pfChips').innerHTML=a.map(k=>[...F[k]].map(v=>'<button type="button" class="pf-chip" data-dim="'+k+'" data-v="'+esc(v)+'" aria-label="Remove '+esc(label(k,v))+'">'+esc(label(k,v))+'<span class="x" aria-hidden="true">×</span></button>').join('')).join('');
 
       /* Hero */
       const tgt=targetFor(),done=O.done,K=kpis(done,tgt,O),scope=tgt?tgt:(P.target||750);
-      $('pfHeroH').textContent=tgt?(a.length?'Admissions against the '+esc(label('centre',F.centre))+' target of '+n(tgt):'Admissions against the '+n(tgt)+' target'):'Admissions from this selection';
+      $('pfHeroH').textContent=tgt?(a.length?'Admissions against the '+label('centre',only('centre'))+' target of '+n(tgt):'Admissions against the '+n(tgt)+' target'):'Admissions from this selection';
       $('pfDone').textContent=n(done);
       $('pfOf').textContent=tgt?'of '+n(tgt)+' admissions':'of '+n(ALL.done)+' admissions overall ('+pc(pct(done,ALL.done),0)+')';
       $('pfFill').style.width=Math.min(100,done/scope*100)+'%';
@@ -673,7 +725,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       $('pfMeter').setAttribute('aria-label',n(done)+' admissions of '+n(scope)+(tgt?'; plan to date '+n(K.plan):' target overall'));
       $('pfStart').textContent=dLong(P.start);$('pfEnd').textContent=dLong(P.end);
       $('pfDay').textContent=K.day?'Day '+n(K.day)+' of '+n(K.total):'';
-      $('pfStatus').innerHTML=!tgt?'<span class="chip info">Filtered: no separate target</span>':K.gap>=0?'<span class="chip good">✓ On track</span>':'<span class="chip crit">⚠ Behind plan by '+n(-K.gap)+'</span>';
+      $('pfStatus').innerHTML=!tgt?'':K.gap>=0?'<span class="chip good">✓ On track</span>':'<span class="chip crit">⚠ Behind plan by '+n(-K.gap)+'</span>';
       const k=(v,l,d,st)=>'<div class="kpi"><span class="lab">'+l+'</span><span class="val"'+(st?' style="'+st+'"':'')+'>'+v+'</span><span class="det">'+d+'</span></div>';
       const LOSS='color:var(--loss)',GOOD='color:var(--good)';
       $('pfKpis').innerHTML=(tgt?[
@@ -730,7 +782,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       rows=rows.slice().sort((a,b)=>{const x=s.k==='key'?label(dim,a.key):a[s.k],y=s.k==='key'?label(dim,b.key):b[s.k];return typeof x==='string'?s.d*x.localeCompare(y):s.d*((x||0)-(y||0))});
       const cell=(r,c)=>{const v=r[c.k];
         if(c.t==='name'){const sw=dim==='source'?'<span class="sw" style="background:'+catColor(r.top('category'))+'"></span>':'';
-          return '<td><button type="button" class="pf-link" data-dim="'+dim+'" data-v="'+esc(r.key)+'" aria-pressed="'+(F[dim]===r.key)+'">'+sw+esc(label(dim,r.key))+'</button>'+(c.sub?'<span class="sub">'+esc(c.sub(r))+'</span>':'')+'</td>'}
+          return '<td><button type="button" class="pf-link" data-dim="'+dim+'" data-v="'+esc(r.key)+'" aria-pressed="'+F[dim].has(r.key)+'">'+sw+esc(label(dim,r.key))+'</button>'+(c.sub?'<span class="sub">'+esc(c.sub(r))+'</span>':'')+'</td>'}
         if(c.t==='bar')return '<td class="num"><div class="pf-cellbar"><span class="tr"><i style="width:'+(v/mx*100)+'%"></i></span><span>'+n(v)+'</span></div></td>';
         if(c.t==='mix'){const ks=catOrder(Object.keys(r.mix));return '<td><div class="pf-mini" data-tip="'+esc('<b>'+label(dim,r.key)+'</b><br>'+ks.map(x=>label('category',x)+': '+n(r.mix[x])+' ('+pc(r.mix[x]/r.leads*100,0)+')').join('<br>'))+'">'+ks.map(x=>'<span style="width:'+(r.mix[x]/r.leads*100)+'%;background:'+catColor(x)+'"></span>').join('')+'</div></td>'}
         if(c.t==='p')return '<td class="num'+(!v?' zero':'')+'">'+pc(v,1)+'</td>';
@@ -749,7 +801,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
     function drawTables(rs,O){
       table('pfSTable','source',group(rs,'source'),[{k:'key',l:'Lead source',t:'name',sub:r=>label('category',r.top('category'))},{k:'leads',l:'Leads',t:'bar'}].concat(FUN,[{k:'no_status',l:'No status',t:'n'}]));
 
-      const cs=group(rs,'centre').filter(c=>cScope==='all'||isMain(c)||F.centre===c.key);
+      const cs=group(rs,'centre').filter(c=>cScope==='all'||isMain(c)||F.centre.has(c.key));
       const T=funnel(rs.filter(r=>cs.some(c=>c.key===r.centre)));
       $('pfCLeg').innerHTML='<span>Lead mix:</span>'+catOrder([...new Set(rs.map(r=>r.category))]).map(x=>'<span><span class="sw" style="background:'+catColor(x)+'"></span> '+esc(label('category',x))+'</span>').join('');
       cs.forEach(c=>c.share=pct(c.done,O.done));
@@ -789,7 +841,6 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       $('pfAsOf').textContent='Last refreshed '+when(D.as_of);
       const next=D.cached_until&&new Date(D.cached_until)>Date.now()?' · next by '+time(D.cached_until):'';
       $('pfEvery').textContent='Refreshed every '+n(every)+' hour'+(every===1?'':'s')+next;
-      $('pfFoot').innerHTML='Admissions count leads at Application Form Filled or Enrolled, admitted within the target period ('+esc(dLong((D.plan||{}).start))+' to '+esc(dLong((D.plan||{}).end))+'); walked in counts Walked in, Counselling Done and Admission Not Done or further. The leads API reads Zoho once every '+n(every)+' hours; <b>Refresh now</b> asks it to read Zoho again. If the live API can\'t be reached the page shows the snapshot built into it, dated above. No keys are kept in this page.';
     }
     async function live(force){
       const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),force?180000:10000);
@@ -798,7 +849,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
         const d=await r.json();if(!d||!d.cube||!d.overall)throw new Error('unexpected reply');return d}
       finally{clearTimeout(t)}
     }
-    const msg=(t,cls)=>{$('pfRMsg').textContent=t;$('pfRMsg').className=cls||''};
+    const msg=(t,cls)=>{$('pfRMsg').textContent=t;$('pfRMsg').className='pf-rmsg'+(cls?' '+cls:'')};
     $('pfRefresh').addEventListener('click',async()=>{
       const b=$('pfRefresh');b.disabled=true;b.lastChild.textContent=' Refreshing from Zoho…';msg('');
       try{const d=await live(true);load(d);
@@ -807,9 +858,18 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       finally{b.disabled=false;b.lastChild.textContent=' Refresh now'}
     });
 
-    $('pfFCat').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setF('category',b.dataset.v)});
-    ['pfFSrc','pfFCen','pfFCol'].forEach(id=>$(id).addEventListener('change',e=>{F[e.target.dataset.dim]='';setF(e.target.dataset.dim,e.target.value)}));
-    $('pfFClear').addEventListener('click',()=>{Object.keys(F).forEach(k=>F[k]='');render()});
+    const side=$('pfSide');
+    side.addEventListener('change',e=>{const i=e.target;if(i.matches('.pf-opt input'))setF(i.dataset.dim,i.dataset.v,i.checked)});
+    side.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+      if(b.dataset.clr){F[b.dataset.clr].clear();render()}
+      else if(b.dataset.more){MORE[b.dataset.more]=!MORE[b.dataset.more];drawFilters()}
+      else if(b.dataset.q){const i=$('pfFQ-'+b.dataset.q),o=i.hidden;i.hidden=!o;b.setAttribute('aria-expanded',o);if(o)i.focus();else i.value='';drawFilters()}
+      else if(b.id==='pfClrAll'){Object.values(F).forEach(S=>S.clear());render()}
+      else if(b.id==='pfSideT'){const o=side.classList.toggle('open');b.setAttribute('aria-expanded',o)}});
+    side.addEventListener('input',e=>{if(e.target.matches('.pf-fq'))drawFilters()});
+    $('pfChips').addEventListener('click',e=>{const b=e.target.closest('.pf-chip');if(b)setF(b.dataset.dim,b.dataset.v,false)});
+    // keep the sidebar below the sticky tab bar
+    const nav=document.querySelector('nav.tabs'),pfTop=()=>{if(nav)document.documentElement.style.setProperty('--pf-top',nav.offsetHeight+12+'px')};pfTop();if(nav&&window.ResizeObserver)new ResizeObserver(pfTop).observe(nav);addEventListener('load',pfTop);
     $('pfCScope').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cScope=b.dataset.v;$('pfCScope').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));render()});
     $('pfColQ').addEventListener('input',()=>render());
     $('pfColMore').addEventListener('click',()=>{colAll=!colAll;render()});
@@ -18529,12 +18589,6 @@ function aiAgg(){const a={calls:0,con:0,int:0,min:0};D.ai.days.forEach(r=>{if(in
 function periodLabel(){const f=d=>{const x=new Date(d+'T00:00:00');return x.getDate()+' '+MON[x.getMonth()]};return f(TF.from)+' – '+f(TF.to)}
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
-/* Theme */
-const themeBtn=$('#themeBtn');
-function isDark(){const t=document.documentElement.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
-function syncTheme(){themeBtn.textContent=isDark()?'Light theme':'Dark theme'}
-themeBtn.addEventListener('click',()=>{document.documentElement.setAttribute('data-theme',isDark()?'light':'dark');store.set('iesp-theme',document.documentElement.getAttribute('data-theme'));syncTheme()});
-const savedTheme=store.get('iesp-theme');if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);syncTheme();
 
 /* Tabs */
 const TABS=[['overview','Overview'],['performance','Lead Performance'],['funnel','Funnel and centres'],['campaigns','Campaigns'],['courses','Courses'],['walkins','Walk-ins'],['ai','AI calls'],['zoho','Zoho'],['workflows','Workflows'],['callcentre','Call Centre'],['youth','Youth Reach-out'],['sim','Simulator']];
