@@ -803,7 +803,7 @@ svg text.cv-v{fill:var(--ink);font-size:12px}
       const b=$('pfRefresh');b.disabled=true;b.lastChild.textContent=' Refreshing from Zoho…';msg('');
       try{const d=await live(true);load(d);
         msg(d.refreshed===false?'Already refreshed at '+time(d.as_of)+(d.refresh_next_at?'. Next refresh possible after '+time(d.refresh_next_at):'')+'.':'Refreshed just now.',d.refreshed===false?'':'good')}
-      catch(e){msg('Live refresh isn\'t available yet, so this shows the snapshot from '+when(D.as_of)+'.','warn')}
+      catch(e){msg('Couldn\'t reach the leads API, so this still shows data from '+(D?when(D.as_of):'earlier')+'. Try again shortly.','warn')}
       finally{b.disabled=false;b.lastChild.textContent=' Refresh now'}
     });
 
