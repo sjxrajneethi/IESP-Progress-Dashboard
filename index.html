@@ -19081,9 +19081,9 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 
 
 /* Tabs */
-const TABS=[['performance','Lead Performance'],['workflows','Process Workflow'],['callcentre','Telecalling Script'],['sim','Simulator'],['walkins','Walk-ins'],['ai','AI calls']];
+const TABS=[['performance','Lead Performance'],['workflows','Process Workflow'],['callcentre','Telecalling Script'],['sim','Simulator']];
 const tabsEl=$('#tabs');
-const GROUPS=[['perf','Lead Performance',['performance']],['wf','Process Workflow',['workflows']],['cc','Telecalling Script',['callcentre']],['sim','Simulator',['sim']],['calls','Calling',['walkins','ai']]];
+const GROUPS=[['perf','Lead Performance',['performance']],['wf','Process Workflow',['workflows']],['cc','Telecalling Script',['callcentre']],['sim','Simulator',['sim']]];
 const TL=Object.fromEntries(TABS);
 tabsEl.innerHTML='<div class="tg-row">'+GROUPS.map(g=>`<button type="button" class="tg" data-grp="${g[0]}">${g[1]}</button>`).join('')+'</div>'+'<div class="ts-row" role="tablist">'+GROUPS.map(g=>g[2].map(k=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}" data-in="${g[0]}">${TL[k]}</button>`).join('')).join('')+'</div>';
 const grpOf=k=>(GROUPS.find(g=>g[2].includes(k))||GROUPS[0]);
