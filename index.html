@@ -940,6 +940,94 @@ show(last);
 </script>
 </section>
 
+<section class="tab" id="t-compare" role="tabpanel" aria-label="Week Comparison" hidden>
+<style>
+#t-compare .wc-head{margin:0;font-size:20px;font-weight:500}
+#t-compare .wc-note{margin:4px 0 14px;font-size:13px;color:var(--muted);line-height:1.5}
+#t-compare .wc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:0 0 16px}
+#t-compare .wc-kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+#t-compare .wc-kpi .v{font-size:28px;font-weight:500;line-height:1.1;font-variant-numeric:tabular-nums}
+#t-compare .wc-kpi .l{font-size:13px;color:var(--muted);line-height:1.35}
+#t-compare .wc-kpi .d{font-size:12.5px;font-variant-numeric:tabular-nums}
+#t-compare .up{color:var(--good)}#t-compare .down{color:var(--crit)}#t-compare .flat{color:var(--muted)}
+#t-compare .panel{margin-bottom:16px}
+#t-compare .wc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:980px){#t-compare .wc-grid{grid-template-columns:1fr}}
+#t-compare .wc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted)}
+#t-compare .wc-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+#t-compare svg text{font-size:11px;fill:var(--muted)}
+#t-compare svg .val{fill:var(--ink);font-weight:500}
+#t-compare .wc-tbl{overflow-x:auto}
+#t-compare .wc-tbl table{font-size:13.5px;width:100%;border-collapse:collapse}
+#t-compare .wc-tbl th,#t-compare .wc-tbl td{padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:left}
+#t-compare .wc-tbl thead th{font-size:12px;font-weight:500;color:var(--muted);background:var(--sunk);vertical-align:bottom}
+#t-compare .wc-tbl tbody th{font-weight:500;position:sticky;left:0;background:var(--surface);z-index:1}
+#t-compare .wc-tbl .n{text-align:right;font-variant-numeric:tabular-nums}
+#t-compare .wc-tbl td.h{background:color-mix(in srgb,var(--accent) var(--h),transparent)}
+#t-compare .wc-tbl td.ch{font-size:12.5px}
+#t-compare .wc-tbl tr.tot th,#t-compare .wc-tbl tr.tot td{font-weight:600;background:var(--sunk);border-top:2px solid var(--line)}
+#t-compare .wc-tbl tr.rate th,#t-compare .wc-tbl tr.rate td{color:var(--muted);font-size:12.5px}
+</style>
+<h2 class="wc-head">Week by Week Comparison</h2>
+<p class="wc-note" id="wcNote"></p>
+<div class="wc-kpis" id="wcKpis"></div>
+<div class="wc-grid">
+  <div class="panel"><div class="panel-h"><h2>Leads created per week</h2><div class="wc-legend" id="wcLeg1"></div></div><div id="wcChart1"></div></div>
+  <div class="panel"><div class="panel-h"><h2>Walk-ins per week</h2><div class="wc-legend" id="wcLeg2"></div></div><div id="wcChart2"></div></div>
+</div>
+<div id="wcTables"></div>
+<script type="application/json" id="wcData">{"weeks": [{"id": "2026-09-16", "label": "16 Sep – 22 Sep", "days": 7, "m": {"Leads created": 1160, "Called (has a call result)": 1120, "Connected": 376, "Not connected": 655, "Interested": 31, "Walk-in booked": 11, "Walked in or later": 3, "Enrolled": 0, "Call logs (Log a call)": 0}, "cat": {"Digital": 1160, "Offline": 0, "Referral": 0, "Direct": 0, "No source": 0}, "centre": {"T6 Bengaluru": [489, 4, 1], "T5 Goa": [124, 1, 1], "T2 Khalapur": [146, 4, 0], "HO Unassigned": [138, 0, 0], "Western Unassigned": [73, 0, 0], "Northern Unassigned": [155, 1, 0], "T1 Andheri East": [21, 0, 0], "Southern Unassigned": [3, 0, 0], "T8 Rewa": [3, 0, 0], "T4 Alibag": [3, 1, 1], "T9 Ahmedabad": [3, 0, 0], "T7 Indore": [2, 0, 0]}, "source": {"D1: Meta Ads": 1160}, "stage": [72, 634, 11, 1, 0, 0, 2, 3, 437, 0]}, {"id": "2026-09-23", "label": "23 Sep – 29 Sep", "days": 7, "m": {"Leads created": 3432, "Called (has a call result)": 2153, "Connected": 739, "Not connected": 1188, "Interested": 79, "Walk-in booked": 28, "Walked in or later": 4, "Enrolled": 0, "Call logs (Log a call)": 0}, "cat": {"Digital": 383, "Offline": 2967, "Referral": 11, "Direct": 71, "No source": 0}, "centre": {"Northern Unassigned": [84, 0, 0], "T7 Indore": [2, 0, 0], "T1 Andheri East": [5, 1, 0], "T6 Bengaluru": [117, 2, 0], "Western Unassigned": [9, 1, 0], "T2 Khalapur": [133, 3, 0], "T9 Ahmedabad": [2, 0, 0], "Southern Unassigned": [2, 0, 0], "T4 Alibag": [1828, 21, 1], "T3 Roha": [1228, 0, 3], "T5 Goa": [22, 0, 0]}, "source": {"D1: Meta Ads": 376, "O10: Seminars & Job Fairs": 2146, "O11: Cold lists": 821, "X31: Direct Enquiry": 71, "R21: Referrals": 11, "D5: Insta Messages": 7}, "stage": [1340, 1470, 30, 1, 3, 0, 0, 1, 587, 0]}, {"id": "2026-09-30", "label": "30 Sep – 6 Oct", "days": 7, "m": {"Leads created": 2381, "Called (has a call result)": 2377, "Connected": 409, "Not connected": 1653, "Interested": 88, "Walk-in booked": 57, "Walked in or later": 5, "Enrolled": 0, "Call logs (Log a call)": 1}, "cat": {"Digital": 2353, "Offline": 28, "Referral": 0, "Direct": 0, "No source": 0}, "centre": {"T4 Alibag": [130, 4, 3], "T1 Andheri East": [663, 26, 0], "T2 Khalapur": [778, 16, 0], "T6 Bengaluru": [377, 3, 2], "T3 Roha": [228, 3, 0], "T5 Goa": [205, 5, 0]}, "source": {"D1: Meta Ads": 2353, "O10: Seminars & Job Fairs": 28}, "stage": [56, 1976, 65, 4, 0, 0, 1, 4, 253, 22]}, {"id": "2026-10-07", "label": "7 Oct – 13 Oct", "days": 7, "m": {"Leads created": 4837, "Called (has a call result)": 1089, "Connected": 240, "Not connected": 578, "Interested": 30, "Walk-in booked": 20, "Walked in or later": 2, "Enrolled": 0, "Call logs (Log a call)": 6}, "cat": {"Digital": 1085, "Offline": 3752, "Referral": 0, "Direct": 0, "No source": 0}, "centre": {"T3 Roha": [3748, 0, 1], "T1 Andheri East": [401, 14, 1], "T6 Bengaluru": [557, 4, 0], "T5 Goa": [123, 2, 0], "T9 Ahmedabad": [1, 0, 0], "T2 Khalapur": [5, 0, 0], "T4 Alibag": [2, 0, 0]}, "source": {"O10: Seminars & Job Fairs": 3752, "D1: Meta Ads": 1085}, "stage": [20, 894, 23, 1, 0, 0, 1, 1, 155, 3742]}, {"id": "2026-10-14", "label": "14 Oct – 20 Oct", "days": 7, "m": {"Leads created": 918, "Called (has a call result)": 726, "Connected": 12, "Not connected": 4, "Interested": 75, "Walk-in booked": 8, "Walked in or later": 7, "Enrolled": 1, "Call logs (Log a call)": 9}, "cat": {"Digital": 701, "Offline": 217, "Referral": 0, "Direct": 0, "No source": 0}, "centre": {"T4 Alibag": [97, 1, 0], "T1 Andheri East": [177, 5, 1], "T2 Khalapur": [276, 1, 0], "T6 Bengaluru": [241, 1, 3], "T3 Roha": [79, 0, 3], "T5 Goa": [48, 0, 0]}, "source": {"D1: Meta Ads": 701, "O10: Seminars & Job Fairs": 217}, "stage": [193, 531, 9, 2, 1, 1, 3, 7, 171, 0]}, {"id": "2026-10-21", "label": "21 Oct – 27 Oct", "days": 7, "m": {"Leads created": 544, "Called (has a call result)": 441, "Connected": 35, "Not connected": 33, "Interested": 24, "Walk-in booked": 15, "Walked in or later": 7, "Enrolled": 1, "Call logs (Log a call)": 4}, "cat": {"Digital": 455, "Offline": 84, "Referral": 1, "Direct": 1, "No source": 3}, "centre": {"T6 Bengaluru": [89, 0, 0], "T4 Alibag": [24, 2, 1], "T1 Andheri East": [58, 4, 0], "T5 Goa": [14, 0, 0], "T2 Khalapur": [128, 2, 2], "(No centre)": [223, 7, 2], "T3 Roha": [8, 0, 2]}, "source": {"D1: Meta Ads": 448, "D4: Website Chatbot": 6, "D5: Insta Messages": 1, "X32: Walk-in": 1, "O10: Seminars & Job Fairs": 70, "O11: Cold lists": 14, "R21: Referrals": 1, "(No source)": 3}, "stage": [9, 322, 14, 2, 4, 1, 0, 1, 99, 92]}, {"id": "2026-10-28", "label": "28 Oct – 4 Nov", "days": 8, "m": {"Leads created": 2407, "Called (has a call result)": 358, "Connected": 87, "Not connected": 37, "Interested": 27, "Walk-in booked": 20, "Walked in or later": 34, "Enrolled": 3, "Call logs (Log a call)": 17}, "cat": {"Digital": 1470, "Offline": 909, "Referral": 14, "Direct": 4, "No source": 10}, "centre": {"T1 Andheri East": [274, 4, 12], "T4 Alibag": [873, 4, 7], "(No centre)": [597, 0, 3], "Northern Unassigned": [1, 0, 0], "T6 Bengaluru": [308, 8, 0], "T2 Khalapur": [172, 3, 7], "Western Unassigned": [1, 0, 0], "T3 Roha": [143, 1, 5], "T5 Goa": [38, 0, 0]}, "source": {"D1: Meta Ads": 948, "D4: Website Chatbot": 8, "R21: Referrals": 14, "(No source)": 10, "O11: Cold lists": 1, "O10: Seminars & Job Fairs": 908, "D3: Website Enquiry": 12, "Chatbot/WhatsApp": 500, "D5: Insta Messages": 1, "X32: Walk-in": 3, "D2: Google Ads": 1, "X31: Direct Enquiry": 1}, "stage": [1411, 204, 20, 11, 15, 3, 5, 3, 108, 627]}], "metrics": ["Leads created", "Called (has a call result)", "Connected", "Not connected", "Interested", "Walk-in booked", "Walked in or later", "Enrolled", "Call logs (Log a call)"], "cats": ["Digital", "Offline", "Referral", "Direct", "No source"], "centres": ["T1 Andheri East", "T2 Khalapur", "T3 Roha", "T4 Alibag", "T5 Goa", "T6 Bengaluru", "T7 Indore", "T8 Rewa", "T9 Ahmedabad", "HO Unassigned", "Northern Unassigned", "Western Unassigned", "Southern Unassigned", "(No centre)"], "sources": ["D1: Meta Ads", "D2: Google Ads", "D3: Website Enquiry", "D4: Website Chatbot", "D5: Insta Messages", "O10: Seminars & Job Fairs", "O11: Cold lists", "R21: Referrals", "X31: Direct Enquiry", "X32: Walk-in", "Chatbot/WhatsApp", "(No source)"], "stages": ["1. New", "2. Calling (Attempted / Contacted)", "3. Walk-in booked", "4. Walked in / Counselled", "5. Admission in progress (Follow-up / Form filled)", "6. Admission (Fees paid / Enrolled)", "7. Admission not done", "8. Not now", "9. Lost", "10. No status"], "note": "Built from Zoho on 5 Nov 2026. Each week counts the leads created in it, with their stage and call result as of that date. Weeks run Wednesday to Tuesday; the last week has 8 days, matching the weekly report."}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('wcData').textContent), W=D.weeks, n=W.length;
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f=v=>v==null?'':Number(v).toLocaleString('en-IN');
+const pct=(a,b)=>b?Math.round(a*100/b)+'%':'–';
+const COL={Digital:'var(--c1)',Offline:'var(--c2)',Referral:'var(--c3)',Direct:'var(--c4)','No source':'var(--c7)'};
+document.getElementById('wcNote').textContent=D.note;
+function change(cur,prev){if(prev==null)return '';if(!prev&&!cur)return '<span class="flat">no change</span>';if(!prev)return '<span class="up">new</span>';
+  const p=Math.round((cur-prev)*100/prev);return '<span class="'+(p>0?'up':p<0?'down':'flat')+'">'+(p>0?'▲ ':p<0?'▼ ':'')+Math.abs(p)+'% vs previous week</span>'}
+const last=W[n-1],prev=W[n-2];
+document.getElementById('wcKpis').innerHTML=['Leads created','Called (has a call result)','Connected','Walk-in booked','Walked in or later','Enrolled'].map(k=>
+  '<div class="wc-kpi"><span class="l">'+esc(last.label)+'</span><span class="v">'+f(last.m[k])+'</span><span class="l">'+esc(k)+'</span><span class="d">'+change(last.m[k],prev&&prev.m[k])+'</span></div>').join('');
+function bars(el,series,stack){
+  const w=Math.max(560,n*92),h=230,pl=8,pb=34,pt=18,bw=Math.min(46,(w-pl*2)/n*0.55),step=(w-pl*2)/n;
+  const tot=W.map(x=>stack?series.reduce((s,k)=>s+x.cat[k],0):Math.max(...series.map(k=>x.m[k])));
+  const max=Math.max(1,...tot);let g='';
+  W.forEach((x,i)=>{const cx=pl+step*i+step/2;
+    if(stack){let y=h-pb;series.forEach(k=>{const v=x.cat[k],bh=v/max*(h-pb-pt);if(v){g+='<rect x="'+(cx-bw/2)+'" y="'+(y-bh)+'" width="'+bw+'" height="'+bh+'" fill="'+COL[k]+'"><title>'+esc(x.label+' · '+k+': '+f(v))+'</title></rect>'}y-=bh});
+      g+='<text class="val" x="'+cx+'" y="'+(y-5)+'" text-anchor="middle">'+f(tot[i])+'</text>'}
+    else{const bw2=bw/series.length;series.forEach((k,j)=>{const v=x.m[k],bh=v/max*(h-pb-pt),xx=cx-bw/2+j*bw2;
+      g+='<rect x="'+xx+'" y="'+(h-pb-bh)+'" width="'+(bw2-2)+'" height="'+bh+'" fill="'+['var(--c1)','var(--c3)','var(--c8)'][j]+'"><title>'+esc(x.label+' · '+k+': '+f(v))+'</title></rect><text class="val" x="'+(xx+bw2/2-1)+'" y="'+(h-pb-bh-4)+'" text-anchor="middle">'+f(v)+'</text>'})}
+    g+='<text x="'+cx+'" y="'+(h-pb+16)+'" text-anchor="middle">'+esc(x.label)+'</text>'});
+  g='<line x1="'+pl+'" x2="'+(w-pl)+'" y1="'+(h-pb)+'" y2="'+(h-pb)+'" stroke="var(--line)"/>'+g;
+  document.getElementById(el).innerHTML='<div style="overflow-x:auto"><svg viewBox="0 0 '+w+' '+h+'" width="100%" style="min-width:'+Math.min(w,560)+'px" role="img">'+g+'</svg></div>'}
+bars('wcChart1',D.cats,true);
+document.getElementById('wcLeg1').innerHTML=D.cats.map(k=>'<span><i style="background:'+COL[k]+'"></i>'+esc(k)+'</span>').join('');
+const S2=['Walk-in booked','Walked in or later','Enrolled'];bars('wcChart2',S2,false);
+document.getElementById('wcLeg2').innerHTML=S2.map((k,j)=>'<span><i style="background:'+['var(--c1)','var(--c3)','var(--c8)'][j]+'"></i>'+esc(k)+'</span>').join('');
+function table(title,first,rows,opts){opts=opts||{};
+  const vals=rows.filter(r=>!r.tot&&!r.rate).flatMap(r=>r.v.filter(v=>typeof v==='number'));const top=Math.max(0,...vals);
+  let h='<thead><tr><th>'+esc(first)+'</th>'+W.map(x=>'<th class="n">'+esc(x.label)+'</th>').join('')+(opts.change?'<th class="n">Last week vs previous</th>':'')+'</tr></thead><tbody>';
+  rows.forEach(r=>{h+='<tr'+(r.tot?' class="tot"':r.rate?' class="rate"':'')+'><th scope="row">'+esc(r.k)+'</th>'+r.v.map(v=>{
+      const sh=!r.tot&&!r.rate&&typeof v==='number'&&v&&top;return '<td class="n'+(sh?' h':'')+'"'+(sh?' style="--h:'+Math.round(8+52*v/top)+'%"':'')+'>'+(typeof v==='number'?f(v):esc(v))+'</td>'}).join('')+
+    (opts.change?'<td class="n ch">'+(r.rate?'':change(r.v[n-1],r.v[n-2]).replace(' vs previous week',''))+'</td>':'')+'</tr>'});
+  return '<div class="panel"><div class="panel-h"><h2>'+esc(title)+'</h2></div><div class="wc-tbl"><table>'+h+'</tbody></table></div></div>'}
+const M=k=>W.map(x=>x.m[k]);
+let out=table('Week by week','Measure',D.metrics.map(k=>({k:k,v:M(k)})).concat([
+  {k:'Called, % of leads created',v:W.map(x=>pct(x.m['Called (has a call result)'],x.m['Leads created'])),rate:1},
+  {k:'Connected, % of called',v:W.map(x=>pct(x.m['Connected'],x.m['Called (has a call result)'])),rate:1},
+  {k:'Walk-in booked, % of leads created',v:W.map(x=>pct(x.m['Walk-in booked'],x.m['Leads created'])),rate:1},
+  {k:'Walked in or later, % of leads created',v:W.map(x=>pct(x.m['Walked in or later'],x.m['Leads created'])),rate:1}]),{change:1});
+const byC=(i,title)=>table(title,'Centre',D.centres.map(c=>({k:c,v:W.map(x=>(x.centre[c]||[0,0,0])[i])})).concat([{k:'Total',v:W.map(x=>Object.values(x.centre).reduce((s,a)=>s+a[i],0)),tot:1}]),{change:1});
+out+=byC(0,'Leads created by centre')+byC(1,'Walk-in booked by centre')+byC(2,'Walked in or later by centre');
+out+=table('Leads created by lead source','Lead Source',D.sources.map(s=>({k:s,v:W.map(x=>x.source[s]||0)})).concat([{k:'Total',v:M('Leads created'),tot:1}]),{change:1});
+out+=table('Lead stage of leads created, by week','Lead Stage',D.stages.map((s,i)=>({k:s,v:W.map(x=>x.stage[i])})).concat([{k:'Total',v:M('Leads created'),tot:1}]));
+document.getElementById('wcTables').innerHTML=out;
+})();
+</script>
+</section>
+
 <section class="tab" id="t-funnel" role="tabpanel" aria-label="Funnel and centres" hidden>
   <div class="panel">
     <div class="panel-h"><h2 id="fTitle">Lead funnel</h2></div>
@@ -19156,9 +19244,9 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 
 
 /* Tabs */
-const TABS=[['performance','Lead Performance'],['weekly','Weekly Report'],['workflows','Process Workflow'],['callcentre','Telecalling Script'],['sim','Simulator']];
+const TABS=[['performance','Lead Performance'],['weekly','Weekly Report'],['compare','Week Comparison'],['workflows','Process Workflow'],['callcentre','Telecalling Script'],['sim','Simulator']];
 const tabsEl=$('#tabs');
-const GROUPS=[['perf','Lead Performance',['performance']],['wr','Weekly Report',['weekly']],['wf','Process Workflow',['workflows']],['cc','Telecalling Script',['callcentre']],['sim','Simulator',['sim']]];
+const GROUPS=[['perf','Lead Performance',['performance']],['wr','Weekly Report',['weekly','compare']],['wf','Process Workflow',['workflows']],['cc','Telecalling Script',['callcentre']],['sim','Simulator',['sim']]];
 const TL=Object.fromEntries(TABS);
 tabsEl.innerHTML='<div class="tg-row">'+GROUPS.map(g=>`<button type="button" class="tg" data-grp="${g[0]}">${g[1]}</button>`).join('')+'</div>'+'<div class="ts-row" role="tablist">'+GROUPS.map(g=>g[2].map(k=>`<button type="button" role="tab" id="tab-${k}" aria-controls="t-${k}" data-tab="${k}" data-in="${g[0]}">${TL[k]}</button>`).join('')).join('')+'</div>';
 const grpOf=k=>(GROUPS.find(g=>g[2].includes(k))||GROUPS[0]);
